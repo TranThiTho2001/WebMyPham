@@ -12,8 +12,6 @@
                     class="fa fa-receipt" aria-hidden="true"> &nbsp;&nbsp;</span> Đơn Hàng</button>
             <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnSanPham" @click="goToQLSanPham"><span
                     class="fa fa-spray-can" aria-hidden="true"> &nbsp;</span> Sản Phẩm</button>
-            <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnKhuyenMai" @click="goToQLKhuyenMai"><span
-                    class="fa fa-donate" aria-hidden="true">&nbsp;&nbsp;</span> Khuyến Mãi</button>
             <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnNhanVien" @click="goToQLNhanVien"><span class="fa fa-users"
                     aria-hidden="true"> &nbsp;</span>Nhân Viên</button>
             <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnThuongHieu" @click="goToQLThuongHieu"><span class="fa fa-tag"

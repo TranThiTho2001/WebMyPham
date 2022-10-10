@@ -58,14 +58,14 @@ exports.create = async (req, res) => {
 
 //*--------Retrive all product of store from the database
 exports.findAll = async (req, res) => {
-    // const condition = { ownerId: req.userId };
-    // const DH_Ma= req.query.DH_Ma;
-    // if(DH_Ma) {
-    //     condition.DH_Ma = { $regex: new RegExp(DH_Ma), $options: "i"};
-    // }
+    const condition = { ownerId: req.userId };
+    const DH_TrangThai= req.query.name;
+    if(DH_TrangThai) {
+        condition.DH_TrangThai = { $regex: new RegExp(DH_TrangThai), $options: "i"};
+    }
 
     const [error, documents] = await handle(
-        DonHang.find()
+        DonHang.find(condition, '-ownerId')
     );
 
     if (error) {

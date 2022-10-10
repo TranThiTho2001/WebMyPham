@@ -45,7 +45,6 @@ exports.create = async(req,res) => {
 
 //*--------Retrive all category  of store from the database
 exports.findAll = async(req,res) => {
-    console.log(req.query.name);
     const condition = { ownerId: req.userId };
     const DH_Ma = req.query.name;
     if(DH_Ma) {

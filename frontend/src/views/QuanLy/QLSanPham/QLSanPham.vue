@@ -140,30 +140,37 @@ export default {
     border-radius: 10px;
 }
 
-table th {
-    text-transform: uppercase;
-    text-align: left;
-    background: #44475C;
-    color: #FFF;
-    padding: 8px;
-    min-width: 30px;
+table {
+    font-family: 'Open Sans', sans-serif;
+    width: 100%;
+    margin: 10px 10px 10px 10px;
+    background-color: #D9D9D9;
+    border-radius: 10px;
+}
+
+.tdChucNang {
+    float: right;
+    width: max-content;
 }
 
 table tr {
     border-radius: 10px;
 }
-
+table table th {
+    text-align: left;
+    color: #000000;
+    padding: 8px;
+    min-width: 30px;
+}
 table td {
     text-align: left;
     padding: 8px;
-    border-right: 2px solid #7D82A8;
+    color: #000000;
+    font-size: 14px;
 }
 
 table td:last-child {
     border-right: none;
 }
 
-table tbody tr:nth-child(2n) td {
-    background: #D4D8F9;
-}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-     <!--<div class="container-fluid">
+    <!-- <div class="container-fluid">
       <header class="align-items-center">
         <div class="row  justify-content-between align-items-center">
           <div class="col-sm-1 logo-image pl-0 pr-0">
@@ -51,46 +51,46 @@
             </div>
           </div>
         </div>
-      </header>      
-      </div> -->
-      <router-view />
+      </header>
+    </div> -->
+    <router-view />
   </div>
 </template>
 
-<!-- <script>
-import Navbar from './components/HomePageComponents/Navbar.vue';
+<script>
 
-export default {
-  name: 'App',
-  data() {
-    return {
-      currentUser: null
-    };
-  },
-  methods: {
-    logout() {
-      console.log("logout");
-    },
-  }
-}
-</script>
-
-
- <style>
-// .app {
-//   font-family: Inter;
-//   Helvetica, Arial, sans-serif 
-//   -webkit-font-smoothing: antialiased;
-//   -moz-osx-font-smoothing: grayscale;
-//   text-align: center;
-//   color: #2c3e50;
-//   margin-left: 45px;
-//   margin-right: 45px;
-//   margin-top: 31px;
+// export default {
+//   name: 'App',
+//   data() {
+//     return {
+//       currentUser: null
+//     };
+//   },
+//   methods: {
+//     logout() {
+//       console.log("logout");
+//     },
+//   }
 // }
-.container-fluid{
+</script> 
+
+
+<style>
+/* #app {
+  font-family: Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-left: 45px;
+  margin-right: 45px;
+  margin-top: 31px;
+}
+
+.container-fluid {
   margin-bottom: 0px;
 }
+
 #app .container-fluid .search {
   text-align: center;
   background-color: #E9E8E8;
@@ -113,10 +113,12 @@ export default {
   height: 36px;
   border: none;
 }
-#app .btnTaiKhoan{
+
+#app .btnTaiKhoan {
   background-color: #E9E8E8;
   border: none;
-}
+} */
+
 /* #app .navbar-expand-lg {
   color: #515151;
   font-size: 20px;
@@ -129,4 +131,4 @@ export default {
 /* #app {
 
 } */
-</style>   -->
+</style>   

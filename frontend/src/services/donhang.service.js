@@ -7,7 +7,7 @@ class DonHangService {
     update(id, data) { return http.put(`donhang/${id}`, data); }
     delete(DH_Ma) { return http.delete(`/donhang/${DH_Ma}`); }
     //deleteAll() { return http.delete("/sanpham"); }
-    findByName(name) { return http.get(`/donhang?name=${name}`); }
+    findByStatus(DH_TrangThai) { return http.get(`/donhang?name=${DH_TrangThai}`); }
 }
 
 export default new DonHangService();

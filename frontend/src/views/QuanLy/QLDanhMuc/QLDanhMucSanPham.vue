@@ -27,6 +27,7 @@
                             <div class="col-md-1"></div>
                         </div>
                     </div>
+                    <!-- danh sach trang hien thi -->
                     <div class="col-md-2">
                         <div style="display: inline-block; padding-top: 4px;">Trang:</div>
                         <div class="pagination nav-item dropdown">
@@ -49,6 +50,7 @@
 
                     </div>
                 </div>
+                <!-- <Danh sach danh muc san pham-->
                 <div class="row dsDanhMuc">
                     <table>
                         <thead>
@@ -81,6 +83,7 @@
             </div>
         </div>
     </div>
+    <!-- ------------------------------Bang xac nhan xoa danh muc ----------------------------- -->
     <div class="dialogXacNhan" v-if="isOpenXacNhan">
         <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 18px;"> 
             <span class="fas fa-trash-alt" style="color:red"></span>Bạn chắc chắn muốn xóa?</p>
@@ -117,6 +120,7 @@ export default {
 
     },
     methods: {
+        // Lay danh sach danh muc
         async retrieveDanhMuc() {
             const [error, response] = await this.handle(
                 DanhMucService.getAll()
@@ -129,31 +133,33 @@ export default {
             }
         },
 
+        //  so hang của danh sach danh muc
         get_rows() {
             var start = (this.currentPage - 1) * this.elementsPerPage;
             var end = start + this.elementsPerPage;
             return this.danhmuc.slice(start, end);
         },
 
-        async gotoTaoDanhMuc() {
-            this.$router.push("/TaoDanhMuc");
-        },
-
+        // So trang cua danh sach danh muc
         num_pages() {
             return Math.ceil(this.danhmuc.length / this.elementsPerPage);
 
         },
-
+        async gotoTaoDanhMuc() {
+            this.$router.push("/TaoDanhMuc");
+        },
         async change_page(page) {
             this.currentPage = page;
         },
+
+        // Set danh muc duoc chon
         async setDanhmucActive(danhmucActive) {
             console.log(danhmucActive);
             this.danhmucActive = danhmucActive;
         },
+
+        //Xoa danh muc duoc chon
         async deleteDanhMuc() {
-
-
             console.log("xoa" + this.danhmucActive)
             const [error, response] = await this.handle(
                 DanhMucService.delete(this.danhmucActive)
@@ -165,6 +171,8 @@ export default {
                 console.log("xoa thanh cong" + response);
             }
         },
+
+        //Tai lai danh sach danh
         async refreshList() {
             this.retrieveDanhMuc();
             this.danhmucActive = "";
@@ -178,7 +186,7 @@ export default {
 </script>
 
 <style>
- .dschucNang .navigationBar .dsChucNang .btnDanhMuc {
+.frameQLDonHang .dschucNang .navigationBar .dsChucNang .btnDanhMuc {
     background-color: #FFFFFF;
     color: #515151;
 }

@@ -28,19 +28,7 @@ const routes = [
         path: "/QLThuongHieu",
         name: "QLthuonghieu",
         component: () =>
-            import ("../views/QuanLy/QLThuongHieu.vue"),
-    },
-    {
-        path: "/QLKhuyenMai",
-        name: "QLkhuyenmai",
-        component: () =>
-            import ("../views/QuanLy/QLKhuyenMai.vue"),
-    },
-    {
-        path: "/QLNhanVien",
-        name: "QLnhanvien",
-        component: () =>
-            import ("../views/QuanLy/QLNhanVien.vue"),
+            import ("../views/QuanLy/QLThuongHieu/QLThuongHieu.vue"),
     },
     {
         path: "/TaoDanhMuc",

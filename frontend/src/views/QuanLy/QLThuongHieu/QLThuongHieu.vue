@@ -56,9 +56,9 @@
     </div>
 </template>
 <script>
-import DanhSachChucNang from '../../components/QuanLy/DanhSachChucNang.vue';
-import QLHeader from '../../components/QuanLy/QLHeader.vue';
-import DanhMucService from '../../services/danhmuc.service';
+import DanhSachChucNang from '../../../components/QuanLy/DanhSachChucNang.vue';
+import QLHeader from '../../../components/QuanLy/QLHeader.vue';
+import DanhMucService from '../../../services/danhmuc.service';
 export default {
     name: `QLHomePage`,
     // props: ["nhanvien"],
@@ -134,28 +134,22 @@ export default {
     border-radius: 10px;
 }
 
-.frameQLThuongHieu table th {
-    text-transform: uppercase;
+.frameQLThuongHieu  table th {
     text-align: left;
-    background: #44475C;
-    color: #FFF;
+    color: #000000;
     padding: 8px;
     min-width: 30px;
-}
-.frameQLThuongHieu  table tr{
-    border-radius: 10px;
 }
 .frameQLThuongHieu  table td {
     text-align: left;
     padding: 8px;
-    border-right: 2px solid #7D82A8;
+    color: #000000;
+    font-size: 14px;
+}
+table tbody tr {
+    background: #FFFFFF;
+    border-radius: 7px;
+    margin-top: 3px;
 }
 
-.frameQLThuongHieu  table td:last-child {
-    border-right: none;
-}
-
-.frameQLThuongHieu  table tbody tr:nth-child(2n) td {
-    background: #D4D8F9;
-}
 </style>
