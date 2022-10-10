@@ -99,18 +99,11 @@ exports.findOne = async (req, res) => {
 
 //*-----Update a product by the is in the request
 exports.update = async (req, res) => {
-    if (!req.body) {
-        return next(
-            new BadRequestError(400, "Dữ liệu cập nhật sản phẩm không thể trống!")
-        );
-    }
-
     const condition = {
-        // _id: res.params.id,
-        // ownerId: req.userId,
-        DH_Ma: req.body.DH_Ma,
+        DH_Ma: req.params.DH_Ma,
     };
-
+console.log("Body"+req.body.DH_Ma);
+console.log("Body"+req.params.DH_Ma);
     const [error, document] = await handle(
         DonHang.findOneAndUpdate(condition, req.body, {
             new: true,

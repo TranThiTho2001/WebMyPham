@@ -1,7 +1,7 @@
 
 <template>
         <div class="chitietDonHang container" style="text-align:center">
-        <div class="row"></div>
+        <div class="row" style="margin-top:15px"></div>
             <div clas="col-md-12"><h4 style="text-align:center">Chi Tiết Đơn Hàng #{{activeDonHang.DH_Ma}}</h4>
         </div>
         <div class="row">
@@ -45,7 +45,7 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="col-md-12" style="text-align: right"><h6 style="text-align: right; margin-right: 100px;">Thành tiền: {{activeDonHang.DH_TongTien}}</h6></div>
+            <div class="col-md-12" style="text-align: right; margin-bottom: 15px;"><h6 style="text-align: right; margin-right: 100px;">Thành tiền: {{activeDonHang.DH_TongTien}}</h6></div>
         </div>
     </div>
 </template>
@@ -63,6 +63,15 @@ export default{
     background-color: #FFFFFF;
     border-radius: 15px;
     border-color: #BABABA;
+    position: absolute;
+    background-color: #F9F9F9;
+    top: calc(32%);
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 16px;
+    border: 1px solid #515151;;
+    display: block;
+    color: #515151;
 }
 .chitietDonHang .bangTT{
     background-color: #FFFFFF;

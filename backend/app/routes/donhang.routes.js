@@ -12,7 +12,7 @@ module.exports = (app) => {
     router.get("/:DH_Ma", donhang.findOne);
 
     //Update a category with id
-    router.put("/:id", donhang.update);
+    router.put("/:DH_Ma", donhang.update);
 
     //Delete a category with id
     router.delete("/:DH_Ma", donhang.delete);
