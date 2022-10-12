@@ -41,6 +41,10 @@ module.exports = mongoose => {
                 type: Number,
                 required: [true, "Mat khau tai khoan duoc yeu cau"],
             },
+            NV_LoaiNV: {
+                type: Number,
+                required:[true,"Loai nhan vien duoc yeu cau"],
+            },
             ownerId: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "user"

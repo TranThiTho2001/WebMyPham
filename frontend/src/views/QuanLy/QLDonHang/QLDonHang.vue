@@ -296,6 +296,20 @@ export default {
         //Set trang thai don hang can tiem kiem
         async setCurentStatus(status) {
             this.curentStatus = status
+        },
+
+        // Tim nhan vien lap don hang
+        async findNVByMaNV(MaNV){
+            activeDonHang.DH_TrangThai = this.newTrangThai;
+            const [error, response] = await this.handle(
+                DonHangService.update(activeDonHang.DH_Ma, activeDonHang)
+            );
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(response.data + "Cap nhat thanh cong");
+                this.retrieveDonHang();
+            }
         }
     },
 

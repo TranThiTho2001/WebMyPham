@@ -3,10 +3,8 @@ const handle = require("../helpers/promise");
 const db = require("../models");
 const KhachHang = db.KhachHang;
 const upload = require("../middlewares/upload");
-exports.findAllFavorite = async (req, res) => {
-    res.send({ message: "Hello san pham" });
-}
-//*-------------Create a product 
+
+//*-------------Create a customer 
 exports.create = async (req, res) => {
     //validate request
     if (!req.body.KH_Ten) {
@@ -20,14 +18,14 @@ exports.create = async (req, res) => {
         return next(new BadRequestError(400, "Mật khẩu tài khoản không được bỏ trống!"));
     }
 
-    // Create a product
+    // Create a customer
     const khachhang = new KhachHang({
         KH_Ten: req.body.KH_Ten,
         KH_SDT: req.body.KH_SDT,
         KH_MatKhau: req.body.KH_MatKhau,
         ownerId: req.userId,
     });
-    // Save product in the DB
+    // Save customer in the DB
     const [error, document] = await handle(khachhang.save());
 
     if (error) {
@@ -39,7 +37,7 @@ exports.create = async (req, res) => {
 
 
 
-//*--------Retrive all product of store from the database
+//*--------Retrive all customers of store from the database
 exports.findAll = async (req, res) => {
     const condition = { ownerId: req.userId };
     const KH_SDT = req.query.name;
@@ -54,14 +52,14 @@ exports.findAll = async (req, res) => {
 
     if (error) {
         return next(
-            new BadRequestError(500, `Lỗi trong quá trình truy xuất sản phẩm với mã ${req.params.KH_Ten}`)
+            new BadRequestError(500, `Lỗi trong quá trình truy xuất khách hàng với SDT ${req.params.KH_SDT}`)
         );
     }
 
     return res.send(documents);
 };
 
-//*-------Find a single product with an id
+//*-------Find a single customer with an id
 exports.findOneByID = async (req, res) => {
     const condition = {
         KH_Ma: req.params.KH
@@ -72,16 +70,16 @@ exports.findOneByID = async (req, res) => {
 
     if (error) {
         return next(
-            new BadRequestError(500, "Lỗi trong quá trình truy xuất sản phẩm!")
+            new BadRequestError(500, "Lỗi trong quá trình truy xuất khách hàng!")
         );
     }
     if (!documents) {
-        return res.send("Khong tim thay id");
+        return res.send("Không tìm thấy");
     }
     return res.send(documents);
 };
 
-//*-------Find a single product with an id
+//*-------Find a single customer with an id
 exports.findOneByPhone = async (req, res) => {
 
     const condition = {
@@ -94,19 +92,19 @@ exports.findOneByPhone = async (req, res) => {
 
     if (error) {
         return next(
-            new BadRequestError(500, "Lỗi trong quá trình truy xuất sản phẩm!")
+            new BadRequestError(500, "Lỗi trong quá trình truy xuất khách hàng!")
         );
     }
     if (!documents) {
-        return res.send("Khong tim thay Phone");
+        return res.send("Không tìm thấy");
     }
     return res.send(documents);
 };
-//*-----Update a product by the is in the request
+//*-----Update a customer by the is in the request
 exports.update = async (req, res) => {
     if (!req.body) {
         return next(
-            new BadRequestError(400, "Dữ liệu cập nhật sản phẩm không thể trống!")
+            new BadRequestError(400, "Dữ liệu cập nhật khách hàng không thể trống!")
         );
     }
 
@@ -122,19 +120,18 @@ exports.update = async (req, res) => {
     );
     if (error) {
         return next(
-            new BadRequestError(500, `Lỗi trong quá trình cập nhật thông tin sản phẩm có mã id=`
-            )
+            new BadRequestError(500, `Lỗi trong quá trình cập nhật thông tin khách hàng`)
         );
     }
 
     if (!document) {
-        return next(new BadRequestError(404, "Không tìm thấy sản phẩm!"));
+        return next(new BadRequestError(404, "Không tìm thấy khách hàng!"));
     }
 
-    return res.send({ message: "Cập nhật thông tin sản phẩm thành công." });
+    return res.send({ message: "Cập nhật thông tin khách hàng thành công." });
 };
 
-//Delete a product with the specified id in the request
+//Delete a customer with the specified id in the request
 exports.delete = async (req, res) => {
     const condition = {
         KH_SDT: req.body.KH_SDT,
@@ -148,15 +145,15 @@ exports.delete = async (req, res) => {
 
     if (error) {
         return next(
-            new BadRequestError(500, `Không xóa được sản phẩm có mã ${req.params.id}`)
+            new BadRequestError(500, `Không xóa được khách hàng có mã ${req.params.id}`)
         );
     }
 
     if (!document) {
-        return next(new BadRequestError(404, "Không tìm thấy sản phẩm"));
+        return next(new BadRequestError(404, "Không tìm thấy khách hàng"));
     }
 
-    return res.send({ message: "Xóa sản phẩm thành công" });
+    return res.send({ message: "Xóa khách hàng thành công" });
 
 };
 

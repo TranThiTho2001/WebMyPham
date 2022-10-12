@@ -31,7 +31,7 @@ exports.create = async (req, res) => {
         return next(new BadRequestError(400, "Trạng thái của đơn hàng không được bỏ trống!"));
     }
 
-    // Create a product
+    // Create a order
     const donhang = new DonHang({
         DH_Ma: req.body.DH_Ma,
         NV_Ma: req.body.NV_Ma,
@@ -40,12 +40,11 @@ exports.create = async (req, res) => {
         DH_NgayDat: req.body.DH_NgayDat,
         DH_TongSoLuong: req.body.DH_TongSoLuong,
         DH_TongTien: req.body.DH_TongTien,
-        DH_GhiChu: req.body.DH_GhiChu,
-        // SP_HinhAnh: req.body.SP_HinhAnh,    
+        DH_GhiChu: req.body.DH_GhiChu,   
         DH_TrangThai: req.body.DH_TrangThai,
         ownerId: req.userId,
     });
-    // Save product in the DB
+    // Save order in the DB
     const [error, document] = await handle(donhang.save());
 
     if (error) {
@@ -56,7 +55,7 @@ exports.create = async (req, res) => {
 };
 
 
-//*--------Retrive all product of store from the database
+//*--------Retrive all orders of store from the database
 exports.findAll = async (req, res) => {
     const condition = { ownerId: req.userId };
     const DH_TrangThai= req.query.name;
@@ -70,13 +69,13 @@ exports.findAll = async (req, res) => {
 
     if (error) {
         return next(
-            new BadRequestError(500, `Lỗi trong quá trình truy xuất sản phẩm với mã ${req.params.DH_Ma}`)
+            new BadRequestError(500, `Lỗi trong quá trình truy xuất đơn hàng với mã ${req.params.DH_Ma}`)
         );
     }
     return res.send(documents);
 };
 
-//*-------Find a single product with an id
+//*-------Find a single order with an id
 exports.findOne = async (req, res) => {
     const condition = {
         DH_Ma: req.params.DH_Ma
@@ -88,7 +87,7 @@ exports.findOne = async (req, res) => {
 
     if (error) {
         return next(
-            new BadRequestError(500, "Lỗi trong quá trình truy xuất sản phẩm!")
+            new BadRequestError(500, "Lỗi trong quá trình truy xuất đơn hàng!")
         );
     }
     if (!documents) {
@@ -97,7 +96,7 @@ exports.findOne = async (req, res) => {
     return res.send(documents);
 };
 
-//*-----Update a product by the is in the request
+//*-----Update a order by the is in the request
 exports.update = async (req, res) => {
     const condition = {
         DH_Ma: req.params.DH_Ma,
@@ -113,19 +112,19 @@ console.log("Body"+req.params.DH_Ma);
 
     if (error) {
         return next(
-            new BadRequestError(500, `Lỗi trong quá trình cập nhật thông tin sản phẩm có mã id=${req.params.id}`
+            new BadRequestError(500, `Lỗi trong quá trình cập nhật thông tin đơn hàng có mã id=${req.params.id}`
             )
         );
     }
 
     if (!document) {
-        return next(new BadRequestError(404, "Không tìm thấy sản phẩm!"));
+        return next(new BadRequestError(404, "Không tìm thấy đơn hàng!"));
     }
 
-    return res.send({ message: "Cập nhật thông tin sản phẩm thành công." });
+    return res.send({ message: "Cập nhật thông tin đơn hàng thành công." });
 };
 
-//Delete a product with the specified id in the request
+//Delete a order with the specified id in the request
 exports.delete = async (req, res) => {
     const condition = {
         _id: req.params.id,
@@ -140,15 +139,15 @@ exports.delete = async (req, res) => {
 
     if (error) {
         return next(
-            new BadRequestError(500, `Không xóa được sản phẩm có mã ${req.params.id}`)
+            new BadRequestError(500, `Không xóa được đơn hàng có mã ${req.params.id}`)
         );
     }
 
     if (!document) {
-        return next(new BadRequestError(404, "Không tìm thấy sản phẩm"));
+        return next(new BadRequestError(404, "Không tìm thấy đơn hàng"));
     }
 
-    return res.send({ message: "Xóa sản phẩm thành công" });
+    return res.send({ message: "Xóa đơn hàng thành công" });
 
 };
 

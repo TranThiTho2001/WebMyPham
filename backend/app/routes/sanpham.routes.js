@@ -4,8 +4,9 @@ const upload = require("../middlewares/upload");
 module.exports = (app) => {
     var router = express.Router();
 ''
-    router.post("/",upload.single('file'),sanpham.create); 
-    console.log("req.body.SP_HinhAnh");
+    // router.post("/",upload.single('SP_HinhAnh'),sanpham.create); 
+    router.post("/",sanpham.create); 
+
     //Retrieve all products
     router.get("/", sanpham.findAll);
 

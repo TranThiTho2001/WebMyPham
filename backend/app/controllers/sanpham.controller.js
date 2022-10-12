@@ -24,14 +24,9 @@ exports.create = async(req,res) => {
     if(!req.body.SP_ThongTin){
         return next(new BadRequestError(400, "Thông tin sản phẩm không được bỏ trống!"));
     }
-    // //Nay co duoc bo trong khong ????????
     if(!req.body.SP_SoLuongNhap){
         return next(new BadRequestError(400, "Số lượng sản phẩm nhập vào không được bỏ trống!"));
     }
-    // //Nay co duoc bo trong khong ????????
-    // if(!req.body.sp_soluongcon){
-    //     return next(new BadRequestError(400, "Số lượng sản phẩm còn lại không được bỏ trống!"));
-    // }
     if(!req.body.SP_GiaMuaVao){
         return next(new BadRequestError(400, "Giá mua sản phẩm không được bỏ trống!"));
     }
@@ -55,8 +50,6 @@ exports.create = async(req,res) => {
     });
 
     console.log(req.file+"file");
-
-  
         // Save product in the DB
     const [error, document] = await handle(sanpham.save());
 
@@ -64,7 +57,9 @@ exports.create = async(req,res) => {
         return res.send(error);
 
     }
+
     return res.send(document);
+
     }
 
 
@@ -73,6 +68,7 @@ exports.create = async(req,res) => {
 exports.findAll = async(req,res) => {
     const condition = { ownerId: req.userId };
     const SP_Ten = req.query.SP_Ten;
+    
     if(SP_Ten) {
         condition.SP_Ten = { $regex: new RegExp(SP_Ten), $options: "i"};
     }

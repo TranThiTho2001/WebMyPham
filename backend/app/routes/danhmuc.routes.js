@@ -4,12 +4,11 @@ const express = require("express");
 module.exports = (app) => {
     var router = express.Router();
 
+    //create a category
     router.post("/", danhmuc.create); 
     //Retrieve all categorys
     router.get("/", danhmuc.findAll);
 
-    // // //Retrieve(lay = find) all favorite category
-    //  router.get("/favorite", danhmuc.findAllFavorite);
 
     //Retrieve a single category with id
     router.get("/:DM_Ma", danhmuc.findOne);

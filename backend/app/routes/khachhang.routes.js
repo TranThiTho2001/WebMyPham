@@ -4,24 +4,22 @@ const express = require("express");
 module.exports = (app) => {
     var router = express.Router();
 
+    //create a customer
     router.post("/", khachhang.create); 
-    //Retrieve all categorys
+    //Retrieve all customers
     router.get("/", khachhang.findAll);
 
-    // // //Retrieve(lay = find) all favorite category
-    //  router.get("/favorite", danhmuc.findAllFavorite);
-
-    //Retrieve a single category with id
+    //Retrieve a single customer with id
     router.get("/:KH", khachhang.findOneByID);
     
-    //Update a category with id
+    //Update a customer with id
     router.put("/:id", khachhang.update);
 
-    //Delete a category with id
+    //Delete a customer with id
     router.delete("/:KH_SDT", khachhang.delete);
 
-    // //Delete all categorys
-    // router.delete("/", danhmuc.deleteAll);
+    // //Delete all customers
+    // router.delete("/", khachhang.deleteAll);
 
     app.use("/api/khachhang", router);
 

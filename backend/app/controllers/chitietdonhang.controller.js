@@ -2,10 +2,7 @@ const { BadRequestError } = require("../helpers/errors");
 const handle = require("../helpers/promise");
 const db = require("../models");
 const ChiTietDonHang = db.ChiTietDonHang;
-//*-------------Create a product 
-// exports.findAllFavorite = async (req, res) => {
-//     res.send( {message: "Hello danh muc"} );
-// }
+
 exports.create = async(req,res) => {
 
     //validate request
@@ -21,7 +18,7 @@ exports.create = async(req,res) => {
     if(!req.body.CTDH_Gia){
         return next(new BadRequestError(400, "Gia sản phẩm không được bỏ trống!"));
     }
-    // Create a category
+    // Create a order details
     const chitietdonhang = new ChiTietDonHang({
         DH_Ma: req.body.DH_Ma,
         SP_Ma: req.body.SP_Ma,
@@ -29,21 +26,20 @@ exports.create = async(req,res) => {
         CTDH_Gia: req.body.CTDH_Gia,
         ownerId: req.userId,
     });
-    // Save category in the DB
+    // Save order details in the DB
     const [error, document] = await handle(chitietdonhang.save());
 
     if(error) {
         return next(
-            new BadRequestError(500, "Lỗi trong quá trình tạo danh mục!")
+            new BadRequestError(500, "Lỗi trong quá trình tạo chi tiết đơn hàng!")
         );
     }
-    // res.send({ message: 'create handler'});
 
     return res.send(document);
 };
 
 
-//*--------Retrive all category  of store from the database
+//*--------Retrive all order details  of store from the database
 exports.findAll = async(req,res) => {
     const condition = { ownerId: req.userId };
     const DH_Ma = req.query.name;
@@ -57,7 +53,7 @@ exports.findAll = async(req,res) => {
 
     if(error) {
         return next(
-            new BadRequestError(500, `Lỗi trong quá trình truy xuất danh mục với mã ${req.params.DH_Ma}`)
+            new BadRequestError(500, `Lỗi trong quá trình truy xuất chi tiết đơn hàng với mã ${req.params.DH_Ma}`)
         );
     }
 

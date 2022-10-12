@@ -4,12 +4,10 @@ const express = require("express");
 module.exports = (app) => {
     var router = express.Router();
 
+    //create a brand
     router.post("/", thuonghieu.create); 
     //Retrieve all brand
     router.get("/", thuonghieu.findAll);
-
-    // //Retrieve(lay = find) all favorite brand
-    // router.get("/favorite", thuonghieu.findAllFavorite);
 
     //Retrieve a single brand with id
     router.get("/:id", thuonghieu.findOne);

@@ -5,10 +5,10 @@ const { BadRequestError } = require("./app/helpers/errors");
 const setupSanPhamRoutes = require("./app/routes/sanpham.routes");
 const setupDanhMucRoutes = require("./app/routes/danhmuc.routes");
 const setupThuongHieuRoutes = require("./app/routes/thuonghieu.routes");
-const setupKhuyenMaiRoutes = require("./app/routes/khuyenmai.routes");
 const setupDonHangRoutes = require("./app/routes/donhang.routes");
 const setupKhachHangRoutes = require("./app/routes/khachhang.routes");
-const setupChiTietDonHang = require("./app/routes/chitietdonhang.routes");
+const setupChiTietDonHangRoutes = require("./app/routes/chitietdonhang.routes");
+const setupNhanVienRoutes = require("./app/routes/nhanvien.routes")
 
 const app = express();
 
@@ -36,10 +36,12 @@ app.use(express.static("uploads"));
 setupSanPhamRoutes(app);
 setupDanhMucRoutes(app);
 setupThuongHieuRoutes(app);
-setupKhuyenMaiRoutes(app);
 setupDonHangRoutes(app);
 setupKhachHangRoutes(app);
-setupChiTietDonHang(app);
+setupChiTietDonHangRoutes(app);
+setupNhanVienRoutes(app)
+
+
 // handle 404 response
 app.use((req, res, next) => {
     next(new BadRequestError(404, "Resource not found"));
