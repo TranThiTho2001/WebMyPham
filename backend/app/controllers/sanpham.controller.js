@@ -18,7 +18,7 @@ exports.create = async(req,res) => {
     if(!req.body.TH_Ma){
         return next(new BadRequestError(400, "Mã thương hiệu không được bỏ trống!"));
     }
-    if(!req.body.SP_Ten){
+    if(!req.body.SP_TenSanPham){
         return next(new BadRequestError(400, "Tên sản phẩm không được bỏ trống!"));
     }
     if(!req.body.SP_ThongTin){
@@ -39,12 +39,11 @@ exports.create = async(req,res) => {
         SP_Ma: req.body.SP_Ma,
         DMSP_Ma: req.body.DMSP_Ma,
         TH_Ma: req.body.TH_Ma,
-        SP_TenSanPham: req.body.SP_Ten,
+        SP_TenSanPham: req.body.SP_TenSanPham,
         SP_ThongTin: req.body.SP_ThongTin,
         SP_SoLuongNhap: req.body.SP_SoLuongNhap,
         SP_GiaMuaVao: req.body.SP_GiaMuaVao,
-        SP_GiaBanRa: req.body.SP_GiaBanRa,
-        // SP_HinhAnh: req.body.SP_HinhAnh,    
+        SP_GiaBanRa: req.body.SP_GiaBanRa, 
         SP_HinhAnh : req.body.SP_HinhAnh.fileName,
         ownerId: req.userId,
     });
@@ -89,11 +88,10 @@ exports.findAll = async(req,res) => {
 //*-------Find a single product with an id
 exports.findOne = async (req,res) => {
     const condition = {
-        SP_Ma: req.params.SP_Ma
+        SP_Ma: req.params.SP_Ma,       
     };
-
     const [error, documents] = await handle(
-        SanPham.findOne(condition, '-ownerId')
+        SanPham.findOne(condition)
     );
 
     if(error) {
@@ -102,7 +100,7 @@ exports.findOne = async (req,res) => {
         );
     }
     if(!documents){
-        return res.send("Khong tim thay");
+        return res.send(error);
     }
     return res.send(documents);
 };

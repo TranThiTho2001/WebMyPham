@@ -54,6 +54,12 @@ const routes = [
         component: () =>
             import ("../views/QuanLy/QLDonHang/QLDonHang.vue"),
     },
+    {
+        path: '/QLDonHangLapHD/:id',
+        name: 'QLDonHangLapHD',        
+        component: () =>
+            import ("../views/QuanLy/QLDonHang/QLDonHangLapHD.vue"),
+    }    ,    
 ];
 
 const router = createRouter({

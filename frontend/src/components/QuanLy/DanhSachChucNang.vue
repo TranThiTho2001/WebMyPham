@@ -60,7 +60,7 @@ export default {
 <style>
 .navigationBar {
     background-color: #515151;
-    height: 100%;
+    height: 670px;
     font-size: 18px;
     display: inline-block;
     border-radius: 30px;

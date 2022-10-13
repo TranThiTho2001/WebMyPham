@@ -2,12 +2,12 @@ import http from "../common/http";
 
 class SanPhamService {
     getAll() { return http.get("/sanpham"); }
-    get(SP_Ma) { return http.get(`/sanpham/${SP_Ma}`); }
+    getByID(SP_Ma) { return http.get(`/sanpham/${SP_Ma}`); }
     create(data) { return http.post("/sanpham", data); }
-    update(id, data) { return http.put(`/sanpham/${id}`, data); }
-    delete(id) { return http.delete(`/sanpham/${id}`); }
-    //deleteAll() { return http.delete("/sanpham"); }
+    update(SP_Ma, data) { return http.put(`/sanpham/${SP_Ma}`, data); }
+    delete(SP_Ma) { return http.delete(`/sanpham/${SP_Ma}`); }
     findByName(name) { return http.get(`/sanpham?name=${name}`); }
+     //deleteAll() { return http.delete("/sanpham"); }
 }
 
 export default new SanPhamService();

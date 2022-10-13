@@ -59,7 +59,6 @@ exports.findAll = async(req,res) => {
 
 //*-------Find a single category with an id
 exports.findOne = async (req,res) => {
-    console.log("Vapo cvhkl");
     const condition = {
         // _id: req.params.id,
         // ownerId: req.userId 
@@ -76,11 +75,8 @@ exports.findOne = async (req,res) => {
         );
     }
     if(!document){
-        console.log(`khong ton tai ${req.params.DM_Ma}`);
         return res.send("Chua ton tai");
     }
-    console.log(`ton tai ${req.params.DM_Ma}`);
-    console.log(document);
     return res.send(document);
 };
 

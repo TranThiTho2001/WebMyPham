@@ -6,6 +6,7 @@ const createDonHangModel = require("./donhang.model");
 const createKhachHangModel = require("./khachhang.model");
 const createChiTietdonHangModel = require("./chitietdonhang.model");
 const createNhanVienModel = require("./nhanvien.model");
+const createHoaDonModel = require("./hoadon.model");
 
 const db = {};
 db.mongoose = mongoose;
@@ -16,5 +17,6 @@ db.DonHang = createDonHangModel(mongoose);
 db.KhachHang = createKhachHangModel(mongoose);
 db.ChiTietDonHang = createChiTietdonHangModel(mongoose);
 db.NhanVien = createNhanVienModel(mongoose);
+db.HoaDon = createHoaDonModel(mongoose);
 
 module.exports = db;

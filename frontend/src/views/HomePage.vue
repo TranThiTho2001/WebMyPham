@@ -1,7 +1,8 @@
 <template>
     <div>
         <Navbar :thuonghieu="thuonghieu" :danhmuc="danhmuc" /><br>
-        <Carousel :khuyenmai="khuyenmai" />
+        <!-- <Carousel :khuyenmai="khuyenmai" /> -->
+        <Carousel />
         <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary" @click="goToQL">
                 Thêm mới
             </button>
@@ -13,7 +14,7 @@
 import Navbar from "../components/HomePageComponents/Navbar.vue";
 import DanhMucService from "../services/danhmuc.service";
 import ThuongHieuService from "../services/thuonghieu.service";
-import KhuyenMaiService from "../services/khuyenmai.service";
+// import KhuyenMaiService from "../services/khuyenmai.service";
 import Carousel from "../components/HomePageComponents/Carousel.vue";
 export default {
     name: `homepage`,
@@ -25,12 +26,11 @@ export default {
         return {
             danhmuc: [],
             thuonghieu: [],
-            khuyenmai: [],
-            
+            // khuyenmai: [],    
         }},
 
 methods: {
-        async retrieveDanhMuc() {
+    async retrieveDanhMuc() {
 
         const [error, response] = await this.handle(
             DanhMucService.getAll()
@@ -43,7 +43,7 @@ methods: {
         }
 
     },
-        async retrieveThuongHieu() {
+    async retrieveThuongHieu() {
         const [error, response] = await this.handle(
             ThuongHieuService.getAll()
         );
@@ -54,17 +54,17 @@ methods: {
             console.log(response.data);
         }
     },
-        async retrieveKhuyenMai() {
-        const [error, response] = await this.handle(
-            KhuyenMaiService.getAll()
-        );
-        if (error) {
-            console.log(error);
-        } else {
-            this.khuyenmai = response.data;
-            console.log(response.data);
-        }
-    },
+//    async retrieveKhuyenMai() {
+//         const [error, response] = await this.handle(
+//             KhuyenMaiService.getAll()
+//         );
+//         if (error) {
+//             console.log(error);
+//         } else {
+//             this.khuyenmai = response.data;
+//             console.log(response.data);
+//         }
+//     },
     goToQL() {
             this.$router.push("/QL");
         },
@@ -73,7 +73,7 @@ methods: {
 mounted() {
     this.retrieveDanhMuc();
     this.retrieveThuongHieu();
-    this.retrieveKhuyenMai();
+    // this.retrieveKhuyenMai();
 }
 };
 </script>

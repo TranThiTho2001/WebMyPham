@@ -12,14 +12,15 @@
                 </tr>
                 <tr>
                     <td>Khách hàng: {{khachhang.KH_Ten}}</td>
+                    <td>Nhân viên: {{nhanvien.NV_Ho + nhanvien.NV_Ten}}</td>
+                </tr>
+                <tr>
                     <td>SDT: {{khachhang.KH_SDT}}</td>
-                </tr>
-                <tr>
-                    <td>Nhân viên: {{activeDonHang.NV_Ma}}</td>
-                    <td>Địa chỉ: {{activeDonHang.DH_DiaChiGiaoHang}} </td>
-                </tr>
-                <tr>
                     <td>Số HD: {{activeDonHang.HD_SoHD}}</td>
+                </tr>
+                <tr>
+                    <td>Địa chỉ: {{activeDonHang.DH_DiaChiGiaoHang}} </td>
+                    <td>Ghi chú: {{activeDonHang.DH_GhiChu}}</td>
                 </tr>
             </table>
         </div>
@@ -28,7 +29,6 @@
                 <thead>
                     <tr style="width:100%">
                         <th>STT</th>
-                        <!-- <th v-for="(col,i) in columns" :key="i">{{col}}</th> -->
                         <th>Mã sản phẩm</th>
                         <th>Tên sản phẩm</th>
                         <th>Số lượng</th>
@@ -56,7 +56,7 @@
 <script>
 export default {
     name: `QLDonHangCTDH`,
-    props: ["chitietdonhang", "activeDonHang", "khachhang"],
+    props: ["chitietdonhang", "activeDonHang", "khachhang", "nhanvien"],
 }
 </script>
 
@@ -68,14 +68,14 @@ export default {
     border-color: #BABABA;
     position: absolute;
     background-color: #F9F9F9;
-    top: calc(32%);
+    top: calc(34%);
     left: 50%;
     transform: translateX(-50%);
     border-radius: 16px;
     border: 1px solid #515151;
-    ;
     display: block;
     color: #515151;
+    margin-bottom: 20px;
 }
 
 .chitietDonHang .bangTT {

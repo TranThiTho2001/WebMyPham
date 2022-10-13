@@ -1,33 +1,32 @@
 const { BadRequestError } = require("../helpers/errors");
 const handle = require("../helpers/promise");
 const db = require("../models");
-const ChiTietDonHang = db.ChiTietDonHang;
+const HoaDon = db.HoaDon;
 
 exports.create = async(req,res) => {
 
-    //validate request
     if(!req.body.DH_Ma){
-        return next(new BadRequestError(400, "Mã đơn hàng không được bỏ trống!"));
+        return next(new BadRequestError(400, "Ma don hang cua hoa don không được bỏ trống!"));
     }
-    if(!req.body.SP_Ma){
-        return next(new BadRequestError(400, "Tên sản phẩm không được bỏ trống!"));
+    if(!req.body.HD_NgayLap){
+        return next(new BadRequestError(400, "Ngay lap hoa don không được bỏ trống!"));
     }
-    if(!req.body.CTDH_SoLuong){
-        return next(new BadRequestError(400, "Số lượng sản phẩm không được bỏ trống!"));
+    if(!req.body.HD_ThoiGianLap){
+        return next(new BadRequestError(400, "Thoi gian lap hoa don không được bỏ trống!"));
     }
-    if(!req.body.CTDH_Gia){
-        return next(new BadRequestError(400, "Gia sản phẩm không được bỏ trống!"));
+    if(!req.body.HD_TongTien){
+        return next(new BadRequestError(400, "Tong tien hoa don không được bỏ trống!"));
     }
     // Create a order details
-    const chitietdonhang = new ChiTietDonHang({
+    const hoadon = new HoaDon({
         DH_Ma: req.body.DH_Ma,
-        SP_Ma: req.body.SP_Ma,
-        CTDH_SoLuong: req.body.CTDH_SoLuong,
-        CTDH_Gia: req.body.CTDH_Gia,
+        HD_NgayLap: req.body.HD_NgayLap,
+        HD_ThoiGianLap: req.body.HD_ThoiGianLap,
+        HD_TongTien: req.body.HD_TongTien,
         ownerId: req.userId,
     });
     // Save order details in the DB
-    const [error, document] = await handle(chitietdonhang.save());
+    const [error, document] = await handle(hoadon.save());
 
     if(error) {
         return next(
@@ -41,47 +40,69 @@ exports.create = async(req,res) => {
 
 //*--------Retrive all order details  of store from the database
 exports.findAll = async(req,res) => {
-    const condition = { ownerId: req.userId };
-    const DH_Ma = req.query.name;
-    if(DH_Ma) {
-        condition.DH_Ma = { $regex: new RegExp(DH_Ma), $options: "i"};
-    }
+    const condition = { 
+        KH_Ma : req.query.name 
+    };
 
+    if(KH_Ma){
+        condition.KH_Ma = { $regex: new RegExp(KH_Ma), $options: "i" };
+    }
     const [error, documents] = await handle(
-        ChiTietDonHang.find(condition, '-ownerId')
+        HoaDon.findOne(condition)
     );
 
     if(error) {
         return next(
-            new BadRequestError(500, `Lỗi trong quá trình truy xuất chi tiết đơn hàng với mã ${req.params.DH_Ma}`)
+            new BadRequestError(500, "Lỗi trong quá trình truy xuất hoa don!")
         );
     }
-
+    if(!documents){
+        return res.send("Chua ton tai");
+    }
     return res.send(documents);
 };
 
-//*-------Find a single category with an id
-// exports.findOne = async (req,res) => {
-//     const condition = {
-//         // _id: req.params.id,
-//         // ownerId: req.userId 
-//         DM_Ma: req.params.DM_Ma
-//     };
+//*-----------------Find a single category with an DH_ma
+exports.findOneByMaDH = async (req, res) => {
+    const condition = { 
+        DH_Ma : req.params.DH_Ma
+    };
+    const [error, documents] = await handle(
+        HoaDon.findOne(condition)
+    );
 
-//     const [error, document] = await handle(
-//         DanhMuc.findOne(condition)
-//     );
+    if(error) {
+        return next(
+            new BadRequestError(500, "Lỗi trong quá trình truy xuất hoa don!")
+        );
+    }
+    if(!documents){
+        return res.send("Chua ton tai");
+    }
+    return res.send(documents);
+}
 
-//     if(error) {
-//         return next(
-//             new BadRequestError(500, "Lỗi trong quá trình truy xuất danh mục!")
-//         );
-//     }
-//     if(!document){
-//         return res.send("Chua ton tai");
-//     }
-//     return res.send(document);
-// };
+// *-------Find a single category with an id
+exports.findOne = async (req,res) => {
+    const condition = {
+        _id: req.params.id,
+        ownerId: req.userId 
+    };
+
+    const [error, document] = await handle(
+        HoaDon.findOne(condition,'-ownerId')
+    );
+
+    if(error) {
+        return next(
+            new BadRequestError(500, "Lỗi trong quá trình truy xuất hoa don!")
+        );
+    }
+    if(!document){
+        return res.send("Chua ton tai");
+    }
+    return res.send(document);
+};
 
 
 //*-----Update a category by the is in the request

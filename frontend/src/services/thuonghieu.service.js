@@ -2,12 +2,12 @@ import http from "../common/http";
 
 class ThuongHieuService {
     getAll() { return http.get("/thuonghieu"); }
-    get(id) { return http.get(`/thuonghieu/${id}`); }
+    get(TH_Ma) { return http.get(`/thuonghieu/${TH_Ma}`); }
     create(data) { return http.post("/thuonghieu", data); }
-    update(id, data) { return http.put(`thuonghieu/${id}`, data); }
-    delete(id) { return http.delete(`/thuonghieu/${id}`); }
-    //deleteAll() { return http.delete("/sanpham"); }
+    update(TH_Ma, data) { return http.put(`thuonghieu/${TH_Ma}`, data); }
+    delete(TH_Ma) { return http.delete(`/thuonghieu/${TH_Ma}`); }
     findByName(name) { return http.get(`/thuonghieu?name=${name}`); }
+    //deleteAll() { return http.delete("/thuonghieu"); }
 }
 
 export default new ThuongHieuService();

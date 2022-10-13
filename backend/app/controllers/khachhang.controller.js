@@ -41,7 +41,6 @@ exports.create = async (req, res) => {
 exports.findAll = async (req, res) => {
     const condition = { ownerId: req.userId };
     const KH_SDT = req.query.name;
-    console.log(req.query.name);
     if (KH_SDT) {
         condition.KH_SDT = { $regex: new RegExp(KH_SDT), $options: "i" };
     }
@@ -55,7 +54,6 @@ exports.findAll = async (req, res) => {
             new BadRequestError(500, `Lỗi trong quá trình truy xuất khách hàng với SDT ${req.params.KH_SDT}`)
         );
     }
-
     return res.send(documents);
 };
 

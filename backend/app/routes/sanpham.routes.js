@@ -10,17 +10,14 @@ module.exports = (app) => {
     //Retrieve all products
     router.get("/", sanpham.findAll);
 
-    // //Retrieve(lay = find) all favorite products
-    router.get("/favorite", sanpham.findAllFavorite);
-
     //Retrieve a single product with id
-    router.get("/:id", sanpham.findOne);
+    router.get("/:SP_Ma", sanpham.findOne);
 
     //Update a product with id
-    router.put("/:id", sanpham.update);
+    router.put("/:SP_Ma", sanpham.update);
 
     //Delete a product with id
-    router.delete("/:id", sanpham.delete);
+    router.delete("/:SP_Ma", sanpham.delete);
 
     // //Delete all products
     // router.delete("/", sanpham.deleteAll);

@@ -2,7 +2,7 @@
     <div class="container frameQLDonHang">
         <div class="row list">
             <div class="col-md-2 dschucNang">
-                <DanhSachChucNang @click="CloseCDTH"/>
+                <DanhSachChucNang @click="CloseCDTH" />
             </div>
             <div class="col-md-10">
                 <div class="row topHeader" @click="CloseCDTH">
@@ -13,11 +13,13 @@
                         <p>Danh sách đơn hàng</p>
                     </div>
                 </div>
+                <!-- Thanh tiem kiem -->
                 <div class="row timkiem" @click="CloseCDTH">
                     <div class="col-md-5 input-group">
                         <input type="text" class="form-control" placeholder="Tìm theo tên" v-model="nameToSearch" />
-                        <div class="input-group-append">
-                            <button class="btn btn-sm btn-outline-secondary" type="button" @click="searchName" style="width:30px; height: 38px">
+                        <div class="input-group-append" v-if="!isOpenHoaDon">
+                            <button class="btn btn-sm btn-outline-secondary" type="button" @click="searchName"
+                                style="width:30px; height: 38px">
                                 <span class="fa fa-search" style="font-size:18px"></span>
                             </button>
                         </div>
@@ -42,9 +44,9 @@
                     <!-- Danh sach so trang hien thi -->
                     <div class="col-md-2">
                         <p style="display: inline-block; padding-top: 4px;">Trang:</p>
-                        <div class="pagination nav-item dropdown">
-                            <a class="nav-link  btn" href="#" data-toggle="dropdown"
-                                style="border-radius: 7px; width: max-content; padding-top: 3px;">
+                        <div class="pagination nav-item dropdown ">
+                            <a class="nav-link btn" href="#" data-toggle="dropdown"
+                                style="border-radius: 7px; width: max-content; padding-top: 3px; width: 100%;">
                                 <span class="fas fa-angle-down"></span>{{currentPage}}
                             </a>
                             <div class="dropdown-menu">
@@ -55,8 +57,8 @@
                         </div>
                     </div>
                     <div class="col-md-1">
-                        <button v-if="isOpenCTDH" class=" btn fas fa-window-close"
-                            @click="isOpenCTDH=!isOpenCTDH" style="float:right; margin-top: 6px; font-size: 30px; color: red;">
+                        <button v-if="isOpenCTDH" class=" btn fas fa-window-close" @click="isOpenCTDH=!isOpenCTDH"
+                            style="float:right; margin-top: 6px; font-size: 30px; color: red;">
                         </button>
                     </div>
                 </div>
@@ -102,7 +104,10 @@
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <a class="dropdown-item" href="#" @click="isOpenCTDH=!isOpenCTDH"><span
                                                 class="fas fa-eye"></span> Xem chi tiết</a>
-                                        <a class="dropdown-item" href="#" @click="isOpenCTDH=!isOpenCTDH"><span
+                                        <a v-if="dalapHD" class="dropdown-item" href="#" @click="isOpenHoaDon=!isOpenHoaDon"><span
+                                                class="fas fa-file-invoice"
+                                                style="font-size:18px; margin-left: 2px;"></span> Xem hoa don</a>
+                                                <a v-else class="dropdown-item" href="#" @click="gotoLapHD"><span
                                                 class="fas fa-file-invoice"
                                                 style="font-size:18px; margin-left: 2px;"></span> Lập hóa đơn</a>
                                     </div>
@@ -110,8 +115,11 @@
                             </tr>
                         </tbody>
                     </table>
+                    <HoaDonChiTiet v-if="isOpenHoaDon" :khachhang="khachhang" :chitietdonhang="chitietdonhang"
+                    :nhanvien="nhanvienXNDH" :hoadon="hoadon" :donhang="activeDonHang"/>
+
                     <QLDonHangCTDH v-if="isOpenCTDH" :chitietdonhang="chitietdonhang" :activeDonHang="activeDonHang"
-                        :khachhang="khachhang" />
+                        :khachhang="khachhang" :nhanvien="nhanvienXNDH"/>
                 </div>
             </div>
         </div>
@@ -149,10 +157,13 @@ import DonHangService from '../../../services/donhang.service';
 import KhachHangService from '../../../services/khachhang.service';
 import CTDHService from '../../../services/chitietdonhang.service';
 import QLDonHangCTDH from '../../../components/QuanLy/QLDonHangCTDH.vue';
+import NhanVienService from '../../../services/nhanvien.service';
+import HoaDonService from '../../../services/hoadon.service';
+import HoaDonChiTiet from '../../../components/QuanLy/HoaDonChiTiet.vue'
 
 export default {
     name: `QLDonHang`,
-    components: { DanhSachChucNang, QLHeader, QLDonHangCTDH },
+    components: { DanhSachChucNang, QLHeader, QLDonHangCTDH, HoaDonChiTiet },
     data() {
 
         return {
@@ -160,17 +171,23 @@ export default {
             khachhang: {},
             activeDonHang: {},
             chitietdonhang: [],
+            nhanvienXNDH: {},
+            nameToSearch: "",
+            resultSearch: null,
             isOpenCTDH: false,
             isOpenTrangThai: false,
+            isOpenHoaDon: false,
             newTrangThai: "",
             isOpenXacNhan: false,
+            currentPage: 1, //so trang dang xem hien tai
+            elementsPerPage: 9, // so don hang duoc hien thi tren 1 trang
+            ascending: false, 
+            curentStatus: "Tất cả",
             trangthai: [
                 "Mới", "Đã xác nhận", "Đã vận chuyển", "Đã nhận hàng", "Đã hủy",
             ],
-            currentPage: 1,
-            elementsPerPage: 9,
-            ascending: false,
-            curentStatus: "Tất cả",
+            hoadon:{},
+            dalapHD: false,
         }
 
     },
@@ -236,6 +253,8 @@ export default {
             this.activeDonHang = DHActive;
             this.findKH(this.activeDonHang.KH_Ma);
             this.retrieveChiTietDonHang(this.activeDonHang.KH_Ma);
+            this.findNVByMaNV(this.activeDonHang.NV_Ma);
+            this.findHoaDon();
         },
 
         // Lay danh sach chi tiet don hang của don hang
@@ -252,7 +271,7 @@ export default {
         },
 
         //setclose CTDH
-        async CloseCDTH(){
+        async CloseCDTH() {
             this.isOpenCTDH = false;
         },
         //set trang thai don hang
@@ -295,22 +314,64 @@ export default {
 
         //Set trang thai don hang can tiem kiem
         async setCurentStatus(status) {
-            this.curentStatus = status
+            this.curentStatus = status;
         },
 
         // Tim nhan vien lap don hang
-        async findNVByMaNV(MaNV){
-            activeDonHang.DH_TrangThai = this.newTrangThai;
+        async findNVByMaNV(MaNV) {
             const [error, response] = await this.handle(
-                DonHangService.update(activeDonHang.DH_Ma, activeDonHang)
+                NhanVienService.getByID(MaNV)
             );
             if (error) {
                 console.log(error);
             } else {
-                console.log(response.data + "Cap nhat thanh cong");
-                this.retrieveDonHang();
+                this.nhanvienXNDH = response.data;
             }
-        }
+        },
+
+        //Tim kiem thong qua thanh tim kiem
+        async searchName(){
+            const [error, response] = await this.handle(
+                DonHangService.getByID(this.nameToSearch)
+            );
+            if(error){
+                console.log(error);
+            } else {
+                this.donhang=[];
+                this.donhang[0]  = response.data;
+                
+                this.setActiveDonHang="";
+                console.log(response.data);
+            }
+        },
+
+        // Di chuyen den trang lap hoa don
+        async gotoLapHD(){
+            console.log(this.activeDonHang.DH_Ma+"ma dhnag");
+            this.$router.push({ name: 'QLDonHangLapHD', params: {id: this.activeDonHang.DH_Ma}});
+            
+        },
+
+        async findHoaDon() {
+            console.log(this.activeDonHang.DH_Ma + " finddonhang")
+            const [error, response] = await this.handle(
+                HoaDonService.getByIDMaDH(this.activeDonHang.DH_Ma)
+            );
+            if (error) {
+                console.log(error);
+            } else {
+                if (response.data == "Chua ton tai") {
+                    console.log(response.data);
+                    this.dalapHD = false;
+                }
+                else {
+                    this.hoadon = response.data;
+                    this.dalapHD = true,
+                    console.log(response.data);
+                }
+
+            }
+        },
     },
 
     mounted() {
@@ -333,7 +394,8 @@ export default {
 .frameQLDonHang {
     background-color: #EAEAEA;
     border-radius: 30px;
-    width: 100%;
+    width: max-content;
+    height:670px;
     border-style: solid;
     border-color: #515151;
     position: relative;
@@ -431,7 +493,6 @@ table {
     width: max-content;
     border-radius: 16px;
     border: 1px solid #515151;
-    ;
     display: block;
     color: #515151;
 }
