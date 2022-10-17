@@ -2,11 +2,11 @@
     <div class="container frameLapHoaDon">
         <div class="row list">
             <div class="col-md-2 dschucNang">
-                <DanhSachChucNang />
+                <DanhSachChucNang :maNV="NhanVien"/>
             </div>
             <div class="col-md-10">
                 <div class="row topHeader">
-                    <QLHeader />
+                    <QLHeader :maNV="localNhanVien.NV_Ma" />
                 </div>
                 <div class="row bottomHeader" v-if="!isOpenLapHD">
                     <div class="col-md-12">
@@ -70,15 +70,17 @@
                 </div>
                 <HoaDonChiTiet v-if="isOpenLapHD" :khachhang="khachhang" :chitietdonhang="chitietdonhang"
                     :nhanvien="nhanvien" :hoadon="hoadon" :donhang="donhang" />
-                <div class="row" v-if="!isOpenLapHD">
-                    <div class="col-md-12">
+                <div class="row" >
+                    <div class="col-md-10" v-if="!isOpenLapHD">
                         <button class="btnLapHoaDon" @click="isOpenXacNhan=!isOpenXacNhan">
                             Lập Hóa Đơn
                         </button>
                     </div>
-                </div>
-                <div class="row">
-                    <p>{{}}</p>
+                    <div class="col-md-2">
+                        <button class="btnTroVe" @click="goToQLDonHang">
+                            Tro ve
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -129,12 +131,14 @@ export default {
             isOpenXacNhan: false,
             isOpenLapHD: false,
             hoadon: {},
-            message:"",
+            message: "",
+            localNhanVien: {},
         }
     },
 
     created() {
         this.MaDH = this.$route.params.id;
+        this.localNhanVien.NV_Ma = this.$route.params.user;
     },
 
     methods: {
@@ -211,7 +215,6 @@ export default {
         },
         // Kiem tra don hang da duoc lap hoa don chua
         async findHoaDon() {
-            console.log(this.donhang.DH_Ma + " finddonhang")
             const [error, response] = await this.handle(
                 HoaDonService.getByIDMaDH(this.donhang.DH_Ma)
             );
@@ -236,7 +239,7 @@ export default {
             this.hoadon.HD_NgayLap = new Date().toLocaleDateString();
             this.hoadon.HD_ThoiGianLap = new Date().toLocaleTimeString();
             this.hoadon.HD_TongTien = this.donhang.DH_TongTien;
-            console.log(this.hoadon.HD_NgayLap + " " + this.hoadon.HD_TongTien)
+
             const [error, response] = await this.handle(
                 HoaDonService.create(this.hoadon)
             );
@@ -246,6 +249,11 @@ export default {
                 this.hoadon = response.data;
                 console.log(response.data);
             }
+        },
+
+        async goToQLDonHang(){
+            console.log(this.localNhanVien.NV_Ma)
+            this.$router.push({ name: 'QLDonHang', params: {id: this.localNhanVien.NV_Ma}})
         }
     },
 
@@ -257,112 +265,5 @@ export default {
 </script>
 
 <style>
-.frameLapHoaDon .dschucNang .navigationBar .dsChucNang .btnDonHang {
-    background-color: #FFFFFF;
-    color: #515151;
-}
-
-.number:hover,
-.number.active {
-    background: #717699;
-}
-
-.frameLapHoaDon {
-    background-color: #EAEAEA;
-    border-radius: 30px;
-    width: 100%;
-    border-style: solid;
-    border-color: #515151;
-    position: relative;
-}
-
-
-.dschucNang {
-    background-color: #515151;
-    border-radius: 26px;
-}
-
-.bottomHeader {
-    margin-bottom: 2px;
-    text-align: center;
-    font-size: 20px;
-}
-
-.topHeader {
-    margin-bottom: 2px;
-    margin-right: -5px;
-}
-
-.frameLapHoaDon table {
-    font-family: 'Open Sans', sans-serif;
-    width: 98%;
-    margin: 10px 10px 10px 10px;
-    background-color: #FFFFFF;
-    border-radius: 10px;
-}
-
-
-.frameLapHoaDon table th {
-    text-align: left;
-    color: #000000;
-    padding: 8px;
-    min-width: 30px;
-    font-size: 14px;
-}
-
-.frameLapHoaDon .bangCTDH table td {
-    text-align: left;
-    padding: 8px;
-    color: #000000;
-    font-size: 14px;
-}
-
-.frameLapHoaDon .bangCTDH table tbody tr {
-    background: #FFFFFF;
-    border-radius: 7px;
-    margin-top: 3px;
-    border: 1px solid #515151;
-}
-
-
-.frameLapHoaDon .hoadon {
-    background-color: #FFFFFF;
-    border: 1px solid #515151;
-    margin-left: 2px;
-}
-
-.frameLapHoaDon .btnLapHoaDon {
-    background-color: #515151;
-    border-radius: 15px;
-    color: white;
-    border: none;
-    height: 40px;
-    width: 120px;
-    float: right;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.dialogXacNhan {
-    position: absolute;
-    background-color: #F9F9F9;
-    top: calc(32%);
-    left: 55%;
-    transform: translateX(-50%);
-    width: max-content;
-    border-radius: 16px;
-    border: 1px solid #515151;
-    display: block;
-    color: #515151;
-}
-
-.dialogXacNhan .btnYes,
-.dialogXacNhan .btnNo {
-    width: 100px;
-    background-color: #5d5757;
-    border-radius: 15px;
-    margin-right: 20px;
-    margin-bottom: 50px;
-    color: #FFFFFF;
-}
+@import "../../../assets/QLDonHangStyle.css"
 </style>

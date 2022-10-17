@@ -1,4 +1,5 @@
 <template>
+    <div>
     <div class="row bottomHeader" v-if="!isOpenLapHD">
         <div class="col-md-12">
             <p>Chi Tiết Hóa Đơn</p>
@@ -59,6 +60,7 @@
             </div>
         </div>
     </div>
+    </div>
 </template>
 
 <script>
@@ -73,60 +75,5 @@ export default {
 
 
 <style>
-.hoadonchitiet{
-    background-color: #FFFFFF;
-    border: 1px solid #515151;
-    margin-left: 2px;
-    position: absolute;
-    width: 98%;
-    background-color: #FFFFFF;
-    border-radius: 15px;
-    border-color: #BABABA;
-    position: absolute;
-    background-color: #F9F9F9;
-    top: calc(18%);
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 16px;
-    border: 1px solid #515151;
-    display: block;
-    color: #515151;
-}
-.hoadonchitiet table {
-    font-family: 'Open Sans', sans-serif;
-    width: 98%;
-    margin: 10px 10px 10px 10px;
-    background-color: #FFFFFF;
-    border-radius: 10px;
-}
-
-
-.hoadonchitiet table th {
-    text-align: left;
-    color: #000000;
-    padding: 8px;
-    min-width: 30px;
-    font-size: 14px;
-}
-
-.hoadonchitiet .bangCTDH table td {
-    text-align: left;
-    padding: 8px;
-    color: #000000;
-    font-size: 14px;
-}
-.hoadonchitiet .bangTT table tr {
-    text-align: left;
-    padding: 8px;
-    color: #000000;
-    font-size: 14px;
-    margin-top: 3px;
-}
-.hoadonchitiet .bangCTDH table tbody tr {
-    background: #FFFFFF;
-    border-radius: 7px;
-    margin-top: 3px;
-    border: 1px solid #515151;
-    margin-bottom: 2px;
-}
+@import "../../assets/QLDonHangStyle.css"
 </style>

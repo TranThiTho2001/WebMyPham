@@ -2,11 +2,11 @@
     <div class="container frameQLDanhMuc">
         <div class="row list">
             <div class="col-md-2 dschucNang">
-                <DanhSachChucNang />
+                <DanhSachChucNang :maNV="localNhanVien.NV_Ma" />
             </div>
             <div class="col-md-10">
                 <div class="row topHeader">
-                    <QLHeader />
+                    <QLHeader :maNV="localNhanVien.NV_Ma" />
                 </div>
                 <div class="row bottomHeader">
                     <div class="col-md-12" style="color:#515151">
@@ -106,7 +106,6 @@ export default {
     // props: ["nhanvien"],
     components: { DanhSachChucNang, QLHeader },
     data() {
-
         return {
             danhmuc: [],
             message: "",
@@ -116,8 +115,13 @@ export default {
             danhmucActive: "",
             isOpenXacNhan: false,
             isOpenThongBao: false,
+            localNhanVien:{},
         }
 
+    },
+
+    created(){
+        this.localNhanVien.NV_Ma = this.$route.params.id;
     },
     methods: {
         // Lay danh sach danh muc
@@ -146,7 +150,9 @@ export default {
 
         },
         async gotoTaoDanhMuc() {
-            this.$router.push("/TaoDanhMuc");
+            console.log(this.NhanVien)
+        
+            this.$router.push({name: 'TaoDanhMuc', params: { id: this.localNhanVien.NV_Ma}});
         },
         async change_page(page) {
             this.currentPage = page;
@@ -186,143 +192,9 @@ export default {
 </script>
 
 <style>
-.frameQLDonHang .dschucNang .navigationBar .dsChucNang .btnDanhMuc {
+@import "../../../assets/QLDanhMucStyle.css";
+.frameQLDanhMuc .dschucNang .navigationBar .dsChucNang .btnDanhMuc{
     background-color: #FFFFFF;
     color: #515151;
-}
-
- .number:hover,
- .number.active {
-    background: #717699;
-}
-
-.frameQLDonHang {
-    background-color: #EAEAEA;
-    border-radius: 30px;
-    width: 100%;
-    border-style: solid;
-    border-color: #515151;
-    position: relative;
-}
-
- .dialogXacNhan, .dialogThongBao {
-    position: absolute;
-    top: calc(45%);
-    left: 25%;
-    transform: translateX(50%);
-    background-color: #BABABA;
-    border-radius: 16px;
-    display: block;
-    width: 404px;
-    height: 187px;
-    border-radius: 15px; 
-    text-align: center;
-}
- .dialogXacNhan .btnYes{
-    border-radius: 10px;
-    background-color: red;
-    width: 70px;
-    height: 30px;
-    color: #FFFFFF;
-    margin-top: 20px;
-}
- .dialogXacNhan .btnNo, .dialogThongBao .btnOK{
-    margin-left: 22px;
-    background-color: #929292;
-    border-radius: 10px;
-    width: 70px;
-    height: 30px;
-    color: #FFFFFF;
-    margin-top: 20px;
-}
- .frameQLDanhMuc .timkiem .btnTao {
-    background-color: #515151;
-    border-radius: 15px;
-    color: #FFFFFF;
-    font-size: 17px;
-    float: right;
-}
-.timkiem .btnTimKiem {
-    background-color: #EAEAEA;
-    border: none;
-}
-
- .form-control {
-    border-radius: 15px;
-    background-color: #F5F4F4;
-    border-right: 15px;
-}
-
-.timkiem .btnTimKiem:hover {
-    background-color: #515151;
-}
-
- .dropdown-menu .dropdown-item:hover {
-    background-color: #D9D9D9;
-}
-
- .dropdown-menu .active {
-    background-color: #515151;
-}
-
- .dschucNang {
-    background-color: #515151;
-    border-radius: 26px;
-}
-
- .bottomHeader {
-    margin-bottom: 2px;
-    text-align: center;
-    font-size: 20px;
-}
-
- .pagination {
-    float: right;
-    margin-top: 2px;
-    border-radius: 7px;
-    height: 34px;
-    border-style: solid;
-    border-color: #515151;
-    border-width: 1px;
-}
-
- .topHeader {
-    margin-bottom: 2px;
-    margin-right: -5px;
-}
-
- table {
-    font-family: 'Open Sans', sans-serif;
-    width: 100%;
-    margin: 10px 10px 10px 10px;
-    background-color: #D9D9D9;
-    border-radius: 10px;
-}
-
- .tdChucNang {
-    float: right;
-}
-
- table th {
-    text-align: left;
-    color: #000000;
-    padding: 8px;
-    min-width: 30px;
-}
-
- table td {
-    text-align: left;
-    padding: 8px;
-    color: #000000;
-    font-size: 14px;
-}
-
- table td:last-child {
-    border-right: none;
-}
- table tbody tr {
-    background: #FFFFFF;
-    border-radius: 7px;
-    margin-top: 3px;
 }
 </style>

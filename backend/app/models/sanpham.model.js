@@ -24,9 +24,9 @@ module.exports = mongoose => {
                 type: String,
                 required: [true, "Thong tin san pham duoc yeu cau"],
             },
-            SP_SoLuongNhap: {
+            SP_SoLuong: {
                 type: Number,
-                required: [true, "So luong nhap duoc yeu cau"],
+                required: [true, "So luong duoc yeu cau"],
             },
             SP_GiaMuaVao: {
                 type: Number,

@@ -6,15 +6,15 @@
                 style="border-top-left-radius: 30px; border-top-right-radius: 30px;">
         </div>
         <div class="dsChucNang">
-            <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnThongKe" @click="goToQLThongKe"><span
+            <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnThongKe" @click="goToQLThongKe" :disabled=true><span
                     class="fa fa-line-chart " aria-hidden="true"> &nbsp;</span> Thống Kê</button>
             <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnDonHang" @click="goToQLDonHang"><span
                     class="fa fa-receipt" aria-hidden="true"> &nbsp;&nbsp;</span> Đơn Hàng</button>
             <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnSanPham" @click="goToQLSanPham"><span
                     class="fa fa-spray-can" aria-hidden="true"> &nbsp;</span> Sản Phẩm</button>
-            <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnNhanVien" @click="goToQLNhanVien"><span class="fa fa-users"
+            <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnNhanVien" @click="goToQLNhanVien" :disabled=disabledQLNV><span class="fa fa-users"
                     aria-hidden="true"> &nbsp;</span>Nhân Viên</button>
-            <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnThuongHieu" @click="goToQLThuongHieu"><span class="fa fa-tag"
+            <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnThuongHieu" @click="goToQLThuongHieu" :disabled=true><span class="fa fa-tag"
                     aria-hidden="true"> &nbsp;</span> Thương Hiệu</button>
             <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnDanhMuc" @click="goToQLDanhMuc"><span class="fa fa-shapes"
                     aria-hidden="true"> &nbsp;</span> Danh Mục</button>
@@ -30,30 +30,68 @@
     </div>
 </template>
 <script>
+import NhanVienService from "../../services/nhanvien.service";
 export default {
+    name:  `DanhSachchucNang`,
+
+    props: [
+      "maNV", 
+    ],
+    data(){
+        return {
+            maNhanVien: this.maNV,
+            localNhanVien: {},
+            disabledQLNV:true,
+        }
+    },
     methods: {
+
         goToQLDanhMuc() {
-            this.$router.push("/QLDanhMuc");
+            this.$router.push({name: 'QLDanhMucSanPham', params: { id: this.maNhanVien }});
         },
         goToQLSanPham() {
-            this.$router.push("/QLSanPham");
+            this.$router.push({name: 'QLsanpham', params: { id: this.maNhanVien }});
         },
         goToQLThongKe() {
-            this.$router.push("/QLThongKe");
+            this.$router.push({name: 'QLDonHang', params: { id: this.maNhanVien }});
         },
         goToQLDonHang() {
-            this.$router.push("/QLDonHang");
+            this.$router.push({name: 'QLDonHang', params: { id: this.maNhanVien }});
         },
         goToQLKhuyenMai() {
-            this.$router.push("/QLKhuyenMai");
+            this.$router.push({name: 'QLDonHang', params: { id: this.maNhanVien }});
         },
         goToQLThuongHieu() {
-            this.$router.push("/QLThuongHieu");
+            this.$router.push({name: 'QLthuonghieu', params: { id: this.maNhanVien }});
         },
         goToQLNhanVien() {
-            this.$router.push("/QLNhanVien");
+            this.$router.push({name: 'QLDonHang', params: { id: this.maNhanVien }});
         },
+
+        async PhanQuyenNhanVien(){
+            const [error, response] = await this.handle(
+                NhanVienService.getByID(this.maNhanVien)
+            );
+            if (error) {
+                console.log(error);
+            } else {
+                this.localNhanVien = response.data;
+                if(this.localNhanVien.NV_LoaiNV==1){
+                    this.disabledQLNV = false;
+
+                }
+                else{
+                    this.disabledQLNV = true;
+                }
+                console.log(this.disabledQLNV)
+            }
+        }
     },
+
+    mounted(){
+        this.PhanQuyenNhanVien();
+    }
+    
 };
 </script>
 

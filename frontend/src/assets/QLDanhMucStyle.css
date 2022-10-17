@@ -1,0 +1,195 @@
+.frameQLDanhMuc .dschucNang .navigationBar .dsChucNang .btnDanhMuc{
+    background-color: #FFFFFF;
+    color: #515151;
+}
+
+ .number:hover,
+ .number.active {
+    background: #717699;
+}
+
+.frameQLDanhMuc {
+    background-color: #EAEAEA;
+    border-radius: 30px;
+    width: 100%;
+    border-style: solid;
+    border-color: #515151;
+    position: relative;
+}
+
+ .dialogXacNhan, .dialogThongBao {
+    position: absolute;
+    top: calc(45%);
+    left: 25%;
+    transform: translateX(50%);
+    background-color: #BABABA;
+    border-radius: 16px;
+    display: block;
+    width: 404px;
+    height: 187px;
+    border-radius: 15px; 
+    text-align: center;
+}
+ .dialogXacNhan .btnYes{
+    border-radius: 10px;
+    background-color: red;
+    width: 70px;
+    height: 30px;
+    color: #FFFFFF;
+    margin-top: 20px;
+}
+ .dialogXacNhan .btnNo, .dialogThongBao .btnOK{
+    margin-left: 22px;
+    background-color: #929292;
+    border-radius: 10px;
+    width: 70px;
+    height: 30px;
+    color: #FFFFFF;
+    margin-top: 20px;
+}
+ .frameQLDanhMuc .timkiem .btnTao {
+    background-color: #515151;
+    border-radius: 15px;
+    color: #FFFFFF;
+    font-size: 17px;
+    float: right;
+}
+.timkiem .btnTimKiem {
+    background-color: #EAEAEA;
+    border: none;
+}
+
+ .form-control {
+    border-radius: 15px;
+    background-color: #F5F4F4;
+    border-right: 15px;
+}
+
+.timkiem .btnTimKiem:hover {
+    background-color: #515151;
+}
+
+ .dropdown-menu .dropdown-item:hover {
+    background-color: #D9D9D9;
+}
+
+ .dropdown-menu .active {
+    background-color: #515151;
+}
+
+ .dschucNang {
+    background-color: #515151;
+    border-radius: 26px;
+}
+
+ .bottomHeader {
+    margin-bottom: 2px;
+    text-align: center;
+    font-size: 20px;
+}
+
+ .pagination {
+    float: right;
+    margin-top: 2px;
+    border-radius: 7px;
+    height: 34px;
+    border-style: solid;
+    border-color: #515151;
+    border-width: 1px;
+}
+
+ .topHeader {
+    margin-bottom: 2px;
+    margin-right: -5px;
+}
+
+ table {
+    font-family: 'Open Sans', sans-serif;
+    width: 100%;
+    margin: 10px 10px 10px 10px;
+    background-color: #D9D9D9;
+    border-radius: 10px;
+}
+
+ .tdChucNang {
+    float: right;
+}
+
+ table th {
+    text-align: left;
+    color: #000000;
+    padding: 8px;
+    min-width: 30px;
+}
+
+ table td {
+    text-align: left;
+    padding: 8px;
+    color: #000000;
+    font-size: 14px;
+}
+
+ table td:last-child {
+    border-right: none;
+}
+ table tbody tr {
+    background: #FFFFFF;
+    border-radius: 7px;
+    margin-top: 3px;
+}
+
+/* Tao danh muc moi */
+
+.frameQLDanhMuc .frameThem form {
+    width: 510px;
+    height: 470px;
+    border-radius: 15px;
+    transform: translateX(2%);
+    margin-top: 20px;
+    background-color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+.frameQLDanhMuc .frameThem form .functionName {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #515151;
+    font-size: 25px;
+    padding-top: 20px;
+}
+
+.frameQLDanhMuc .frameThem form .form-group {
+    color: black;
+    width: 90%;
+    margin-left: 25px;
+    margin-top: 50px;
+}
+
+.frameQLDanhMuc .frameThem form .error-feedback {
+    text-align: right;
+    color: red;
+    float: right;
+}
+
+.frameQLDanhMuc .frameThem form .textMessage2{
+    padding-top: 5px;
+    text-align: center;
+    padding-bottom: 2px;
+    color: #D30000;
+    display: inline;
+}
+f.frameQLDanhMuc .frameThem orm .textMessage1 {
+    padding-bottom: 2px;
+    color: #D30000;
+    text-align: center;
+}
+
+.frameQLDanhMuc .frameThem form .btnLuu {
+    text-align: center;
+    transform: translateY(0px);
+    margin-left: 175px;
+    margin-top: 5px;
+    width: 125px;
+    background-color: #515151;
+    color: #FFFFFF;
+}

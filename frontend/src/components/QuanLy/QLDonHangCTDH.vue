@@ -61,6 +61,10 @@ export default {
 </script>
 
 <style>
+.chitietDonHang .dschucNang .navigationBar .dsChucNang .btnDonHang {
+    background-color: #FFFFFF;
+    color: #515151;
+}
 .chitietDonHang {
     width: 98%;
     background-color: #FFFFFF;
@@ -68,7 +72,7 @@ export default {
     border-color: #BABABA;
     position: absolute;
     background-color: #F9F9F9;
-    top: calc(34%);
+    top: calc(25%);
     left: 50%;
     transform: translateX(-50%);
     border-radius: 16px;

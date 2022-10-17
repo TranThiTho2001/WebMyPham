@@ -6,56 +6,72 @@ const routes = [
         name: "HomePage",
         component: () => import("../views/HomePage.vue"),
     },
+
     {
-        path: "/QL",
-        name: "QLHomePage",
+        path: "/QLDangNhap",
+        name: "QLDangNhap",
         component: () =>
-            import ("../views/QLHomePage.vue"),
+            import ("../views/QuanLy/QLTaiKhoan/DangNhap.vue"),
     },
+
     {
-        path: "/QLSanPham",
+        path: "/QLDoiMatKhau/:id",
+        name: "QLDoiMatKhau",
+        component: () =>
+            import ("../views/QuanLy/QLTaiKhoan/DoiMatKhau.vue"),
+    },
+
+    {
+        path: "/QLSanPham/:id",
         name: "QLsanpham",
         component: () =>
             import ("../views/QuanLy/QLSanPham/QLSanPham.vue"),
     },
+
     {
-        path: "/QLDanhMuc",
+        path: "/QLDanhMucSanPham/:id",
         name: "QLDanhMucSanPham",
         component: () =>
             import ("../views/QuanLy/QLDanhMuc/QLDanhMucSanPham.vue"),
     },
+
     {
-        path: "/QLThuongHieu",
+        path: "/QLThuongHieu/:id",
         name: "QLthuonghieu",
         component: () =>
             import ("../views/QuanLy/QLThuongHieu/QLThuongHieu.vue"),
     },
+
     {
-        path: "/TaoDanhMuc",
+        path: "/TaoDanhMuc/:id",
         name: "TaoDanhMuc",
         component: () =>
             import ("../views/QuanLy/QLDanhMuc/QLTaoDanhMuc.vue"),
     },
+
     {
-        path: "/SuaDanhMuc",
+        path: "/SuaDanhMuc/:id",
         name: "SuaDanhMuc",
         component: () =>
             import ("../views/QuanLy/QLDanhMuc/QLDanhMucSua.vue"),
     },
+
     {
-        path: "/QLSanPhamThem",
+        path: "/QLSanPhamThem/:id",
         name: "QLSanPhamThem",
         component: () =>
             import ("../views/QuanLy/QLSanPham/QLSanPhamThem.vue"),
     },
+
     {
-        path: "/QLDonHang",
+        path: "/QLDonHang/:id",
         name: "QLDonHang",
         component: () =>
             import ("../views/QuanLy/QLDonHang/QLDonHang.vue"),
     },
+
     {
-        path: '/QLDonHangLapHD/:id',
+        path: '/QLDonHangLapHD/:id/:user',
         name: 'QLDonHangLapHD',        
         component: () =>
             import ("../views/QuanLy/QLDonHang/QLDonHangLapHD.vue"),

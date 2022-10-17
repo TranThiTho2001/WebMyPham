@@ -3,11 +3,11 @@
     <div class="container frameQLDanhMuc">
         <div class="row list">
             <div class="col-md-2 dschucNang">
-                <DanhSachChucNang />
+                <DanhSachChucNang :maNV="localNhanVien.NV_Ma"/>
             </div>
             <div class="col-md-10">
                 <div class="row topHeader">
-                    <QLHeader />
+                    <QLHeader  :maNV="localNhanVien.NV_Ma" />
                 </div>
                 <div class="row bottomHeader">
                     <div class="col-md-12 font-weight-bold" style="color:#515151; font-size: 25px;">
@@ -46,7 +46,6 @@ import DanhMucService from '../../../services/danhmuc.service';
 import DanhMucTao from '../../../components/QuanLy/DanhMucFormThem.vue'
 export default {
     name: `QLHomePage`,
-    // props: ["nhanvien"],
     components: { DanhSachChucNang, QLHeader, DanhMucTao },
     data() {
 
@@ -57,8 +56,12 @@ export default {
             message1: "",
             message2:"",
             check: 0,
+            localNhanVien:{},
         }
 
+    },
+    created(){
+        this.localNhanVien.NV_Ma = this.$route.params.id;
     },
     computed: {
         "columns": function columns() {
@@ -124,62 +127,10 @@ export default {
 </script>
 
 <style>
-.frameQLDanhMuc .dschucNang .navigationBar .dsChucNang .btnDanhMuc {
-    background-color: #FFFFFF;
-    color: #515151;
-}
-
-.frameQLDanhMuc {
-    background-color: #EAEAEA;
-    border-radius: 30px;
-    width: 100%;
-    border-style: solid;
-    border-color: #515151;
-    position: relative;
-}
-
-.frameQLDanhMuc .timkiem .btnXem {
-    background-color: #515151;
-    border-radius: 15px;
-    color: #FFFFFF;
-    float: right;
-    font-size: 16px;
-}
-
-
-.form-control {
-    border-radius: 15px;
-    background-color: #F5F4F4;
-    border-right: 15px;
-}
-
-.frameQLDanhMuc .timkiem .btnTimKiem:hover {
-    background-color: #515151;
-}
-
-.frameQLDanhMuc .dschucNang {
-    background-color: #515151;
-    border-radius: 26px;
-}
-
-.frameQLDanhMuc .bottomHeader {
-    /* margin-bottom: 2px; */
-    text-align: center;
-    font-size: 20px;
-}
-
-.frameQLDanhMuc .topHeader {
-    margin-bottom: 2px;
-    margin-right: -5px;
-}
-
+@import "../../../assets/QLDanhMucStyle.css";
 .frameQLDanhMuc .frameThem{
     background-color: #D9D9D9;
     border-radius: 15px;
     margin: 8px 1px 1px 0px;
 }
-
-/* table tbody tr:nth-child(2n) td {
-    background: #D4D8F9;
-} */
 </style>

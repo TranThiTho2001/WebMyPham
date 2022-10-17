@@ -66,7 +66,7 @@ methods: {
 //         }
 //     },
     goToQL() {
-            this.$router.push("/QL");
+            this.$router.push("/QuanLy");
         },
 },
 

@@ -2,11 +2,11 @@
     <div class="container frameQLDonHang">
         <div class="row list">
             <div class="col-md-2 dschucNang">
-                <DanhSachChucNang @click="CloseCDTH" />
+                <DanhSachChucNang @click="CloseCDTH" :maNV="localNhanVien.NV_Ma"/>
             </div>
             <div class="col-md-10">
                 <div class="row topHeader" @click="CloseCDTH">
-                    <QLHeader />
+                    <QLHeader :maNV="localNhanVien.NV_Ma" />
                 </div>
                 <div class="row bottomHeader" @click="CloseCDTH">
                     <div class="col-md-12">
@@ -188,10 +188,15 @@ export default {
             ],
             hoadon:{},
             dalapHD: false,
+            localNhanVien:{},
         }
 
     },
 
+    created(){
+        this.localNhanVien.NV_Ma = this.$route.params.id;
+    },
+    
     computed: {
         "columns": function columns() {
             if (this.donhang.length == 0) {
@@ -202,6 +207,17 @@ export default {
     },
 
     methods: {
+        //Tim nhan vien dang nhap
+        async findLocalNhanVien(){
+            const [error, response] = await this.handle(
+                NhanVienService.getByID(this.localNhanVien.NV_Ma)
+            );
+            if (error) {
+                console.log(error);
+            } else {
+                this.localNhanVien = response.data;
+            }
+        },
 
         //Lay danh sach don hang
         async retrieveDonHang() {
@@ -347,9 +363,7 @@ export default {
 
         // Di chuyen den trang lap hoa don
         async gotoLapHD(){
-            console.log(this.activeDonHang.DH_Ma+"ma dhnag");
-            this.$router.push({ name: 'QLDonHangLapHD', params: {id: this.activeDonHang.DH_Ma}});
-            
+            this.$router.push({ name: 'QLDonHangLapHD', params: {id: this.activeDonHang.DH_Ma, user:this.localNhanVien.NV_Ma}});            
         },
 
         async findHoaDon() {
@@ -381,131 +395,5 @@ export default {
 </script>
 
 <style>
-.frameQLDonHang .dschucNang .navigationBar .dsChucNang .btnDonHang {
-    background-color: #FFFFFF;
-    color: #515151;
-}
-
-.number:hover,
-.number.active {
-    background: #717699;
-}
-
-.frameQLDonHang {
-    background-color: #EAEAEA;
-    border-radius: 30px;
-    width: max-content;
-    height:670px;
-    border-style: solid;
-    border-color: #515151;
-    position: relative;
-}
-
-
-.timkiem .btnTimKiem {
-    background-color: #EAEAEA;
-    border: none;
-}
-
-
-.timkiem .btnTimKiem:hover {
-    background-color: #515151;
-}
-
-.dropdown-menu .dropdown-item:hover {
-    background-color: #D9D9D9;
-}
-
-.dschucNang {
-    background-color: #515151;
-    border-radius: 26px;
-}
-
-.bottomHeader {
-    margin-bottom: 2px;
-    text-align: center;
-    font-size: 20px;
-}
-
-.topHeader {
-    margin-bottom: 2px;
-    margin-right: -5px;
-}
-
-table {
-    font-family: 'Open Sans', sans-serif;
-    width: 100%;
-    margin: 10px 10px 10px 10px;
-    background-color: #D9D9D9;
-    border-radius: 10px;
-}
-
-.tdChucNang {
-    float: right;
-    width: max-content;
-}
-
-.btnTrangThaiDH {
-    border-radius: 7px;
-    border: none;
-    width: 100px;
-}
-
-.frameQLDonHang table th {
-    text-align: left;
-    color: #000000;
-    padding: 8px;
-    min-width: 30px;
-    font-size: 14px;
-}
-
-.frameQLDonHang table td {
-    text-align: left;
-    padding: 8px;
-    color: #000000;
-    font-size: 14px;
-}
-
-.frameQLDonHang table tbody tr {
-    background: #FFFFFF;
-    border-radius: 7px;
-    margin-top: 3px;
-}
-
-.pagination {
-    float: right;
-    margin-top: 2px;
-    border-radius: 7px;
-    height: 34px;
-    width: 65px;
-    border-style: solid;
-    border-color: #515151;
-    border-width: 1px;
-}
-
-.dialogTrangThai,
-.dialogXacNhan {
-    position: absolute;
-    background-color: #F9F9F9;
-    top: calc(32%);
-    left: 55%;
-    transform: translateX(-50%);
-    width: max-content;
-    border-radius: 16px;
-    border: 1px solid #515151;
-    display: block;
-    color: #515151;
-}
-
-.dialogTrangThai .btnCapNhat,
-.dialogTrangThai .btnHuy,
-.dialogXacNhan .btnYes,
-.dialogXacNhan .btnNo {
-    width: 100px;
-    background-color: #929292;
-    border-radius: 15px;
-    margin-right: 20px;
-    margin-bottom: 50px;
-    color: #FFFFFF;
-}
+@import "../../../assets/QLDonHangStyle.css"
 </style>

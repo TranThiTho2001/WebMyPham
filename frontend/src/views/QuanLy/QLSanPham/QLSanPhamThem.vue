@@ -3,11 +3,11 @@
     <div class="container frameQLSanPham">
         <div class="row list">
             <div class="col-md-2 dschucNang">
-                <DanhSachChucNang />
+                <DanhSachChucNang :maNV="localNhanVien.NV_Ma"/>
             </div>
             <div class="col-md-10">
                 <div class="row topHeader">
-                    <QLHeader />
+                    <QLHeader :maNV="localNhanVien.NV_Ma" />
                 </div>
                 <div class="row bottomHeader">
                     <div class="col-md-12 font-weight-bold" style="color:#515151; font-size: 25px;">
@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-md-3 col-sm-11">
                         <!-- <button class=" btn btn-sm btn-outline-secondary btnTaoDanhMuc" @click="isOpen = !isOpen"> -->
-                        <button class=" btn btn-sm btn-outline-secondary btnXem font-weight-bold" @click="goToQLDanhMuc">
+                        <button class=" btn btn-sm btn-outline-secondary btnXem font-weight-bold" @click="goToQLSanPham">
                             <span class="fa fa-list-ol" style="font-size:20px"></span>
                             Xem danh sách
                         </button>
@@ -27,12 +27,11 @@
 
                 </div>                    
                 <div class="row frameThem">
-                    <div class="col-md-2 col-sm-0"></div>
-                    <div class="col-md-8 col-sm-12">
+                    <div class="col-md-12 col-sm-12">
                         <SanPhamThem :newsanpham="newsanpham" @themSanPham-submit="findSanPham"
                             :message1="message1" :message2="message2"/>
                     </div>
-                    <div class="col-md-2 col-sm-0"></div>
+                    
                 </div>
 
             </div>
@@ -46,8 +45,9 @@ import SanPhamService from '../../../services/sanpham.service';
 import SanPhamThem from '../../../components/QuanLy/SanPhamFormThem.vue'
 export default {
     name: `QLSanPhamThem`,
-    // props: ["nhanvien"],
+
     components: { DanhSachChucNang, QLHeader, SanPhamThem},
+
     data() {
 
         return {
@@ -57,9 +57,15 @@ export default {
             message1: "",
             message2:"",
             check: 0,
+            localNhanVien:{},
         }
 
     },
+
+    created(){
+        this.localNhanVien.NV_Ma = this.$route.params.id;
+    },
+
     computed: {
         "columns": function columns() {
             if (this.sanpham.length == 0) {
@@ -68,6 +74,7 @@ export default {
             return Object.keys(this.sanpham[0])
         }
     },
+
     methods: {
         async retrieveSanPham() {
             const [error, response] = await this.handle(
@@ -113,10 +120,11 @@ export default {
             }
         },
 
-        async goToQLDanhMuc(){
-            this.$router.push("/QLDanhMuc");
+        async goToQLSanPham(){
+            this.$router.push({name: 'QLsanpham', params: { id: this.localNhanVien.NV_Ma }});
         }
     },
+
     mounted() {
         this.retrieveSanPham();
     }
@@ -124,7 +132,7 @@ export default {
 </script>
 
 <style>
-.frameQLSanPham .dschucNang .navigationBar .dsChucNang .btnDanhMuc {
+.frameQLSanPham .dschucNang .navigationBar .dsChucNang .btnSanPham {
     background-color: #FFFFFF;
     color: #515151;
 }
@@ -147,7 +155,7 @@ export default {
 }
 
 
-.form-control {
+.frameQLSanPham .form-control {
     border-radius: 15px;
     background-color: #F5F4F4;
     border-right: 15px;
@@ -176,10 +184,7 @@ export default {
 .frameQLSanPham .frameThem{
     background-color: #D9D9D9;
     border-radius: 15px;
-    margin: 8px 1px 1px 0px;
+    margin: 1% 1% 1% 1%;
 }
 
-/* table tbody tr:nth-child(2n) td {
-    background: #D4D8F9;
-} */
 </style>

@@ -38,9 +38,10 @@ module.exports = mongoose => {
             },
 
             NV_MatKhau: {
-                type: Number,
+                type: String,
                 required: [true, "Mat khau tai khoan duoc yeu cau"],
             },
+
             NV_LoaiNV: {
                 type: Number,
                 required:[true,"Loai nhan vien duoc yeu cau"],

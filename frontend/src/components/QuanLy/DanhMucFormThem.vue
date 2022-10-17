@@ -72,57 +72,5 @@ export default {
 </script>
 
 <style>
-form {
-    width: 510px;
-    height: 470px;
-    border-radius: 15px;
-    transform: translateX(6%);
-    margin-top: 20px;
-    background-color: #FFFFFF;
-    margin-bottom: 10px;
-}
-
-form .functionName {
-    text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #515151;
-    font-size: 25px;
-    padding-top: 20px;
-}
-
-form .form-group {
-    color: black;
-    width: 90%;
-    margin-left: 25px;
-    margin-top: 50px;
-}
-
-form .error-feedback {
-    text-align: right;
-    color: red;
-    float: right;
-}
-
-form .textMessage2{
-    padding-top: 5px;
-    text-align: center;
-    padding-bottom: 2px;
-    color: #D30000;
-    display: inline;
-}
-form .textMessage1 {
-    padding-bottom: 2px;
-    color: #D30000;
-    text-align: center;
-}
-
-form .btnLuu {
-    text-align: center;
-    transform: translateY(0px);
-    margin-left: 175px;
-    margin-top: 5px;
-    width: 125px;
-    background-color: #515151;
-    color: #FFFFFF;
-}
+@import "../../assets/QLDanhMucStyle.css"
 </style>

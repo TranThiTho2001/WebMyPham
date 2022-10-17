@@ -1,0 +1,182 @@
+.frameQLDonHang .dschucNang .navigationBar .dsChucNang .btnDonHang{
+    background-color: #FFFFFF;
+    color: #515151;
+}
+.frameQLDonHang {
+    background-color: #EAEAEA;
+    border-radius: 30px;
+    width: max-content;
+    height:670px;
+    border-style: solid;
+    border-color: #515151;
+    position: relative;
+}
+
+
+.timkiem .btnTimKiem {
+    background-color: #EAEAEA;
+    border: none;
+}
+
+
+.timkiem .btnTimKiem:hover {
+    background-color: #515151;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #D9D9D9;
+}
+
+.dschucNang {
+    background-color: #515151;
+    border-radius: 26px;
+}
+
+.bottomHeader {
+    margin-bottom: 2px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.topHeader {
+    margin-bottom: 2px;
+    margin-right: -5px;
+}
+
+table {
+    font-family: 'Open Sans', sans-serif;
+    width: 100%;
+    margin: 10px 10px 10px 10px;
+    background-color: #D9D9D9;
+    border-radius: 10px;
+}
+
+.tdChucNang {
+    float: right;
+    width: max-content;
+}
+
+.btnTrangThaiDH {
+    border-radius: 7px;
+    border: none;
+    width: 100px;
+}
+
+ table th {
+    text-align: left;
+    color: #000000;
+    padding: 8px;
+    min-width: 30px;
+    font-size: 14px;
+}
+
+ table td {
+    text-align: left;
+    padding: 8px;
+    color: #000000;
+    font-size: 14px;
+}
+
+ table tbody tr {
+    background: #FFFFFF;
+    border-radius: 7px;
+    margin-top: 3px;
+}
+
+.pagination {
+    float: right;
+    margin-top: 2px;
+    border-radius: 7px;
+    height: 34px;
+    width: 65px;
+    border-style: solid;
+    border-color: #515151;
+    border-width: 1px;
+}
+
+.dialogTrangThai,
+.dialogXacNhan {
+    position: absolute;
+    background-color: #F9F9F9;
+    top: calc(32%);
+    left: 55%;
+    transform: translateX(-50%);
+    width: max-content;
+    border-radius: 16px;
+    border: 1px solid #515151;
+    display: block;
+    color: #515151;
+}
+
+.dialogTrangThai .btnCapNhat,
+.dialogTrangThai .btnHuy,
+.dialogXacNhan .btnYes,
+.dialogXacNhan .btnNo {
+    width: 100px;
+    background-color: #929292;
+    border-radius: 15px;
+    margin-right: 20px;
+    margin-bottom: 50px;
+    color: #FFFFFF;
+}
+
+
+/* Lap hoa don */
+.frameLapHoaDon .dschucNang .navigationBar .dsChucNang .btnDonHang {
+    background-color: #FFFFFF;
+    color: #515151;
+}
+
+.number:hover,
+.number.active {
+    background: #717699;
+}
+
+.frameLapHoaDon {
+    background-color: #EAEAEA;
+    border-radius: 30px;
+    width: 100%;
+    border-style: solid;
+    border-color: #515151;
+    position: relative;
+}
+
+.frameLapHoaDon .hoadon {
+    background-color: #FFFFFF;
+    border: 1px solid #515151;
+    margin-left: 2px;
+}
+
+.frameLapHoaDon .btnLapHoaDon, .frameLapHoaDon .btnTroVe {
+    background-color: #515151;
+    border-radius: 15px;
+    color: white;
+    border: none;
+    height: 40px;
+    width: 120px;
+    float: right;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+/* Xem chi tiet hoa don */
+.hoadonchitiet{
+    background-color: #FFFFFF;
+    border: 1px solid #515151;
+    margin-left: 2px;
+    position: absolute;
+    width: 98%;
+    background-color: #FFFFFF;
+    border-radius:15px;
+    border-color: #BABABA;
+    position: absolute;
+    background-color: #F9F9F9;
+    top: calc(18%);
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 16px;
+    border: 1px solid #515151;
+    display: block;
+    color: #515151;
+}

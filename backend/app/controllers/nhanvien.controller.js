@@ -88,7 +88,7 @@ exports.findOne = async (req,res) => {
     };
 
     const [error, documents] = await handle(
-        NhanVien.findOne(condition, '-ownerId')
+        NhanVien.findOne(condition)
     );
 
     if(error) {

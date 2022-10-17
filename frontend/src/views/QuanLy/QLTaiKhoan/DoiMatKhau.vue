@@ -1,0 +1,274 @@
+
+<template>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <div class="container frameDoiMatKhau">
+        <div class="row formDoiMatKhau">
+            <div class="col-md-4 leftForm">
+                <div class="row">
+                    <img src="../../../images/logoDanhNhap.png" class="img-fluid  mx-auto d-block" width="269px"
+                        height="222px" alt="Logo" style="border-radius: 15px;">
+                </div>
+                <div class="row" style="margin-top:10%">
+                    <img src="../../../images/ImageDangNhap.png" class="img-fluid" width="464px" height="466px"
+                        alt="Image" style="border-radius: 15px;">
+                </div>
+            </div>
+
+            <div class="col-md-8 rightForm">
+                <div style="margin-top: 5%">
+                    <h2 style="text-align:center">ĐỔI MẬT KHẨU</h2>
+                </div>
+                <div class="row">
+                    <Form @submit="handleLogin" :validation-schema="schema" v-slot="{ isSubmitting }">
+                        <div class="form-group">
+                            <label for="username">Tên đăng nhập</label>
+                            <Field name="username" type="text" class="form-control" placeholder="{{maNhanVien}}"
+                                v-model="maNhanVien"
+                                style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA;"
+                                :disabled="true" />
+                            <ErrorMessage name="username" class="error-feedback" style="color:red" />
+
+                        </div>
+                        <!-- ----------------------------------------------NHAP MAT KHAU CU---------------------------------------------------------- -->
+                        <div v-if="!isOpenMatKhauHienTai" class="form-group" style="margin-top:6%">
+                            <label for="currentPassword">Mật khẩu cũ</label>
+                            <div class="row"
+                                style="background-color: #F5F4F4; border-radius: 15px; margin: 0 0 0 0.1%;">
+                                <Field name="currentPassword" type="password" class="form-control"
+                                    placeholder="Nhập mật khẩu hiện tại"
+                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
+                                    v-model="nhanvien.NV_MatKhau" />
+                                <span class="btn far fa-eye-slash btnHienMatKhau"
+                                    @click="isOpenMatKhauHienTai=!isOpenMatKhauHienTai"></span>
+                            </div>
+                            <ErrorMessage name="currentPassword" class="error-feedback" style="color:red" />
+                        </div>
+
+                        <div v-if="isOpenMatKhauHienTai" class="form-group" style="margin-top:6%">
+                            <label for="currentPassword">Mật khẩu hiện tại</label>
+                            <div class="row"
+                                style="background-color: #F5F4F4; border-radius: 15px; margin: 0 0 0 0.1%;">
+                                <Field v-if="nhanvien.NV_MatKhau==''" name="password" type="text" class="form-control"
+                                    placeholder="Nhập mật khẩu hiện tại"
+                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
+                                    v-model="nhanvien.NV_MatKhau" />
+                                <Field v-else name="currentPassword" type="text" class="form-control"
+                                    placeholder="{{nhanvien.NV_MatKhau}}"
+                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
+                                    v-model="nhanvien.NV_MatKhau" />
+                                <span class="btn  far fa-eye btnAnMatKhau"
+                                    @click="isOpenMatKhauHienTai=!isOpenMatKhauHienTai, setIsOpenmatKhau"></span>
+                            </div>
+                            <ErrorMessage name="currentPassword" class="error-feedback" style="color:red" />
+                        </div>
+                        <p v-if="message" style="display: inline; color: red; float:right">
+                            {{ message }}
+                        </p>
+                        <!-- ------------------------------------------NHAP MAT KHAU MOI------------------------------------------------------------ -->
+                        <div v-if="!isOpenMatKhauMoi" class="form-group" style="margin-top:6%">
+                            <label for="newPassword">Mật khẩu mới</label>
+                            <div class="row"
+                                style="background-color: #F5F4F4; border-radius: 15px; margin: 0 0 0 0.1%;">
+                                <Field name="newPassword" type="password" class="form-control"
+                                    placeholder="Nhập mật khẩu mới"
+                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
+                                    v-model="newPassword" />
+                                <span class="btn far fa-eye-slash btnHienMatKhau"
+                                    @click="isOpenMatKhauMoi=!isOpenMatKhauMoi"></span>
+                            </div>
+                            <ErrorMessage name="newPassword" class="error-feedback" style="color:red" />
+                        </div>
+
+                        <div v-if="isOpenMatKhauMoi" class="form-group" style="margin-top:6%">
+                            <label for="newPassword">Mật khẩu mới</label>
+                            <div class="row"
+                                style="background-color: #F5F4F4; border-radius: 15px; margin: 0 0 0 0.1%;">
+                                <Field v-if="newPassword==''" name="password" type="text" class="form-control"
+                                    placeholder="Nhập mật khẩu mới"
+                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
+                                    v-model="newPassword" />
+                                <Field v-else name="newPassword" type="text" class="form-control"
+                                    placeholder="{{newPassword}}"
+                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
+                                    v-model="newPassword" />
+                                <span class="btn  far fa-eye btnAnMatKhau"
+                                    @click="isOpenMatKhauMoi=!isOpenMatKhauMoi, setIsOpenmatKhau"></span>
+                            </div>
+                            <ErrorMessage name="newPassword" class="error-feedback" style="color:red" />
+                        </div>
+                        <!-- ------------------------------------NHAP XAC THUC MAT KHAU MOI------------------------------------------------ -->
+                        <div v-if="!isOpenMatKhauXacThuc" class="form-group" style="margin-top:5%">
+                            <label for="confirmPassword">Xác thực mật khẩu mới</label>
+                            <div class="row"
+                                style="background-color: #F5F4F4; border-radius: 15px; margin: 0 0 0 0.1%;">
+                                <Field name="confirmPassword" type="password" class="form-control"
+                                    placeholder="Nhập lại mật khẩu mới"
+                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
+                                    v-model="confirmPassword" />
+                                <span class="btn far fa-eye-slash btnHienMatKhau"
+                                    @click="isOpenMatKhauXacThuc=!isOpenMatKhauXacThuc"></span>
+                            </div>
+                            <ErrorMessage name="confirmPassword" class="error-feedback" style="color:red" />
+                        </div>
+
+                        <div v-if="isOpenMatKhauXacThuc" class="form-group" style="margin-top:5%">
+                            <label for="confirmPassword">Xác thực mật khẩu mới</label>
+                            <div class="row"
+                                style="background-color: #F5F4F4; border-radius: 15px; margin: 0 0 0 0.1%;">
+                                <Field v-if="confirmPassword==''" name="password" type="text" class="form-control"
+                                    placeholder="Nhập lại mật khẩu mới"
+                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
+                                    v-model="confirmPassword" />
+                                <Field v-else name="confirmPassword" type="text" class="form-control"
+                                    placeholder="{{confirmPassword}}"
+                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
+                                    v-model="confirmPassword" />
+                                <span class="btn far fa-eye btnAnMatKhau"
+                                    @click="isOpenMatKhauXacThuc=!isOpenMatKhauXacThuc, setIsOpenmatKhau"></span>
+                            </div>
+                            <ErrorMessage name="confirmPassword" class="error-feedback" style="color:red" />
+                        </div>
+                        <p v-if="message2" style="display: inline; color: red; float:right">
+                            {{ message2 }}
+                        </p>
+
+                        <div class="form-group my-3">
+                            <button class="btn btn-sm btn-outline-secondary btn-block btnDangNhap"
+                                :disabled="isSubmitting" :class="{ 'submitting': isSubmitting }">
+                                <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+                                <span>Đổi Mật Khẩu</span>
+                            </button>
+                        </div>
+
+
+                    </Form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</template>
+
+<script>
+import * as yup from "yup";
+import { Form, Field, ErrorMessage } from "vee-validate";
+import NhanVienService from "../../../services/nhanvien.service"
+export default {
+    name: `QLDangNhap`,
+
+    components: { Form, Field, ErrorMessage },
+
+    created(){
+        this.maNhanVien = this. $route.params.id;
+    },
+
+    data() {
+
+        const schema = yup.object().shape({
+            username: yup.string().required("Tên đăng nhập phải có giá trị."),
+
+            currentPassword: yup
+                .string()
+                .required("Mật khẩu hiện tại phải có giá trị.")
+                .min(8, "Mật khẩu có ít nhất 8 ký tự")
+                .max(30, "Mật khẩu có nhiều nhất 30 ký tự"),
+
+            newPassword: yup
+                .string()
+                .required("Mật khẩu mới phải có giá trị.")
+                .min(8, "Mật khẩu có ít nhất 8 ký tự")
+                .max(30, "Mật khẩu có nhiều nhất 30 ký tự"),
+            confirmPassword: yup
+                .string()
+                .required("Mật khẩu xác thực phải có giá trị.")
+                .min(8, "Mật khẩu có ít nhất 8 ký tự")
+                .max(30, "Mật khẩu có nhiều nhất 30 ký tự"),
+        });
+
+        return {
+            loading: false,
+            message: "",
+            message2:"",
+            schema,
+            isOpenMatKhauHienTai: false,
+            isOpenMatKhauMoi: false,
+            isOpenMatKhauXacThuc: false,
+            nhanvien: {},
+            nhanviencheck: {},
+            newPassword: "",
+            confirmPassword: "",
+            maNhanVien: this.maNV,
+        };
+    },
+
+    methods: {
+        async setIsOpenmatKhau() {
+            if (this.nhanvien.NV_MatKhau != "") {
+                console.log("");
+            }
+            else {
+                this.nhanvien.NV_MatKhau = "";
+            }
+
+        },
+
+        async handleLogin() {
+            console.log(this.nhanvien.NV_Ma)
+            const [error, response] = await this.handle(
+                NhanVienService.getByID(this.maNhanVien)
+            );
+            if (error) {
+                console.log(error);
+                this.message = "Không tìm thấy tài khoản"
+            } else {
+                console.log(response.data);
+                this.nhanviencheck = response.data;
+                this.checkAccount();
+            }
+        },
+
+        async checkAccount() {
+            console.log("Mat khau" + this.nhanvien.NV_MatKhau);
+            if (this.nhanvien.NV_MatKhau == this.nhanviencheck.NV_MatKhau) {
+                if (this.newPassword == this.confirmPassword) {
+                    this.nhanviencheck.NV_MatKhau = this.newPassword;
+                    const [error, response] = await this.handle(
+                        NhanVienService.update(this.nhanviencheck.NV_Ma,this.nhanviencheck)
+                    );
+                    if (error) {
+                        console.log(error);
+                        this.message = "Không tìm thấy tài khoản"
+                    } else {
+                        console.log(response.data);
+                        this.nhanviencheck = response.data;
+                        this.message2 = "Mật khẩu mới của bạn đã được đổi thành công!!!"
+                        this.$router.push({name: 'QLDonHang', params: { id: this.maNhanVien }})
+                        
+                    }
+                    this.message = ""
+                }
+                else{
+                    this.message2 = "Mật khẩu mới và mật khẩu xác thực không trùng  khớp";
+                    this.message = ""
+                }
+            }
+            else {
+                this.message = "Mật khẩu sai";
+                this.message2 = ""
+            }
+        },
+
+        async goToQuenMatKhau() {
+            this.$router.push("/QLQuenMatKhau");
+        }
+    },
+    mounted() {
+        this.nhanvien.NV_MatKhau = "";
+    }
+}
+</script>
+
+<style>
+@import "../../../assets/QLTaiKhoanStyle.css"
+</style>

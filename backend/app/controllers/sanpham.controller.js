@@ -41,7 +41,7 @@ exports.create = async(req,res) => {
         TH_Ma: req.body.TH_Ma,
         SP_TenSanPham: req.body.SP_TenSanPham,
         SP_ThongTin: req.body.SP_ThongTin,
-        SP_SoLuongNhap: req.body.SP_SoLuongNhap,
+        SP_SoLuong: req.body.SP_SoLuong,
         SP_GiaMuaVao: req.body.SP_GiaMuaVao,
         SP_GiaBanRa: req.body.SP_GiaBanRa, 
         SP_HinhAnh : req.body.SP_HinhAnh.fileName,
@@ -65,11 +65,13 @@ exports.create = async(req,res) => {
 
 //*--------Retrive all product of store from the database
 exports.findAll = async(req,res) => {
-    const condition = { ownerId: req.userId };
-    const SP_Ten = req.query.SP_Ten;
+    const condition = { 
+        ownerId: req.userId
+    };
+   const SP_TenSanPham = req.query.name;
     
-    if(SP_Ten) {
-        condition.SP_Ten = { $regex: new RegExp(SP_Ten), $options: "i"};
+    if( SP_TenSanPham) {
+        condition.SP_TenSanPham = { $regex: new RegExp( SP_TenSanPham), $options: "i"};
     }
 
     const [error, documents] = await handle(
