@@ -25,7 +25,7 @@
                             <Field name="KH_SDT" type="text" class="form-control"
                                 placeholder="Nhập số điện thoại đăng ký tài khoản" v-model="khachhang.KH_SDT"
                                 style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA;" />
-                            <ErrorMessage name="KH_SDT" class="error-feedback" style="color:red; font-size: 17px;" />
+                            <ErrorMessage name="KH_SDT" class="error-feedback" />
 
                         </div>
 
@@ -51,10 +51,11 @@
                                 <span v-else class="btn  far fa-eye btnAnMatKhau"
                                     @click="isOpenPassword=!isOpenPassword"></span>
                             </div>
-                            
+                            <a href="#" @click="goToQuenMatKhau" style="font-size: 17px;">Bạn quên mật khẩu?</a>
+                            <ErrorMessage name="KH_MatKhau" class="error-feedback" />
                         </div>
 
-                        <a href="#" @click="goToQuenMatKhau" style="font-size: 17px;">Bạn quên mật khẩu</a>
+                        
                         <p v-if="message" style=" color: red; text-align: center; font-size: 17px; margin-top: 4%;">
                             {{ message }}
                         </p>
@@ -113,7 +114,7 @@ export default {
         async handleLogin(khachhang) {
             this.loading = true;
 
-            const [error] = await this.handle(
+            const [error,data] = await this.handle(
                 this.$store.dispatch("login", khachhang)
             );
             if (error) {
@@ -122,6 +123,7 @@ export default {
                 this.message = "Số điện thoại hoặc mật khẩu đăng nhập sai";
             } else {
                 this.$router.push("/");
+                console.log(data)
             }
         },
 

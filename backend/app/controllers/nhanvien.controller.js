@@ -38,7 +38,7 @@ exports.create = async(req,res) => {
     }
     // Create a employee
     const nhanvien = new NhanVien({
-        NV_Ma: req.body.SP_Ma,
+        NV_Ma: req.body.NV_Ma,
         NV_Ten: req.body.NV_Ten,
         NV_Ho: req.body.NV_Ho,
         NV_CCCD: req.body.NV_CCCD,
@@ -53,7 +53,7 @@ exports.create = async(req,res) => {
      // Save employee in the DB
     const [error, document] = await handle(nhanvien.save());
 
-    if(error) {
+    if(error) {console.log(error);
         return res.send(error);
     }
 
@@ -139,7 +139,7 @@ exports.delete = async (req,res) => {
         const condition = {
            NV_Ma: req.params.NV_Ma,
         };
-    
+    console.log(req.params.NV_Ma)
         const [error, document] = await handle(
             NhanVien.findOneAndDelete(condition
             )

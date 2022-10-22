@@ -213,7 +213,7 @@ exports.signin = async (req, res, next) => {
     });
 
     res.status(200).send({
-        KH_Ma: khachhang.KH_Ma,
+        KH_Ma: khachhang._id,
         KH_Ten: khachhang.KH_Ten,
         KH_SDT: khachhang.KH_SDT,
         accessToken: token,

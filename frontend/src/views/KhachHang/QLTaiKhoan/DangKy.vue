@@ -15,7 +15,7 @@
             </div>
 
             <div class="col-md-8 rightForm" style="height:98%;">
-                <div style="margin-top: 5%">
+                <div style="margin-top: 10%">
                     <h2 style="text-align:center">ĐĂNG KÝ TÀI KHOẢN</h2>
                 </div>
                 <div class="row">
@@ -25,7 +25,7 @@
                             <Field name="KH_Ten" type="text" class="form-control" placeholder="Nhập tên tài khoản"
                                 v-model="khachhang.KH_Ten"
                                 style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA;" />
-                            <ErrorMessage name="KH_Ten" class="error-feedback" style="color:red;font-size: 16px;" />
+                            <ErrorMessage name="KH_Ten" class="error-feedback" />
 
                         </div>
                         <div class="form-group">
@@ -33,7 +33,7 @@
                             <Field name="KH_SDT" type="text" class="form-control" placeholder="Nhập số điện thoại "
                                 v-model="khachhang.KH_SDT"
                                 style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA;" />
-                            <ErrorMessage name="KH_SDT" class="error-feedback" style="color:red; font-size: 16px;" />
+                            <ErrorMessage name="KH_SDT" class="error-feedback" />
 
                         </div>
 
@@ -62,7 +62,7 @@
                                 <span v-else class="btn  far fa-eye btnAnMatKhau"
                                     @click="isOpenPassword=!isOpenPassword"></span>
                             </div>
-                            <ErrorMessage name="KH_MatKhau" class="error-feedback" style="color:red; font-size: 16px;" />
+                            <ErrorMessage name="KH_MatKhau" class="error-feedback" />
                         </div>
 
                         <div class="form-group">
@@ -89,7 +89,7 @@
                                 <span v-else class="btn  far fa-eye btnAnMatKhau"
                                     @click="isOpenconfirmPassword=!isOpenconfirmPassword"></span>
                             </div>
-                            <ErrorMessage name="confirmPassword" class="error-feedback" style="color:red; font-size: 16px;" />
+                            <ErrorMessage name="confirmPassword" class="error-feedback" />
                         </div>
                         <p style="text-align:center">{{message}}</p>
                         <div class="form-group my-3" style="margin-bottom:0%">

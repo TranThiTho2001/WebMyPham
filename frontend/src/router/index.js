@@ -6,7 +6,7 @@ const routes = [
         name: "HomePage",
         component: () => import("../views/HomePage.vue"),
     },
-
+    // Quan ly tai khoan
     {
         path: "/QLDangNhap",
         name: "QLDangNhap",
@@ -21,6 +21,7 @@ const routes = [
             import ("../views/QuanLy/QLTaiKhoan/DoiMatKhau.vue"),
     },
 
+    // Quan ly san pham
     {
         path: "/QLSanPham/:id",
         name: "QLsanpham",
@@ -28,18 +29,28 @@ const routes = [
             import ("../views/QuanLy/QLSanPham/QLSanPham.vue"),
     },
 
+
     {
-        path: "/QLDanhMucSanPham/:id",
-        name: "QLDanhMucSanPham",
+        path: "/QLSanPhamThem/:id",
+        name: "QLSanPhamThem",
         component: () =>
-            import ("../views/QuanLy/QLDanhMuc/QLDanhMucSanPham.vue"),
+            import ("../views/QuanLy/QLSanPham/QLSanPhamThem.vue"),
     },
 
+     // Quan ly thuong hieu
     {
         path: "/QLThuongHieu/:id",
         name: "QLthuonghieu",
         component: () =>
             import ("../views/QuanLy/QLThuongHieu/QLThuongHieu.vue"),
+    },
+
+     // Quan ly danh muc
+    {
+        path: "/QLDanhMucSanPham/:id",
+        name: "QLDanhMucSanPham",
+        component: () =>
+            import ("../views/QuanLy/QLDanhMuc/QLDanhMucSanPham.vue"),
     },
 
     {
@@ -56,13 +67,8 @@ const routes = [
             import ("../views/QuanLy/QLDanhMuc/QLDanhMucSua.vue"),
     },
 
-    {
-        path: "/QLSanPhamThem/:id",
-        name: "QLSanPhamThem",
-        component: () =>
-            import ("../views/QuanLy/QLSanPham/QLSanPhamThem.vue"),
-    },
 
+    // Quan ly don hang
     {
         path: "/QLDonHang/:id",
         name: "QLDonHang",
@@ -77,6 +83,21 @@ const routes = [
             import ("../views/QuanLy/QLDonHang/QLDonHangLapHD.vue"),
     },    
 
+    // Quan ly nhan vien
+    {
+        path: '/QLNhanVien/:id',
+        name: 'QLNhanVien',        
+        component: () =>
+            import ("../views/QuanLy/QLNhanVien/QLNhanVien.vue"),
+    },   
+    {
+        path: '/ThemNhanVien/:id',
+        name: 'ThemNhanVien',        
+        component: () =>
+            import ("../views/QuanLy/QLNhanVien/QLThemNhanVien.vue"),
+    },    
+
+//-------------------------------------------------KHACHHANG-----------------------------------
     {
         path: '/KHDangNhap',
         name: 'KHDangNhap',        

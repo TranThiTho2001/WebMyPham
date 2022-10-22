@@ -65,7 +65,7 @@ export default {
             this.$router.push({name: 'QLthuonghieu', params: { id: this.maNhanVien }});
         },
         goToQLNhanVien() {
-            this.$router.push({name: 'QLDonHang', params: { id: this.maNhanVien }});
+            this.$router.push({name: 'QLNhanVien', params: { id: this.maNhanVien }});
         },
 
         async PhanQuyenNhanVien(){

@@ -14,8 +14,8 @@
                 </div>
             </div>
 
-            <div class="col-md-8 rightForm">
-                <div style="margin-top: 5%">
+            <div class="col-md-8 rightForm" style="height:98%;">
+                <div style="margin-top: 7%">
                     <h2 style="text-align:center">ĐỔI MẬT KHẨU</h2>
                 </div>
                 <div class="row">
@@ -122,9 +122,11 @@
                                 <span v-show="loading" class="spinner-border spinner-border-sm"></span>
                                 <span>Đổi Mật Khẩu</span>
                             </button>
+                            <button class="btn btn-sm btn-outline-secondary btn-block btnTroVe" @click="goToQL">
+                                <span  v-show="loading"  class="spinner-border spinner-border-sm" ></span>
+                                <span>Trở về</span>
+                            </button>
                         </div>
-
-
                     </Form>
 
                 </div>
@@ -234,6 +236,10 @@ export default {
 
         async goToQuenMatKhau() {
             this.$router.push("/QLQuenMatKhau");
+        },
+
+        async goToQL(){
+            this.$router.push({ name: 'QLDonHang', params: { id: this.maNhanVien} });
         }
     },
     mounted() {
