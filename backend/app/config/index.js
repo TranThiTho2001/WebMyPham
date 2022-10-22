@@ -7,6 +7,10 @@ const config = {
     },
     db: {
         url: "mongodb://0.0.0.0:27017/mypham"
+    },
+    jwt: {
+        secret: "webmypham-secret-key"
     }
+
 };
 module.exports = config;

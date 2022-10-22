@@ -1,0 +1,222 @@
+
+<template>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <div class="container frameDangky">
+        <div class="row formDangky">
+            <div class="col-md-4 leftForm" style="height:100%">
+                <div class="row">
+                    <img src="../../../images/logoDanhNhap.png" class="img-fluid  mx-auto d-block" width="269px"
+                        height="222px" alt="Logo" style="border-radius: 15px;">
+                </div>
+                <div class="row" style="margin-top:25%">
+                    <img src="../../../images/ImageDangNhap.png" class="img-fluid" width="464px" height="466px"
+                        alt="Image" style="border-radius: 15px;">
+                </div>
+            </div>
+
+            <div class="col-md-8 rightForm" style="height:98%;">
+                <div style="margin-top: 5%">
+                    <h2 style="text-align:center">ĐĂNG KÝ TÀI KHOẢN</h2>
+                </div>
+                <div class="row">
+                    <Form @submit="handleRegister" :validation-schema="schema" v-slot="{ isSubmitting }">
+                        <div class="form-group">
+                            <label for="KH_Ten">Tên tài khoản</label>
+                            <Field name="KH_Ten" type="text" class="form-control" placeholder="Nhập tên tài khoản"
+                                v-model="khachhang.KH_Ten"
+                                style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA;" />
+                            <ErrorMessage name="KH_Ten" class="error-feedback" style="color:red;font-size: 16px;" />
+
+                        </div>
+                        <div class="form-group">
+                            <label for="KH_SDT">Số điện thoại</label>
+                            <Field name="KH_SDT" type="text" class="form-control" placeholder="Nhập số điện thoại "
+                                v-model="khachhang.KH_SDT"
+                                style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA;" />
+                            <ErrorMessage name="KH_SDT" class="error-feedback" style="color:red; font-size: 16px;" />
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="KH_MatKhau">Mật khẩu</label>
+                            <div class="row" style="background-color: #F5F4F4; border-radius: 15px; margin: 0 0 0 0%;">
+
+                                <Field v-if="!isOpenPassword" name="KH_MatKhau" type="password" class="form-control"
+                                    placeholder="Nhập mật khẩu"
+                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
+                                    v-model="khachhang.KH_MatKhau" />
+
+                                <Field v-if="khachhang.KH_MatKhau=='' && isOpenPassword" name="KH_MatKhau" type="text"
+                                    class="form-control" placeholder="Nhập mật khẩu"
+                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
+                                    v-model="khachhang.KH_MatKhau" />
+
+                                <Field v-if="khachhang.KH_MatKhau!='' && isOpenPassword" name="KH_MatKhau" type="text"
+                                    class="form-control" placeholder="{{KH_MatKhau}}"
+                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
+                                    v-model="khachhang.KH_MatKhau" />
+
+                                <span v-if="!isOpenPassword" class="btn far fa-eye-slash btnHienMatKhau"
+                                    @click="isOpenPassword=!isOpenPassword"></span>
+                                <span v-else class="btn  far fa-eye btnAnMatKhau"
+                                    @click="isOpenPassword=!isOpenPassword"></span>
+                            </div>
+                            <ErrorMessage name="KH_MatKhau" class="error-feedback" style="color:red; font-size: 16px;" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">Nhập lại mật khẩu</label>
+                            <div class="row" style="background-color: #F5F4F4; border-radius: 15px; margin: 0 0 0 0;">
+
+                                <Field v-if="!isOpenconfirmPassword" name="confirmPassword" type="password"
+                                    class="form-control" placeholder="Nhập lại mật khẩu"
+                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
+                                    v-model="confirmPassword" />
+
+                                <Field v-if="confirmPassword=='' && isOpenconfirmPassword" name="confirmPassword"
+                                    type="text" class="form-control" placeholder="Nhập lại mật khẩu"
+                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
+                                    v-model="confirmPassword" />
+
+                                <Field v-if="confirmPassword!='' && isOpenconfirmPassword" name="confirmPassword"
+                                    type="text" class="form-control" placeholder="{{confirmPassword}}"
+                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
+                                    v-model="confirmPassword" />
+
+                                <span v-if="!isOpenconfirmPassword" class="btn far fa-eye-slash btnHienMatKhau"
+                                    @click="isOpenconfirmPassword=!isOpenconfirmPassword"></span>
+                                <span v-else class="btn  far fa-eye btnAnMatKhau"
+                                    @click="isOpenconfirmPassword=!isOpenconfirmPassword"></span>
+                            </div>
+                            <ErrorMessage name="confirmPassword" class="error-feedback" style="color:red; font-size: 16px;" />
+                        </div>
+                        <p style="text-align:center">{{message}}</p>
+                        <div class="form-group my-3" style="margin-bottom:0%">
+                            <button class="btn btn-sm btn-outline-secondary btn-block btnDangKy"
+                                :disabled="isSubmitting" :class="{ 'submitting': isSubmitting }">
+                                <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+                                <span>Đăng Ký</span>
+                            </button>
+                        </div>
+                        <div class="textDangNhap" style="margin-bottom:0%">
+                            <p>Bạn đã có tài khoản?<button @click="goToDangNhap" href="" class="btnGoToDangNhap"> Đăng Nhập</button></p>
+                        </div>
+                    </Form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</template>
+
+<script>
+import * as yup from "yup";
+import { Form, Field, ErrorMessage } from "vee-validate";
+import { mapGetters } from "vuex";
+export default {
+    name: `QLDangNhap`,
+    components: { Form, Field, ErrorMessage },
+    data() {
+
+        const schema = yup.object().shape({
+            KH_Ten: yup
+                .string()
+                .required("Tên đăng nhập phải có giá trị."),
+            KH_SDT: yup
+                .string()
+                .required("Số điện thoại phải có giá trị."),
+            KH_MatKhau: yup
+                .string()
+                .required("Mật khẩu phải có giá trị.")
+                .min(8, "Mật khẩu tối thiểu 8 ký tự.")
+                .max(30, "Mật khẩu tối đa 30 ký tự."),
+            confirmPassword: yup
+                .string()
+                .required("Nhập lại mật khẩu phải có giá trị")
+        });
+
+        return {
+            loading: false,
+            message: "",
+            schema,
+            isOpenPassword: false,
+            isOpenconfirmPassword: false,
+            khachhang: {},
+            khachhangcheck: {},
+            confirmPassword: "",
+        };
+    },
+    computed: {
+        ...mapGetters([
+            "khachhangLoggedIn"
+        ]),
+    },
+    mounted() {
+        this.khachhang.KH_MatKhau = "";
+        if (!this.khachhangLoggedIn) {
+            this.$router.push("/");
+        }
+    },
+
+    methods: {
+        async handleRegister(khachhang) {
+            this.message = "";
+
+            if(this.confirmPassword == khachhang.KH_MatKhau) { 
+                this.successful = false;
+                this.loading = true;
+
+                const [error, data] = await this.handle(
+                    this.$store.dispatch("register", khachhang)
+                );
+                if (error) {
+                    this.message = error.response.data.message;
+                    this.successful = false;
+                    this.loading = false;
+                }
+                else {
+                    this.message = data.message;
+                    this.successful = true;
+                    this.loading = false;
+                }
+            }
+            else {
+                this.message = "Mật khẩu và mật khẩu nhập lại không trùng khớp"
+            }
+
+        },
+
+        async goToDangNhap() {
+            this.$router.push("/KHDangNhap");
+        }
+    },
+
+}
+</script>
+
+<style>
+@import "../../../assets/QLTaiKhoanStyle.css";
+
+.textDangNhap {
+    font-size:18px;
+    font-weight: 500;
+    color: #515151;
+}
+
+.btnGoToDangNhap{
+    border: none;
+    font-size: 20px;
+    font-weight: 600;
+    color: #515151;
+    background-color:unset;
+}
+
+.btnGoToDangNhap:hover{
+    border: none;
+    color: black;
+    background-color:unset;
+}
+
+</style>

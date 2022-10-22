@@ -1,54 +1,80 @@
-.frameDangNhap, .frameDoiMatKhau {
+.frameDangNhap, .frameDoiMatKhau, .frameDangky {
     background-image: url("../images/backgroundDangNhap.png");
     height: 100vh;
     margin-top: 0px;
     border-radius: 1px;
     border: 1px solid #FFFFFF;
+    font-size: 20px;
+    font-family: Inter;
+    color: #515151;
 }
 
-.frameDangNhap .formDangNhap{
-    margin: 3% 3% 6% 6%;
+.frameDangNhap .formDangNhap
+{
+    margin: 5% 4% 6% 6%;
+    border-radius: 15px;
+    border: 2px solid #FFFFFF;
+}
+
+.frameDangky .formDangky{
+    height: 98%;
+    margin: 0.5% 3% 0% 3%;
     border-radius: 15px;
     border: 2px solid #FFFFFF;
 }
 .frameDoiMatKhau .formDoiMatKhau{
-    margin: 1% 1% 4% 4%;
+    margin: 1% 1% 4% 2%;
     border-radius: 15px;
     border: 2px solid #FFFFFF;
 }
 
+.frameDangky .formDangky .leftForm, 
 .frameDangNhap .formDangNhap .leftForm,
-.frameDoiMatKhau .formDoiMatKhau .leftForm {
+.frameDoiMatKhau .formDoiMatKhau .leftForm
+{
     background-color: #FFFFFF;
     border-radius: 12px 0px 0px 12px;
     margin-top: 0%;
     width: 100%;
     padding-top: 0px;
-
 }
 
+.frameDangky .formDangky .rightForm,
 .frameDangNhap .formDangNhap .rightForm,
 .frameDoiMatKhau .formDoiMatKhau .rightForm  {
     border-radius: 0px 12px 12px 0px;
 }
 
+.frameDangky .formDangky .rightForm Form{
+    width: 70%;
+    margin: 0% 0% 0% 15%;
+}
 .frameDangNhap .formDangNhap .rightForm Form
 {
     width: 70%;
-    margin: 10% 10% 15% 15%;
+    margin: 10% 10% 0% 15%;
 }
 .frameDoiMatKhau .formDoiMatKhau .rightForm Form {
     width: 70%;
     margin: 5% 5% 15% 15%;
+ 
 }
+
+.frameDangky .formDangky .rightForm Form .form-group{
+    margin-top: 4.5%;
+}
+
+.frameDangky .formDangky .rightForm Form .form-group .btnDangKy,
 .frameDangNhap .formDangNhap .rightForm Form .form-group .btnDangNhap,
 .frameDoiMatKhau .formDoiMatKhau .rightForm Form  .form-group .btnDangNhap{
     margin-top: 10%;
-    width: 50%;
-    border-radius: 15px;
+    width: 40%;
+    border-radius: 10px;
     background-color: black;
     color: white;
-    margin: 10% 0 0 30%;
+    margin: 5% 0 0 33%;
+    font-size: 20px;
+    font-family: Inter;
 }
 
 .frameDangNhap .formDangNhap .rightForm Form .form-group .btnHienMatKhau,
@@ -59,8 +85,22 @@
     padding-left: 2%;
 }
 
+.frameDangky .formDangky .rightForm a,
 .frameDangNhap .formDangNhap .rightForm a,
 .frameDoiMatKhau .formDoiMatKhau .rightForm a{
     color: #7E7E7E;
+    text-decoration: none;
+    font-size: 20px;
 }
-
+.frameDangky label, .frameDangNhap label, .frameDoiMatKhau label {
+    font-weight: 600;
+    font-size: 21px;
+}
+.frameDangky h2, .frameDangNhap h2, .frameDoiMatKhau h2{
+    font-weight: 800;
+    font-family: Inter;
+}
+.frameDangky p, .frameDangNhap p, .frameDoiMatKhau p{
+    font-size: 17px;
+    
+}

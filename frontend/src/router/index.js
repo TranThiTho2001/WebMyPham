@@ -75,7 +75,21 @@ const routes = [
         name: 'QLDonHangLapHD',        
         component: () =>
             import ("../views/QuanLy/QLDonHang/QLDonHangLapHD.vue"),
-    }    ,    
+    },    
+
+    {
+        path: '/KHDangNhap',
+        name: 'KHDangNhap',        
+        component: () =>
+            import ("../views/KhachHang/QLTaiKhoan/DangNhap.vue"),
+    },
+
+    {
+        path: '/KHDangKy',
+        name: 'KHDangKy',        
+        component: () =>
+            import ("../views/KhachHang/QLTaiKhoan/DangKy.vue"),
+    },
 ];
 
 const router = createRouter({

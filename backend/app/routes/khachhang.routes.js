@@ -1,4 +1,5 @@
 const khachhang = require("../controllers/khachhang.controller");
+const middlewares = require("../middlewares");
 const express = require("express");
 
 module.exports = (app) => {
@@ -20,7 +21,13 @@ module.exports = (app) => {
 
     // //Delete all customers
     // router.delete("/", khachhang.deleteAll);
+    router.post(
+        "/signup",
+        [middlewares.checkDuplicateSDT],
+        khachhang.signup
+    );
 
+    router.post("/signin", khachhang.signin);
     app.use("/api/khachhang", router);
 
 };

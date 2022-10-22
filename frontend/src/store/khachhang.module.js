@@ -2,43 +2,41 @@ import http from "../common/http";
 import { handle } from "../common/promise";
 
 const state = {
-    user: {
+   khachhang: {
         KH_Ma: String,
         KH_Ten: String,
         KH_SDT: String,
-        KH_NgaySinh: Date,
-        KH_DiaChi: String,
-        KH_MatKHau: String
+        KH_MatKhau: String
     },
     status: {
         loggedIn: Boolean
     }
 };
 const mutations = {
-    initAuthState(state) {
-        state.user = JSON.parse(localStorage.getItem("user"));
-        state.status.loggedIn = !!state.user;
+    initCustomerState(state) {
+        state.khachhang = JSON.parse(localStorage.getItem("khachhang"));
+        state.status.loggedIn = !!state.khachhang;
     },
-    login(state, user) {
+    login(state, khachhang) {
         state.status.loggedIn = true;
-        state.user = user;
-        localStorage.setItem("user", JSON.stringify(user));
+        state.khachhang = khachhang;
+        localStorage.setItem("khachhang", JSON.stringify(khachhang));
     },
     logout(state) {
         state.status.loggedIn = false;
-        state.user = null;
-        localStorage.removeItem("user");
+        state.khachhang = null;
+        localStorage.removeItem("khachhang");
     },
     clearLoginStatus(state) {
         state.status.loggedIn = false;
     },
 };
 const actions = {
-    async login({ commit }, user) {
+    async login({ commit }, khachhang) {
         let [error, response] = await handle(
-            http.post("/auth/signin", {
-                username: user.KH_Ten,
-                password: user.KH_MatKHau,
+            http.post("/khachhang/signin", {
+                KH_SDT: khachhang.KH_SDT,
+                KH_MatKhau: khachhang.KH_MatKhau,
             })
         );
         if (error || !response.data.accessToken) {
@@ -51,12 +49,12 @@ const actions = {
         commit("login", response.data);
         return response.data;
     },
-    async register({ commit }, user) {
+    async register({ commit }, khachhang) {
         const [error, response] = await handle(
-            http.post("/auth/signup", {
-                username: user.KH_Ten,
-                phone: user.KH_SDT,
-                password: user.KH_MatKHau,
+            http.post("/khachhang/signup", {
+                KH_Ten: khachhang.KH_Ten,
+                KH_SDT: khachhang.KH_SDT,
+                KH_MatKhau: khachhang.KH_MatKhau,
             })
         );
         commit("clearLoginStatus");
@@ -67,11 +65,11 @@ const actions = {
     }
 };
 const getters = {
-    userLoggedIn(state) {
+    khachhangLoggedIn(state) {
         return state.status.loggedIn;
     },
-    loggedInUser(state) {
-        return state.user;
+    loggedInKhachHang(state) {
+        return state.khachhang;
     }
 };
 export const khachhang = {

@@ -1,4 +1,7 @@
 const { BadRequestError } = require("../helpers/errors");
+const config = require("../config");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 const handle = require("../helpers/promise");
 const db = require("../models");
 const KhachHang = db.KhachHang;
@@ -46,7 +49,7 @@ exports.findAll = async (req, res) => {
     }
 
     const [error, documents] = await handle(
-        KhachHang.find(condition, '-ownerId')
+        KhachHang.findOne(condition, '-ownerId')
     );
 
     if (error) {
@@ -79,7 +82,6 @@ exports.findOneByID = async (req, res) => {
 
 //*-------Find a single customer with an id
 exports.findOneByPhone = async (req, res) => {
-
     const condition = {
         KH_SDT: req.params.KH_SDT
     };
@@ -154,4 +156,68 @@ exports.delete = async (req, res) => {
     return res.send({ message: "Xóa khách hàng thành công" });
 
 };
+
+
+exports.signup = async (req, res, next) => {
+    const khachhang = new KhachHang({
+        KH_Ten: req.body.KH_Ten,
+        KH_SDT: req.body.KH_SDT,
+        KH_MatKhau: bcrypt.hashSync(req.body.KH_MatKhau, 8),
+    });
+
+    const [error] = await handle(khachhang.save());
+
+    if (error) {
+        let statusCode = 400;
+        let { KH_Ten = {}, KH_SDT = {}, KH_MatKhau = {} } = error.errors;
+
+        const errorMessage =
+            KH_Ten.message || KH_SDT.message || KH_MatKhau.message;
+        if (!errorMessage) {
+            statusCode = 500;
+        }
+
+        return next(new BadRequestError(statusCode, errorMessage));
+    }
+
+    res.send({ message: "Đăng ký tài khoản thành công" });
+};
+
+exports.signin = async (req, res, next) => {
+    const [error, khachhang] = await handle(
+        KhachHang.findOne({
+            KH_SDT: req.body.KH_SDT,
+        }).exec()
+    );
+
+    if (error) {
+        console.log(error);
+        return next(new BadRequestError(500));
+    }
+    console.log(req.body.KH_MatKhau +"y"+khachhang.KH_MatKhau);
+    if (!khachhang) {
+        return next(new BadRequestError(401, "Incorrect username"+req.body.KH_SDT+req.body.KH_MatKhau));
+    }
+
+    const passwordIsValid = bcrypt.compareSync(
+        req.body.KH_MatKhau,
+        khachhang.KH_MatKhau,
+    );
+        console.log(passwordIsValid)
+    if (!passwordIsValid) {
+        return next(new BadRequestError(401, " or password"));
+    }
+
+    const token = jwt.sign({ KH_Ma: khachhang.KH_Ma }, config.jwt.secret, {
+        expiresIn: 86400, // 24 hours
+    });
+
+    res.status(200).send({
+        KH_Ma: khachhang.KH_Ma,
+        KH_Ten: khachhang.KH_Ten,
+        KH_SDT: khachhang.KH_SDT,
+        accessToken: token,
+    });
+};
+
 

@@ -16,47 +16,46 @@
 
             <div class="col-md-8 rightForm">
                 <div style="margin-top: 10%">
-                    <h2 style="text-align:center">ĐĂNG NHẬP</h2>
+                    <h2 style="text-align:center; font-weight: 600;">ĐĂNG NHẬP</h2>
                 </div>
                 <div class="row">
                     <Form @submit="handleLogin" :validation-schema="schema" v-slot="{ isSubmitting }">
                         <div class="form-group">
-                            <label for="username">Tên đăng nhập</label>
-                            <Field name="username" type="text" class="form-control" placeholder="Nhập số tên đăng nhập"
-                                v-model="nhanvien.NV_Ma"
+                            <label for="KH_SDT">Số điện thoại</label>
+                            <Field name="KH_SDT" type="text" class="form-control"
+                                placeholder="Nhập số điện thoại đăng ký tài khoản" v-model="khachhang.KH_SDT"
                                 style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA;" />
-                            <ErrorMessage name="username" class="error-feedback" style="color:red; font-size: 17px;" />
+                            <ErrorMessage name="KH_SDT" class="error-feedback" style="color:red; font-size: 17px;" />
 
                         </div>
 
                         <div class="form-group" style="margin-top:10%">
-                            <label for="password">Mật khẩu</label>
-                            <div class="row" style="background-color: #F5F4F4; border-radius: 15px; margin: 0 0 0 1%;">
-                                <Field v-if="!isOpenPassword" name="password" type="password" class="form-control"
+                            <label for="KH_MatKhau">Mật khẩu</label>
+                            <div class="row" style="background-color: #F5F4F4; border-radius: 15px; margin: 0 0 0 0">
+                                <Field v-if="!isOpenPassword" name="KH_MatKhau" type="password" class="form-control"
                                     placeholder="Nhập mật khẩu"
                                     style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="nhanvien.NV_MatKhau" />
-
-                                <Field v-if="nhanvien.NV_MatKhau=='' & isOpenPassword" name="password" type="text"
+                                    v-model="khachhang.KH_MatKhau" />
+                                <Field v-if="khachhang.KH_MatKhau=='' & isOpenPassword" name="KH_MatKhau" type="text"
                                     class="form-control" placeholder="Nhập mật khẩu"
                                     style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="nhanvien.NV_MatKhau" />
+                                    v-model="khachhang.KH_MatKhau" />
 
-                                <Field v-if="nhanvien.NV_MatKhau!='' & isOpenPassword" name="password" type="text"
-                                    class="form-control" placeholder="{{nhanvien.NV_MatKhau}}"
+                                <Field v-if="khachhang.KH_MatKhau!='' & isOpenPassword" name="KH_MatKhau" type="text"
+                                    class="form-control" placeholder="{{khachhang.KH_MatKhau}}"
                                     style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="nhanvien.NV_MatKhau" />
+                                    v-model="khachhang.KH_MatKhau" />
 
                                 <span v-if="!isOpenPassword" class="btn far fa-eye-slash btnHienMatKhau"
                                     @click="isOpenPassword=!isOpenPassword"></span>
-                                <span v-if="isOpenPassword" class="btn far fa-eye btnAnMatKhau"
+                                <span v-else class="btn  far fa-eye btnAnMatKhau"
                                     @click="isOpenPassword=!isOpenPassword"></span>
                             </div>
-                            <ErrorMessage name="password" class="error-feedback" style="color:red; font-size: 17px;" />
+                            
                         </div>
 
-                        <a href="#" @click="goToQuenMatKhau">Bạn quên mật khẩu</a>
-                        <p v-if="message" style="display: inline; color: red; float:right">
+                        <a href="#" @click="goToQuenMatKhau" style="font-size: 17px;">Bạn quên mật khẩu</a>
+                        <p v-if="message" style=" color: red; text-align: center; font-size: 17px; margin-top: 4%;">
                             {{ message }}
                         </p>
 
@@ -67,10 +66,12 @@
                                 <span>Đăng nhập</span>
                             </button>
                         </div>
+                        <div>
+                            <p>Bạn chưa có tài khoản? <button class="btnGoToDangKy" @click="goTodangKy">Đăng ký</button></p>
+                        </div>
                     </Form>
                 </div>
             </div>
-
         </div>
     </div>
 </template>
@@ -78,15 +79,15 @@
 <script>
 import * as yup from "yup";
 import { Form, Field, ErrorMessage } from "vee-validate";
-import NhanVienService from "../../../services/nhanvien.service"
+import { mapGetters } from "vuex";
 export default {
     name: `QLDangNhap`,
     components: { Form, Field, ErrorMessage },
     data() {
 
         const schema = yup.object().shape({
-            username: yup.string().required("Tên đăng nhập phải có giá trị."),
-            password: yup.string().required("Mật khẩu phải có giá trị."),
+            KH_SDT: yup.string().required("Tên đăng nhập phải có giá trị."),
+            KH_MatKhau: yup.string().required("Mật khẩu phải có giá trị."),
         });
 
         return {
@@ -94,46 +95,62 @@ export default {
             message: "",
             schema,
             isOpenPassword: false,
-            nhanvien: {},
-            nhanviencheck: {},
+            khachhang: {},
+            khachhangcheck: {},
         };
     },
-
+    computed: {
+        ...mapGetters([
+            "khachhangLoggedIn"
+        ]),
+    },
+    created() {
+        if (!this.khachhangLoggedIn) {
+            this.$router.push("/");
+        }
+    },
     methods: {
-        async handleLogin() {
-            console.log(this.nhanvien.NV_Ma)
-            const [error, response] = await this.handle(
-                NhanVienService.getByID(this.nhanvien.NV_Ma)
+        async handleLogin(khachhang) {
+            this.loading = true;
+
+            const [error] = await this.handle(
+                this.$store.dispatch("login", khachhang)
             );
             if (error) {
                 console.log(error);
-                this.message = "Không tìm thấy tài khoản"
+                this.loading = false;
+                this.message = "Số điện thoại hoặc mật khẩu đăng nhập sai";
             } else {
-                console.log(response.data);
-                this.nhanviencheck = response.data;
-                this.checkAccount();
-            }
-        },
-
-        async checkAccount() {
-            if (this.nhanvien.NV_MatKhau == this.nhanviencheck.NV_MatKhau) {
-                this.$router.push({ name: 'QLDonHang', params: { id: this.nhanviencheck.NV_Ma } });
-            }
-            else {
-                this.message = "Mật khẩu sai";
+                this.$router.push("/");
             }
         },
 
         async goToQuenMatKhau() {
             this.$router.push("/QLQuenMatKhau");
+        },
+
+        async goTodangKy(){
+            this.$router.push("/KHDangKy");
         }
     },
-    mounted() {
-        this.nhanvien.NV_MatKhau = "";
+    mounted(){
+        this.khachhang.KH_MatKhau="";
     }
+
 }
 </script>
 
 <style>
-@import "../../../assets/QLTaiKhoanStyle.css"
+@import "../../../assets/QLTaiKhoanStyle.css";
+.btnGoToDangKy{
+    border: none;
+    background-color: unset;
+    color: #515151;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 600;
+}
+.btnGoToDangKy:hover{
+    color: black;
+}
 </style>
