@@ -111,8 +111,12 @@
  .frameQLNhanVien .frameThem form .btnLuu {
      text-align: center;
      transform: translateY(0px);
-     margin: -1% 0 2% 40%;
+     margin: -1% 0 2% 43%;
      width: 125px;
      background-color: #515151;
      color: #FFFFFF;
+ }
+
+ .formThongTin p{
+    border: 0.5px solid #929292;
  }

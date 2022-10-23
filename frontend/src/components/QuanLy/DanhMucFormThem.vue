@@ -18,8 +18,8 @@
         </div>
 
         <div class="form-group">
-            <span v-if="message2=='Thêm thành công'" class="fas fa-check-circle" style="color:#00BA13; text-align: center; margin-left: 180px;"></span>
-            <span v-if="message2=='Thêm không thành công'" class="fas fa-times-circle" style="color:red; text-align: center;  margin-left: 145px;"></span>
+            <span v-if="message2=='Thêm thành công'" class="fas fa-check-circle" style="color:#00BA13; text-align: center; margin-left: 32%;"></span>
+            <span v-if="message2=='Thêm không thành công'" class="fas fa-times-circle" style="color:red; text-align: center;  margin-left: 30%;"></span>
             <p v-if="message2=='Thêm thành công'" class="textMessage2" style="color:#00BA13">{{message2}}</p>
             <p v-else class="textMessage2" >{{message2}}</p><br>
             <p v-if="message2=='Thêm không thành công'" class="textMessage1">{{message1}}</p>
@@ -43,7 +43,7 @@ export default {
         Field,
         ErrorMessage,
     },
-    emits: ["author-submit", "author-delete"],
+    emits: ["themDanhMuc-submit"],
     props: ["newdanhmuc", "message1", "message2"],
     data() {
 

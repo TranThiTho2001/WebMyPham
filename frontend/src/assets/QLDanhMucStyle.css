@@ -149,6 +149,8 @@
     margin-top: 20px;
     background-color: #FFFFFF;
     margin-bottom: 10px;
+    font-family: Inter;
+    font-size: 20px;
 }
 
 .frameQLDanhMuc .frameThem form .functionName {
@@ -188,7 +190,7 @@ f.frameQLDanhMuc .frameThem orm .textMessage1 {
 .frameQLDanhMuc .frameThem form .btnLuu {
     text-align: center;
     transform: translateY(0px);
-    margin-left: 175px;
+    margin-left: 36%;
     margin-top: 5px;
     width: 125px;
     background-color: #515151;

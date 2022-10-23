@@ -71,7 +71,7 @@
                                         data-toggle="dropdown" style="color:#515151">
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#"><span class="fas fa-edit"></span> Sửa</a>
+                                        <a class="dropdown-item" href="#" @click="gotoSua"><span class="fas fa-edit"></span> Sửa</a>
                                         <a class="dropdown-item" href="#" @click="isOpenXacNhan = !isOpenXacNhan"><span class="fas fa-trash-alt"
                                                 style="color:red"></span> Xóa</a>
                                     </div>
@@ -176,6 +176,10 @@ export default {
                 this.refreshList();
                 console.log("xoa thanh cong" + response);
             }
+        },
+
+        async gotoSua(){
+            this.$router.push({ name: 'SuaDanhMuc', params: { id: this.localNhanVien.NV_Ma, user: this.danhmucActive}})
         },
 
         //Tai lai danh sach danh

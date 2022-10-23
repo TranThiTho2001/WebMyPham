@@ -61,7 +61,7 @@ const routes = [
     },
 
     {
-        path: "/SuaDanhMuc/:id",
+        path: "/SuaDanhMuc/:id/:user",
         name: "SuaDanhMuc",
         component: () =>
             import ("../views/QuanLy/QLDanhMuc/QLDanhMucSua.vue"),
@@ -95,7 +95,14 @@ const routes = [
         name: 'ThemNhanVien',        
         component: () =>
             import ("../views/QuanLy/QLNhanVien/QLThemNhanVien.vue"),
-    },    
+    }, 
+
+    {
+        path: '/SuaNhanVien/:id/:user',
+        name: 'SuaNhanVien',        
+        component: () =>
+            import ("../views/QuanLy/QLNhanVien/QLSuaNhanVien.vue"),
+    },  
 
 //-------------------------------------------------KHACHHANG-----------------------------------
     {

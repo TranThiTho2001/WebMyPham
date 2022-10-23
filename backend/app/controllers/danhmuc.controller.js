@@ -90,8 +90,7 @@ exports.update = async (req, res) =>{
    }
 
    const condition = {
-    _id: res.params.id,
-    ownerId: req.userId,
+    DM_Ma: req.params.DM_Ma,
    };
 
    const [error, document] = await handle(
@@ -102,7 +101,7 @@ exports.update = async (req, res) =>{
    );
    if (error) {
     return next(
-        new BadRequestError(500,`Lỗi trong quá trình cập nhật danh muc có mã id=${req.params.id}`
+        new BadRequestError(500,`Lỗi trong quá trình cập nhật danh muc có mã id=${req.params.DM_Ma}`
         )
     );
 }

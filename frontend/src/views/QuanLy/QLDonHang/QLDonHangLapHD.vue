@@ -110,9 +110,6 @@ import HoaDonChiTiet from '../../../components/QuanLy/HoaDonChiTiet.vue';
 export default {
     name: `QLDonHang`,
     components: { DanhSachChucNang, QLHeader, HoaDonChiTiet },
-    template: `{{$route.params.MaHD}}`,
-
-
 
     props: ["DH_Ma"],
     computed: {

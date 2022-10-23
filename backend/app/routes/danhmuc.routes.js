@@ -14,7 +14,7 @@ module.exports = (app) => {
     router.get("/:DM_Ma", danhmuc.findOne);
 
     //Update a category with id
-    router.put("/:id", danhmuc.update);
+    router.put("/:DM_Ma", danhmuc.update);
 
     //Delete a category with id
     router.delete("/:DM_Ma", danhmuc.delete);

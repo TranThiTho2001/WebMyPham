@@ -55,7 +55,6 @@ export default {
             newdanhmuc: {},
             message1: "",
             message2:"",
-            check: 0,
             localNhanVien:{},
         }
 
@@ -117,7 +116,7 @@ export default {
         },
 
         async goToQLDanhMuc(){
-            this.$router.push("/QLDanhMuc");
+            this.$router.push({ name: 'QLDanhMucSanPham', params: { id: this.localNhanVien.NV_Ma }});
         }
     },
     mounted() {

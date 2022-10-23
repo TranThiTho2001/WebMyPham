@@ -1,40 +1,36 @@
 <template>
-     <Form @submit="$emit('themNhanVien-submit', nhanvienMoi)" :validation-schema="schema">
+     <Form @submit="$emit('suaNhanVien-submit', nhanvienMoi)" :validation-schema="schema">
           <div class="functionName">
                <span class="fa fa-plus-circle"> </span>
-               <h4 style="display:inline">Thêm nhân viên mới </h4>
+               <h3 style="display:inline">Thông tin nhân viên</h3>
           </div>
           <div class="row container-fluid content">
                <div class="col-md-6">
                     <div class="form-group">
                          <label for="maNV">Mã</label>
-                         <Field name="maNV" type="name" class="form-control" v-model="nhanvienMoi.NV_Ma"
-                              placeholder="Nhập mã nhân viên" />
+                         <Field name="maNV" type="name" class="form-control" 
+                               v-model="nhanvienMoi.NV_Ma" />
                          <ErrorMessage name="maNV" class="error-feedback" />
                     </div>
                     <div class="form-group">
                          <label for="hoNV">Họ nhân viên</label>
-                         <Field name="hoNV" class="form-control" v-model="nhanvienMoi.NV_Ho"
-                              placeholder="Nhập họ nhân viên" />
+                         <Field name="hoNV" class="form-control" v-model="nhanvienMoi.NV_Ho" />
                          <ErrorMessage name="hoNV" class="error-feedback" />
                     </div>
                     <div class="form-group">
                          <label for="tenNV">Tên</label>
-                         <Field name="tenNV" class="form-control" v-model="nhanvienMoi.NV_Ten"
-                              placeholder="Nhập tên nhân viên" />
+                         <Field name="tenNV" class="form-control" v-model="nhanvienMoi.NV_Ten" />
                          <ErrorMessage name="tenNV" class="error-feedback" />
                     </div>
                     <div class="form-group">
                          <label for="cccdNV">Số CMND/CCCD</label>
-                         <Field name="cccdNV" class="form-control" v-model="nhanvienMoi.NV_CCCD"
-                              placeholder="Nhập số CMND/CCCD" />
+                         <Field name="cccdNV" class="form-control" v-model="nhanvienMoi.NV_CCCD" />
                          <ErrorMessage name="cccdNV" class="error-feedback" />
                     </div>
                     <div class="form-group">
                          <label for="ngaysinhNV">Ngày sinh</label>
-                         <Field name="ngaysinhNV" class="form-control" v-model="nhanvienMoi.NV_NgaySinh"
-                              placeholder="Ngày sinh">
-                              <datepicker :value="nhanvienMoi.NV_NgaySinh" v-model="nhanvienMoi.NV_NgaySinh">
+                         <Field name="ngaysinhNV" class="form-control" v-model="nhanvienMoi.NV_NgaySinh">
+                              <datepicker :value="nhanvienMoi.NV_NgaySinh" :placeholder="nhanvienMoi.NV_NgaySinh">
                               </datepicker>
                          </Field>
                          <ErrorMessage name="ngaysinhNV" class="error-feedback" />
@@ -43,36 +39,33 @@
                <div class="col-md-6">
                     <div class="form-group">
                          <label for="sdtNV">Số điện thoại</label>
-                         <Field name="sdtNV" class="form-control" v-model="nhanvienMoi.NV_SDT"
-                              placeholder="Nhập số điện thoại" />
+                         <Field name="sdtNV" class="form-control" v-model="nhanvienMoi.NV_SDT" />
                          <ErrorMessage name="sdtNV" class="error-feedback" />
                     </div>
                     <div class="form-group">
                          <label for="emailNV">Email</label>
-                         <Field name="emailNV" class="form-control" v-model="nhanvienMoi.NV_Email"
-                              placeholder="Nhập địa chỉ Email" />
+                         <Field name="emailNV" class="form-control" v-model="nhanvienMoi.NV_Email" />
                          <ErrorMessage name="emailNV" class="error-feedback" />
                     </div>
                     <div class="form-group">
                          <label for="diachiNV">Địa chỉ</label>
-                         <Field name="diachiNV" class="form-control" v-model="nhanvienMoi.NV_DiaChi"
-                              placeholder="Nhập địa chỉ" />
+                         <Field name="diachiNV" class="form-control" v-model="nhanvienMoi.NV_DiaChi" />
                          <ErrorMessage name="diachiNV" class="error-feedback" />
                     </div>
 
                     <div class="form-group">
                          <label for="matkhauNV">Mật khẩu</label>
-                         <Field name="matkhauNV" class="form-control" v-model="nhanvienMoi.NV_MatKhau"
-                              placeholder="Nhập mật khẩu tài khoản" />
+                         <Field name="matkhauNV" class="form-control" v-model="nhanvienMoi.NV_MatKhau" />
                          <ErrorMessage name="matkhauNV" class="error-feedback" />
                     </div>
                     <div class="form-group">
                          <label for="loaiNV">Chức vụ &nbsp; </label><br>
-                         <Field name="loaiNV" class="form-control" v-model="nhanvienMoi.NV_LoaiNV"
-                              placeholder="Chức vụ: ">
-                              <select v-model="nhanvienMoi.NV_LoaiNV">
-                                   <option selected>Nhân viên</option>
-                                   <option>Quản ly</option>
+                         <Field name="loaiNV" class="form-control" v-model="nhanvienMoi.NV_LoaiNV">
+                              <select  v-model="nhanvienMoi.NV_LoaiNV">
+                                   <option v-if="nhanvienMoi.NV_LoaiNV == '1'" :selected="true">Quản lý</option>
+                                   <option v-else>Quản lý</option>
+                                   <option v-if="nhanvienMoi.NV_LoaiNV == '2'" :selected="true">Nhân viên</option>
+                                   <option v-else>Nhân viên</option>
                               </select>
                          </Field>
                          <ErrorMessage name="loaiNV" class="error-feedback" />
@@ -80,19 +73,18 @@
                </div>
           </div>
           <div class="form-group">
-               <span v-if="message2=='Thêm thành công'" class="fas fa-check-circle"
-                    style="color:#00BA13; text-align: center; margin-left: 180px;"></span>
-               <span v-if="message2=='Thêm không thành công'" class="fas fa-times-circle"
-                    style="color:red; text-align: center;  margin-left: 145px;"></span>
-               <p v-if="message2=='Thêm thành công'" class="textMessage2" style="color:#00BA13">{{message2}}
+               <span v-if="message1 == 'Cập nhật thành công'" class="fas fa-check-circle"
+                    style="color:#00BA13; text-align: center; margin-left: 40%;"></span>
+               <span v-if="message1 == 'Cập nhật không thành công'" class="fas fa-times-circle"
+                    style="color:red; text-align: center;  margin-left: 38%;"></span>
+               <p v-if="message1 == 'Cập nhật thành công'" class="textMessage2" style="color:#00BA13">{{ message1 }}
                </p>
-               <p v-else class="textMessage2">{{message2}}</p><br>
-               <p v-if="message2=='Thêm không thành công'" class="textMessage1">{{message1}}</p>
+               <p v-else class="textMessage2">{{ message1 }}</p><br>
+               <p v-if="message1 == 'Cập nhật không thành công'" class="textMessage1">{{ message1 }}</p>
                <button class="btn btn-outline-secondary btnLuu">Lưu</button>
           </div>
 
      </form>
-
 </template>
  
 <script>
@@ -103,13 +95,11 @@ import '@vuepic/vue-datepicker/dist/main.css'
 export default {
      name: "NhanVienFormThem",
      components: {
-          Form,
-          Field,
-          ErrorMessage,
           Datepicker,
+          Form, Field, ErrorMessage
      },
-     emits: ["themNhanVien-submit"],
-     props: ["newnhanvien", "message1", "message2"],
+     emits: ["suaNhanVien-submit"],
+     props: ["newnhanvien", "message1"],
      data() {
 
           const schema = yup.object().shape({
@@ -149,7 +139,6 @@ export default {
           return {
                nhanvienMoi: this.newnhanvien,
                schema,
-
           };
      },
 };

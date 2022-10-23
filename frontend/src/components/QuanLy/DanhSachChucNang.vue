@@ -103,6 +103,7 @@ export default {
     display: inline-block;
     border-radius: 30px;
     margin-left: 0px;
+
 }
 
 .dsChucNang {
@@ -110,7 +111,8 @@ export default {
     display: inline-block;
     width: 100%;
     padding-right: 0px;
-    padding-left: 0px;
+    padding-left: 0px;  
+
 }
 
 .moreInformation {
@@ -127,7 +129,8 @@ export default {
     background-color: #515151;
     color: #FFFFFF;
     border: none;
-
+      font-size: 18px;
+    font-family: Inter;
 }
 
 .dsChucNang .btn-outline-secondary:hover,

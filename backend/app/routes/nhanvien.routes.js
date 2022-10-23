@@ -12,7 +12,7 @@ module.exports = (app) => {
     router.get("/:NV_Ma", nhanvien.findOne);
 
     //Update a employee with id
-    router.put("/:id", nhanvien.update);
+    router.put("/:NV_Ma", nhanvien.update);
 
     //Delete a employee with id
     router.delete("/:NV_Ma", nhanvien.delete);

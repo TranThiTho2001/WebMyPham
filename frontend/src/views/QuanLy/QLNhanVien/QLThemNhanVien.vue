@@ -119,7 +119,7 @@
          },
  
          async goToQLNhanVien(){
-             this.$router.push("/QLNhanVien");
+            this.$router.push({name: 'QLNhanVien', params: { id: this.localNhanVien.NV_Ma }});
          }
      },
      mounted() {

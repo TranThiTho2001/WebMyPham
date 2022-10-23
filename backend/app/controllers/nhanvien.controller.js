@@ -99,6 +99,7 @@ exports.findOne = async (req,res) => {
     if(!documents){
         return res.send("Khong tim thay");
     }
+    console.log(documents);
     return res.send(documents);
 };
 
@@ -111,7 +112,7 @@ exports.update = async (req, res) =>{
    }
 
    const condition = {
-    Ma_NV: req.params.Ma_NV,
+    NV_Ma: req.params.NV_Ma,
    };
 
    const [error, document] = await handle(
