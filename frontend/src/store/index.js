@@ -1,8 +1,9 @@
 import { createStore } from "vuex";
-import { khachhang } from "./khachhang.module";
+import { user } from "./khachhang.module";
+
 const store = createStore({
     modules: {
-        khachhang,
+        khachhang: user,
     },
 });
 export default store;

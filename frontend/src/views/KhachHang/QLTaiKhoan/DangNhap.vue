@@ -10,7 +10,7 @@
                 </div>
                 <div class="row" style="margin-top:20%">
                     <img src="../../../images/ImageDangNhap.png" class="img-fluid" width="464px" height="466px"
-                        alt="Image" style="border-radius: 15px;">
+                        alt="Image" style="border-radius: 15px; position: relative; bottom: -40px;">
                 </div>
             </div>
 
@@ -51,7 +51,7 @@
                                 <span v-else class="btn  far fa-eye btnAnMatKhau"
                                     @click="isOpenPassword=!isOpenPassword"></span>
                             </div>
-                            <a href="#" @click="goToQuenMatKhau" style="font-size: 17px;">Bạn quên mật khẩu?</a>
+                            <a href="#" @click="goToQuenMatKhau">Quên mật khẩu?</a>
                             <ErrorMessage name="KH_MatKhau" class="error-feedback" />
                         </div>
 
@@ -60,14 +60,14 @@
                             {{ message }}
                         </p>
 
-                        <div class="form-group my-3">
+                        <div class="form-group my-3 btn-login">
                             <button class="btn btn-sm btn-outline-secondary btn-block btnDangNhap"
                                 :disabled="isSubmitting" :class="{ 'submitting': isSubmitting }">
                                 <span v-show="loading" class="spinner-border spinner-border-sm"></span>
                                 <span>Đăng nhập</span>
                             </button>
                         </div>
-                        <div>
+                        <div class="botton-register">
                             <p>Bạn chưa có tài khoản? <button class="btnGoToDangKy" @click="goTodangKy">Đăng ký</button></p>
                         </div>
                     </Form>
@@ -97,7 +97,6 @@ export default {
             schema,
             isOpenPassword: false,
             khachhang: {},
-            khachhangcheck: {},
         };
     },
     computed: {

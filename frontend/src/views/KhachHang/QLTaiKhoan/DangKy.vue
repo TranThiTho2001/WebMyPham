@@ -10,7 +10,7 @@
                 </div>
                 <div class="row" style="margin-top:25%">
                     <img src="../../../images/ImageDangNhap.png" class="img-fluid" width="464px" height="466px"
-                        alt="Image" style="border-radius: 15px;">
+                        alt="Image" style="border-radius: 15px; position: relative; bottom: -100px;">
                 </div>
             </div>
 
@@ -92,7 +92,7 @@
                             <ErrorMessage name="confirmPassword" class="error-feedback" />
                         </div>
                         <p style="text-align:center">{{message}}</p>
-                        <div class="form-group my-3" style="margin-bottom:0%">
+                        <div class="form-group my-3 btn-login" style="margin-bottom:0%">
                             <button class="btn btn-sm btn-outline-secondary btn-block btnDangKy"
                                 :disabled="isSubmitting" :class="{ 'submitting': isSubmitting }">
                                 <span v-show="loading" class="spinner-border spinner-border-sm"></span>
@@ -163,7 +163,6 @@ export default {
     methods: {
         async handleRegister(khachhang) {
             this.message = "";
-
             if(this.confirmPassword == khachhang.KH_MatKhau) { 
                 this.successful = false;
                 this.loading = true;
@@ -189,7 +188,7 @@ export default {
         },
 
         async goToDangNhap() {
-            this.$router.push("/KHDangNhap");
+            this.$router.push("/DangNhap");
         }
     },
 

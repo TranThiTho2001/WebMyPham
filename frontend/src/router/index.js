@@ -8,8 +8,8 @@ const routes = [
     },
     // Quan ly tai khoan
     {
-        path: "/QLDangNhap",
-        name: "QLDangNhap",
+        path: "/admin",
+        name: "DangNhap",
         component: () =>
             import ("../views/QuanLy/QLTaiKhoan/DangNhap.vue"),
     },
@@ -23,7 +23,7 @@ const routes = [
 
     // Quan ly san pham
     {
-        path: "/QLSanPham/:id",
+        path: "/admin/SanPham/:id",
         name: "QLsanpham",
         component: () =>
             import ("../views/QuanLy/QLSanPham/QLSanPham.vue"),
@@ -31,7 +31,7 @@ const routes = [
 
 
     {
-        path: "/QLSanPhamThem/:id",
+        path: "/admin/SanPhamThem/:id",
         name: "QLSanPhamThem",
         component: () =>
             import ("../views/QuanLy/QLSanPham/QLSanPhamThem.vue"),
@@ -39,7 +39,7 @@ const routes = [
 
      // Quan ly thuong hieu
     {
-        path: "/QLThuongHieu/:id",
+        path: "/admin/ThuongHieu/:id",
         name: "QLthuonghieu",
         component: () =>
             import ("../views/QuanLy/QLThuongHieu/QLThuongHieu.vue"),
@@ -47,21 +47,21 @@ const routes = [
 
      // Quan ly danh muc
     {
-        path: "/QLDanhMucSanPham/:id",
+        path: "/admin/DanhMucSanPham/:id",
         name: "QLDanhMucSanPham",
         component: () =>
             import ("../views/QuanLy/QLDanhMuc/QLDanhMucSanPham.vue"),
     },
 
     {
-        path: "/TaoDanhMuc/:id",
+        path: "/admin/TaoDanhMuc/:id",
         name: "TaoDanhMuc",
         component: () =>
             import ("../views/QuanLy/QLDanhMuc/QLTaoDanhMuc.vue"),
     },
 
     {
-        path: "/SuaDanhMuc/:id/:user",
+        path: "/admin/SuaDanhMuc/:id/:user",
         name: "SuaDanhMuc",
         component: () =>
             import ("../views/QuanLy/QLDanhMuc/QLDanhMucSua.vue"),
@@ -70,14 +70,14 @@ const routes = [
 
     // Quan ly don hang
     {
-        path: "/QLDonHang/:id",
+        path: "/admin/DonHang/:id",
         name: "QLDonHang",
         component: () =>
             import ("../views/QuanLy/QLDonHang/QLDonHang.vue"),
     },
 
     {
-        path: '/QLDonHangLapHD/:id/:user',
+        path: '/admin/DonHangLapHD/:id/:user',
         name: 'QLDonHangLapHD',        
         component: () =>
             import ("../views/QuanLy/QLDonHang/QLDonHangLapHD.vue"),
@@ -85,20 +85,20 @@ const routes = [
 
     // Quan ly nhan vien
     {
-        path: '/QLNhanVien/:id',
+        path: '/admin/NhanVien/:id',
         name: 'QLNhanVien',        
         component: () =>
             import ("../views/QuanLy/QLNhanVien/QLNhanVien.vue"),
     },   
     {
-        path: '/ThemNhanVien/:id',
+        path: '/admin/ThemNhanVien/:id',
         name: 'ThemNhanVien',        
         component: () =>
             import ("../views/QuanLy/QLNhanVien/QLThemNhanVien.vue"),
     }, 
 
     {
-        path: '/SuaNhanVien/:id/:user',
+        path: '/admin/SuaNhanVien/:id/:user',
         name: 'SuaNhanVien',        
         component: () =>
             import ("../views/QuanLy/QLNhanVien/QLSuaNhanVien.vue"),
@@ -106,14 +106,14 @@ const routes = [
 
 //-------------------------------------------------KHACHHANG-----------------------------------
     {
-        path: '/KHDangNhap',
+        path: '/DangNhap',
         name: 'KHDangNhap',        
         component: () =>
             import ("../views/KhachHang/QLTaiKhoan/DangNhap.vue"),
     },
 
     {
-        path: '/KHDangKy',
+        path: '/DangKy',
         name: 'KHDangKy',        
         component: () =>
             import ("../views/KhachHang/QLTaiKhoan/DangKy.vue"),

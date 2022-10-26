@@ -16,7 +16,7 @@ module.exports = (app) => {
 
     //Delete a employee with id
     router.delete("/:NV_Ma", nhanvien.delete);
-
+    router.post("/signin", nhanvien.signin);
     // //Delete all employee
     // router.delete("/", nhanvien.deleteAll);
 

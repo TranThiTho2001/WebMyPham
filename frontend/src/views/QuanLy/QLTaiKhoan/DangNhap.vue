@@ -10,7 +10,7 @@
                 </div>
                 <div class="row" style="margin-top:20%">
                     <img src="../../../images/ImageDangNhap.png" class="img-fluid" width="464px" height="466px"
-                        alt="Image" style="border-radius: 15px;">
+                        alt="Image" style="border-radius: 15px; position: relative; bottom: -40px;">
                 </div>
             </div>
 
@@ -52,15 +52,16 @@
                                 <span v-if="isOpenPassword" class="btn far fa-eye btnAnMatKhau"
                                     @click="isOpenPassword=!isOpenPassword"></span>
                             </div>
-                            <ErrorMessage name="password" class="error-feedback" style="color:red; font-size: 17px;" />
+                            <a href="#" @click="goToQuenMatKhau">Quên mật khẩu?</a>
+                            <ErrorMessage name="password" class="error-feedback" style="color:red; font-size: 13px;" />
                         </div>
 
-                        <a href="#" @click="goToQuenMatKhau">Bạn quên mật khẩu</a>
+                        
                         <p v-if="message" style="display: inline; color: red; float:right">
                             {{ message }}
                         </p>
 
-                        <div class="form-group my-3">
+                        <div class="form-group my-3 btn-login">
                             <button class="btn btn-sm btn-outline-secondary btn-block btnDangNhap"
                                 :disabled="isSubmitting" :class="{ 'submitting': isSubmitting }">
                                 <span v-show="loading" class="spinner-border spinner-border-sm"></span>
@@ -78,7 +79,8 @@
 <script>
 import * as yup from "yup";
 import { Form, Field, ErrorMessage } from "vee-validate";
-import NhanVienService from "../../../services/nhanvien.service"
+// import NhanVienService from "../../../services/nhanvien.service";
+import { mapGetters } from "vuex";
 export default {
     name: `QLDangNhap`,
     components: { Form, Field, ErrorMessage },
@@ -99,30 +101,34 @@ export default {
         };
     },
 
+    computed: {
+        ...mapGetters([
+            "nhanvienLoggedIn"
+        ]),
+    },
+
+    created() {
+        if (this.nhanvienLoggedIn) {
+            this.$router.push({ name: 'QLDonHang', params: { id: this.nhanviencheck.NV_Ma } });
+        }
+    },
+
     methods: {
         async handleLogin() {
-            console.log(this.nhanvien.NV_Ma)
-            const [error, response] = await this.handle(
-                NhanVienService.getByID(this.nhanvien.NV_Ma)
+            this.loading = true;
+            const [error,data] = await this.handle(
+                this.$store.dispatch("loginEmployee", this.nhanvien)
             );
             if (error) {
                 console.log(error);
-                this.message = "Không tìm thấy tài khoản"
+                this.loading = false;
+                this.message = "Số điện thoại hoặc mật khẩu đăng nhập sai";
             } else {
-                console.log(response.data);
-                this.nhanviencheck = response.data;
-                this.checkAccount();
+                console.log(data)
+                this.$router.push({ name: 'QLDonHang', params: { id: this.nhanvien.NV_Ma } });
             }
         },
 
-        async checkAccount() {
-            if (this.nhanvien.NV_MatKhau == this.nhanviencheck.NV_MatKhau) {
-                this.$router.push({ name: 'QLDonHang', params: { id: this.nhanviencheck.NV_Ma } });
-            }
-            else {
-                this.message = "Mật khẩu sai";
-            }
-        },
 
         async goToQuenMatKhau() {
             this.$router.push("/QLQuenMatKhau");

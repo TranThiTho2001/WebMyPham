@@ -10,6 +10,14 @@ const state = {
     },
     status: {
         loggedIn: Boolean
+    },
+    nhanvien: {
+        NV_Ma: String,
+        NV_Ten: String,
+        NV_MatKhau: String
+    },
+    statusnv: {
+        loggedInEmployee: Boolean
     }
 };
 const mutations = {
@@ -28,6 +36,23 @@ const mutations = {
         localStorage.removeItem("khachhang");
     },
     clearLoginStatus(state) {
+        state.status.loggedIn = false;
+    },
+    initEmployeeState(state) {
+        state.nhanvien = JSON.parse(localStorage.getItem("nhanvien"));
+        state.status.loggedIn = !!state.nhanvien;
+    },
+    loginEmployee(state, nhanvien) {
+        state.status.loggedIn = true;
+        state.nhanvien = nhanvien;
+        localStorage.setItem("nhanvien", JSON.stringify(nhanvien));
+    },
+    logoutEmployee(state) {
+        state.status.loggedIn = false;
+        state.nhanvien = null;
+        localStorage.removeItem("nhanvien");
+    },
+    clearLoginStatusEmployee(state) {
         state.status.loggedIn = false;
     },
 };
@@ -62,7 +87,26 @@ const actions = {
             throw error;
         }
         return response.data;
-    }
+    },
+
+    async loginEmployee({ commit }, nhanvien) {
+        console.log("Alo");
+        let [error, response] = await handle(
+            http.post("/nhanvien/signin", {
+                NV_Ma: nhanvien.NV_Ma,
+                NV_MatKhau: nhanvien.NV_MatKhau,
+            })
+        );
+        if (error || !response.data.accessToken) {
+            commit("logout");
+            if (!error) {
+                error = new Error("Whoops, no access token found!");
+            }
+            throw error;
+        }
+        commit("login", response.data);
+        return response.data;
+    },
 };
 const getters = {
     khachhangLoggedIn(state) {
@@ -70,9 +114,15 @@ const getters = {
     },
     loggedInKhachHang(state) {
         return state.khachhang;
+    },
+    nhanvienLoggedIn(state) {
+        return state.status.loggedInEmployee;
+    },
+    loggedInNhanVien(state) {
+        return state.nhanvien;
     }
 };
-export const khachhang = {
+export const user = {
     state,
     mutations,
     actions,

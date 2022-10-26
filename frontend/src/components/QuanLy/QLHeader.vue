@@ -58,7 +58,7 @@ export default {
         },
 
         async goToQLDangNhap() {
-            this.$router.push("/QLDangNhap");
+            this.$router.push("/admin");
         },
 
         async goToDoiMatKHau(){

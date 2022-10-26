@@ -7,6 +7,7 @@
     font-size: 20px;
     font-family: Inter;
     color: #515151;
+    background-size: cover;
 }
 
 .frameDangNhap .formDangNhap
@@ -68,13 +69,15 @@
 .frameDangky .formDangky .rightForm Form .form-group .btnDangKy,
 .frameDangNhap .formDangNhap .rightForm Form .form-group .btnDangNhap{
     margin-top: 10%;
-    width: 40%;
-    border-radius: 10px;
+    border-radius: 8px;
     background-color: black;
     color: white;
-    margin: 10% 0 0 30%;
     font-size: 20px;
     font-family: Inter;
+    width: fit-content;
+    padding: 3px 45px;
+    
+    font-weight: 600;
 }
 
 .frameDoiMatKhau .formDoiMatKhau .rightForm Form  .form-group .btnDangNhap,
@@ -103,7 +106,11 @@
 .frameDoiMatKhau .formDoiMatKhau .rightForm a{
     color: #7E7E7E;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 13px;
+    white-space: nowrap;
+    float: left;
+    font-weight: 600;
+    margin: 0px 0px 0px 1%;
 }
 .frameDangky label, .frameDangNhap label, .frameDoiMatKhau label {
     font-weight: 600;
@@ -121,5 +128,14 @@
     text-align: right;
     color: red;
     float: right;
-    font-size: 17px;
+    font-size: 13px;
+}
+
+.btn-login{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.botton-register p{
+    font-size: 14px;
 }
