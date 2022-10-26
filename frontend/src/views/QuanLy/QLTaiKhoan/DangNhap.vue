@@ -108,7 +108,8 @@ export default {
     },
 
     created() {
-        if (this.nhanvienLoggedIn) {
+        if (!this.nhanvienLoggedIn) {
+            console.log(this.nhanvienLoggedIn)
             this.$router.push({ name: 'QLDonHang', params: { id: this.nhanviencheck.NV_Ma } });
         }
     },
@@ -117,7 +118,7 @@ export default {
         async handleLogin() {
             this.loading = true;
             const [error,data] = await this.handle(
-                this.$store.dispatch("loginEmployee", this.nhanvien)
+                this.$store.dispatch("loginEmloyee", this.nhanvien)
             );
             if (error) {
                 console.log(error);

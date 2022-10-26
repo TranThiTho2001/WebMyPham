@@ -132,9 +132,11 @@ export default {
                     .required("Ngày sinh phải có giá trị"),
                sdtNV: yup
                     .string()
-                    .required("SDT phải có giá trị"),
+                    .required("SDT phải có giá trị")
+                    .matches(/^(0|\+84)(\s|\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\d)(\s|\.)?(\d{3})(\s|\.)?(\d{3})$/,'Số điện thoại không hợp lệ.') ,
                emailNV: yup
                     .string()
+                    .matches(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/,"Email phải đúng định dạng")
                     .required("Email phải có giá trị"),
                diachiNV: yup
                     .string()

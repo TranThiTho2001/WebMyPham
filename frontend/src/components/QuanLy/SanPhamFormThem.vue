@@ -102,34 +102,29 @@ export default {
         const schema = yup.object().shape({
             ma: yup
                 .string()
-                .required("Mã danh mục phải có giá trị.")
-                .min(10, "Mã danh mục phải gồm 10 ký tự.")
-                .max(10, "Mã danh mục phải gồm 10 ký tự."),
+                .required("Mã sản phẩm phải có giá trị.")
+                .min(10, "Mã sản phẩm phải gồm 10 ký tự.")
+                .max(10, "Mã sản phẩm  phải gồm 10 ký tự."),
             ID_Catalog: yup
                 .string()
                 .required("Mã danh mục phải có giá trị."),
             ID_Branch: yup
                 .string()
-                .required("Thuong hieu phai cos"),
+                .required("Thương hiệu phải có giá trị"),
             name: yup
                 .string()
-                .required("Tên danh mục phải được nhập"),
+                .required("Tên sản phẩm phải được nhập"),
             information: yup
                 .string()
-                .required(" TT phai dc nhap"),
+                .required("Thông tin sản phẩm phải có giá trị"),
             quality: yup
                 .number()
-                .required("so luong phai dc nhap"),
+                .required("Số lượng phải có giá trị"),
             purchase_price: yup
                 .number()
-                .required(" Gia mua phai dcnhpa"),
+                .required("Giá mua vào phải có giá trị"),
             saleprice: yup
                 .number()
-                .required("Gia ban ra phai doc nha[p]"),
-            // image:yup
-
-            // .object()
-            // .required("Hinh anh phai dc chon")
         });
         return {
             sanphamLocal: this.newsanpham,

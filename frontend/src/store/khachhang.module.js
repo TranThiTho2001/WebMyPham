@@ -16,8 +16,8 @@ const state = {
         NV_Ten: String,
         NV_MatKhau: String
     },
-    statusnv: {
-        loggedIn: Boolean
+    statusEmployee: {
+        loggedInNhanVien: Boolean
     }
 };
 const mutations = {
@@ -38,22 +38,24 @@ const mutations = {
     clearLoginStatus(state) {
         state.status.loggedIn = false;
     },
+    
+    //employee
     initEmployeeState(state) {
         state.nhanvien = JSON.parse(localStorage.getItem("nhanvien"));
-        state.status.loggedIn = !!state.nhanvien;
+        state.statusEmployee.loggedInNhanVien = !!state.nhanvien;
     },
     loginEmployee(state, nhanvien) {
-        state.status.loggedIn = true;
+        state.statusEmployee.loggedInNhanVien = true;
         state.nhanvien = nhanvien;
         localStorage.setItem("nhanvien", JSON.stringify(nhanvien));
     },
     logoutEmployee(state) {
-        state.status.loggedIn = false;
+        state.statusEmployee.loggedInNhanVien = false;
         state.nhanvien = null;
         localStorage.removeItem("nhanvien");
     },
     clearLoginStatusEmployee(state) {
-        state.status.loggedIn = false;
+        state.status.loggedInNhanVien = false;
     },
 };
 const actions = {
@@ -98,13 +100,13 @@ const actions = {
             })
         );
         if (error || !response.data.accessToken) {
-            commit("logout");
+            commit("logoutEmployee");
             if (!error) {
                 error = new Error("Whoops, no access token found!");
             }
             throw error;
         }
-        commit("login", response.data);
+        commit("loginEmployee", response.data);
         return response.data;
     },
 };
@@ -116,7 +118,7 @@ const getters = {
         return state.khachhang;
     },
     nhanvienLoggedIn(state) {
-        return state.status.loggedIn;
+        return state.statusEmployee.loggedInNhanVien;
     },
     loggedInNhanVien(state) {
         return state.nhanvien;
