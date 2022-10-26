@@ -105,8 +105,8 @@ export default {
         ]),
     },
     created() {
-        if (!this.khachhangLoggedIn) {
-            this.$router.push("/");
+        if (this.khachhangLoggedIn) {
+            this.$router.push("/DangNhap");
         }
     },
     methods: {
@@ -131,7 +131,7 @@ export default {
         },
 
         async goTodangKy(){
-            this.$router.push("/KHDangKy");
+            this.$router.push("DangKy");
         }
     },
     mounted(){

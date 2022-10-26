@@ -126,7 +126,9 @@ export default {
                 .required("Tên đăng nhập phải có giá trị."),
             KH_SDT: yup
                 .string()
+                .matches(/^(0|\+84)(\s|\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\d)(\s|\.)?(\d{3})(\s|\.)?(\d{3})$/,'Số điện thoại không hợp lệ.')
                 .required("Số điện thoại phải có giá trị."),
+                
             KH_MatKhau: yup
                 .string()
                 .required("Mật khẩu phải có giá trị.")
@@ -155,7 +157,7 @@ export default {
     },
     mounted() {
         this.khachhang.KH_MatKhau = "";
-        if (!this.khachhangLoggedIn) {
+        if (this.khachhangLoggedIn) {
             this.$router.push("/");
         }
     },
@@ -168,7 +170,7 @@ export default {
                 this.loading = true;
 
                 const [error, data] = await this.handle(
-                    this.$store.dispatch("register", khachhang)
+                    this.$store.dispatch("registerCustomer", khachhang)
                 );
                 if (error) {
                     this.message = error.response.data.message;

@@ -17,7 +17,7 @@ const state = {
         NV_MatKhau: String
     },
     statusnv: {
-        loggedInEmployee: Boolean
+        loggedIn: Boolean
     }
 };
 const mutations = {
@@ -89,7 +89,7 @@ const actions = {
         return response.data;
     },
 
-    async loginEmployee({ commit }, nhanvien) {
+    async loginEmloyee({ commit }, nhanvien) {
         console.log("Alo");
         let [error, response] = await handle(
             http.post("/nhanvien/signin", {
@@ -116,7 +116,7 @@ const getters = {
         return state.khachhang;
     },
     nhanvienLoggedIn(state) {
-        return state.status.loggedInEmployee;
+        return state.status.loggedIn;
     },
     loggedInNhanVien(state) {
         return state.nhanvien;

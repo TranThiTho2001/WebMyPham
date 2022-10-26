@@ -191,21 +191,19 @@ exports.signin = async (req, res, next) => {
     );
 
     if (error) {
-        console.log(error);
         return next(new BadRequestError(500));
     }
-    console.log(req.body.KH_MatKhau +"y"+khachhang.KH_MatKhau);
     if (!khachhang) {
-        return next(new BadRequestError(401, "Incorrect username"+req.body.KH_SDT+req.body.KH_MatKhau));
+        return next(new BadRequestError(401, "Incorrect username"));
     }
 
     const passwordIsValid = bcrypt.compareSync(
         req.body.KH_MatKhau,
         khachhang.KH_MatKhau,
     );
-        console.log(passwordIsValid)
+
     if (!passwordIsValid) {
-        return next(new BadRequestError(401, " or password"));
+        return next(new BadRequestError(401, " password"));
     }
 
     const token = jwt.sign({ KH_Ma: khachhang.KH_Ma }, config.jwt.secret, {

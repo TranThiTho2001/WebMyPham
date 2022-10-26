@@ -9,7 +9,7 @@
                     <div class="form-group">
                          <label for="maNV">Mã</label>
                          <Field name="maNV" type="name" class="form-control" 
-                               v-model="nhanvienMoi.NV_Ma" />
+                               v-model="nhanvienMoi.NV_Ma" :disabled="true"/>
                          <ErrorMessage name="maNV" class="error-feedback" />
                     </div>
                     <div class="form-group">
@@ -55,7 +55,7 @@
 
                     <div class="form-group">
                          <label for="matkhauNV">Mật khẩu</label>
-                         <Field name="matkhauNV" class="form-control" v-model="nhanvienMoi.NV_MatKhau" />
+                         <Field name="matkhauNV" class="form-control" v-model="nhanvienMoi.NV_MatKhau" type="password"/>
                          <ErrorMessage name="matkhauNV" class="error-feedback" />
                     </div>
                     <div class="form-group">
