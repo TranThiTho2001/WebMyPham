@@ -1,9 +1,10 @@
 <template>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <div class="container frameQLSanPham">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <div class="container frameQLThemSanPham">
         <div class="row list">
             <div class="col-md-2 dschucNang">
-                <DanhSachChucNang :maNV="localNhanVien.NV_Ma"/>
+                <DanhSachChucNang :maNV="localNhanVien.NV_Ma" />
             </div>
             <div class="col-md-10">
                 <div class="row topHeader">
@@ -11,27 +12,35 @@
                 </div>
                 <div class="row bottomHeader">
                     <div class="col-md-12 font-weight-bold" style="color:#515151; font-size: 25px;">
-                        <p>Danh sách danh mục</p>
+                        <p style="font-family:Inter; text-align: center; margin-bottom: 10px;">Danh sách sản phẩm</p>
                     </div>
                 </div>
                 <div class="row timkiem">
-                    <div class="col-md-9 col-sm-1">
+                    <div class="col-md-5 col-sm-1 input-group">
+                        <div class="row" style="margin-left:0.01%">
+                            <input type="text" class="form-control col-md-10" placeholder="Tìm theo tên" v-model="nameToSearch"  @keyup.enter="searchName" @click="goToQLSanPham"/>
+                                <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button"
+                                    @click="searchName" style="border:none">
+                                    <span class="fa fa-search" style="font-size:18px"></span>
+                                </button>
+                        </div>
                     </div>
+                    <div class="col-md-4"></div>
                     <div class="col-md-3 col-sm-11">
-                        <!-- <button class=" btn btn-sm btn-outline-secondary btnTaoDanhMuc" @click="isOpen = !isOpen"> -->
-                        <button class=" btn btn-sm btn-outline-secondary btnXem font-weight-bold" @click="goToQLSanPham">
+                        <button class=" btn btn-sm btn-outline-secondary btnXem font-weight-bold"
+                            @click="goToQLSanPham">
                             <span class="fa fa-list-ol" style="font-size:20px"></span>
                             Xem danh sách
                         </button>
                     </div>
 
-                </div>                    
+                </div>
                 <div class="row frameThem">
                     <div class="col-md-12 col-sm-12">
-                        <SanPhamThem :newsanpham="newsanpham" @themSanPham-submit="findSanPham"
-                            :message1="message1" :message2="message2"/>
+                        <SanPhamThem :newsanpham="newsanpham" @themSanPham-submit="findSanPham" :danhmuc="danhmuc"
+                            :thuonghieu="thuonghieu" :message1="message1" :message2="message2" />
                     </div>
-                    
+
                 </div>
 
             </div>
@@ -42,6 +51,8 @@
 import DanhSachChucNang from '../../../components/QuanLy/DanhSachChucNang.vue';
 import QLHeader from '../../../components/QuanLy/QLHeader.vue';
 import SanPhamService from '../../../services/sanpham.service';
+import DanhMucService from '../../../services/danhmuc.service';
+import ThuongHieuService from '../../../services/thuonghieu.service';
 import SanPhamThem from '../../../components/QuanLy/SanPhamFormThem.vue'
 export default {
     name: `QLSanPhamThem`,
@@ -55,14 +66,15 @@ export default {
             isOpen: false,
             newsanpham: {},
             message1: "",
-            message2:"",
-            check: 0,
-            localNhanVien:{},
+            message2: "",
+            localNhanVien: {},
+            danhmuc: [],
+            thuonghieu: [],
         }
 
     },
 
-    created(){
+    created() {
         this.localNhanVien.NV_Ma = this.$route.params.id;
     },
 
@@ -86,10 +98,10 @@ export default {
                 this.sanpham = response.data;
                 console.log(response.data);
             }
-
         },
 
         async createSanPham(data) {
+            console.log(data);
             const [error, response] = await this.handle(
                 SanPhamService.create(data)
             );
@@ -98,13 +110,26 @@ export default {
             } else {
                 console.log(response.data);
                 this.message2 = "Thêm thành công";
+                console.log(response.data)
+            }
+        },
+
+        async retrieveThuongHieu() {
+            const [error, response] = await this.handle(
+                ThuongHieuService.getAll()
+            );
+            if (error) {
+                console.log(error);
+            } else {
+                this.thuonghieu = response.data;
+                console.log(response.data);
             }
         },
 
         async findSanPham(data) {
             console.log("heklasjkx");
             const [error, response] = await this.handle(
-                SanPhamService.get(data.SP_Ma)
+                SanPhamService.getByID(data.SP_Ma)
             );
             if (error) {
                 console.log(error);
@@ -119,72 +144,31 @@ export default {
                 }
             }
         },
+        async retrieveDanhMuc() {
+            const [error, response] = await this.handle(
+                DanhMucService.getAll()
+            );
+            if (error) {
+                console.log(error);
+            } else {
+                this.danhmuc = response.data;
+                console.log(response.data);
+            }
+        },
 
-        async goToQLSanPham(){
-            this.$router.push({name: 'QLsanpham', params: { id: this.localNhanVien.NV_Ma }});
+        async goToQLSanPham() {
+            this.$router.push({ name: 'QLsanpham', params: { id: this.localNhanVien.NV_Ma } });
         }
     },
 
     mounted() {
         this.retrieveSanPham();
+        this.retrieveDanhMuc();
+        this.retrieveThuongHieu();
     }
 };
 </script>
 
 <style>
-.frameQLSanPham .dschucNang .navigationBar .dsChucNang .btnSanPham {
-    background-color: #FFFFFF;
-    color: #515151;
-}
-
-.frameQLSanPham {
-    background-color: #EAEAEA;
-    border-radius: 30px;
-    width: 100%;
-    border-style: solid;
-    border-color: #515151;
-    position: relative;
-}
-
-.frameQLSanPham .timkiem .btnXem {
-    background-color: #515151;
-    border-radius: 15px;
-    color: #FFFFFF;
-    float: right;
-    font-size: 16px;
-}
-
-
-.frameQLSanPham .form-control {
-    border-radius: 15px;
-    background-color: #F5F4F4;
-    border-right: 15px;
-}
-
-.frameQLSanPham .timkiem .btnTimKiem:hover {
-    background-color: #515151;
-}
-
-.frameQLSanPham .dschucNang {
-    background-color: #515151;
-    border-radius: 26px;
-}
-
-.frameQLSanPham .bottomHeader {
-    /* margin-bottom: 2px; */
-    text-align: center;
-    font-size: 20px;
-}
-
-.frameQLSanPham .topHeader {
-    margin-bottom: 2px;
-    margin-right: -5px;
-}
-
-.frameQLSanPham .frameThem{
-    background-color: #D9D9D9;
-    border-radius: 15px;
-    margin: 1% 1% 1% 1%;
-}
-
+@import '../../../assets/QLSanPhamStyle.css';
 </style>

@@ -14,18 +14,21 @@
                     </div>
                 </div>
                 <div class="row timkiem">
-                    <div class="col-md-5 input-group">
-                        <input type="text" class="form-control" placeholder="Tìm theo tên" v-model="nameToSearch" />
-                        <div class="input-group-append">
-                            <button class="btn btn-sm btn-outline-secondary" type="button" @click="searchName">
-                                <span class="fa fa-search" style="font-size:18px"></span>
-                            </button>
+                    <div class="col-md-7 input-group">
+                        <div class="row" style="margin-left:0.01%">
+                            <input type="text" class="form-control col-md-10" placeholder="Tìm theo tên"
+                                v-model="nameToSearch"  @keyup.enter="searchName"/>
+                                <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button"
+                                    @click="searchName">
+                                    <span class="fa fa-search" style="font-size:18px"></span>
+                                </button>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                     </div>
                     <div class="col-md-3">
-                        <button class=" btn btn-sm btn-outline-secondary" @click="goToThemSanPham" style="float:right; font-size:18px">
+                        <button class=" btn btn-sm btn-outline-secondary btnThem" @click="goToThemSanPham"
+                            style="float:right; font-size:18px">
                             <span class="fa fa-plus-circle"></span>
                             Thêm sản phẩm
                         </button>
@@ -36,7 +39,6 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <!-- <th v-for="(col,i) in columns" :key="i">{{col}}</th> -->
                                 <th>Mã</th>
                                 <th>Tên</th>
                                 <th>Danh Mục</th>
@@ -45,14 +47,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(row,i) in sanpham" :key="i">
-                                <td>{{i}}</td>
+                            <tr v-for="(row, i) in sanpham" :key="i">
+                                <td>{{ i }}</td>
                                 <!-- <td v-for="(col,i) in columns" :key="i">{{row[col]}}</td> -->
-                                <td>{{row.SP_Ma}}</td>
-                                <td>{{row.SP_TenSanPham}}</td>
-                                <td>{{row.DMSP_Ma}}</td>
-                                <td>{{row.SP_GiaBanRa}}</td>
-                                <td>{{row.SP_SoLuong}}</td>
+                                <td>{{ row.SP_Ma }}</td>
+                                <td>{{ row.SP_TenSanPham }}</td>
+                                <td>{{ row.DMSP_Ma }}</td>
+                                <td>{{ row.SP_GiaBanRa }}</td>
+                                <td>{{ row.SP_SoLuong }}</td>
+                                <td>
+                                    <img :src="require(`@/images/${row.SP_HinhAnh}`)" >
+                                </td>
                                 <td class="tdChucNang nav-item dropdown">
                                     <a class="nav-link  fas fa-ellipsis-v" href="#" id="navbardrop"
                                         data-toggle="dropdown" style="color:#515151">
@@ -66,6 +71,7 @@
                             </tr>
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>
@@ -75,6 +81,8 @@
 import DanhSachChucNang from '../../../components/QuanLy/DanhSachChucNang.vue';
 import QLHeader from '../../../components/QuanLy/QLHeader.vue';
 import SanPhamService from '../../../services/sanpham.service';
+import ImageService from '../../../services/image';
+
 export default {
     name: `QLHomePage`,
     components: { DanhSachChucNang, QLHeader },
@@ -82,6 +90,8 @@ export default {
         return {
             sanpham: [],
             localNhanVien: {},
+            image: [],
+            nameToSearch:"",
         }
 
     },
@@ -100,6 +110,7 @@ export default {
     },
 
     methods: {
+
         async retrieveSanPham() {
 
             const [error, response] = await this.handle(
@@ -113,87 +124,50 @@ export default {
             }
 
         },
+        async retrieveImage() {
 
+            const [error, response] = await this.handle(
+                ImageService.getAll()
+            );
+            if (error) {
+                console.log(error);
+            } else {
+                this.image = response.data;
+                console.log(response.data);
+            }
+
+        },
         async goToThemSanPham() {
             this.$router.push({ name: 'QLSanPhamThem', params: { id: this.localNhanVien.NV_Ma } });
+        },
+
+        //Tìm kiếm theo tên
+        async searchName(){
+            console.log(this.nameToSearch)
+            const [error, response] = await this.handle(
+                    SanPhamService.findByName(this.nameToSearch)
+                );
+                if (error) {
+                    console.log(error);
+                } else {
+                    if(response.data!=null){
+                        this.sanpham = response.data
+                        console.log(response.data)
+                    }
+                }
         },
     },
 
     mounted() {
         this.retrieveSanPham();
+        this.retrieveImage();
     }
 };
 </script>
 
 <style>
-.frameQLSanPham .dschucNang .navigationBar .dsChucNang .btnSanPham {
-    background-color: #FFFFFF;
-    color: #515151;
-}
-
-.frameQLSanPham {
-    background-color: #EAEAEA;
-    border-radius: 30px;
-    width: 100%;
-    height: 100hv;
-}
-
-.frameQLSanPham .dschucNang {
-    background-color: #515151;
-    border-radius: 30px;
-}
-
-.frameQLSanPham .bottomHeader {
-    margin-bottom: 2px;
-    text-align: center;
-    font-size: 20px;
-}
-
-/* .dsDanhMuc{
-    width: 100%;
-} */
-.frameQLSanPham table {
-    font-family: 'Open Sans', sans-serif;
-    width: 100%;
-    /* border-collapse: collapse; */
-    /* border: 3px solid #44475C; */
-    margin: 10px 10px 0 10px;
-    /* margin-top: 10px; */
-    border-radius: 10px;
-}
-
-table {
-    font-family: 'Open Sans', sans-serif;
-    width: 100%;
-    margin: 10px 10px 10px 10px;
-    background-color: #D9D9D9;
-    border-radius: 10px;
-}
-
-.tdChucNang {
-    float: right;
-    width: max-content;
-}
-
-table tr {
-    border-radius: 10px;
-}
-
-table table th {
-    text-align: left;
-    color: #000000;
-    padding: 8px;
-    min-width: 30px;
-}
-
-table td {
-    text-align: left;
-    padding-top:8px;
-    color: #000000;
-    font-size: 14px;
-}
-
-table td:last-child {
-    border-right: none;
+@import '../../../assets/QLSanPhamStyle.css';
+.dschucNang  .navigationBar  .moreInformation{
+    margin-top: 40px;
 }
 </style>

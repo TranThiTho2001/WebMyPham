@@ -6,7 +6,7 @@ class DanhMucService {
     create(data) { return http.post("/danhmuc", data); }
     update(DM_Ma, data) { return http.put(`danhmuc/${DM_Ma}`, data); }
     delete(DM_Ma) { return http.delete(`/danhmuc/${DM_Ma}`); }
-    findByName(name) { return http.get(`/danhmuc?name=${name}`); }
+    findByName(DM_Ten) { return http.get(`/danhmuc?name=${DM_Ten}`); }
     //deleteAll() { return http.delete("/sanpham"); }
 }
 

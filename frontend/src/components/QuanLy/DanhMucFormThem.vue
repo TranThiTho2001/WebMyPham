@@ -9,7 +9,6 @@
             <label for="name">Mã danh mục</label>
             <Field name="ma" type="name" class="form-control" v-model="danhmucLocal.DM_Ma" placeholder="Nhập mã danh mục" />
             <ErrorMessage name="ma" class="error-feedback" />
-            <!-- <p class="textMessage1">{{message1}}</p> -->
         </div>
         <div class="form-group">
             <label for="profile">Tên danh mục</label>

@@ -1,6 +1,6 @@
 <template>
     <!-- Cot ben trai -->
-    <div class="navigationBar container-fuild">
+    <div class="navigationBar container-fuild" >
         <div class="logo">
             <img src="../../images/LogoQL.png" class="img-fluid"
                 style="border-top-left-radius: 30px; border-top-right-radius: 30px;">
@@ -15,15 +15,16 @@
             <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnNhanVien" @click="goToQLNhanVien" :disabled=disabledQLNV><span class="fa fa-users"
                     aria-hidden="true"> &nbsp;</span>Nhân Viên</button>
             <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnThuongHieu" @click="goToQLThuongHieu" :disabled=true><span class="fa fa-tag"
-                    aria-hidden="true"> &nbsp;</span> Thương Hiệu</button>
+                    aria-hidden="true"> &nbsp;</span>Thương Hiệu</button>
             <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnDanhMuc" @click="goToQLDanhMuc"><span class="fa fa-shapes"
                     aria-hidden="true"> &nbsp;</span> Danh Mục</button>
         </div>
+        <div class="null" ></div>
         <div class="moreInformation">
             <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnCaiDat" @click="goToCaiDat" ><span class="fa fa-cog"
                     aria-hidden="true"> &nbsp;</span> Cài Đặt</button>
             <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnThongTin" @click="goToThongTin"
-                style="margin-bottom: 10px; margin-right:10px"><span class="fa fa-info-circle" aria-hidden="true">
+                style=" margin-right:10px"><span class="fa fa-info-circle" aria-hidden="true">
                     &nbsp;</span> Thông Tin</button>
         </div>
         <!-- Cot ben phai -->
@@ -98,14 +99,17 @@ export default {
 <style>
 .navigationBar {
     background-color: #515151;
-    height: 670px;
+    font-family: Inter;
+    height: 745px;
     font-size: 18px;
     display: inline-block;
     border-radius: 30px;
     margin-left: 0px;
 
 }
-
+ .navigationBar .null{
+    height: 23%;
+ }
 .dsChucNang {
     margin-top: 20px;
     display: inline-block;
@@ -114,30 +118,23 @@ export default {
     padding-left: 0px;  
 
 }
-
-.moreInformation {
-    /* margin-top: 100px; */
-    vertical-align: bottom;
-}
-
 .dsChucNang .btn-outline-secondary,
 .moreInformation .btn-outline-secondary {
-    font-size: 16px;
+    font-size: 18px;
     text-align: left;
-    width: 90%;
+    width: 100%;
     display: block;
     background-color: #515151;
     color: #FFFFFF;
     border: none;
-      font-size: 18px;
     font-family: Inter;
 }
 
 .dsChucNang .btn-outline-secondary:hover,
 .moreInformation .btn-outline-secondary:hover {
     display: block;
-    width: 90%;
-    font-size: 16px;
+    width: 100%;
+    font-size: 18px;
     background-color: #FFFFFF;
     color: #515151;
     border: none;

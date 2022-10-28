@@ -1,8 +1,8 @@
 <template>
      <Form @submit="$emit('suaNhanVien-submit', nhanvienMoi)" :validation-schema="schema">
           <div class="functionName">
-               <span class="fa fa-plus-circle"> </span>
-               <h3 style="display:inline">Thông tin nhân viên</h3>
+               <span class="fas fa-edit"> </span>
+               <h3 style="display:inline"> Cập nhật thông tin nhân viên</h3>
           </div>
           <div class="row container-fluid content">
                <div class="col-md-6">
@@ -61,7 +61,7 @@
                     <div class="form-group">
                          <label for="loaiNV">Chức vụ &nbsp; </label><br>
                          <Field name="loaiNV" class="form-control" v-model="nhanvienMoi.NV_LoaiNV">
-                              <select  v-model="nhanvienMoi.NV_LoaiNV">
+                              <select  v-model="nhanvienMoi.NV_LoaiNV" class="selectBox">
                                    <option v-if="nhanvienMoi.NV_LoaiNV == '1'" :selected="true">Quản lý</option>
                                    <option v-else>Quản lý</option>
                                    <option v-if="nhanvienMoi.NV_LoaiNV == '2'" :selected="true">Nhân viên</option>

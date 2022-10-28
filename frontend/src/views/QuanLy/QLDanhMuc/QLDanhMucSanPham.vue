@@ -10,21 +10,18 @@
                 </div>
                 <div class="row bottomHeader">
                     <div class="col-md-12" style="color:#515151">
-                        <p>Danh sách danh mục</p>
+                        <p style="font-family:Inter; color:#515151; font-size:22px; font-weight:600">Danh sách danh mục</p>
                     </div>
                 </div>
                 <div class="row timkiem" style="margin-left:0.1px">
                     <div class="col-md-7 input-group">
                         <div class="row">
-                            <input type="text" class="form-control col-md-10" placeholder="Tìm theo"
-                                v-model="nameToSearch" />
-                            <div class="input-group-append col-md-1">
+                            <input type="text" class="form-control col-md-10" placeholder="Tìm theo tên"
+                                v-model="nameToSearch"  @keyup.enter="searchName"/>
                                 <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button"
                                     @click="searchName">
                                     <span class="fa fa-search" style="font-size:18px"></span>
                                 </button>
-                            </div>
-                            <div class="col-md-1"></div>
                         </div>
                     </div>
                     <!-- danh sach trang hien thi -->
@@ -32,13 +29,13 @@
                         <div style="display: inline-block; padding-top: 4px;">Trang:</div>
                         <div class="pagination nav-item dropdown">
                             <a class="nav-link  btn" href="#" id="navbardrop" data-toggle="dropdown"
-                                style="border-radius: 7px; width: max-content; padding-top: 3px;"> {{currentPage}}
+                                style="border-radius: 7px; width: max-content; padding-top: 3px;"> {{ currentPage }}
                                 <span class="fas fa-angle-down"></span>
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" v-for="(i,j) in num_pages() " :key="j"
+                                <a class="dropdown-item" v-for="(i, j) in num_pages() " :key="j"
                                     v-bind:class="[i == currentPage ? 'active' : '']" v-on:click="change_page(i)"
-                                    aria-controls="my-table"> {{i}}</a>
+                                    aria-controls="my-table"> {{ i }}</a>
                             </div>
                         </div>
                     </div>
@@ -56,24 +53,25 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Mã danh mục</th>
+                                <th :sortKey="DM_Ma" :hideSortIcons="true">Mã danh mục</th>
                                 <th>Tên danh mục</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(row, i ) in get_rows()" :key="i">
-                                <td v-if="currentPage>1">{{i+((currentPage-1)*9)}}</td>
-                                <td v-else>{{i}}</td>
-                                <td>{{row.DM_Ma}}</td>
-                                <td>{{row.DM_Ten}}</td>
+                                <td v-if="currentPage > 1">{{ i + ((currentPage - 1) * 9) }}</td>
+                                <td v-else>{{ i }}</td>
+                                <td>{{ row.DM_Ma }}</td>
+                                <td>{{ row.DM_Ten }}</td>
                                 <td class="tdChucNang nav-item dropdown" @click="setDanhmucActive(row.DM_Ma)">
                                     <a class="nav-link  fas fa-ellipsis-v" href="#" id="navbardrop"
                                         data-toggle="dropdown" style="color:#515151">
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#" @click="gotoSua"><span class="fas fa-edit"></span> Sửa</a>
-                                        <a class="dropdown-item" href="#" @click="isOpenXacNhan = !isOpenXacNhan"><span class="fas fa-trash-alt"
-                                                style="color:red"></span> Xóa</a>
+                                        <a class="dropdown-item" href="#" @click="gotoSua"><span
+                                                class="fas fa-edit"></span> Sửa</a>
+                                        <a class="dropdown-item" href="#" @click="isOpenXacNhan = !isOpenXacNhan"><span
+                                                class="fas fa-trash-alt" style="color:red"></span> Xóa</a>
                                     </div>
                                 </td>
                             </tr>
@@ -85,22 +83,29 @@
     </div>
     <!-- ------------------------------Bang xac nhan xoa danh muc ----------------------------- -->
     <div class="dialogXacNhan" v-if="isOpenXacNhan">
-        <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 18px;"> 
-            <span class="fas fa-trash-alt" style="color:red"></span>Bạn chắc chắn muốn xóa?</p>
-        <button class="btnYes btn btn-sm btn-outline-secondary" @click="deleteDanhMuc(), isOpenXacNhan = !isOpenXacNhan, isOpenThongBao = !isOpenThongBao">Yes</button>
+        <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 18px;">
+            <span class="fas fa-trash-alt" style="color:red"></span>Bạn chắc chắn muốn xóa?
+        </p>
+        <button class="btnYes btn btn-sm btn-outline-secondary"
+            @click="deleteDanhMuc(), isOpenXacNhan = !isOpenXacNhan, isOpenThongBao = !isOpenThongBao">Yes</button>
         <button class="btnNo btn btn-sm btn-outline-secondary" @click="isOpenXacNhan = !isOpenXacNhan">No</button>
     </div>
     <div class="dialogThongBao" v-if="isOpenThongBao">
-        <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 18px;"> 
-            <span class="fas fa-check-circle" style="color:#00BA13; text-align: center;"></span>Xóa thành công</p>
-            <button class="btnOK btn btn-sm btn-outline-secondary" @click="isOpenThongBao = !isOpenThongBao">OK</button>
+        <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 18px;">
+            <span v-if="message == 'Đã xóa danh mục đã chọn'" class="fas fa-check-circle"
+                style="color:#00BA13; text-align: center;"></span>
+            <span v-else class="fas fa-exclamation-circle" style="color:red; text-align: center;"></span>
+            {{ message }}
+        </p>
+        <button class="btnOK btn btn-sm btn-outline-secondary" @click="isOpenThongBao = !isOpenThongBao">OK</button>
     </div>
 </template>
 <script>
 import DanhSachChucNang from '../../../components/QuanLy/DanhSachChucNang.vue';
 import QLHeader from '../../../components/QuanLy/QLHeader.vue';
 import DanhMucService from '../../../services/danhmuc.service';
-// import ThemDanhMucForm from '../../components/QuanLy/ThemDanhMucForm.vue'
+import SanPhamService from '../../../services/sanpham.service';
+
 export default {
     name: `QLHomePage`,
     // props: ["nhanvien"],
@@ -110,17 +115,19 @@ export default {
             danhmuc: [],
             message: "",
             currentPage: 1,
-            elementsPerPage: 9,
+            elementsPerPage: 11,
             ascending: false,
             danhmucActive: "",
             isOpenXacNhan: false,
             isOpenThongBao: false,
-            localNhanVien:{},
+            localNhanVien: {},
+            sanpham: [],
+            nameToSearch:"",
         }
 
     },
 
-    created(){
+    created() {
         this.localNhanVien.NV_Ma = this.$route.params.id;
     },
     methods: {
@@ -151,8 +158,8 @@ export default {
         },
         async gotoTaoDanhMuc() {
             console.log(this.NhanVien)
-        
-            this.$router.push({name: 'TaoDanhMuc', params: { id: this.localNhanVien.NV_Ma}});
+
+            this.$router.push({ name: 'TaoDanhMuc', params: { id: this.localNhanVien.NV_Ma } });
         },
         async change_page(page) {
             this.currentPage = page;
@@ -166,20 +173,56 @@ export default {
 
         //Xoa danh muc duoc chon
         async deleteDanhMuc() {
-            console.log("xoa" + this.danhmucActive)
+            let check = 0;
             const [error, response] = await this.handle(
-                DanhMucService.delete(this.danhmucActive)
+                SanPhamService.getAll()
             );
             if (error) {
                 console.log(error);
             } else {
-                this.refreshList();
-                console.log("xoa thanh cong" + response);
+                this.sanpham = response.data;
             }
+            this.sanpham.forEach(element => {
+                if (element.DMSP_Ma == this.danhmucActive) {
+                    this.message = "Không thể xóa danh mục đã chọn";
+                    check = 1;
+                }
+            });
+
+            if (check == 0) {
+                const [errors, responses] = await this.handle(
+                    DanhMucService.delete(this.danhmucActive)
+                );
+                if (errors) {
+                    console.log(errors);
+                } else {
+                    this.refreshList();
+                    console.log("xoa thanh cong" + responses);
+                    this.message = "Đã xóa danh mục đã chọn"
+                }
+            }
+
         },
 
-        async gotoSua(){
-            this.$router.push({ name: 'SuaDanhMuc', params: { id: this.localNhanVien.NV_Ma, user: this.danhmucActive}})
+        // Tim danh muc theo ten
+
+        async searchName(){
+            console.log(this.nameToSearch)
+            const [error, response] = await this.handle(
+                    DanhMucService.findByName(this.nameToSearch)
+                );
+                if (error) {
+                    console.log(error);
+                } else {
+                    if(response.data!=null){
+                        this.danhmuc = response.data
+                        console.log(response.data)
+                    }
+                }
+        },
+
+        async gotoSua() {
+            this.$router.push({ name: 'SuaDanhMuc', params: { id: this.localNhanVien.NV_Ma, user: this.danhmucActive } })
         },
 
         //Tai lai danh sach danh
@@ -197,7 +240,8 @@ export default {
 
 <style>
 @import "../../../assets/QLDanhMucStyle.css";
-.frameQLDanhMuc .dschucNang .navigationBar .dsChucNang .btnDanhMuc{
+
+.frameQLDanhMuc .dschucNang .navigationBar .dsChucNang .btnDanhMuc {
     background-color: #FFFFFF;
     color: #515151;
 }

@@ -10,6 +10,7 @@ const setupKhachHangRoutes = require("./app/routes/khachhang.routes");
 const setupChiTietDonHangRoutes = require("./app/routes/chitietdonhang.routes");
 const setupNhanVienRoutes = require("./app/routes/nhanvien.routes");
 const setupHoaDonRoutes = require("./app/routes/hoadon.routes");
+const setupImageRoutes = require("./app/routes/image.router");
 
 const app = express();
 
@@ -42,6 +43,7 @@ setupKhachHangRoutes(app);
 setupChiTietDonHangRoutes(app);
 setupNhanVienRoutes(app)
 setupHoaDonRoutes(app);
+setupImageRoutes(app);
 
 // handle 404 response
 app.use((req, res, next) => {

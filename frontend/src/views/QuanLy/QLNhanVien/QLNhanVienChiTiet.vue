@@ -83,14 +83,14 @@ export default {
                }
           },
 
-          async findNhanVien(data) {
+          async findNhanVien() {
                const [error, response] = await this.handle(
                     NhanVienService.getByID(this.localNhanVien.NV_Ma)
                );
                if (error) {
                     console.log(error);
                } else {
-                    this.nhan
+                    console.log(response)
                }
           },
 

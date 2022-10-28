@@ -12,10 +12,12 @@
     background-color: #EAEAEA;
     border-radius: 30px;
     width: 100%;
+    height:100%;
     border-style: solid;
     border-color: #515151;
     position: relative;
     font-family: Inter;
+    font-size: 17px;
 }
 
  .dialogXacNhan, .dialogThongBao {
@@ -48,9 +50,9 @@
     color: #FFFFFF;
     margin-top: 20px;
 }
- .frameQLDanhMuc .timkiem .btnTao {
+ .frameQLDanhMuc .timkiem .btnTao, .frameQLDanhMuc .timkiem  .btnXem {
     background-color: #515151;
-    border-radius: 15px;
+    border-radius: 10px;
     color: #FFFFFF;
     font-size: 17px;
     float: right;
@@ -60,13 +62,13 @@
     border: none;
 }
 
- .form-control {
-    border-radius: 15px;
+ .frameQLDanhMuc .form-control {
+    border-radius: 10px;
     background-color: #F5F4F4;
     border-right: 15px;
 }
 
-.timkiem .btnTimKiem:hover {
+ .timkiem .btnTimKiem:hover {
     background-color: #515151;
 }
 
@@ -105,7 +107,7 @@
 }
 
  table {
-    font-family: 'Open Sans', sans-serif;
+    font-family: Inter;
     width: 100%;
     margin: 10px 10px 10px 10px;
     background-color: #D9D9D9;
@@ -137,13 +139,14 @@
     background: #FFFFFF;
     border-radius: 7px;
     margin-top: 3px;
+    font-size: 18px;
 }
 
 /* Tao danh muc moi */
 
 .frameQLDanhMuc .frameThem form {
     width: 510px;
-    height: 470px;
+    height: 490px;
     border-radius: 15px;
     transform: translateX(2%);
     margin-top: 20px;
@@ -175,13 +178,13 @@
 }
 
 .frameQLDanhMuc .frameThem form .textMessage2{
-    padding-top: 5px;
+    padding-top: 3px;
     text-align: center;
     padding-bottom: 2px;
     color: #D30000;
     display: inline;
 }
-f.frameQLDanhMuc .frameThem orm .textMessage1 {
+f.frameQLDanhMuc .frameThem form .textMessage1 {
     padding-bottom: 2px;
     color: #D30000;
     text-align: center;
@@ -191,8 +194,11 @@ f.frameQLDanhMuc .frameThem orm .textMessage1 {
     text-align: center;
     transform: translateY(0px);
     margin-left: 36%;
-    margin-top: 5px;
+    margin-top: 2px;
     width: 125px;
     background-color: #515151;
     color: #FFFFFF;
+}
+.frameQLDanhMuc .frameThem p{
+    text-align: center;
 }

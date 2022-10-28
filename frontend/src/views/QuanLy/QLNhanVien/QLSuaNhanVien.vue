@@ -1,6 +1,6 @@
 <template>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <div class="container frameQLNhanVien">
+    <div class="container frameQLSuaNhanVien">
         <div class="row list">
             <div class="col-md-2 dschucNang">
                 <DanhSachChucNang :maNV="localNhanVien.NV_Ma"/>
@@ -15,8 +15,17 @@
                     </div>
                 </div>
                 <div class="row timkiem">
-                    <div class="col-md-9 col-sm-1">
+                    <div class="col-md-7 input-group">
+                        <div class="row" style="margin-left:2px">
+                            <input type="text" class="form-control col-md-10" placeholder="Tìm theo tên"
+                               v-model="nameToSearch" @keyup.enter="searchName"/>                           
+                                <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button"
+                                    @click="searchName">
+                                    <span class="fa fa-search" style="font-size:18px"></span>
+                               </button>                           
+                        </div>
                     </div>
+                    <div class="col-md-2"></div>
                     <div class="col-md-3 col-sm-11">
                         <button class=" btn btn-sm btn-outline-secondary btnXem font-weight-bold" @click="goToQLNhanVien">
                             <span class="fa fa-list-ol" style="font-size:20px"></span>
@@ -25,7 +34,7 @@
                     </div>
 
                 </div>                    
-                <div class="row frameThem">
+                <div class="row frameSua">
                     <div class="col-md-12 col-sm-12">
                         <NhanVienFormSua :newnhanvien="newnhanvien"  @suaNhanVien-submit="updateNhanVien"
                             :message1="message1" :message2="message2"/>

@@ -6,7 +6,7 @@
     background-color: #EAEAEA;
     border-radius: 30px;
     width: max-content;
-    height:670px;
+    height:100%;
     border-style: solid;
     border-color: #515151;
     position: relative;
@@ -173,7 +173,7 @@ table {
     border-color: #BABABA;
     position: absolute;
     background-color: #F9F9F9;
-    top: calc(18%);
+    top: calc(24%);
     left: 50%;
     transform: translateX(-50%);
     border-radius: 16px;

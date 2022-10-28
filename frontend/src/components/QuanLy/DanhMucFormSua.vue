@@ -1,8 +1,8 @@
 <template>
     <Form @submit="$emit('suaDanhMuc-submit', danhmucLocal)" :validation-schema="schema">
         <div class="functionName">
-            <span class="fa fa-plus-circle"> </span>
-            <p style="display:inline">Sửa danh mục </p>
+            <span class="fas fa-edit"> </span>
+            <p style="font-family:Inter; color:#515151; font-size:22px; font-weight:600; display: inline;"> Sửa danh mục </p>
         </div>
 
         <div class="form-group">

@@ -1,0 +1,217 @@
+.frameQLSanPham .dschucNang .navigationBar .dsChucNang .btnSanPham,
+.frameQLThemSanPham  .dschucNang .navigationBar .dsChucNang .btnSanPham {
+     background-color: #FFFFFF;
+     color: #515151;
+} 
+
+.frameQLSanPham .dschucNang .navigationBar .dsChucNang .btnSanPham ,
+.frameQLSanPham .dschucNang .navigationBar .dsChucNang .btnSanPham{
+     background-color: #FFFFFF;
+     color: #515151;
+}
+
+.frameQLThemSanPham .dschucNang  .navigationBar  .moreInformation{
+    margin-top: 120px;
+}
+.frameQLThemSanPham .dschucNang  .navigationBar .null{
+     height: 20%;
+}
+
+
+.frameQLSanPham, .frameQLThemSanPham {
+     background-color: #EAEAEA;
+     border-radius: 30px;
+     width: 100%;
+     font-family: Inter;
+     background-color: #D9D9D9;
+     height:100%;
+}
+
+.frameQLSanPham .dschucNang, 
+.frameQLThemSanPham .dschucNang {
+     background-color: #515151;
+     border-radius: 30px;
+}
+.frameQLSanPham .timkiem .btnThem,
+.frameQLThemSanPham .timkiem .btnXem{
+     background-color: #515151;
+     border-radius: 15px;
+     color: #FFFFFF;
+     font-size: 17px;
+     float: right;
+}
+.frameQLSanPham .bottomHeader {
+     margin-bottom: 2px;
+     text-align: center;
+     font-size: 20px;
+}
+
+.frameQLSanPham table {
+     font-family: 'Open Sans', sans-serif;
+     width: 100%;
+     margin: 10px 10px 0 10px;
+     border-radius: 10px;
+}
+
+table {
+     font-family: 'Open Sans', sans-serif;
+     width: 100%;
+     margin: 10px 10px 10px 10px;
+     background-color: #D9D9D9;
+     border-radius: 10px;
+}
+
+.tdChucNang {
+     float: right;
+     width: max-content;
+}
+
+table tr {
+     border-radius: 10px;
+}
+
+table table th {
+     text-align: left;
+     color: #000000;
+     padding: 8px;
+     min-width: 30px;
+}
+
+table td {
+     text-align: left;
+     padding-top: 8px;
+     color: #000000;
+     font-size: 14px;
+}
+
+table td:last-child {
+     border-right: none;
+}
+
+.frameQLSanPham {
+     background-color: #EAEAEA;
+     border-radius: 30px;
+     width: 100%;
+     border-style: solid;
+     border-color: #515151;
+     position: relative;
+}
+
+.frameQLSanPham .timkiem .btnXem {
+     background-color: #515151;
+     border-radius: 15px;
+     color: #FFFFFF;
+     float: right;
+     font-size: 16px;
+}
+
+
+.frameQLSanPham .form-control,
+.frameQLThemSanPham .form-control {
+     border-radius: 10px;
+     background-color: #F5F4F4;
+     border-right: 10px;
+}
+
+.frameQLSanPham .timkiem .btnTimKiem:hover {
+     background-color: #515151;
+}
+
+.frameQLSanPham .dschucNang {
+     background-color: #515151;
+     border-radius: 26px;
+}
+
+.frameQLSanPham .bottomHeader {
+
+     text-align: center;
+     font-size: 20px;
+}
+
+.frameQLSanPham .topHeader {
+     margin-bottom: 2px;
+     margin-right: -5px;
+}
+
+.frameQLSanPham .frameThem {
+     background-color: #D9D9D9;
+     border-radius: 15px;
+     margin: 1% 1% 1% 1%;
+}
+
+form {
+     width: 100%;
+     height: 98%;
+     border-radius: 15px;
+     margin-top: 1%;
+     margin-bottom: 1%;
+     background-color: #FFFFFF;
+}
+
+form .functionName {
+     text-align: center;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     color: #515151;
+     font-size: 25px;
+     padding-top: 20px;
+}
+
+form .form-group {
+     color: black;
+     width: 90%;
+     margin-left: 25px;
+     margin-top: 20px;
+}
+
+form .error-feedback {
+     text-align: right;
+     color: red;
+     float: right;
+}
+
+form .textMessage2 {
+     padding-top: 5px;
+     text-align: center;
+     padding-bottom: 2px;
+     color: #D30000;
+     display: inline;
+}
+
+form .textMessage1 {
+     padding-bottom: 2px;
+     color: #D30000;
+     text-align: center;
+}
+
+form .btnLuu {
+     text-align: center;
+     transform: translateY(0px);
+     margin-left: 42%;
+     margin-top: 2px;
+     width: 125px;
+     background-color: #515151;
+     color: #FFFFFF;
+}
+
+.selectBox {
+     width: 100%;
+     height: 38px;
+     font-size: 16px;
+     border-radius: 10px;
+     background-color: #F5F4F4;
+     border: solid #dad9d9 0.1px;
+     font-family: Inter;
+     font-weight: 600;
+     color: #757474;
+}
+
+form label {
+     font-family: Inter;
+     font-weight: 400;
+}
+
+form .form-control {
+     font-family: Inter;
+     font-weight: 600;
+     color: #515151;
+}

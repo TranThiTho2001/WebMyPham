@@ -1,9 +1,11 @@
 const sanpham = require("../controllers/sanpham.controller");
 const express = require("express");
 const upload = require("../middlewares/upload");
+
 module.exports = (app) => {
     var router = express.Router();
 ''
+
     // router.post("/",upload.single('SP_HinhAnh'),sanpham.create); 
     router.post("/",sanpham.create); 
 

@@ -1,38 +1,45 @@
 <template>
-    <Form @submit="$emit('themSanPham-submit', sanphamLocal)" :validation-schema="schema">
+    <Form @submit="$emit('themSanPham-submit', sanphamLocal)" :validation-schema="schema" enctype="multipart/form-data">
         <div class="functionName">
             <span class="fa fa-plus-circle"> </span>
-            <p style="display:inline">Thêm danh mục mới </p>
+            <p style="display:inline">Thêm sản phẩm mới </p>
         </div>
         <div class="row container-fluid">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="ma">Mã san pham</label>
+                    <label for="ma">Mã sản phẩm</label>
                     <Field name="ma" type="name" class="form-control" v-model="sanphamLocal.SP_Ma"
                         placeholder="Nhập mã sản phẩm" />
                     <ErrorMessage name="ma" class="error-feedback" />
-                    <!-- <p class="textMessage1">{{message1}}</p> -->
                 </div>
                 <div class="form-group">
-                    <label for="name">ma danh muc san pham</label>
-                    <Field name="ID_Catalog" class="form-control" v-model="sanphamLocal.DMSP_Ma"
-                        placeholder="Nhập ma danh muc sản phẩm" />
-                    <ErrorMessage name="name" class="error-feedback" />
+                    <label for="ID_Catalog">Mã danh mục sản phẩm</label><br>
+                    <Field name="ID_Catalog" type="name" class="form-control" v-model="sanphamLocal.DMSP_Ma">
+                        <select v-model="danhmucActive" @click="setMaDanhMuc()" class="selectBox">
+                            <option disabled="true">Danh mục</option>
+                            <option v-for="(dm, i) in danhmuc" :key="i">{{ dm.DM_Ten }}</option>
+                        </select>
+                    </Field>
+                    <ErrorMessage name="ID_Catalog" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="name">thuong hieu san pham</label>
-                    <Field name="ID_Branch" class="form-control" v-model="sanphamLocal.TH_Ma"
-                        placeholder="Nhập ma thuong hieu sản phẩm" />
-                    <ErrorMessage name="name" class="error-feedback" />
+                    <label for="ID_Branch">Thương hiệu</label>
+                    <Field name="ID_Branch" type="name" class="form-control" v-model="sanphamLocal.TH_Ma">
+                        <select v-model="thuonghieuActive" @click="setMathuongHieu()" class="selectBox">
+                            <option disabled="true">Thương Hiệu</option>
+                            <option v-for="(data, i) in thuonghieu" :key="i">{{ data.TH_Ten }}</option>
+                        </select>
+                    </Field>
+                    <ErrorMessage name="ID_Branch" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="name">Tên san pham</label>
-                    <Field name="name" class="form-control" v-model="sanphamLocal.SP_Ten"
+                    <label for="name">Tên sản phẩm</label>
+                    <Field name="name" class="form-control" v-model="sanphamLocal.SP_TenSanPham"
                         placeholder="Nhập tên sản phẩm" />
                     <ErrorMessage name="name" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="information">Thong tin sp</label>
+                    <label for="information">Thông tin</label>
                     <Field name="information" class="form-control" v-model="sanphamLocal.SP_ThongTin"
                         placeholder="Thông tin sản phẩm" />
                     <ErrorMessage name="information" class="error-feedback" />
@@ -40,44 +47,40 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="quality">So luonh nhap</label>
-                    <Field name="quality" class="form-control" v-model="sanphamLocal.SP_SoLuongNhap"
+                    <label for="quality">Số lượng nhập</label>
+                    <Field name="quality" class="form-control" v-model="sanphamLocal.SP_SoLuong"
                         placeholder="Nhập Số lượng sản phẩm nhập vào" />
                     <ErrorMessage name="quality" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="purchase_price">Gia mua vao</label>
+                    <label for="purchase_price">Giá mua vào</label>
                     <Field name="purchase_price" class="form-control" v-model="sanphamLocal.SP_GiaMuaVao"
                         placeholder="Nhập Giá mua sản phẩm " />
                     <ErrorMessage name="purchase_price" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="saleprice">gia ban ra</label>
+                    <label for="saleprice">Giá bán ra</label>
                     <Field name="saleprice" class="form-control" v-model="sanphamLocal.SP_GiaBanRa"
                         placeholder="Giá bán sản phẩm" />
                     <ErrorMessage name="saleprice" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="image">Hinh anh</label>
-                    <!-- <file-input v-model="sanphamLocal.SP_HinhAnh" name="SP_HinhAnh"></file-input> -->
-                    <!-- <input type="file" ref="file" name="image" v-model="sanphamLocal.SP_HinhAnh">@change="selectFile" -->
-                    
-                    <Field name="image" class="form-control" type="file" ref="file" v-model="sanphamLocal.SP_HinhAnh" />
-                    <!-- <ErrorMessage name="image" class="error-feedback" /> -->
-                    <p>{{sanphamLocal.SP_HinhAnh}}</p>
+                    <label for="image">Hình ảnh</label>
+                    <input type="file" ref="file" name="image" @change="selectFile" accept="image/*">
+                    <p>{{ sanphamLocal.SP_HinhAnh }}</p>
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            <span v-if="message2=='Thêm thành công'" class="fas fa-check-circle"
-                style="color:#00BA13; text-align: center; margin-left: 180px;"></span>
-            <span v-if="message2=='Thêm không thành công'" class="fas fa-times-circle"
-                style="color:red; text-align: center;  margin-left: 145px;"></span>
-            <p v-if="message2=='Thêm thành công'" class="textMessage2" style="color:#00BA13">{{message2}}</p>
-            <p v-else class="textMessage2">{{message2}}</p><br>
-            <p v-if="message2=='Thêm không thành công'" class="textMessage1">{{message1}}</p>
-            <button class="btn btn-outline-secondary btnLuu">Lưu</button>
+            <span v-if="message2 == 'Thêm thành công'" class="fas fa-check-circle"
+                style="color:#00BA13; text-align: center; margin-left: 40%;"></span>
+            <span v-if="message2 == 'Thêm không thành công'" class="fas fa-times-circle"
+                style="color:red; text-align: center;  margin-left: 36%;"></span>
+            <p v-if="message2 == 'Thêm thành công'" class="textMessage2" style="color:#00BA13">{{ message2 }}</p>
+            <p v-else class="textMessage2">{{ message2 }}</p><br>
+            <p v-if="message2 == 'Thêm không thành công'" class="textMessage1">{{ message1 }}</p>
+            <button class="btn btn-outline-secondary btnLuu" @click="saveImge">Lưu</button>
         </div>
     </form>
 
@@ -86,17 +89,17 @@
 <script>
 import * as yup from "yup";
 import { Form, Field, ErrorMessage } from "vee-validate";
-// import FileInput from 'vue3-simple-file-input';
+import ImageService from '../../services/image'
+
 export default {
     name: "SanPhamFormThem",
     components: {
         Form,
         Field,
         ErrorMessage,
-        // FileInput,
     },
     emits: ["themSanPham-submit", "author-delete"],
-    props: ["newsanpham", "message1", "message2"],
+    props: ["newsanpham", "message1", "message2", "danhmuc", "thuonghieu"],
     data() {
 
         const schema = yup.object().shape({
@@ -119,84 +122,70 @@ export default {
                 .required("Thông tin sản phẩm phải có giá trị"),
             quality: yup
                 .number()
+                .typeError("Số lượng sản phẩm phải là số nguyên")
                 .required("Số lượng phải có giá trị"),
             purchase_price: yup
                 .number()
+                .typeError("Giá mua sản phẩm phải là kiểu số")
                 .required("Giá mua vào phải có giá trị"),
             saleprice: yup
                 .number()
+                .typeError("Giá bán sản phẩm phải là kiểu số"),
+
         });
         return {
             sanphamLocal: this.newsanpham,
             schema,
-
+            danhmucActive: "",
+            thuonghieuActive: "",
+            fileImage: {},
         };
     },
     methods: {
+
         goToQLDanhMuc() {
             this.$router.push("/QLDanhMuc");
         },
-        async selectFile() {
-            // debugger;
-            this.sanphamLocal.SP_HinhAnh = this.$refs.file[0];
-            console.log(this.sanphamLocal.SP_HinhAnh);
+
+        async selectFile(event) {
+            this.fileImage = event.target.files[0];
+            this.sanphamLocal.SP_HinhAnh = "image_" + this.fileImage.name;
+            console.log(this.fileImage.name);
+
+        },
+
+        async saveImge() {
+
+                const formData = new FormData();
+                formData.append("image", this.fileImage);
+                const response = await ImageService.create(formData);
+                console.log(response.data)
+            
+        },
+
+        async setMaDanhMuc() {
+            this.danhmuc.forEach(element => {
+                if (element.DM_Ten == this.danhmucActive) {
+                    this.sanphamLocal.DMSP_Ma = element.DM_Ma;
+                }
+            });
+        },
+
+        async setMathuongHieu() {
+            this.thuonghieu.forEach(element => {
+                if (element.TH_Ten == this.thuonghieuActive) {
+                    this.sanphamLocal.TH_Ma = element.TH_Ma;
+                }
+            });
+        },
+
+        async show() {
+            console.log(this.sanphamLocal);
         }
     }
 };
 </script>
 
 <style>
-form {
-    width: 100%;
-    height: 100%;
-    border-radius: 15px;
-    margin-top: 1%;
-    margin-bottom:1%;
-    background-color: #FFFFFF;
-}
-
-form .functionName {
-    text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #515151;
-    font-size: 25px;
-    padding-top: 20px;
-}
-
-form .form-group {
-    color: black;
-    width: 90%;
-    margin-left: 25px;
-    margin-top: 20px;
-}
-
-form .error-feedback {
-    text-align: right;
-    color: red;
-    float: right;
-}
-
-form .textMessage2 {
-    padding-top: 5px;
-    text-align: center;
-    padding-bottom: 2px;
-    color: #D30000;
-    display: inline;
-}
-
-form .textMessage1 {
-    padding-bottom: 2px;
-    color: #D30000;
-    text-align: center;
-}
-
-form .btnLuu {
-    text-align: center;
-    transform: translateY(0px);
-    margin-left: 45%;
-    margin-top: 2px;
-    width: 125px;
-    background-color: #515151;
-    color: #FFFFFF;
-}
+@import '../../assets/QLSanPhamStyle.css'
 </style>

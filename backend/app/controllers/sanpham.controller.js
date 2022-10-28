@@ -2,7 +2,7 @@ const { BadRequestError } = require("../helpers/errors");
 const handle = require("../helpers/promise");
 const db = require("../models");
 const SanPham = db.SanPham;
-const upload = require("../middlewares/upload");
+
 exports.findAllFavorite = async (req, res) => {
     res.send( {message: "Hello san pham"} );
 }
@@ -24,7 +24,7 @@ exports.create = async(req,res) => {
     if(!req.body.SP_ThongTin){
         return next(new BadRequestError(400, "Thông tin sản phẩm không được bỏ trống!"));
     }
-    if(!req.body.SP_SoLuongNhap){
+    if(!req.body.SP_SoLuong){
         return next(new BadRequestError(400, "Số lượng sản phẩm nhập vào không được bỏ trống!"));
     }
     if(!req.body.SP_GiaMuaVao){
@@ -44,16 +44,16 @@ exports.create = async(req,res) => {
         SP_SoLuong: req.body.SP_SoLuong,
         SP_GiaMuaVao: req.body.SP_GiaMuaVao,
         SP_GiaBanRa: req.body.SP_GiaBanRa, 
-        SP_HinhAnh : req.body.SP_HinhAnh.fileName,
+        SP_HinhAnh : req.body.SP_HinhAnh,
         ownerId: req.userId,
     });
 
-    console.log(req.file+"file");
+    console.log(req.file+req.body.SP_HinhAnh);
         // Save product in the DB
     const [error, document] = await handle(sanpham.save());
 
     if(error) {
-        return res.send(error);
+        return console.log(error);
 
     }
 
@@ -75,7 +75,7 @@ exports.findAll = async(req,res) => {
     }
 
     const [error, documents] = await handle(
-        SanPham.find(condition, '-ownerId')
+        SanPham.find(condition, '-ownerId').sort({'SP_Ma':1})
     );
 
     if(error) {
@@ -102,7 +102,7 @@ exports.findOne = async (req,res) => {
         );
     }
     if(!documents){
-        return res.send(error);
+        return res.send("Khong tim thay")
     }
     return res.send(documents);
 };

@@ -37,6 +37,8 @@ const routes = [
             import ("../views/QuanLy/QLSanPham/QLSanPhamThem.vue"),
     },
 
+
+
      // Quan ly thuong hieu
     {
         path: "/admin/ThuongHieu/:id",

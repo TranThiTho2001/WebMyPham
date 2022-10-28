@@ -40,7 +40,7 @@
                     <tr v-for="(row,i) in chitietdonhang" :key="i" style="width:100%">
                         <td>{{i}}</td>
                         <td>{{row.SP_Ma}}</td>
-                        <td>Ten sp</td>
+                        <td>{{tenSP[i]}}</td>
                         <td>{{row.CTDH_SoLuong}}</td>
                         <td>{{row.CTDH_Gia}}</td>
                         <td>{{row.CTDH_SoLuong * row.CTDH_Gia}}</td>
@@ -54,10 +54,41 @@
     </div>
 </template>
 <script>
-export default {
-    name: `QLDonHangCTDH`,
-    props: ["chitietdonhang", "activeDonHang", "khachhang", "nhanvien"],
-}
+    import SanPhamService from '../../services/sanpham.service';
+    export default {
+        name: `QLDonHangCTDH`,
+        props: ["chitietdonhang", "activeDonHang", "khachhang", "nhanvien"],
+
+        data(){
+            return{
+                tenSP:[],
+            }
+        },
+
+        created(){
+            let i = 0;
+            this.chitietdonhang.forEach(element => {
+                this.findSanPham(element.SP_Ma, i);
+                i++;
+            });
+            console.log(this.tenSP)
+        },
+        methods:{
+           async findSanPham(maSP,index){
+            const [error, response] = await this.handle(
+                SanPhamService.getByID(maSP)
+            );
+            if (error) {
+                console.log(error);
+            } else {
+                this.tenSP[index] = response.data.SP_TenSanPham;
+                }
+            }
+        }
+
+    }
+
+
 </script>
 
 <style>
@@ -72,7 +103,7 @@ export default {
     border-color: #BABABA;
     position: absolute;
     background-color: #F9F9F9;
-    top: calc(25%);
+    top: calc(23%);
     left: 50%;
     transform: translateX(-50%);
     border-radius: 16px;

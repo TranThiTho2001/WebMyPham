@@ -43,7 +43,7 @@ exports.findAll = async(req,res) => {
     }
 
     const [error, documents] = await handle(
-        ThuongHieu.find(condition, '-ownerId')
+        ThuongHieu.find(condition, '-ownerId').sort({'DM_Ma':1})
     );
 
     if(error) {
@@ -58,8 +58,7 @@ exports.findAll = async(req,res) => {
 //*-------Find a single brand with an id
 exports.findOne = async (req,res) => {
     const condition = {
-        _id: req.params.id,
-        ownerId: req.userId 
+        TH_Ma: req.params.TH_Ma
     };
 
     const [error, documents] = await handle(
@@ -71,7 +70,7 @@ exports.findOne = async (req,res) => {
             new BadRequestError(500, "Lỗi trong quá trình truy xuất thương hiệu!")
         );
     }
-    if(!document){
+    if(!documents){
         return next(new BadRequestError(404, "Không tìm thấy"));
     }
     return res.send(document);

@@ -10,23 +10,22 @@
                 </div>
                 <div class="row bottomHeader">
                     <div class="col-md-12" style="color:#515151">
-                        <p>Danh sách nhân viên</p>
+                        <p style="font-family:Inter; color:#515151; font-size:22px; font-weight:600">Danh sách nhân viên</p>
                     </div>
                 </div>
+
                 <div class="row timkiem" style="margin-left:0.1px">
                     <div class="col-md-7 input-group">
                         <div class="row">
-                            <input type="text" class="form-control col-md-10" placeholder="Tìm theo"
-                                v-model="nameToSearch" />
-                            <div class="input-group-append col-md-1">
+                            <input type="text" class="form-control col-md-10" placeholder="Tìm theo tên"
+                               v-model="nameToSearch" @keyup.enter="searchName"/>                           
                                 <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button"
                                     @click="searchName">
                                     <span class="fa fa-search" style="font-size:18px"></span>
-                                </button>
-                            </div>
-                            <div class="col-md-1"></div>
+                               </button>                           
                         </div>
                     </div>
+
                     <!-- danh sach trang hien thi -->
                     <div class="col-md-2">
                         <div style="display: inline-block; padding-top: 4px;">Trang:</div>
@@ -42,17 +41,19 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-3">
                         <button v-if="!isOpenXemChiTiet" class=" btn btn-sm btn-outline-secondary btnTao" @click="gotoThemNhanVien">
                             <span class="fa fa-plus-circle"></span>
                             Thêm Nhân Viên
                         </button>
-                        <button v-else class=" btn btn-sm btn-outline-secondary btnTao" @click="gotoThemNhanVien">
+                        <button v-else class=" btn btn-sm btn-outline-secondary btnTao" @click="isOpenXemChiTiet=!isOpenXemChiTiet">
                             <span class="fa fa-list-ol"></span>
                             Xem Danh Sách
                         </button>
                     </div>
                 </div>
+
                 <!-- <Danh sach danh muc san pham-->
                 <div class="row dsNhanVien" v-if="!isOpenXemChiTiet">
                     <table>
@@ -90,13 +91,14 @@
                         </tbody>
                     </table>
                 </div>
+
                 <div class="row" v-if="isOpenXemChiTiet">
                     <NhanVienFormChiTiet  :nhanvienActive="nhanvienActive"></NhanVienFormChiTiet>
                 </div>
             </div>
         </div>
     </div>
-    <!-- ------------------------------Bang xac nhan xoa danh muc ----------------------------- -->
+    <!-- ------------------------------Bang xac nhan xoa nhan vien ----------------------------- -->
     <div class="dialogXacNhan" v-if="isOpenXacNhan">
         <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 18px;">
             <span class="fas fa-trash-alt" style="color:red"></span>Bạn chắc chắn muốn xóa?
@@ -107,7 +109,7 @@
     </div>
     <div class="dialogThongBao" v-if="isOpenThongBao">
         <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 18px;">
-            <span class="fas fa-check-circle" style="color:#00BA13; text-align: center;"></span>Xóa thành công
+            <span class="fas fa-check-circle" style="color:#00BA13; text-align: center;"></span>{{message}}
         </p>
         <button class="btnOK btn btn-sm btn-outline-secondary" @click="isOpenThongBao = !isOpenThongBao">OK</button>
     </div>
@@ -134,6 +136,7 @@ export default {
             isOpenThongBao: false,
             isOpenXemChiTiet:false,
             localNhanVien: {},
+            nameToSearch:"",
         }
 
     },
@@ -182,13 +185,14 @@ export default {
         //Xoa danh muc duoc chon
         async deleteNhanVien() {
             const [error, response] = await this.handle(
-                NhanVienService.delete(this.nhanvienActive)
+                NhanVienService.delete(this.nhanvienActive.NV_Ma)
             );
             if (error) {
                 console.log(error);
             } else {
                 this.refreshList();
                 console.log(response.data);
+                this.message = "Xóa nhân viên thành công"
             }
         },
 
@@ -197,12 +201,32 @@ export default {
             this.$router.push({ name: 'SuaNhanVien', params: { id: this.localNhanVien.NV_Ma, user: this.nhanvienActive.NV_Ma }});
         },
 
+
+
         //Tai lai danh sach danh
         async refreshList() {
             this.retrieveNhanVien();
             this.nhanvienActive = "";
         },
 
+        //Tim kiem nhan vien theo ten
+
+        async searchName(){
+            const [error, response] = await this.handle(NhanVienService.findByName(this.nameToSearch));
+            if (error) {
+                console.log(error);
+            } else {
+                if(response.data!=null){
+                    this.nhanvien = response.data;
+                    console.log(response.data)
+                }
+                else{
+                    this.message = "Không tìm thấy nhân viên!";
+                    this.isOpenThongBao = !this.isOpenThongBao;
+                }
+                
+            }
+        }
         
     },
 
@@ -219,5 +243,8 @@ export default {
 .frameQLNhanVien .dschucNang .navigationBar .dsChucNang .btnNhanVien {
     background-color: #FFFFFF;
     color: #515151;
+}
+.dschucNang  .navigationBar  .moreInformation{
+    margin-top: 20px;
 }
 </style>

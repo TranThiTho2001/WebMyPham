@@ -67,13 +67,13 @@ exports.create = async (req, res) => {
 //*--------Retrive all employees of store from the database
 exports.findAll = async (req, res) => {
     const condition = { ownerId: req.userId };
-    const NV_Ten = req.query.NV_Ten;
+    const NV_Ten = req.query.name;
     if (NV_Ten) {
         condition.NV_Ten = { $regex: new RegExp(NV_Ten), $options: "i" };
     }
 
     const [error, documents] = await handle(
-        NhanVien.find(condition, '-ownerId')
+        NhanVien.find(condition, '-ownerId').sort({'NV_Ma':1})
     );
 
     if (error) {
@@ -103,7 +103,6 @@ exports.findOne = async (req, res) => {
     if (!documents) {
         return res.send("Khong tim thay");
     }
-    console.log(documents);
     return res.send(documents);
 };
 

@@ -2,7 +2,7 @@
      <Form @submit="$emit('themNhanVien-submit', nhanvienMoi)" :validation-schema="schema">
           <div class="functionName">
                <span class="fa fa-plus-circle"> </span>
-               <h4 style="display:inline">Thêm nhân viên mới </h4>
+               <p style="display:inline">Thêm nhân viên mới </p>
           </div>
           <div class="row container-fluid content">
                <div class="col-md-6">
@@ -70,9 +70,9 @@
                          <label for="loaiNV">Chức vụ &nbsp; </label><br>
                          <Field name="loaiNV" class="form-control" v-model="nhanvienMoi.NV_LoaiNV"
                               placeholder="Chức vụ: ">
-                              <select v-model="nhanvienMoi.NV_LoaiNV">
-                                   <option selected>Nhân viên</option>
-                                   <option>Quản ly</option>
+                              <select v-model="nhanvienMoi.NV_LoaiNV" class="selectBox">
+                                   <option selected style="font-size:17px">Nhân viên</option>
+                                   <option>Quản lý</option>
                               </select>
                          </Field>
                          <ErrorMessage name="loaiNV" class="error-feedback" />
@@ -81,9 +81,9 @@
           </div>
           <div class="form-group">
                <span v-if="message2=='Thêm thành công'" class="fas fa-check-circle"
-                    style="color:#00BA13; text-align: center; margin-left: 180px;"></span>
+                    style="color:#00BA13; text-align: center; margin-left: 40%;"></span>
                <span v-if="message2=='Thêm không thành công'" class="fas fa-times-circle"
-                    style="color:red; text-align: center;  margin-left: 145px;"></span>
+                    style="color:red; text-align: center;  margin-left:34%;"></span>
                <p v-if="message2=='Thêm thành công'" class="textMessage2" style="color:#00BA13">{{message2}}
                </p>
                <p v-else class="textMessage2">{{message2}}</p><br>

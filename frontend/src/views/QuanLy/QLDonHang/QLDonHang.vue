@@ -2,7 +2,7 @@
     <div class="container frameQLDonHang">
         <div class="row list">
             <div class="col-md-2 dschucNang">
-                <DanhSachChucNang @click="CloseCDTH" :maNV="localNhanVien.NV_Ma"/>
+                <DanhSachChucNang @click="CloseCDTH" :maNV="localNhanVien.NV_Ma" />
             </div>
             <div class="col-md-10">
                 <div class="row topHeader" @click="CloseCDTH">
@@ -10,18 +10,19 @@
                 </div>
                 <div class="row bottomHeader" @click="CloseCDTH">
                     <div class="col-md-12">
-                        <p>Danh sách đơn hàng</p>
+                        <p style="font-family:Inter; color:#515151; font-size:22px; font-weight:600">Danh sách đơn hàng</p>
                     </div>
                 </div>
                 <!-- Thanh tiem kiem -->
                 <div class="row timkiem" @click="CloseCDTH">
-                    <div class="col-md-5 input-group">
-                        <input type="text" class="form-control" placeholder="Tìm theo tên" v-model="nameToSearch" />
-                        <div class="input-group-append" v-if="!isOpenHoaDon">
-                            <button class="btn btn-sm btn-outline-secondary" type="button" @click="searchName"
-                                style="width:30px; height: 38px">
-                                <span class="fa fa-search" style="font-size:18px"></span>
-                            </button>
+                    <div class="col-md-6 input-group">
+                        <div class="row" style="margin-left:1px">
+                            <input type="text" class="form-control col-md-10" placeholder="Tìm theo tên"
+                               v-model="nameToSearch" @keyup.enter="searchName"/>                           
+                                <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button"
+                                    @click="searchName">
+                                    <span class="fa fa-search" style="font-size:18px"></span>
+                               </button>                           
                         </div>
                     </div>
                     <!-- Danh sach don hang theo trang thai -->
@@ -30,35 +31,36 @@
                         <div class="pagination nav-item dropdown" style="width:160px;">
                             <a class="nav-link btn" href="#" data-toggle="dropdown"
                                 style=" width: max-content; padding-top: 3px;width:160px">
-                                {{curentStatus}} <span class="fas fa-angle-down"></span>
+                                {{ curentStatus }} <span class="fas fa-angle-down"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="#"
                                     @click="findDHByStatus(`Tất cả`), setCurentStatus(`Tất cả`)">Tất cả</a>
-                                <a class="dropdown-item" href="#" v-for="(trangthai,i) in trangthai " :key="i"
-                                    @click="findDHByStatus(trangthai), setCurentStatus(trangthai)">{{trangthai}}</a>
+                                <a class="dropdown-item" href="#" v-for="(trangthai, i) in trangthai " :key="i"
+                                    @click="findDHByStatus(trangthai), setCurentStatus(trangthai)">{{ trangthai }}</a>
                             </div>
 
                         </div>
                     </div>
                     <!-- Danh sach so trang hien thi -->
-                    <div class="col-md-2">
+                    <div class="col-md-2" v-if="!isOpenCTDH">
                         <p style="display: inline-block; padding-top: 4px;">Trang:</p>
                         <div class="pagination nav-item dropdown ">
                             <a class="nav-link btn" href="#" data-toggle="dropdown"
                                 style="border-radius: 7px; width: max-content; padding-top: 3px; width: 100%;">
-                                <span class="fas fa-angle-down"></span>{{currentPage}}
+                                <span class="fas fa-angle-down"></span>{{ currentPage }}
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" v-for="(i,j) in num_pages() " :key="j"
+                                <a class="dropdown-item" v-for="(i, j) in num_pages() " :key="j"
                                     v-bind:class="[i == currentPage ? 'active' : '']" v-on:click="change_page(i)"
-                                    aria-controls="my-table"> {{i}}</a>
+                                    aria-controls="my-table"> {{ i }}</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-1">
-                        <button v-if="isOpenCTDH" class=" btn fas fa-window-close" @click="isOpenCTDH=!isOpenCTDH"
-                            style="float:right; margin-top: 6px; font-size: 30px; color: red;">
+                
+                    <div v-if="isOpenCTDH || isOpenHoaDon" class="col-md-2" >
+                        <button v-if="isOpenCTDH" class=" btn" @click="isOpenCTDH = !isOpenCTDH" 
+                            style="font-size: 17px; color: red;"> Xem danh sach
                         </button>
                     </div>
                 </div>
@@ -75,51 +77,63 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(row,i) in donhang" :key="i" @click="setActiveDonHang(row)" style="width:100%">
-                                <td>{{i}}</td>
-                                <td>{{row.DH_Ma}}</td>
-                                <td>{{row.DH_NgayDat}}</td>
-                                <td>{{row.KH_Ma}}</td>
-                                <td>{{row.DH_TongTien}}</td>
+                            <tr v-for="(row, i) in donhang" :key="i" @click="setActiveDonHang(row)" style="width:100%">
+                                <td>{{ i }}</td>
+                                <td>{{ row.DH_Ma }}</td>
+                                <td>{{ row.DH_NgayDat }}</td>
+                                <td>{{ row.KH_Ma }}</td>
+                                <td>{{ row.DH_TongTien }}</td>
                                 <td>
-                                    <button v-if="row.DH_TrangThai===`Mới`" @click="isOpenTrangThai=!isOpenTrangThai"
-                                        class="btnTrangThaiDH"
-                                        style="background-color:#00FFFF">{{row.DH_TrangThai}}</button>
-                                    <button v-if="row.DH_TrangThai===`Đã xác nhận`"
-                                        @click="isOpenTrangThai=!isOpenTrangThai" class="btnTrangThaiDH"
-                                        style="background-color:#DCD409">{{row.DH_TrangThai}}</button>
-                                    <button v-if="row.DH_TrangThai===`Đã vận chuyển`"
-                                        @click="isOpenTrangThai=!isOpenTrangThai" class="btnTrangThaiDH"
-                                        style="background-color:#FF9999">{{row.DH_TrangThai}}</button>
-                                    <button v-if="row.DH_TrangThai===`Đã nhận hàng`"
-                                        @click="isOpenTrangThai=!isOpenTrangThai" class="btnTrangThaiDH"
-                                        style="background-color:#00BA13">{{row.DH_TrangThai}}</button>
-                                    <button v-if="row.DH_TrangThai===`Đã hủy`" @click="isOpenTrangThai=!isOpenTrangThai"
-                                        class="btnTrangThaiDH"
-                                        style="background-color:#D30000">{{row.DH_TrangThai}}</button>
+                                    <button v-if="row.DH_TrangThai === `Mới`" @click="isOpenTrangThai = !isOpenTrangThai"
+                                        class="btnTrangThaiDH" style="background-color:#00FFFF">{{ row.DH_TrangThai }}
+                                    </button>
+
+                                    <button v-if="row.DH_TrangThai === `Đã xác nhận`"
+                                        @click="isOpenTrangThai = !isOpenTrangThai" class="btnTrangThaiDH"
+                                        style="background-color:#DCD409">{{ row.DH_TrangThai }}
+                                    </button>
+
+                                    <button v-if="row.DH_TrangThai === `Đã vận chuyển`"
+                                        @click="isOpenTrangThai = !isOpenTrangThai" class="btnTrangThaiDH"
+                                        style="background-color:#FF9999">{{ row.DH_TrangThai }}
+                                    </button>
+
+                                    <button v-if="row.DH_TrangThai === `Đã nhận hàng`"
+                                        @click="isOpenTrangThai = !isOpenTrangThai" class="btnTrangThaiDH"
+                                        style="background-color:#00BA13">{{ row.DH_TrangThai }}
+                                    </button>
+
+                                    <button v-if="row.DH_TrangThai === `Đã hủy`" @click="isOpenTrangThai = !isOpenTrangThai"
+                                        class="btnTrangThaiDH" style="background-color:#D30000">{{ row.DH_TrangThai }}
+                                    </button>
+
                                 </td>
                                 <td class="tdChucNang nav-item dropdown">
                                     <a class="nav-link  fas fa-ellipsis-v" data-toggle="dropdown" style="color:#515151">
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#" @click="isOpenCTDH=!isOpenCTDH"><span
-                                                class="fas fa-eye"></span> Xem chi tiết</a>
-                                        <a v-if="dalapHD" class="dropdown-item" href="#" @click="isOpenHoaDon=!isOpenHoaDon"><span
-                                                class="fas fa-file-invoice"
-                                                style="font-size:18px; margin-left: 2px;"></span> Xem hoa don</a>
-                                                <a v-else class="dropdown-item" href="#" @click="gotoLapHD"><span
-                                                class="fas fa-file-invoice"
-                                                style="font-size:18px; margin-left: 2px;"></span> Lập hóa đơn</a>
+                                        <a class="dropdown-item" href="#" @click="isOpenCTDH = !isOpenCTDH">
+                                            <span class="fas fa-eye"></span> Xem chi tiết
+                                        </a>
+                                        <a v-if="dalapHD" class="dropdown-item" href="#" @click="isOpenHoaDon = !isOpenHoaDon">
+                                            <span class="fas fa-file-invoice"
+                                                style="font-size:18px; margin-left: 2px;">
+                                            </span> Xem hoa don
+                                        </a>
+                                        <a v-else class="dropdown-item" href="#" @click="gotoLapHD">
+                                            <span class="fas fa-file-invoice" style="font-size:18px; margin-left: 2px;">
+                                            </span> Lập hóa đơn
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                     <HoaDonChiTiet v-if="isOpenHoaDon" :khachhang="khachhang" :chitietdonhang="chitietdonhang"
-                    :nhanvien="nhanvienXNDH" :hoadon="hoadon" :donhang="activeDonHang"/>
+                        :nhanvien="nhanvienXNDH" :hoadon="hoadon" :donhang="activeDonHang" />
 
                     <QLDonHangCTDH v-if="isOpenCTDH" :chitietdonhang="chitietdonhang" :activeDonHang="activeDonHang"
-                        :khachhang="khachhang" :nhanvien="nhanvienXNDH"/>
+                        :khachhang="khachhang" :nhanvien="nhanvienXNDH" />
                 </div>
             </div>
         </div>
@@ -131,19 +145,19 @@
         </p>
         <div style="display:block; margin-left: 130px;" v-for="(trangthai, i) in trangthai" :key="i">
             <input type="radio" id="{{trangthai}}" name="trangthai_nd" value="{{trangthai}}"
-                @click="setTrangThaiDH(trangthai)" v-if="trangthai===activeDonHang.DH_TrangThai" checked />
+                @click="setTrangThaiDH(trangthai)" v-if="trangthai === activeDonHang.DH_TrangThai" checked />
             <input type="radio" id="{{trangthai}}" name="trangthai_nd" value="{{trangthai}}"
                 @click="setTrangThaiDH(trangthai)" v-else />
-            <label for="{{trangthai}}">&nbsp; {{ trangthai}}</label><br>
+            <label for="{{trangthai}}">&nbsp; {{ trangthai }}</label><br>
         </div>
-        <button class="btn btnCapNhat" @click="isOpenXacNhan=!isOpenXacNhan, isOpenTrangThai= !isOpenTrangThai"
+        <button class="btn btnCapNhat" @click="isOpenXacNhan = !isOpenXacNhan, isOpenTrangThai = !isOpenTrangThai"
             style="margin-left:100px">Cập nhật</button>
-        <button class="btn btnHuy" @click="isOpenTrangThai=!isOpenTrangThai">Hủy</button>
+        <button class="btn btnHuy" @click="isOpenTrangThai = !isOpenTrangThai">Hủy</button>
     </div>
     <div class="dialogXacNhan" v-if="isOpenXacNhan">
         <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 20px;">
             Bạn chắc chắn muốn cập nhật trạng thái đơn hàng
-            #{{activeDonHang.DH_Ma}}
+            #{{ activeDonHang.DH_Ma }}
         </p>
         <button class="btnYes btn btn-sm btn-outline-secondary"
             @click="updateDonHang(activeDonHang), isOpenXacNhan = !isOpenXacNhan" style="margin-left:170px">Yes</button>
@@ -161,6 +175,7 @@ import NhanVienService from '../../../services/nhanvien.service';
 import HoaDonService from '../../../services/hoadon.service';
 import HoaDonChiTiet from '../../../components/QuanLy/HoaDonChiTiet.vue'
 
+
 export default {
     name: `QLDonHang`,
     components: { DanhSachChucNang, QLHeader, QLDonHangCTDH, HoaDonChiTiet },
@@ -171,6 +186,7 @@ export default {
             khachhang: {},
             activeDonHang: {},
             chitietdonhang: [],
+            sanpham:[],
             nhanvienXNDH: {},
             nameToSearch: "",
             resultSearch: null,
@@ -181,22 +197,22 @@ export default {
             isOpenXacNhan: false,
             currentPage: 1, //so trang dang xem hien tai
             elementsPerPage: 9, // so don hang duoc hien thi tren 1 trang
-            ascending: false, 
+            ascending: false,
             curentStatus: "Tất cả",
             trangthai: [
                 "Mới", "Đã xác nhận", "Đã vận chuyển", "Đã nhận hàng", "Đã hủy",
             ],
-            hoadon:{},
+            hoadon: {},
             dalapHD: false,
-            localNhanVien:{},
+            localNhanVien: {},
         }
 
     },
 
-    created(){
+    created() {
         this.localNhanVien.NV_Ma = this.$route.params.id;
     },
-    
+
     computed: {
         "columns": function columns() {
             if (this.donhang.length == 0) {
@@ -208,7 +224,7 @@ export default {
 
     methods: {
         //Tim nhan vien dang nhap
-        async findLocalNhanVien(){
+        async findLocalNhanVien() {
             const [error, response] = await this.handle(
                 NhanVienService.getByID(this.localNhanVien.NV_Ma)
             );
@@ -230,7 +246,6 @@ export default {
                 this.donhang = response.data;
                 console.log(response.data);
             }
-
         },
 
         //Tinh so hang 
@@ -346,24 +361,24 @@ export default {
         },
 
         //Tim kiem thong qua thanh tim kiem
-        async searchName(){
+        async searchName() {
             const [error, response] = await this.handle(
                 DonHangService.getByID(this.nameToSearch)
             );
-            if(error){
+            if (error) {
                 console.log(error);
             } else {
-                this.donhang=[];
-                this.donhang[0]  = response.data;
-                
-                this.setActiveDonHang="";
+                this.donhang = [];
+                this.donhang[0] = response.data;
+
+                this.setActiveDonHang = "";
                 console.log(response.data);
             }
         },
 
         // Di chuyen den trang lap hoa don
-        async gotoLapHD(){
-            this.$router.push({ name: 'QLDonHangLapHD', params: {id: this.activeDonHang.DH_Ma, user:this.localNhanVien.NV_Ma}});            
+        async gotoLapHD() {
+            this.$router.push({ name: 'QLDonHangLapHD', params: { id: this.activeDonHang.DH_Ma, user: this.localNhanVien.NV_Ma } });
         },
 
         async findHoaDon() {
@@ -381,11 +396,12 @@ export default {
                 else {
                     this.hoadon = response.data;
                     this.dalapHD = true,
-                    console.log(response.data);
+                        console.log(response.data);
                 }
 
             }
         },
+
     },
 
     mounted() {

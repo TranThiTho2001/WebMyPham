@@ -39,13 +39,13 @@ exports.create = async(req,res) => {
 //*--------Retrive all category  of store from the database
 exports.findAll = async(req,res) => {
     const condition = { ownerId: req.userId };
-    const DM_Ten = req.query.DM_Ten;
+    const DM_Ten = req.query.name;
     if(DM_Ten) {
         condition.DM_Ten = { $regex: new RegExp(DM_Ten), $options: "i"};
     }
 
     const [error, documents] = await handle(
-        DanhMuc.find(condition, '-ownerId')
+        DanhMuc.find(condition, '-ownerId').sort({'DM_Ma':1})
     );
 
     if(error) {
@@ -60,8 +60,6 @@ exports.findAll = async(req,res) => {
 //*-------Find a single category with an id
 exports.findOne = async (req,res) => {
     const condition = {
-        // _id: req.params.id,
-        // ownerId: req.userId 
         DM_Ma: req.params.DM_Ma
     };
 

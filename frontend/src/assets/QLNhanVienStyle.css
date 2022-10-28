@@ -1,17 +1,30 @@
-.frameQLNhanVien .dschucNang .navigationBar .dsChucNang .btnNhanVien{
+.frameQLNhanVien .dschucNang .navigationBar .dsChucNang .btnNhanVien,
+.frameQLThemNhanVien .dschucNang .navigationBar .dsChucNang .btnNhanVien, 
+.frameQLSuaNhanVien .dschucNang .navigationBar .dsChucNang .btnNhanVien
+{
      background-color: #FFFFFF;
      color: #515151;
  }
- 
+ .frameQLThemNhanVien .dschucNang  .navigationBar  .moreInformation,
+ .frameQLSuaNhanVien .dschucNang  .navigationBar  .moreInformation {
+    margin-top: 275px;
+}
+
+.frameQLThemNhanVien .dschucNang  .navigationBar .null,
+.frameQLSuaNhanVien .dschucNang  .navigationBar .null{
+    height: 10%;
+}
   .number:hover,
   .number.active {
      background: #717699;
  }
- .frameQLNhanVien .bottomHeader {
+ .frameQLNhanVien .bottomHeader, 
+ .frameQLThemNhanVien .bottomHeader,
+ .frameQLSuaNhanVien .bottomHeader {
      text-align: center;
      font-size: 22px;
  }
- .frameQLNhanVien {
+ .frameQLNhanVien,  .frameQLThemNhanVien,  .frameQLSuaNhanVien  {
      background-color: #EAEAEA;
      border-radius: 30px;
      width: 100%;
@@ -19,7 +32,8 @@
      border-color: #515151;
      position: relative;
      font-family: Inter;
-     font-size: 20px;
+     font-size: 18px;
+     height:100%px;
  }
  
   .dialogXacNhan, .dialogThongBao {
@@ -52,9 +66,11 @@
      color: #FFFFFF;
      margin-top: 20px;
  }
- .frameQLNhanVien .timkiem .btnTao {
+.frameQLNhanVien .timkiem .btnTao,
+.frameQLThemNhanVien .timkiem .btnXem,
+.frameQLSuaNhanVien .timkiem .btnXem{
      background-color: #515151;
-     border-radius: 15px;
+     border-radius: 10px;
      color: #FFFFFF;
      font-size: 17px;
      float: right;
@@ -62,9 +78,11 @@
 
  /* Tao danh muc moi */
  
- .frameQLNhanVien .frameThem form {
+ .frameQLThemNhanVien  .frameThem form,
+ .frameQLSuaNhanVien  .frameSua form{
      width: 100%;
      border-radius: 15px;
+     height: 96%;
      transform: translateX(2%);
      margin-top: 2%;
      margin-left: -2%;
@@ -72,7 +90,8 @@
      
  }
  
- .frameQLNhanVien .frameThem form .functionName {
+ .frameQLThemNhanVien .frameThem form .functionName,
+ .frameQLSuaNhanVien .frameSua form .functionName{
      text-align: center;
      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
      color: #515151;
@@ -81,42 +100,118 @@
      padding-bottom: 10px;
  }
  
- .frameQLNhanVien .frameThem form .form-group {
+ .frameQLThemNhanVien .frameThem form .form-group,
+ .frameQLSuaNhanVien .frameSua form .form-group
+  {
      color: black;
      width: 90%;
      margin-left: 25px;
      margin-top: 20px;
  }
  
- .frameQLNhanVien .frameThem form .error-feedback {
+ .frameQLThemNhanVien .frameThem form .error-feedback,
+ .frameQLSuaNhanVien .frameSua form .error-feedback{
      text-align: right;
      color: red;
      float: right;
      font-size: 17px;
  }
  
- .frameQLNhanVien .frameThem form .textMessage2{
+ .frameQLThemNhanVien .frameThem form .textMessage2,
+ .frameQLSuaNhanVien .frameSua form .textMessage2
+ {
      padding-top: 5px;
-     text-align: center;
-     padding-bottom: 2px;
+     padding-bottom: 3px;
      color: #D30000;
      display: inline;
+     justify-content: center;
  }
- .frameQLNhanVien .frameThem form .textMessage1 {
-     padding-bottom: 2px;
+ .frameQLThemNhanVien .frameThem form .textMessage1,
+ .frameQLSuaNhanVien .frameSua form .textMessage1
+  {
+     padding-bottom: 3px;
      color: #D30000;
      text-align: center;
+     justify-content: center;
+     background-color: #717699;
  }
  
- .frameQLNhanVien .frameThem form .btnLuu {
+ .frameQLThemNhanVien .frameThem form .btnLuu  {
      text-align: center;
      transform: translateY(0px);
-     margin: -1% 0 2% 43%;
+     margin: 2% 0 2% 43%;
      width: 125px;
      background-color: #515151;
      color: #FFFFFF;
  }
+ .frameQLSuaNhanVien .frameSua form .btnLuu  {
+    text-align: center;
+    transform: translateY(0px);
+    margin: 2% 0 2% 43%;
+    width: 125px;
+    background-color: #515151;
+    color: #FFFFFF;
+}
 
  .formThongTin p{
     border: 0.5px solid #929292;
  }
+
+ form label {
+    font-family: Inter;
+    font-weight: 400;
+}
+
+form .form-control {
+    font-family: Inter;
+    font-weight: 600;
+    color: #515151;
+}
+.frameQLThemNhanVien .frameThem  form .selectBox,
+.frameQLSuaNhanVien .frameSua  form .selectBox {
+    width: 100%;
+    height: 38px;
+    font-size: 17px;
+    border-radius: 10px;
+    background-color: #F5F4F4;
+    border: solid #dad9d9 0.1px;
+    font-family: Inter;
+    font-weight: 600;
+    color: #757474;
+}
+
+table {
+    font-family: Inter;
+    width: 100%;
+    margin: 10px 10px 10px 10px;
+    background-color: #D9D9D9;
+    border-radius: 10px;
+}
+
+ .tdChucNang {
+    float: right;
+}
+
+ table th {
+    text-align: left;
+    color: #000000;
+    padding: 8px;
+    min-width: 30px;
+}
+
+ table td {
+    text-align: left;
+    padding: 8px;
+    color: #000000;
+    font-size: 14px;
+}
+
+ table td:last-child {
+    border-right: none;
+}
+ table tbody tr {
+    background: #FFFFFF;
+    border-radius: 7px;
+    margin-top: 3px;
+    font-size: 17px;
+}
