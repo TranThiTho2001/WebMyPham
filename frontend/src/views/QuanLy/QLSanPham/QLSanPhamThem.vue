@@ -18,11 +18,12 @@
                 <div class="row timkiem">
                     <div class="col-md-5 col-sm-1 input-group">
                         <div class="row" style="margin-left:0.01%">
-                            <input type="text" class="form-control col-md-10" placeholder="Tìm theo tên" v-model="nameToSearch"  @keyup.enter="searchName" @click="goToQLSanPham"/>
-                                <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button"
-                                    @click="searchName" style="border:none">
-                                    <span class="fa fa-search" style="font-size:18px"></span>
-                                </button>
+                            <input type="text" class="form-control col-md-10" placeholder="Tìm theo tên"
+                                v-model="nameToSearch" @keyup.enter="searchName" @click="goToQLSanPham" />
+                            <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button"
+                                @click="searchName" style="border:none">
+                                <span class="fa fa-search" style="font-size:18px"></span>
+                            </button>
                         </div>
                     </div>
                     <div class="col-md-4"></div>
@@ -54,10 +55,12 @@ import SanPhamService from '../../../services/sanpham.service';
 import DanhMucService from '../../../services/danhmuc.service';
 import ThuongHieuService from '../../../services/thuonghieu.service';
 import SanPhamThem from '../../../components/QuanLy/SanPhamFormThem.vue'
+import ImageService from '../../../services/image';
+
 export default {
     name: `QLSanPhamThem`,
 
-    components: { DanhSachChucNang, QLHeader, SanPhamThem},
+    components: { DanhSachChucNang, QLHeader, SanPhamThem },
 
     data() {
 
@@ -70,6 +73,7 @@ export default {
             localNhanVien: {},
             danhmuc: [],
             thuonghieu: [],
+            fileName: "",
         }
 
     },
@@ -101,7 +105,7 @@ export default {
         },
 
         async createSanPham(data) {
-            console.log(data);
+            data.SP_HinhAnh = this.fileName;
             const [error, response] = await this.handle(
                 SanPhamService.create(data)
             );
@@ -115,9 +119,7 @@ export default {
         },
 
         async retrieveThuongHieu() {
-            const [error, response] = await this.handle(
-                ThuongHieuService.getAll()
-            );
+            const [error, response] = await this.handle( ThuongHieuService.getAll() );
             if (error) {
                 console.log(error);
             } else {
@@ -127,7 +129,7 @@ export default {
         },
 
         async findSanPham(data) {
-            console.log("heklasjkx");
+            console.log(data);
             const [error, response] = await this.handle(
                 SanPhamService.getByID(data.SP_Ma)
             );
@@ -135,6 +137,7 @@ export default {
                 console.log(error);
             } else {
                 if (response.data == "Khong tim thay") {
+                    this.saveImge(data.Image);
                     this.createSanPham(data);
                     this.message1 = "";
                 }
@@ -154,6 +157,15 @@ export default {
                 this.danhmuc = response.data;
                 console.log(response.data);
             }
+        },
+
+        async saveImge(data) {
+            const formData = new FormData();
+            formData.append("image", data);
+            const response = await ImageService.create(formData);
+            this.fileName = response.data.filename;
+            console.log(response.data)
+
         },
 
         async goToQLSanPham() {

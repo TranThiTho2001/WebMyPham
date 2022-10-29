@@ -123,13 +123,14 @@
     color: #000000;
     padding: 8px;
     min-width: 30px;
+    font-size: 16px;
 }
 
  table td {
     text-align: left;
     padding: 8px;
     color: #000000;
-    font-size: 14px;
+    font-size: 15px;
 }
 
  table td:last-child {
@@ -139,7 +140,7 @@
     background: #FFFFFF;
     border-radius: 7px;
     margin-top: 3px;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 /* Tao danh muc moi */

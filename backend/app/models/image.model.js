@@ -2,7 +2,7 @@ module.exports = mongoose => {
      const schema = mongoose.Schema(
          {
              filename: {
-                 type: Object,
+                 type: String,
                  require: [true, "Ma Don hang duoc yeu cau"],
              },
 

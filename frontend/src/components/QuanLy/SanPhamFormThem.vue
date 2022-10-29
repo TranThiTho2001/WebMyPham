@@ -66,8 +66,8 @@
                 </div>
                 <div class="form-group">
                     <label for="image">Hình ảnh</label>
-                    <input type="file" ref="file" name="image" @change="selectFile" accept="image/*">
-                    <p>{{ sanphamLocal.SP_HinhAnh }}</p>
+                    <input type="file" ref="file" name="image" @change="selectFile" accept="image/*" >
+                    
                 </div>
             </div>
         </div>
@@ -80,7 +80,7 @@
             <p v-if="message2 == 'Thêm thành công'" class="textMessage2" style="color:#00BA13">{{ message2 }}</p>
             <p v-else class="textMessage2">{{ message2 }}</p><br>
             <p v-if="message2 == 'Thêm không thành công'" class="textMessage1">{{ message1 }}</p>
-            <button class="btn btn-outline-secondary btnLuu" @click="saveImge">Lưu</button>
+            <button class="btn btn-outline-secondary btnLuu">Lưu</button>
         </div>
     </form>
 
@@ -89,7 +89,7 @@
 <script>
 import * as yup from "yup";
 import { Form, Field, ErrorMessage } from "vee-validate";
-import ImageService from '../../services/image'
+// import ImageService from '../../services/image'
 
 export default {
     name: "SanPhamFormThem",
@@ -151,16 +151,7 @@ export default {
             this.fileImage = event.target.files[0];
             this.sanphamLocal.SP_HinhAnh = "image_" + this.fileImage.name;
             console.log(this.fileImage.name);
-
-        },
-
-        async saveImge() {
-
-                const formData = new FormData();
-                formData.append("image", this.fileImage);
-                const response = await ImageService.create(formData);
-                console.log(response.data)
-            
+            this.sanphamLocal.Image = this.fileImage;
         },
 
         async setMaDanhMuc() {

@@ -14,8 +14,7 @@ module.exports = (app) => {
     
         // Create a customer
         const image = new Image({
-            filename: req.body.filename,
-    
+            filename: req.file.filename,
             ownerId: req.userId,
         });
         // Save customer in the DB
@@ -45,23 +44,6 @@ module.exports = (app) => {
         return res.send(documents);}
     );
         
-
-
-//     //Retrieve all products
-//     router.get("/", sanpham.findAll);
-
-//     //Retrieve a single product with id
-//     router.get("/:SP_Ma", sanpham.findOne);
-
-//     //Update a product with id
-//     router.put("/:SP_Ma", sanpham.update);
-
-//     //Delete a product with id
-//     router.delete("/:SP_Ma", sanpham.delete);
-
-    // //Delete all products
-    // router.delete("/", sanpham.deleteAll);
-
     app.use("/api/image", router);
 
 };

@@ -65,6 +65,7 @@
      color: #000000;
      padding: 8px;
      min-width: 30px;
+     font-size: 16px;
  }
  
   table td {
@@ -72,7 +73,7 @@
      padding: 8px;
      color: #000000;
      font-family: Inter;
-     font-size: 18px;
+     font-size: 15px;
  }
  
   table td:last-child {
@@ -83,6 +84,6 @@
      border-radius: 7px;
      margin-top: 3px;
      font-family: Inter;
-     font-size: 17px;
+     font-size: 15px;
  }
  
