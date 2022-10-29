@@ -60,28 +60,26 @@ exports.findAll = async(req,res) => {
     return res.send(documents);
 };
 
-//*-------Find a single category with an id
-// exports.findOne = async (req,res) => {
-//     const condition = {
-//         // _id: req.params.id,
-//         // ownerId: req.userId 
-//         DM_Ma: req.params.DM_Ma
-//     };
+// *-------Find a single category with an id
+exports.findOne= async (req,res) => {
 
-//     const [error, document] = await handle(
-//         DanhMuc.findOne(condition)
-//     );
+    const condition = {
+             SP_Ma: req.params.SP_Ma 
+    };
+    const [error, document] = await handle(
+        ChiTietDonHang.find(condition)
+    );
 
-//     if(error) {
-//         return next(
-//             new BadRequestError(500, "Lỗi trong quá trình truy xuất danh mục!")
-//         );
-//     }
-//     if(!document){
-//         return res.send("Chua ton tai");
-//     }
-//     return res.send(document);
-// };
+    if(error) {
+        return next(
+            new BadRequestError(500, "Lỗi trong quá trình truy xuất sản phẩm!")
+        );
+    }
+    if(!document){
+        return res.send("Khong tim thay");
+    }
+    return res.send(document);
+};
 
 
 //*-----Update a category by the is in the request

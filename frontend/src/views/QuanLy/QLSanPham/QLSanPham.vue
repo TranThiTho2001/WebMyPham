@@ -10,21 +10,33 @@
                 </div>
                 <div class="row bottomHeader">
                     <div class="col-md-12">
-                        <p>Danh sách sản phẩm</p>
+                        <p style="font-family:Inter; color:#515151; font-size:22px; font-weight:600">Danh sách sản phẩm</p>
                     </div>
                 </div>
                 <div class="row timkiem">
                     <div class="col-md-7 input-group">
                         <div class="row" style="margin-left:0.01%">
                             <input type="text" class="form-control col-md-10" placeholder="Tìm theo tên"
-                                v-model="nameToSearch"  @keyup.enter="searchName"/>
-                                <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button"
-                                    @click="searchName">
-                                    <span class="fa fa-search" style="font-size:18px"></span>
-                                </button>
+                                v-model="nameToSearch" @keyup.enter="searchName" />
+                            <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button"
+                                @click="searchName">
+                                <span class="fa fa-search" style="font-size:18px"></span>
+                            </button>
                         </div>
                     </div>
                     <div class="col-md-2">
+                        <div style="display: inline-block; padding-top: 4px;">Trang:</div>
+                        <div class="pagination nav-item dropdown">
+                            <a class="nav-link  btn" href="#" id="navbardrop" data-toggle="dropdown"
+                                style="border-radius: 7px; width: max-content; padding-top: 3px;"> {{ currentPage }}
+                                <span class="fas fa-angle-down"></span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" v-for="(i, j) in num_pages() " :key="j"
+                                    v-bind:class="[i == currentPage ? 'active' : '']" v-on:click="change_page(i)"
+                                    aria-controls="my-table"> {{ i }}</a>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-3">
                         <button class=" btn btn-sm btn-outline-secondary btnThem" @click="goToThemSanPham"
@@ -47,18 +59,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(row, i) in sanpham" :key="i">
-                                <td>{{ i }}</td>
-                                <!-- <td v-for="(col,i) in columns" :key="i">{{row[col]}}</td> -->
+                            <tr v-for="(row, i ) in get_rows()" :key="i">
+                                <td v-if="currentPage > 1">{{ i + ((currentPage - 1) * 11) }}</td>
+                                <td v-else>{{ i }}</td>
                                 <td>{{ row.SP_Ma }}</td>
                                 <td>{{ row.SP_TenSanPham }}</td>
-                                <td>{{ row.DMSP_Ma }}</td>
+                                <td>{{ row.DMSP_Ten }}</td>
                                 <td>{{ row.SP_GiaBanRa }}</td>
                                 <td>{{ row.SP_SoLuong }}</td>
-                                <td>
+                                <!-- <td>
                                     <img :src="require(`@/images/${row.SP_HinhAnh}`)" >
-                                </td>
-                                <td class="tdChucNang nav-item dropdown">
+                                </td> -->
+                                <td class="tdChucNang nav-item dropdown" @click="setActiveSanPham(row.SP_Ma)">
                                     <a class="nav-link  fas fa-ellipsis-v" href="#" id="navbardrop"
                                         data-toggle="dropdown" style="color:#515151">
                                     </a>
@@ -76,13 +88,32 @@
             </div>
         </div>
     </div>
+    <!-- ------------------------------Bang xac nhan xoa danh muc ----------------------------- -->
+    <div class="dialogXacNhan" v-if="isOpenXacNhan">
+        <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 18px;">
+            <span class="fas fa-trash-alt" style="color:red"></span>Bạn chắc chắn muốn xóa?
+        </p>
+        <button class="btnYes btn btn-sm btn-outline-secondary"
+            @click="findSanPhamTheoCTDH(), isOpenXacNhan = !isOpenXacNhan, isOpenThongBao = !isOpenThongBao">Yes</button>
+        <button class="btnNo btn btn-sm btn-outline-secondary" @click="isOpenXacNhan = !isOpenXacNhan">No</button>
+    </div>
+    <div class="dialogThongBao" v-if="isOpenThongBao">
+        <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 18px;">
+            <span v-if="message == 'Đã xóa danh mục đã chọn'" class="fas fa-check-circle"
+                style="color:#00BA13; text-align: center;"></span>
+            <span v-else class="fas fa-exclamation-circle" style="color:red; text-align: center;"></span>
+            {{ message }}
+        </p>
+        <button class="btnOK btn btn-sm btn-outline-secondary" @click="isOpenThongBao = !isOpenThongBao">OK</button>
+    </div>
 </template>
 <script>
 import DanhSachChucNang from '../../../components/QuanLy/DanhSachChucNang.vue';
 import QLHeader from '../../../components/QuanLy/QLHeader.vue';
 import SanPhamService from '../../../services/sanpham.service';
 import ImageService from '../../../services/image';
-
+import DanhMucService from '../../../services/danhmuc.service';
+import ChiTietDonHangService from '../../../services/chitietdonhang.service'
 export default {
     name: `QLHomePage`,
     components: { DanhSachChucNang, QLHeader },
@@ -91,7 +122,14 @@ export default {
             sanpham: [],
             localNhanVien: {},
             image: [],
-            nameToSearch:"",
+            nameToSearch: "",
+            sanphamActive: "",
+            message: "",
+            isOpenXacNhan: false,
+            isOpenThongBao: false,
+            currentPage: 1,
+            elementsPerPage: 11,
+            ascending: false,
         }
 
     },
@@ -112,7 +150,6 @@ export default {
     methods: {
 
         async retrieveSanPham() {
-
             const [error, response] = await this.handle(
                 SanPhamService.getAll()
             );
@@ -120,12 +157,14 @@ export default {
                 console.log(error);
             } else {
                 this.sanpham = response.data;
-                console.log(response.data);
+                this.sanpham.forEach(element => {
+                    this.findDanhMuc(element);
+                });
             }
 
         },
-        async retrieveImage() {
 
+        async retrieveImage() {
             const [error, response] = await this.handle(
                 ImageService.getAll()
             );
@@ -133,28 +172,91 @@ export default {
                 console.log(error);
             } else {
                 this.image = response.data;
-                console.log(response.data);
             }
-
         },
+
+        async setActiveSanPham(data) {
+            this.sanphamActive = data;
+            console.log(this.sanphamActive)
+        },
+
+        async findDanhMuc(sanpham) {
+            const [error, response] = await this.handle(
+                DanhMucService.get(sanpham.DMSP_Ma)
+            );
+            if (error) {
+                console.log(error);
+            } else {
+                sanpham.DMSP_Ten = response.data.DM_Ten;
+            }
+        },
+
+        async findSanPhamTheoCTDH() {
+            this.message = "";
+            const [error, response] = await this.handle(
+                ChiTietDonHangService.get(this.sanphamActive)
+            );
+            console.log(response.data)
+            if (response.data.length == 0) {
+                this.deleteSanPham();
+
+                console.log(error);
+            } else {
+                this.message = "Không thể xóa sản phẩm";
+                console.log(response)
+            }
+        },
+
+        async deleteSanPham() {
+            console.log("jffnewg");
+            const [error, response] = await this.handle(
+                SanPhamService.delete(this.sanphamActive)
+            );
+            if (error) {
+                console.log(error);
+                this.message = "Xóa sản phẩm không thành công"
+            } else {
+                this.retrieveSanPham()
+                this.message = "Xóa sản phẩm thành công"
+                console.log(response.data)
+            }
+        },
+
         async goToThemSanPham() {
             this.$router.push({ name: 'QLSanPhamThem', params: { id: this.localNhanVien.NV_Ma } });
         },
 
         //Tìm kiếm theo tên
-        async searchName(){
+        async searchName() {
             console.log(this.nameToSearch)
             const [error, response] = await this.handle(
-                    SanPhamService.findByName(this.nameToSearch)
-                );
-                if (error) {
-                    console.log(error);
-                } else {
-                    if(response.data!=null){
-                        this.sanpham = response.data
-                        console.log(response.data)
-                    }
+                SanPhamService.findByName(this.nameToSearch)
+            );
+            if (error) {
+                console.log(error);
+            } else {
+                if (response.data != null) {
+                    this.sanpham = response.data
+                    console.log(response.data)
                 }
+            }
+        },
+
+        //  so hang của danh sach danh muc
+        get_rows() {
+            var start = (this.currentPage - 1) * this.elementsPerPage;
+            var end = start + this.elementsPerPage;
+            return this.sanpham.slice(start, end);
+        },
+
+        // So trang cua danh sach danh muc
+        num_pages() {
+            return Math.ceil(this.sanpham.length / this.elementsPerPage);
+
+        },
+
+        async change_page(page) {
+            this.currentPage = page;
         },
     },
 
@@ -167,7 +269,8 @@ export default {
 
 <style>
 @import '../../../assets/QLSanPhamStyle.css';
-.dschucNang  .navigationBar  .moreInformation{
+
+.dschucNang .navigationBar .moreInformation {
     margin-top: 40px;
 }
 </style>

@@ -9,6 +9,8 @@ module.exports = (app) => {
     //Retrieve all order details
     router.get("/", chitietdonhang.findAll);
 
+    router.get("/:SP_Ma", chitietdonhang.findOne);
+    
     app.use("/api/chitietdonhang", router);
 
 };

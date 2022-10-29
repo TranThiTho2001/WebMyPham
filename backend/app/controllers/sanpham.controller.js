@@ -143,8 +143,7 @@ return res.send({ message: "Cập nhật thông tin sản phẩm thành công." 
 //Delete a product with the specified id in the request
 exports.delete = async (req,res) => {    
         const condition = {
-            _id: req.params.id,
-            ownerId: req.userId,
+            SP_Ma: req.params.SP_Ma
         };
     
         const [error, document] = await handle(
@@ -159,9 +158,7 @@ exports.delete = async (req,res) => {
             );
         }
     
-        if (!document) {
-            return next(new BadRequestError(404, "Không tìm thấy sản phẩm"));
-        }
+
     
         return res.send({ message: "Xóa sản phẩm thành công" });
     

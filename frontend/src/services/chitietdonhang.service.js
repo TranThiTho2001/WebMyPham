@@ -11,7 +11,7 @@ class ChiTietDonHangService {
     // update(id, data) { return http.put(`chitietdonhang/${id}`, data); }
     // delete(DM_Ma) { return http.delete(`/chitietdonhang/${DM_Ma}`); }
     //deleteAll() { return http.delete("/sanpham"); }  
-    // get(DM_Ma) { return http.get(`/chitietdonhang/${DM_Ma}`); }
+    get(SP_Ma) { return http.get(`/chitietdonhang/${SP_Ma}`); }
 }
 
 export default new ChiTietDonHangService();

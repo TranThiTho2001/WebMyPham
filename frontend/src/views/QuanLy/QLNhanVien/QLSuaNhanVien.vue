@@ -49,7 +49,8 @@
 import DanhSachChucNang from '../../../components/QuanLy/DanhSachChucNang.vue';
 import QLHeader from '../../../components/QuanLy/QLHeader.vue';
 import NhanVienFormSua from '../../../components/QuanLy/NhanVienFormSua.vue';
-import NhanVienService from '../../../services/nhanvien.service'
+import NhanVienService from '../../../services/nhanvien.service';
+
 export default {
     name: `QLHomePage`,
     components: { DanhSachChucNang, QLHeader, NhanVienFormSua },

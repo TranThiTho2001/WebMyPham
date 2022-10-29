@@ -129,6 +129,8 @@ export default {
         },
 
         async findSanPham(data) {
+            this.message1 = "";
+            this.message2 = "";
             console.log(data);
             const [error, response] = await this.handle(
                 SanPhamService.getByID(data.SP_Ma)
@@ -139,7 +141,6 @@ export default {
                 if (response.data == "Khong tim thay") {
                     this.saveImge(data.Image);
                     this.createSanPham(data);
-                    this.message1 = "";
                 }
                 else {
                     this.message1 = "Mã đã tồn tại";

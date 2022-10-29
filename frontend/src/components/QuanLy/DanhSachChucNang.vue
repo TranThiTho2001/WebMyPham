@@ -108,7 +108,7 @@ export default {
 
 }
  .navigationBar .null{
-    height: 23%;
+    height: 21%;
  }
 .dsChucNang {
     margin-top: 20px;

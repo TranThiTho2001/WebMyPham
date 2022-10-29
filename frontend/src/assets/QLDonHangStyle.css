@@ -19,6 +19,17 @@
     border: none;
 }
 
+.frameQLDonHang .btnOpenCTDH, .btnOpenHoaDon{
+    background-color: #515151;
+    color: #FFFFFF;
+    border-radius: 10px;
+    float: right;
+}
+.frameQLDonHang .form-control {
+    border-radius: 10px;
+    background-color: #F5F4F4;
+    border-right: 15px;
+}
 
 .timkiem .btnTimKiem:hover {
     background-color: #515151;
@@ -85,8 +96,8 @@ table {
     font-size: 15px;
 }
 
-.pagination {
-    float: right;
+ .pagination {
+    display: inline-block;
     margin-top: 2px;
     border-radius: 7px;
     height: 34px;
@@ -95,7 +106,9 @@ table {
     border-color: #515151;
     border-width: 1px;
 }
-
+.btnChoosePage{
+    float: right;
+}
 .dialogTrangThai,
 .dialogXacNhan {
     position: absolute;

@@ -156,14 +156,15 @@ export default {
             return Math.ceil(this.danhmuc.length / this.elementsPerPage);
 
         },
-        async gotoTaoDanhMuc() {
-            console.log(this.NhanVien)
-
-            this.$router.push({ name: 'TaoDanhMuc', params: { id: this.localNhanVien.NV_Ma } });
-        },
+        
         async change_page(page) {
             this.currentPage = page;
         },
+        
+        async gotoTaoDanhMuc() {
+            this.$router.push({ name: 'TaoDanhMuc', params: { id: this.localNhanVien.NV_Ma } });
+        },
+
 
         // Set danh muc duoc chon
         async setDanhmucActive(danhmucActive) {
