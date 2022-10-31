@@ -69,18 +69,15 @@ export default {
 
 <style>
 form {
-    width: 510px;
-    height: 470px;
-    border-radius: 15px;
-    transform: translateX(6%);
-    margin-top: 20px;
+    border-radius: 10px;
+    top:calc(50%);
     background-color: #FFFFFF;
     margin-bottom: 10px;
 }
 
 form .functionName {
     text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Inter;
     color: #515151;
     font-size: 25px;
     padding-top: 20px;
@@ -115,8 +112,9 @@ form .textMessage1 {
 form .btnCapNnhat{
     text-align: center;
     transform: translateY(0px);
-    margin-left: 36%;
+    margin-left: 44%;
     margin-top: 5px;
+    margin-bottom: 2%;
     width: 125px;
     background-color: #515151;
     color: #FFFFFF;

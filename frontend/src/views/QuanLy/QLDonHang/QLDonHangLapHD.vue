@@ -1,26 +1,23 @@
 <template>
-    <div class="container frameLapHoaDon">
+    <div class="container-fluid frameLapHoaDon">
         <div class="row list">
             <div class="col-md-2 dschucNang">
-                <DanhSachChucNang :maNV="NhanVien"/>
+                <DanhSachChucNang :maNV="localNhanVien.NV_Ma"/>
             </div>
             <div class="col-md-10">
-                <div class="row topHeader">
                     <QLHeader :maNV="localNhanVien.NV_Ma" />
-                </div>
                 <div class="row bottomHeader" v-if="!isOpenLapHD">
                     <div class="col-md-12">
-                        <p>Lập hóa đơn</p>
+                        <p style="font-family:Inter; color:#515151; font-size:30px; font-weight:700">Lập hóa đơn</p>
                         <p></p>
                     </div>
                 </div>
 
-                <div class="row container hoadon" v-if="!isOpenLapHD">
+                <div class="row container-fluid hoadon" v-if="!isOpenLapHD">
                     <div class="col-md-12">
-                        <div class="row" style="width:60px"> <img src="../../../images/Logo.png "
-                                class="rounded float-left img-fluid">
-                        </div>
-                        <h4 style="text-align:center"> HÓA ĐƠN </h4>
+                        <div>
+                        
+                        <h4 style="text-align:center; margin-top: 30px; margin-bottom: 30px;"> HÓA ĐƠN </h4></div>
                         <div class="row">
                             <table class="bangTT">
                                 <tr>
@@ -207,7 +204,7 @@ export default {
             if (error) {
                 console.log(error);
             } else {
-                this.chitietdonhang[i].SP_Ten = response.data.SP_Ten;
+                this.chitietdonhang[i].SP_Ten = response.data.SP_TenSanPham;
             }
         },
         // Kiem tra don hang da duoc lap hoa don chua
@@ -262,5 +259,14 @@ export default {
 </script>
 
 <style>
-@import "../../../assets/QLDonHangStyle.css"
+@import "../../../assets/QLDonHangStyle.css";
+.hoadon .bangTT {
+    background-color: #FFFFFF;
+}
+
+.hoadon .bangCTHD {
+    border-radius: 15px;
+    border-bottom: 1px solid #BABABA;
+}
+
 </style>

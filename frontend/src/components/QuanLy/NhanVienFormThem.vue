@@ -81,9 +81,9 @@
           </div>
           <div class="form-group">
                <span v-if="message2=='Thêm thành công'" class="fas fa-check-circle"
-                    style="color:#00BA13; text-align: center; margin-left: 40%;"></span>
+                    style="color:#00BA13; text-align: center; margin-left: 44%;"></span>
                <span v-if="message2=='Thêm không thành công'" class="fas fa-times-circle"
-                    style="color:red; text-align: center;  margin-left:34%;"></span>
+                    style="color:red; text-align: center;  margin-left:40%;"></span>
                <p v-if="message2=='Thêm thành công'" class="textMessage2" style="color:#00BA13">{{message2}}
                </p>
                <p v-else class="textMessage2">{{message2}}</p><br>

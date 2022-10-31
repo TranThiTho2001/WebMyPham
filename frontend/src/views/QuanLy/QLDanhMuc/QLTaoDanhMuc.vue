@@ -1,25 +1,23 @@
 <template>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <div class="container frameQLDanhMuc">
+    <div class="container-fluid frameQLThemDanhMuc">
         <div class="row list">
             <div class="col-md-2 dschucNang">
                 <DanhSachChucNang :maNV="localNhanVien.NV_Ma"/>
             </div>
             <div class="col-md-10">
-                <div class="row topHeader">
-                    <QLHeader  :maNV="localNhanVien.NV_Ma" />
-                </div>
+                <QLHeader  :maNV="localNhanVien.NV_Ma" />
                 <div class="row bottomHeader">
                     <div class="col-md-12 font-weight-bold" style="color:#515151; font-size: 25px;">
                         <p>Danh sách danh mục</p>
                     </div>
                 </div>
-                <div class="row timkiem">
+                <div class="row timkiem" >
                     <div class="col-md-7 input-group" >
                         <div class="row" style="margin-left:2px">
-                            <input type="text" class="form-control col-md-10" placeholder="Tìm theo tên" @click="goToQLDanhMuc"
+                            <input type="text" class="form-control col-md-10 inputSearch" placeholder="Tìm theo tên" @click="goToQLDanhMuc"
                                 v-model="nameToSearch"  @keyup.enter="searchName"/>
-                                <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button"
+                                <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button" style="border:none"
                                     @click="searchName">
                                     <span class="fa fa-search" style="font-size:18px"></span>
                                 </button>
@@ -33,8 +31,9 @@
                         </button>
                     </div>
 
-                </div>                    
-                <div class="row frameThem">
+                </div>
+                <hr style="color:#515151">                   
+                <div class="row frameThem" style="background-color:#EAEAEA">
                     <div class="col-md-2 col-sm-0"></div>
                     <div class="col-md-8 col-sm-12">
                         <DanhMucTao :newdanhmuc="newdanhmuc" @themDanhMuc-submit="findDanhMuc"
@@ -135,11 +134,4 @@ export default {
 
 <style>
 @import "../../../assets/QLDanhMucStyle.css";
-.frameQLDanhMuc .frameThem{
-    background-color: #D9D9D9;
-    border-radius: 15px;
-    margin: 8px 1px 1px 0px;
-}
-
-
 </style>

@@ -1,23 +1,30 @@
 <template>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <div class="container frameQLDanhMuc">
+    <div class="container-fluid frameQLSuaDanhMuc">
         <div class="row list">
             <div class="col-md-2 dschucNang">
-                <DanhSachChucNang :maNv="localNhanVien"/>
+                <DanhSachChucNang :maNV="localNhanVien.NV_Ma" />
             </div>
             <div class="col-md-10">
-                <div class="row topHeader">
-                    <QLHeader :maNV="localNhanVien.NV_Ma" />
-                </div>
+                <QLHeader :maNV="localNhanVien.NV_Ma" />
                 <div class="row bottomHeader">
                     <div class="col-md-12 font-weight-bold" style="color:#515151; font-size: 25px;">
                         <p>Danh sách danh mục</p>
                     </div>
                 </div>
-                <div class="row timkiem">
-                    <div class="col-md-9 col-sm-1">
+                <div class="row timkiem" style="margin-left:2%">
+                    <div class="col-md-7 input-group">
+                        <div class="row" style="margin-left:2px">
+                            <input type="text" class="form-control col-md-10 inputSearch" placeholder="Tìm theo tên"
+                                @click="goToQLDanhMuc" v-model="nameToSearch" @keyup.enter="searchName" />
+                            <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button"
+                                style="border:none" @click="searchName">
+                                <span class="fa fa-search" style="font-size:18px"></span>
+                            </button>
+                        </div>
                     </div>
+                    <div class="col-md-2"></div>
                     <div class="col-md-3 col-sm-11">
                         <button class=" btn btn-sm btn-outline-secondary btnXem font-weight-bold"
                             @click="goToQLDanhMuc">
@@ -27,10 +34,12 @@
                     </div>
 
                 </div>
-                <div class="row frameThem">
+                <hr style="color:#515151">
+                <div class="row frameSua">
                     <div class="col-md-2 col-sm-0"></div>
                     <div class="col-md-8 col-sm-12">
-                        <DanhMucFromSua :newdanhmuc="newdanhmuc" @suaDanhMuc-submit="updateDanhMuc" :message1="message1" />
+                        <DanhMucFromSua :newdanhmuc="newdanhmuc" @suaDanhMuc-submit="updateDanhMuc"
+                            :message1="message1" />
                     </div>
                     <div class="col-md-2 col-sm-0"></div>
                 </div>
@@ -61,12 +70,12 @@ export default {
 
     created() {
         this.localNhanVien.NV_Ma = this.$route.params.id;
-        
+
         console.log("1")
     },
 
     methods: {
-        async updateDanhMuc(data){
+        async updateDanhMuc(data) {
             this.message1 = "";
             const [error, response] = await this.handle(
                 DanhMucService.update(data.DM_Ma, data)
@@ -95,7 +104,7 @@ export default {
         },
 
         async goToQLDanhMuc() {
-            this.$router.push({ name: 'QLDanhMucSanPham', params: { id: this.localNhanVien.NV_Ma }});
+            this.$router.push({ name: 'QLDanhMucSanPham', params: { id: this.localNhanVien.NV_Ma } });
         }
     },
     mounted() {
@@ -106,58 +115,10 @@ export default {
 </script>
 
 <style>
+@import '../../../assets/QLDanhMucStyle.css';
+
 .frameQLDanhMuc .dschucNang .navigationBar .dsChucNang .btnDanhMuc {
     background-color: #FFFFFF;
     color: #515151;
-}
-
-.frameQLDanhMuc {
-    background-color: #EAEAEA;
-    border-radius: 30px;
-    width: 100%;
-    border-style: solid;
-    border-color: #515151;
-    position: relative;
-}
-
-.frameQLDanhMuc .timkiem .btnXem {
-    background-color: #515151;
-    border-radius: 15px;
-    color: #FFFFFF;
-    float: right;
-    font-size: 16px;
-}
-
-
-.form-control {
-    border-radius: 15px;
-    background-color: #F5F4F4;
-    border-right: 15px;
-}
-
-.frameQLDanhMuc .timkiem .btnTimKiem:hover {
-    background-color: #515151;
-}
-
-.frameQLDanhMuc .dschucNang {
-    background-color: #515151;
-    border-radius: 26px;
-}
-
-.frameQLDanhMuc .bottomHeader {
-    /* margin-bottom: 2px; */
-    text-align: center;
-    font-size: 20px;
-}
-
-.frameQLDanhMuc .topHeader {
-    margin-bottom: 2px;
-    margin-right: -5px;
-}
-
-.frameQLDanhMuc .frameThem {
-    background-color: #D9D9D9;
-    border-radius: 15px;
-    margin: 8px 1px 1px 0px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <div class="container frameQLSuaNhanVien">
+    <div class="container-fluid frameQLSuaNhanVien">
         <div class="row list">
             <div class="col-md-2 dschucNang">
                 <DanhSachChucNang :maNV="localNhanVien.NV_Ma"/>
@@ -11,12 +11,12 @@
                 </div>
                 <div class="row bottomHeader">
                     <div class="col-md-12 font-weight-bold" style="color:#515151; font-size: 25px;">
-                        <p>Danh sách nhân viên</p>
+                        <p style="font-family:Inter; color:#515151; font-size:30px; font-weight:700">Danh sách nhân viên</p>
                     </div>
                 </div>
-                <div class="row timkiem">
+                <div class="row timkiem" style="margin-left:2%">
                     <div class="col-md-7 input-group">
-                        <div class="row" style="margin-left:2px">
+                        <div class="row" >
                             <input type="text" class="form-control col-md-10" placeholder="Tìm theo tên"
                                v-model="nameToSearch" @keyup.enter="searchName"/>                           
                                 <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button"

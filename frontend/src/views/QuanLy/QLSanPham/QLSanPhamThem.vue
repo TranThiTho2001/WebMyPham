@@ -1,15 +1,13 @@
 <template>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <div class="container frameQLThemSanPham">
+    <div class="container-fluid frameQLThemSanPham">
         <div class="row list">
             <div class="col-md-2 dschucNang">
                 <DanhSachChucNang :maNV="localNhanVien.NV_Ma" />
             </div>
             <div class="col-md-10">
-                <div class="row topHeader">
                     <QLHeader :maNV="localNhanVien.NV_Ma" />
-                </div>
                 <div class="row bottomHeader">
                     <div class="col-md-12 font-weight-bold" style="color:#515151; font-size: 25px;">
                         <p style="font-family:Inter; text-align: center; margin-bottom: 10px;">Danh sách sản phẩm</p>

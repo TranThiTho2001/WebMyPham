@@ -1,24 +1,22 @@
 <template>
-    <div class="container frameQLDanhMuc">
+    <div class="container-fluid frameQLDanhMuc">
         <div class="row list">
             <div class="col-md-2 dschucNang">
                 <DanhSachChucNang :maNV="localNhanVien.NV_Ma" />
             </div>
             <div class="col-md-10">
-                <div class="row topHeader">
-                    <QLHeader :maNV="localNhanVien.NV_Ma" />
-                </div>
+                <QLHeader :maNV="localNhanVien.NV_Ma" />
                 <div class="row bottomHeader">
                     <div class="col-md-12" style="color:#515151">
-                        <p style="font-family:Inter; color:#515151; font-size:22px; font-weight:600">Danh sách danh mục</p>
+                        <p style="font-family:Inter; color:#515151; font-size:30px; font-weight:700">Danh sách danh mục</p>
                     </div>
                 </div>
-                <div class="row timkiem" style="margin-left:0.1px">
+                <div class="row timkiem" style="margin-left:2%">
                     <div class="col-md-7 input-group">
                         <div class="row">
-                            <input type="text" class="form-control col-md-10" placeholder="Tìm theo tên"
+                            <input type="text" class="form-control col-md-10 inputSearch" placeholder="Tìm theo tên"
                                 v-model="nameToSearch"  @keyup.enter="searchName"/>
-                                <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button"
+                                <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button" style="border:none"
                                     @click="searchName">
                                     <span class="fa fa-search" style="font-size:18px"></span>
                                 </button>
@@ -26,21 +24,9 @@
                     </div>
                     <!-- danh sach trang hien thi -->
                     <div class="col-md-2">
-                        <div style="display: inline-block; padding-top: 4px;">Trang:</div>
-                        <div class="pagination nav-item dropdown">
-                            <a class="nav-link  btn" href="#" id="navbardrop" data-toggle="dropdown"
-                                style="border-radius: 7px; width: max-content; padding-top: 3px;"> {{ currentPage }}
-                                <span class="fas fa-angle-down"></span>
-                            </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" v-for="(i, j) in num_pages() " :key="j"
-                                    v-bind:class="[i == currentPage ? 'active' : '']" v-on:click="change_page(i)"
-                                    aria-controls="my-table"> {{ i }}</a>
-                            </div>
-                        </div>
                     </div>
                     <div class="col-md-3">
-                        <button class=" btn btn-sm btn-outline-secondary btnTao" @click="gotoTaoDanhMuc">
+                        <button class=" btn btn-sm btn-outline-secondary btnThem" @click="gotoTaoDanhMuc">
                             <span class="fa fa-plus-circle"></span>
                             Tạo Danh Mục
                         </button>
@@ -77,6 +63,24 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <!-- danh sach so trang hien thi -->
+                <div class="row" style="width: 100%;" v-if="!isOpenChoosePage && danhmuc.length>9">
+                    <div class="btnChoosePage">
+                        <p style="display: inline-block; padding-top: 4px;text-align: right;">Trang &nbsp;</p>
+                        <div class="numberPage">
+                            <div class="dropup">
+                                <button class="dropbtn">{{ currentPage }}
+                                <span class="fas fa-chevron-up"></span></button>
+                                <div class="dropup-content">
+                                    <a class="dropdown-item" v-for="(i, j) in num_pages() " :key="j"
+                                        v-bind:class="[i == currentPage ? 'active' : '']" v-on:click="change_page(i)"
+                                        aria-controls="my-table"> {{ i }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -115,14 +119,15 @@ export default {
             danhmuc: [],
             message: "",
             currentPage: 1,
-            elementsPerPage: 11,
+            elementsPerPage: 9,
             ascending: false,
             danhmucActive: "",
             isOpenXacNhan: false,
             isOpenThongBao: false,
             localNhanVien: {},
             sanpham: [],
-            nameToSearch:"",
+            nameToSearch: "",
+            isOpenChoosePage: false,
         }
 
     },

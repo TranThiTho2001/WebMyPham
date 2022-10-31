@@ -2,8 +2,7 @@
     <!-- Cot ben trai -->
     <div class="navigationBar container-fuild" >
         <div class="logo">
-            <img src="../../images/LogoQL.png" class="img-fluid"
-                style="border-top-left-radius: 30px; border-top-right-radius: 30px;">
+            <img src="../../images/LogoQL.png" class="img-fluid">
         </div>
         <div class="dsChucNang">
             <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnThongKe" @click="goToQLThongKe" :disabled=true><span
@@ -100,15 +99,14 @@ export default {
 .navigationBar {
     background-color: #515151;
     font-family: Inter;
-    height: 745px;
+    height:100vmin;
     font-size: 18px;
     display: inline-block;
-    border-radius: 30px;
     margin-left: 0px;
-
+    width:100%;
 }
  .navigationBar .null{
-    height: 21%;
+    height: 19%;
  }
 .dsChucNang {
     margin-top: 20px;
@@ -116,7 +114,6 @@ export default {
     width: 100%;
     padding-right: 0px;
     padding-left: 0px;  
-
 }
 .dsChucNang .btn-outline-secondary,
 .moreInformation .btn-outline-secondary {

@@ -1,111 +1,184 @@
 .frameQLSanPham .dschucNang .navigationBar .dsChucNang .btnSanPham,
-.frameQLThemSanPham  .dschucNang .navigationBar .dsChucNang .btnSanPham {
-     background-color: #FFFFFF;
-     color: #515151;
-} 
-
-.frameQLSanPham .dschucNang .navigationBar .dsChucNang .btnSanPham ,
-.frameQLSanPham .dschucNang .navigationBar .dsChucNang .btnSanPham{
+.frameQLThemSanPham .dschucNang .navigationBar .dsChucNang .btnSanPham {
      background-color: #FFFFFF;
      color: #515151;
 }
 
-.frameQLThemSanPham .dschucNang  .navigationBar  .moreInformation{
-    margin-top: 120px;
-}
-.frameQLThemSanPham .dschucNang  .navigationBar .null{
-     height: 20%;
+
+
+.frameQLThemSanPham .dschucNang .navigationBar .moreInformation {
+     margin-top: 80px;
 }
 
 
-.frameQLSanPham, .frameQLThemSanPham {
+.frameQLSanPham,
+.frameQLThemSanPham {
      background-color: #EAEAEA;
-     border-radius: 30px;
-     width: 100%;
+     height: 100%;
      font-family: Inter;
-     background-color: #D9D9D9;
-     height:100%;
+     width: 100%;
+     margin-right: 0px;
 }
 
-.frameQLSanPham .dschucNang, 
+.frameQLSanPham .dschucNang,
 .frameQLThemSanPham .dschucNang {
      background-color: #515151;
-     border-radius: 30px;
+     border-bottom-right-radius: 20px;
+     border-top-right-radius: 20px;
 }
-.frameQLSanPham .timkiem .btnThem,
-.frameQLThemSanPham .timkiem .btnXem{
+
+.frameQLSanPham .timkiem .btnThem{
      background-color: #515151;
-     border-radius: 15px;
+     border-radius: 10px;
      color: #FFFFFF;
      font-size: 17px;
      float: right;
+     margin-left: 34.5%;
+     position: absolute;
 }
-.frameQLSanPham .bottomHeader {
+
+.frameQLThemSanPham .timkiem .btnXem {
+     background-color: #515151;
+     border-radius: 10px;
+     color: #FFFFFF;
+     font-size: 17px;
+     float: right;
+     margin-left: 36%;
+     position: absolute;
+}
+ .timkiem .inputSearch:hover{
+     background-color: #D9D9D9;
+ }
+.frameQLSanPham .bottomHeader, .frameQLThemSanPham .bottomHeader {
      margin-bottom: 2px;
      text-align: center;
      font-size: 20px;
+     width: 100%;
 }
 
-.frameQLSanPham table {
-     font-family: 'Open Sans', sans-serif;
+.dsSanPham {
      width: 100%;
-     margin: 10px 10px 0 10px;
-     border-radius: 10px;
 }
-.pagination {
-     float: right;
+
+.frameQLSanPham .timkiem, .frameQLThemSanPham .timkiem{
+     width: 98%;
+     margin-left: 10px;
+     margin-bottom: 10px;
+ }
+
+.btnChoosePage {
+     margin-left: 88.4%;
+     margin-top: 2%;
+}
+
+/* Dropup Button */
+.dropbtn {
+     color: black;
+     font-size: 16px;
+     border: none;
+     width: 80px;
+     height: 35px;
+     background-color: #f1f1f1;
+     border-radius: 7px;
+}
+
+/* The container <div> - needed to position the dropup content */
+.dropup {
+     position: relative;
+     display: inline-block;
+}
+
+/* Dropup content (Hidden by Default) */
+.dropup-content {
+     display: none;
+     position: absolute;
+     bottom: 50px;
+     background-color: #f1f1f1;
+     min-width: 100px;
+     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+     z-index: 1;
+     font-family: Inter;
+     font-size: 17px;
+}
+
+/* Links inside the dropup */
+.dropup-content a {
+     color: black;
+     padding: 12px 16px;
+     text-decoration: none;
+     display: block;
+     font-family: Inter;
+     font-size: 17px;
+}
+
+/* Change color of dropup links on hover */
+.dropup-content a:hover {
+     background-color: #D9D9D9
+}
+
+.dropup-content a.active {
+     background-color: #929292
+}
+
+/* Show the dropup menu on hover */
+.dropup:hover .dropup-content {
+     display: block;
+     bottom: 105%;
+     right: 1%;
+}
+
+/* Change the background color of the dropup button when the dropup content is shown */
+.dropup:hover .dropbtn {
+     background-color: #BABABA;
+
+}
+
+.numberPage {
+     display: inline-block;
      margin-top: 2px;
      border-radius: 7px;
-     height: 34px;
      border-style: solid;
      border-color: #515151;
      border-width: 1px;
- }
+}
 
- table {
+
+.frameQLSanPham table {
      font-family: Inter;
-     width: 100%;
-     margin: 10px 10px 10px 10px;
+     width: 96%;
+     margin-left: 3%;
      background-color: #D9D9D9;
      border-radius: 10px;
- }
- 
-  .tdChucNang {
+     margin-top: 0.1%;
+     justify-items: center;
+}
+
+.tdChucNang {
      float: right;
- }
- 
-  table th {
+}
+
+.frameQLSanPham table th {
      text-align: left;
      color: #000000;
      padding: 8px;
      min-width: 30px;
      font-size: 16px;
- }
- 
-  table td {
+}
+
+.frameQLSanPham table td {
      text-align: left;
      padding: 8px;
      color: #000000;
      font-size: 15px;
- }
- 
-  table td:last-child {
-     border-right: none;
- }
-  table tbody tr {
+}
+
+.frameQLSanPham table tbody tr {
      background: #FFFFFF;
      border-radius: 7px;
      margin-top: 3px;
      font-size: 15px;
- }
-.frameQLSanPham {
-     background-color: #EAEAEA;
-     border-radius: 30px;
-     width: 100%;
-     border-style: solid;
-     border-color: #515151;
-     position: relative;
 }
+
 
 .frameQLSanPham .timkiem .btnXem {
      background-color: #515151;
@@ -114,28 +187,33 @@
      float: right;
      font-size: 16px;
 }
-.dialogXacNhan, .dialogThongBao {
+
+.dialogXacNhan,
+.dialogThongBao {
      position: absolute;
      top: calc(45%);
-     left: 25%;
+     left: 30%;
      transform: translateX(50%);
      background-color: #BABABA;
      border-radius: 16px;
      display: block;
      width: 404px;
      height: 187px;
-     border-radius: 15px; 
+     border-radius: 15px;
      text-align: center;
- }
-  .dialogXacNhan .btnYes{
+}
+
+.dialogXacNhan .btnYes {
      border-radius: 10px;
      background-color: red;
      width: 70px;
      height: 30px;
      color: #FFFFFF;
      margin-top: 20px;
- }
-  .dialogXacNhan .btnNo, .dialogThongBao .btnOK{
+}
+
+.dialogXacNhan .btnNo,
+.dialogThongBao .btnOK {
      margin-left: 22px;
      background-color: #929292;
      border-radius: 10px;
@@ -143,7 +221,7 @@
      height: 30px;
      color: #FFFFFF;
      margin-top: 20px;
- }
+}
 
 .frameQLSanPham .form-control,
 .frameQLThemSanPham .form-control {
@@ -152,39 +230,23 @@
      border-right: 10px;
 }
 
-.frameQLSanPham .timkiem .btnTimKiem:hover {
+.frameQLSanPham .timkiem .btnTimKiem:hover, .frameQLThemSanPham .timkiem .btnTimKiem:hover{
      background-color: #515151;
-}
-
-.frameQLSanPham .dschucNang {
-     background-color: #515151;
-     border-radius: 26px;
-}
-
-.frameQLSanPham .bottomHeader {
-
-     text-align: center;
-     font-size: 20px;
-}
-
-.frameQLSanPham .topHeader {
-     margin-bottom: 2px;
-     margin-right: -5px;
 }
 
 .frameQLSanPham .frameThem {
      background-color: #D9D9D9;
-     border-radius: 15px;
-     margin: 1% 1% 1% 1%;
+     border-radius: 10px;
 }
 
 form {
-     width: 100%;
+     width: 96.2%;
      height: 98%;
      border-radius: 15px;
-     margin-top: 1%;
+     /* margin-top: 1%; */
      margin-bottom: 1%;
      background-color: #FFFFFF;
+     margin-left: 2%;
 }
 
 form .functionName {
@@ -226,7 +288,7 @@ form .btnLuu {
      text-align: center;
      transform: translateY(0px);
      margin-left: 42%;
-     margin-top: 2px;
+     margin-bottom: 1%;
      width: 125px;
      background-color: #515151;
      color: #FFFFFF;

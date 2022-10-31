@@ -1,5 +1,5 @@
 <template v-if="isOpen">
-    <div class="chitietDonHang container" style="text-align:center">
+    <div class="chitietDonHang container-fluid" style="text-align:center">
         <div class="row" style="margin-top:15px"></div>
         <div clas="col-md-12">
             <h4 style="text-align:center">Chi Tiết Đơn Hàng #{{activeDonHang.DH_Ma}}</h4>
@@ -97,20 +97,20 @@
     color: #515151;
 }
 .chitietDonHang {
-    width: 98%;
+    width: 93.8%;
     background-color: #FFFFFF;
     border-radius: 15px;
     border-color: #BABABA;
-    position: absolute;
     background-color: #F9F9F9;
-    top: calc(23%);
-    left: 50%;
+    top: calc(28%);
+    left: 50.1%;
     transform: translateX(-50%);
     border-radius: 16px;
     border: 1px solid #515151;
     display: block;
     color: #515151;
     margin-bottom: 20px;
+    position:absolute;
 }
 
 .chitietDonHang .bangTT {

@@ -1,17 +1,11 @@
 <template>
     <div>
-        <div class="row bottomHeader" v-if="!isOpenLapHD">
-            <div class="col-md-12">
-                <p>Chi Tiết Hóa Đơn</p>
-                <p></p>
-            </div>
-        </div>
-        <div class="row container hoadonchitiet">
+        <div class="row container-fluid hoadonchitiet">
             <div class="col-md-12">
                 <div class="row" style="width:60px"> <img src="../../images/Logo.png"
                         class="rounded float-left img-fluid">
                 </div>
-                <h4 style="text-align:center"> HÓA ĐƠN </h4>
+                <h4 style="text-align:center"> CHI TIẾT HÓA ĐƠN </h4>
                 <div class="row">
                     <table class="bangTT">
                         <tr>
@@ -32,8 +26,9 @@
                         </tr>
                     </table>
                 </div>
+                <div class="row"></div>
                 <div class="row">
-                    <table class="bangCTDH table-bordered">
+                    <table class="bangCTHD table-bordered">
                         <thead>
                             <tr style="width:100%">
                                 <th>STT</th>
@@ -46,7 +41,7 @@
                         <tbody>
                             <tr v-for="(row, i) in chitietdonhang" :key="i" style="width:100%">
                                 <td>{{ i + 1 }}</td>
-                                <td>{{ row.SP_TenSanPham }} </td>
+                                <td>{{ tenSP[i] }} </td>
                                 <td>{{ row.CTDH_SoLuong }}</td>
                                 <td>{{ row.CTDH_Gia }}</td>
                                 <td>{{ row.CTDH_SoLuong * row.CTDH_Gia }}</td>
@@ -65,10 +60,38 @@
 </template>
 
 <script>
+import SanPhamService from '../../services/sanpham.service';
 
 export default {
     name: `HoaDonChiTiet`,
     props: ["khachhang", "nhanvien", "hoadon", "donhang", "chitietdonhang"],
+    data() {
+        return {
+            tenSP:[],
+        }
+    },
+
+    created() {
+        let i = 0;
+        this.chitietdonhang.forEach(element => {
+            this.findSanPham(element.SP_Ma, i);
+            i++;
+        });
+        console.log(this.tenSP)
+    },
+
+    methods: {
+        async findSanPham(maSP, index) {
+            const [error, response] = await this.handle(
+                SanPhamService.getByID(maSP)
+            );
+            if (error) {
+                console.log(error);
+            } else {
+                this.tenSP[index] = response.data.SP_TenSanPham;
+            }
+        }
+    }
 
 }
 
@@ -76,5 +99,14 @@ export default {
 
 
 <style>
-@import "../../assets/QLDonHangStyle.css"
+@import "../../assets/QLDonHangStyle.css";
+
+.hoadonchitiet .bangTT {
+    background-color: #FFFFFF;
+}
+
+.hoadonchitiet .bangCTHD {
+    border-radius: 15px;
+    border-bottom: 1px solid #BABABA;
+}
 </style>

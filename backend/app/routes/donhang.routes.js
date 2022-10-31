@@ -12,8 +12,8 @@ module.exports = (app) => {
     //Retrieve a single order with id
     router.get("/:DH_Ma", donhang.findOne);
 
-    //Update a order with id
-    // router.put("/:DH_Ma", donhang.update);
+    // Update a order with id
+    router.put("/:DH_Ma", donhang.update);
 
     //Delete a order with id
     // router.delete("/:DH_Ma", donhang.delete);

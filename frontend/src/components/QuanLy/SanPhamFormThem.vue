@@ -39,10 +39,9 @@
                     <ErrorMessage name="name" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="information">Thông tin</label>
-                    <Field name="information" class="form-control" v-model="sanphamLocal.SP_ThongTin"
-                        placeholder="Thông tin sản phẩm" />
-                    <ErrorMessage name="information" class="error-feedback" />
+                    <label for="image">Hình ảnh</label><br>
+                    <input type="file" ref="file" name="image" @change="selectFile" accept="image/*">
+
                 </div>
             </div>
             <div class="col-md-6">
@@ -65,9 +64,10 @@
                     <ErrorMessage name="saleprice" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="image">Hình ảnh</label>
-                    <input type="file" ref="file" name="image" @change="selectFile" accept="image/*" >
-                    
+                    <label for="information">Thông tin</label>
+                    <Field name="information" class="form-control" v-model="sanphamLocal.SP_ThongTin"
+                        placeholder="Thông tin sản phẩm" as="textarea"/>
+                    <ErrorMessage name="information" class="error-feedback" />
                 </div>
             </div>
         </div>
