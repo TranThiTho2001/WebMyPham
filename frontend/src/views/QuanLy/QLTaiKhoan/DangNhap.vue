@@ -22,7 +22,7 @@
                     <Form @submit="handleLogin" :validation-schema="schema" v-slot="{ isSubmitting }">
                         <div class="form-group">
                             <label for="username">Tên đăng nhập</label>
-                            <Field name="username" type="text" class="form-control" placeholder="Nhập số tên đăng nhập"
+                            <Field name="username" type="text" class="form-control" placeholder="Nhập tên đăng nhập"
                                 v-model="nhanvien.NV_Ma"
                                 style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA;" />
                             <ErrorMessage name="username" class="error-feedback" style="color:red; font-size: 17px;" />
@@ -65,7 +65,7 @@
                             <button class="btn btn-sm btn-outline-secondary btn-block btnDangNhap"
                                 :disabled="isSubmitting" :class="{ 'submitting': isSubmitting }">
                                 <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                                <span>Đăng nhập</span>
+                                <span>Đăng Nhập</span>
                             </button>
                         </div>
                     </Form>
@@ -87,8 +87,8 @@ export default {
     data() {
 
         const schema = yup.object().shape({
-            username: yup.string().required("Tên đăng nhập phải có giá trị."),
-            password: yup.string().required("Mật khẩu phải có giá trị."),
+            username: yup.string().required("Tên đăng nhập phải có giá trị"),
+            password: yup.string().required("Mật khẩu phải có giá trị"),
         });
 
         return {

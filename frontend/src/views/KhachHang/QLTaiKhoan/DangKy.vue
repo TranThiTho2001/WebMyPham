@@ -123,17 +123,17 @@ export default {
         const schema = yup.object().shape({
             KH_Ten: yup
                 .string()
-                .required("Tên đăng nhập phải có giá trị."),
+                .required("Tên đăng nhập phải có giá trị"),
             KH_SDT: yup
                 .string()
-                .matches(/^(0|\+84)(\s|\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\d)(\s|\.)?(\d{3})(\s|\.)?(\d{3})$/,'Số điện thoại không hợp lệ.')
-                .required("Số điện thoại phải có giá trị."),
+                .matches(/^(0|\+84)(\s|\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\d)(\s|\.)?(\d{3})(\s|\.)?(\d{3})$/,'Số điện thoại không hợp lệ')
+                .required("Số điện thoại phải có giá trị"),
                 
             KH_MatKhau: yup
                 .string()
-                .required("Mật khẩu phải có giá trị.")
-                .min(8, "Mật khẩu tối thiểu 8 ký tự.")
-                .max(30, "Mật khẩu tối đa 30 ký tự."),
+                .required("Mật khẩu phải có giá trị")
+                .min(8, "Mật khẩu tối thiểu 8 ký tự")
+                .max(30, "Mật khẩu tối đa 30 ký tự"),
             confirmPassword: yup
                 .string()
                 .required("Nhập lại mật khẩu phải có giá trị")

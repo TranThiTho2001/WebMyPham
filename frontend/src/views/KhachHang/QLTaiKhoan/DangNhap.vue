@@ -64,7 +64,7 @@
                             <button class="btn btn-sm btn-outline-secondary btn-block btnDangNhap"
                                 :disabled="isSubmitting" :class="{ 'submitting': isSubmitting }">
                                 <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                                <span>Đăng nhập</span>
+                                <span>Đăng Nhập</span>
                             </button>
                         </div>
                         <div class="botton-register">
@@ -87,8 +87,8 @@ export default {
     data() {
 
         const schema = yup.object().shape({
-            KH_SDT: yup.string().required("Tên đăng nhập phải có giá trị."),
-            KH_MatKhau: yup.string().required("Mật khẩu phải có giá trị."),
+            KH_SDT: yup.string().required("Tên đăng nhập phải có giá trị"),
+            KH_MatKhau: yup.string().required("Mật khẩu phải có giá trị"),
         });
 
         return {

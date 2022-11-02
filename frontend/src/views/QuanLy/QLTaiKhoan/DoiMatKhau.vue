@@ -127,7 +127,7 @@
                             </button>
                             <button class="btn btn-sm btn-outline-secondary btn-block btnTroVe" @click="goToQL">
                                 <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                                <span>Trở về</span>
+                                <span>Trở Về</span>
                             </button>
                         </div>
                     </Form>
@@ -155,11 +155,11 @@ export default {
     data() {
 
         const schema = yup.object().shape({
-            username: yup.string().required("Tên đăng nhập phải có giá trị."),
+            username: yup.string().required("Tên đăng nhập phải có giá trị"),
 
             currentPassword: yup
                 .string()
-                .required("Mật khẩu hiện tại phải có giá trị.")
+                .required("Mật khẩu hiện tại phải có giá trị")
                 .min(8, "Mật khẩu có ít nhất 8 ký tự")
                 .max(30, "Mật khẩu có nhiều nhất 30 ký tự"),
 
@@ -170,7 +170,7 @@ export default {
                 .max(30, "Mật khẩu có nhiều nhất 30 ký tự"),
             confirmPassword: yup
                 .string()
-                .required("Mật khẩu xác thực phải có giá trị.")
+                .required("Mật khẩu xác thực phải có giá trị")
                 .min(8, "Mật khẩu có ít nhất 8 ký tự")
                 .max(30, "Mật khẩu có nhiều nhất 30 ký tự"),
         });

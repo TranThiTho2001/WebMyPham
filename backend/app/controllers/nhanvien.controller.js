@@ -233,8 +233,7 @@ exports.signin = async (req, res, next) => {
             NV_Ma: req.body.NV_Ma,
         }).exec()
     );
-    console.log(errorss);
-    console.log(nhanvien.NV_MatKhau + " " + req.body.NV_MatKhau)
+    if(!nhanvien) return res.send("Khong tim thay");
     const passwordIsValid = bcrypt.compareSync(
         req.body.NV_MatKhau,
         nhanvien.NV_MatKhau,
