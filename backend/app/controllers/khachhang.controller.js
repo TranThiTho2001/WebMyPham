@@ -196,12 +196,12 @@ exports.signin = async (req, res, next) => {
     if (!khachhang) {
         return next(new BadRequestError(401, "Incorrect username"));
     }
-
+    
     const passwordIsValid = bcrypt.compareSync(
         req.body.KH_MatKhau,
         khachhang.KH_MatKhau,
     );
-
+console.log(passwordIsValid)
     if (!passwordIsValid) {
         return next(new BadRequestError(401, " password"));
     }

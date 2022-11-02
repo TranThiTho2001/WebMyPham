@@ -2,7 +2,7 @@
     <Form @submit="$emit('themDanhMuc-submit', danhmucLocal)" :validation-schema="schema">
         <div class="functionName">
             <span class="fa fa-plus-circle"> </span>
-            <p style="display:inline">Thêm danh mục mới </p>
+            <p style="display:inline"> Thêm danh mục mới </p>
         </div>
 
         <div class="form-group">

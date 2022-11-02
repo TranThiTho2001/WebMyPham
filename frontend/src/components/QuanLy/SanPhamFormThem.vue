@@ -2,7 +2,7 @@
     <Form @submit="$emit('themSanPham-submit', sanphamLocal)" :validation-schema="schema" enctype="multipart/form-data">
         <div class="functionName">
             <span class="fa fa-plus-circle"> </span>
-            <p style="display:inline">Thêm sản phẩm mới </p>
+            <p style="display:inline"> Thêm sản phẩm mới </p>
         </div>
         <div class="row container-fluid">
             <div class="col-md-6">
@@ -48,13 +48,13 @@
                 <div class="form-group">
                     <label for="quality">Số lượng nhập</label>
                     <Field name="quality" class="form-control" v-model="sanphamLocal.SP_SoLuong"
-                        placeholder="Nhập Số lượng sản phẩm nhập vào" />
+                        placeholder="Nhập số lượng sản phẩm nhập vào" />
                     <ErrorMessage name="quality" class="error-feedback" />
                 </div>
                 <div class="form-group">
                     <label for="purchase_price">Giá mua vào</label>
                     <Field name="purchase_price" class="form-control" v-model="sanphamLocal.SP_GiaMuaVao"
-                        placeholder="Nhập Giá mua sản phẩm " />
+                        placeholder="Nhập giá mua sản phẩm " />
                     <ErrorMessage name="purchase_price" class="error-feedback" />
                 </div>
                 <div class="form-group">

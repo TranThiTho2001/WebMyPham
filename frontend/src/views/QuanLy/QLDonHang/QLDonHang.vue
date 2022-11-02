@@ -8,17 +8,18 @@
                 <QLHeader :maNV="localNhanVien.NV_Ma" />
                 <div class="row bottomHeader">
                     <div class="col-md-12">
-                        <p style="font-family:Inter; color:#515151; font-size:30px; font-weight:700">Danh sách đơn hàng
-                        </p>
+                        <p class="lableName" v-if="!isOpenCTDH && !isOpenHoaDon">DANH SÁCH ĐƠN HÀNG</p>
+                        <p class="lableName" v-if="isOpenCTDH && !isOpenHoaDon">CHI TIẾT ĐƠN HÀNG</p>
+                        <p class="lableName" v-if="!isOpenCTDH && isOpenHoaDon">CHI TIẾT HÓA ĐƠN</p>
                     </div>
                 </div>
                 <!-- Thanh tiem kiem -->
                 <div class="row timkiem">
                     <div class="col-md-9 col-sm-8 input-group" v-if="(!isOpenHoaDon && !isOpenCTDH)">
                         <div class="row" style="margin-left:1px">
-                            <input type="text" class="form-control col-md-10 inputSearch" placeholder="Tìm theo tên"
+                            <input type="text" class="form-control col-md-10 inputSearch" placeholder="Tìm theo mã"
                                 v-model="nameToSearch" @keyup.enter="searchName" @click="goToQLDonHang"/>
-                            <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button"
+                            <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button" style="border:none"
                                 @click="searchName">
                                 <span class="fa fa-search" style="font-size:18px"></span>
                             </button>
@@ -27,8 +28,8 @@
                     <div v-if="(!isOpenCTDH && isOpenHoaDon)|| (!isOpenHoaDon && isOpenCTDH)"  class="col-md-7 col-sm-6 input-group">
                         <div class="row" style="margin-left:1px">
                             <input type="text" class="form-control col-md-10 inputSearch" placeholder="Tìm theo tên"
-                                v-model="nameToSearch" @keyup.enter="searchName" @click="goToQLDonHang"/>
-                            <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button"
+                                v-model="nameToSearch" @keyup.enter="searchName" @click="isOpenCTDH = false, isOpenList = false,isOpenHoaDon = false"/>
+                            <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button" style="border:none"
                                 @click="searchName">
                                 <span class="fa fa-search" style="font-size:18px"></span>
                             </button>
@@ -38,16 +39,15 @@
                     <div class="col-md-3 col-sm-4" style="text-align: center;">
                         <div class="btnTrangThai" style="float:right" @click="goToQLDonHang" >
                             <p style="display: inline-block; padding-top: 4px;"> Trạng thái &nbsp;</p>
-                            <div class="pagination nav-item dropdown " style="width:190px;">
-                                <a class="nav-link" href="#" style=" width: max-content; padding-top: 3px;width:180px"
+                            <div class="pagination nav-item dropdown " style="width:175px;"  @click="isOpenCTDH = false, isOpenList = false,isOpenHoaDon = false">
+                                <a class="nav-link" href="#" style=" width: max-content; padding-top: 4px;width:180px"
                                     id="navbardrop">
                                     {{ curentStatus }} <span class="fas fa-angle-down"></span>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="#"
                                             @click="findDHByStatus(`Tất cả`), setCurentStatus(`Tất cả`)">Tất cả</a>
                                         <a class="dropdown-item" href="#" v-for="(trangthai, i) in trangthai " :key="i"
-                                            @click="findDHByStatus(trangthai), setCurentStatus(trangthai)">{{ trangthai
-                                            }}
+                                            @click="findDHByStatus(trangthai), setCurentStatus(trangthai)">{{ trangthai }}
                                         </a>
                                     </div>
                                 </a>
@@ -145,7 +145,7 @@
                 </div>
                 <!-- danh sach so trang hien thi -->
                 <div class="row" style="width: 100%;" v-if="!isOpenChoosePage && donhang.length>11">
-                    <div class="btnChoosePage">
+                    <div class="btnChonTrang">
                         <p style="display: inline-block; padding-top: 4px;text-align: right;">Trang &nbsp;</p>
                         <div class="numberPage">
                             <div class="dropup">

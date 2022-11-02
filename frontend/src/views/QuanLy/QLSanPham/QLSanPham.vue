@@ -7,8 +7,8 @@
             <div class="col-md-10">
                     <QLHeader :maNV="localNhanVien.NV_Ma" />
                 <div class="row bottomHeader">
-                    <div class="col-md-12">
-                        <p style="font-family:Inter; color:#515151; font-size:30px; font-weight:700">Danh sách sản phẩm</p>
+                    <div class="col-md-12" style="width:96%; margin-left: 2%;">
+                        <p class="lableName">DANH SÁCH SẢN PHẨM</p>
                     </div>
                 </div>
                 <div class="row timkiem">
@@ -16,7 +16,7 @@
                         <div class="row" style="margin-left:0.01%">
                             <input type="text" class="form-control col-md-10 inputSearch" placeholder="Tìm theo tên"
                                 v-model="nameToSearch" @keyup.enter="searchName" />
-                            <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button"
+                            <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button" style="border:none"
                                 @click="searchName">
                                 <span class="fa fa-search" style="font-size:18px"></span>
                             </button>
@@ -71,7 +71,7 @@
                 
                 <!-- danh sach so trang hien thi -->
                 <div class="row" style="width: 100%;" v-if="!isOpenChoosePage && sanpham.length>11">
-                    <div class="btnChoosePage">
+                    <div class="btnChonTrang">
                         <p style="display: inline-block; padding-top: 4px;text-align: right;">Trang &nbsp;</p>
                         <div class="numberPage">
                             <div class="dropup">
@@ -95,8 +95,8 @@
             <span class="fas fa-trash-alt" style="color:red"></span> Bạn chắc chắn muốn xóa?
         </p>
         <button class="btnYes btn btn-sm btn-outline-secondary"
-            @click="findSanPhamTheoCTDH(), isOpenXacNhan = !isOpenXacNhan, isOpenThongBao = !isOpenThongBao">Yes</button>
-        <button class="btnNo btn btn-sm btn-outline-secondary" @click="isOpenXacNhan = !isOpenXacNhan">No</button>
+            @click="findSanPhamTheoCTDH(), isOpenXacNhan = !isOpenXacNhan, isOpenThongBao = !isOpenThongBao">Xóa</button>
+        <button class="btnNo btn btn-sm btn-outline-secondary" @click="isOpenXacNhan = !isOpenXacNhan">Hủy</button>
     </div>
     <div class="dialogThongBao" v-if="isOpenThongBao">
         <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 18px;">

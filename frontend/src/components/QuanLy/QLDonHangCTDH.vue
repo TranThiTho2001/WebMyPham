@@ -2,7 +2,7 @@
     <div class="chitietDonHang container-fluid" style="text-align:center">
         <div class="row" style="margin-top:15px"></div>
         <div clas="col-md-12">
-            <h4 style="text-align:center">Chi Tiết Đơn Hàng #{{activeDonHang.DH_Ma}}</h4>
+            <h4 style="text-align:center">CHI TIẾT HÓA ĐƠN #{{activeDonHang.DH_Ma}}</h4>
         </div>
         <div class="row">
             <table class="bangTT">
@@ -47,8 +47,8 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="col-md-12" style="text-align: right; margin-bottom: 15px;">
-                <h6 style="text-align: right; margin-right: 100px;">Thành tiền: {{activeDonHang.DH_TongTien}}</h6>
+            <div class="col-md-12">
+                <h6 style="text-align: right; margin-right: 100px; margin-top: 15px;">Thành tiền: {{activeDonHang.DH_TongTien}}</h6>
             </div>
         </div>
     </div>

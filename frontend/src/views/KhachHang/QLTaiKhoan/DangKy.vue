@@ -8,9 +8,9 @@
                     <img src="../../../images/logoDanhNhap.png" class="img-fluid  mx-auto d-block" width="269px"
                         height="222px" alt="Logo" style="border-radius: 15px;">
                 </div>
-                <div class="row" style="margin-top:25%">
+                <div class="row" style="margin-top:44.1%">
                     <img src="../../../images/ImageDangNhap.png" class="img-fluid" width="464px" height="466px"
-                        alt="Image" style="border-radius: 15px; position: relative; bottom: -100px;">
+                        alt="Image" style="border-radius: 15px; position: relative; bottom: -34px;">
                 </div>
             </div>
 
@@ -99,7 +99,7 @@
                                 <span>Đăng Ký</span>
                             </button>
                         </div>
-                        <div class="textDangNhap" style="margin-bottom:0%">
+                        <div class="textDangNhap" >
                             <p>Bạn đã có tài khoản?<button @click="goToDangNhap" href="" class="btnGoToDangNhap"> Đăng Nhập</button></p>
                         </div>
                     </Form>
@@ -157,7 +157,7 @@ export default {
     },
     mounted() {
         this.khachhang.KH_MatKhau = "";
-        if (this.khachhangLoggedIn) {
+        if (!this.khachhangLoggedIn) {
             this.$router.push("/");
         }
     },

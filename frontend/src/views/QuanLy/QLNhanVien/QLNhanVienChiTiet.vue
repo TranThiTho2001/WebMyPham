@@ -12,7 +12,7 @@
                     </div>
                     <div class="row bottomHeader">
                          <div class="col-md-12 font-weight-bold" style="color:#515151; font-size: 25px;">
-                              <p>Danh sách nhân viên</p>
+                              <p class="lableName">Danh sách nhân viên</p>
                          </div>
                     </div>
                     <div class="row timkiem">

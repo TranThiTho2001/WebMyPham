@@ -35,7 +35,7 @@
     margin-left: 9.1%;
 }
 .frameQLDonHang .btnTrangThai{
-    margin-left: 2%;
+    margin-left: 6%;
     position: absolute;
 }
 .frameQLDonHang .form-control {
@@ -110,6 +110,7 @@
     border-radius: 7px;
     margin-top: 3px;
     font-size: 15px;
+    border-bottom: solid 0.01px #e9e7e7;
 }
 .pagination a {
     color: #515151;
@@ -142,11 +143,11 @@
 .pagination  .nav-link:hover .dropdown-menu {
     position: absolute;
     background-color: #FFFFFF;
-    width: 190px;
+    width: 180px;
     border-radius: 10px 10px 10px 10px;
     display: block;
     text-align: left;
-    
+    top: calc(95%);
 }
 .btnChoosePage{
     margin-left: 88.4%;
@@ -219,33 +220,48 @@
 
 
 
-.dialogTrangThai,
-.dialogXacNhan {
+.frameLapHoaDon .dialogTrangThai,
+ .dialogXacNhan {
     position: absolute;
-    background-color: #F9F9F9;
-    top: calc(32%);
-    left: 55%;
-    transform: translateX(-50%);
-    width: max-content;
+    top: calc(45%);
+    left: 31.9%;
+    transform: translateX(50%);
+    border: solid 0.5px #929292;
+    background-color: #EAEAEA;
     border-radius: 16px;
-    border: 1px solid #515151;
     display: block;
-    color: #515151;
-}
-
-.dialogTrangThai .btnCapNhat,
-.dialogTrangThai .btnHuy,
-.dialogXacNhan .btnYes,
-.dialogXacNhan .btnNo {
-    width: 100px;
-    background-color: #929292;
+    width: max-content;
     border-radius: 15px;
-    margin-right: 20px;
-    margin-bottom: 50px;
+    text-align: center;
+}
+
+.frameLapHoaDon .dialogXacNhan .btnYes {
+    border-radius: 10px;
+    background-color: red;
+    width: 70px;
+    height: 30px;
     color: #FFFFFF;
+    margin: 20px 0px 20px 10px;
 }
 
 
+.frameLapHoaDon .dialogXacNhan .btnNo{
+    border-radius: 10px;
+    background-color: #929292;
+    width: 70px;
+    height: 30px;
+    color: #FFFFFF;
+    margin: 20px 0px 20px 20px;
+}
+.dialogThongBao .btnOK {
+     margin-left: 22px;
+     background-color: #929292;
+     border-radius: 10px;
+     width: 70px;
+     height: 30px;
+     color: #FFFFFF;
+     margin-top: 4%;
+}
 /* Lap hoa don */
 .frameLapHoaDon .dschucNang .navigationBar .dsChucNang .btnDonHang {
     background-color: #FFFFFF;
@@ -266,13 +282,13 @@
 
 .frameLapHoaDon .btnLapHoaDon, .frameLapHoaDon .btnTroVe {
     background-color: #515151;
-    border-radius: 15px;
+    border-radius: 10px;
     color: white;
     border: none;
     height: 40px;
     width: 120px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 20px 21px 20px 0px;
+    float: right;
 }
 
 
@@ -294,5 +310,12 @@
     border: 1px solid #515151;
     display: block;
     color: #515151;
+}
+
+.lableName{
+    font-family:Inter; 
+    color: #515151; 
+    font-size: 30px; 
+    font-weight: 600;
 }
 

@@ -9,15 +9,15 @@
                      <QLHeader  :maNV="localNhanVien.NV_Ma" />
                  <div class="row bottomHeader">
                      <div class="col-md-12 font-weight-bold" style="color:#515151; font-size: 25px;">
-                         <p style="font-family:Inter; color:#515151; font-size:30px; font-weight:700">Danh sách nhân viên</p>
+                         <p class="lableName">THÊM NHÂN VIÊN</p>
                      </div>
                  </div>
                  <div class="row timkiem" style="margin-left:2%">
                     <div class="col-md-7 input-group">
                         <div class="row" >
                             <input type="text" class="form-control col-md-10 inputSearch" placeholder="Tìm theo tên"
-                               v-model="nameToSearch" @keyup.enter="searchName"/>                           
-                                <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button"
+                               v-model="nameToSearch" @keyup.enter="searchName" @click="goToQLNhanVien"/>                           
+                                <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button" style="border:none"
                                     @click="searchName">
                                     <span class="fa fa-search" style="font-size:18px"></span>
                                </button>                           

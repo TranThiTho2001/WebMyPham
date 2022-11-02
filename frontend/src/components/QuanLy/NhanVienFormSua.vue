@@ -30,7 +30,7 @@
                     <div class="form-group">
                          <label for="ngaysinhNV">Ngày sinh</label>
                          <Field name="ngaysinhNV" class="form-control" v-model="nhanvienMoi.NV_NgaySinh">
-                              <datepicker :value="nhanvienMoi.NV_NgaySinh" :placeholder="nhanvienMoi.NV_NgaySinh">
+                              <datepicker :value="nhanvienMoi.NV_NgaySinh" v-model="nhanvienMoi.NV_NgaySinh">
                               </datepicker>
                          </Field>
                          <ErrorMessage name="ngaysinhNV" class="error-feedback" />
@@ -54,8 +54,11 @@
                     </div>
 
                     <div class="form-group">
-                         <label for="matkhauNV">Mật khẩu</label>
-                         <Field name="matkhauNV" class="form-control" v-model="nhanvienMoi.NV_MatKhau" type="password"/>
+                         <label for="matkhauNV">Mật khẩu</label><br>
+                        <div style="border: solid 0.1px #cecaca; border-radius: 5px;">
+                              <Field name="matkhauNV" class="form-control" v-model="nhanvienMoi.password" type="password" style="width:95%; display: inline; border: none;" /> 
+                              <span class="far fa-eye-slash" style="dislay:inline"> </span>
+                         </div> 
                          <ErrorMessage name="matkhauNV" class="error-feedback" />
                     </div>
                     <div class="form-group">
@@ -81,7 +84,7 @@
                </p>
                <p v-else class="textMessage2">{{ message1 }}</p><br>
                <p v-if="message1 == 'Cập nhật không thành công'" class="textMessage1">{{ message1 }}</p>
-               <button class="btn btn-outline-secondary btnLuu">Lưu</button>
+               <button class="btn btn-outline-secondary btnCapNhat">Cập Nhật</button>
           </div>
 
      </form>
@@ -133,8 +136,8 @@ export default {
                     .string()
                     .required("Địa chỉ phải có giá trị"),
                matkhauNV: yup
-                    .string()
-                    .required("Mật khẩu tài khoản phải có giá trị"),
+                    .string(),
+                    // .required("Mật khẩu tài khoản phải có giá trị")
                loaiNV: yup
                     .string()
                     .required("Loại nhân viên phải được chọn"),
@@ -142,6 +145,7 @@ export default {
           return {
                nhanvienMoi: this.newnhanvien,
                schema,
+               password:"",
           };
      },
 };
@@ -158,6 +162,7 @@ export default {
 select {
      width: 200px;
      height: 35px;
-     border-color: #c9c6c6;
+     border-color: #cecaca;
+     background-color: #FFFFFF;
 }
 </style>

@@ -23,7 +23,7 @@
                         <div class="form-group">
                             <label for="KH_SDT">Số điện thoại</label>
                             <Field name="KH_SDT" type="text" class="form-control"
-                                placeholder="Nhập số điện thoại đăng ký tài khoản" v-model="khachhang.KH_SDT"
+                                placeholder="Nhập số điện thoại đã đăng ký tài khoản" v-model="khachhang.KH_SDT"
                                 style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA;" />
                             <ErrorMessage name="KH_SDT" class="error-feedback" />
 

@@ -6,20 +6,18 @@
                 <DanhSachChucNang :maNV="localNhanVien.NV_Ma"/>
             </div>
             <div class="col-md-10">
-                <div class="row topHeader">
                     <QLHeader  :maNV="localNhanVien.NV_Ma" />
-                </div>
                 <div class="row bottomHeader">
-                    <div class="col-md-12 font-weight-bold" style="color:#515151; font-size: 25px;">
-                        <p style="font-family:Inter; color:#515151; font-size:30px; font-weight:700">Danh sách nhân viên</p>
+                    <div class="col-md-12 font-weight-bold">
+                        <p class="lableName">CẬP NHẬT THÔNG TIN NHÂN VIÊN</p>
                     </div>
                 </div>
                 <div class="row timkiem" style="margin-left:2%">
                     <div class="col-md-7 input-group">
                         <div class="row" >
                             <input type="text" class="form-control col-md-10" placeholder="Tìm theo tên"
-                               v-model="nameToSearch" @keyup.enter="searchName"/>                           
-                                <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button"
+                               v-model="nameToSearch" @keyup.enter="searchName" @click="goToQLNhanVien"/>                           
+                                <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button" style="border:none"
                                     @click="searchName">
                                     <span class="fa fa-search" style="font-size:18px"></span>
                                </button>                           
@@ -81,6 +79,15 @@ export default {
            }
            else{
                data.NV_LoaiNV = 2;
+           }
+           if(data.password!=""){
+            data.NV_MatKhau = data.password;
+            console.log("mk"+data.NV_MatKhau)
+            data.curentPass = "";
+           }
+           else{
+            data.NV_MatKhau = "";
+            data.curentPass = "";
            }
             const [error, response] = await this.handle(
                NhanVienService.update(data.NV_Ma, data)

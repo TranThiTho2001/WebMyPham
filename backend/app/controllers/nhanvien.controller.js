@@ -73,7 +73,7 @@ exports.findAll = async (req, res) => {
     }
 
     const [error, documents] = await handle(
-        NhanVien.find(condition, '-ownerId').sort({'NV_Ma':1})
+        NhanVien.find(condition, '-ownerId').sort({ 'NV_Ma': 1 })
     );
 
     if (error) {
@@ -108,45 +108,98 @@ exports.findOne = async (req, res) => {
 
 //*-----Update a employee by the is in the request
 exports.update = async (req, res) => {
-    if (!req.body) {
-        return next(
-            new BadRequestError(400, "Dữ liệu cập nhật nhân viên không thể trống!")
-        );
-    }
     const condition = {
         NV_Ma: req.params.NV_Ma,
     };
 
-    const [error, document] = await handle(
-        NhanVien.findOneAndUpdate(condition, req.body, {
-            new: true,
-            projection: "-ownerId",
-        })
-    );
-    const [errors, documents] = await handle(
-        NhanVien.findOneAndUpdate(condition, {
-            $set: {
-              'NV_MatKhau': bcrypt.hashSync(req.body.NV_MatKhau, 8),
-            }
-          }, {
-            new: true,
-            projection: "-ownerId",
-        })
-    );
-// `Lỗi trong quá trình cập nhật thông tin nhân viên có mã id=${req.params.NV_Ma}`
-    if (error || errors) {
-        console.log(error)
-        return next(
-            new BadRequestError(error
-            )
+    const curentPass = req.body.curentPass;
+    console.log(curentPass)
+    console.log("1")
+    if (curentPass != "") {
+        const [errorss, nhanvien] = await handle(
+            NhanVien.findOne(condition)
         );
+        console.log(nhanvien.NV_MatKhau + " " + req.body.NV_MatKhau)
+        const passwordIsValid = bcrypt.compareSync(
+            curentPass,
+            nhanvien.NV_MatKhau,
+        );
+        console.log(passwordIsValid + "cdsfd")
+        if (!passwordIsValid) {
+            return res.send("Sai mat khau");
+        }
+        else {
+            const [errors, documents] = await handle(
+                NhanVien.findOneAndUpdate(condition, {
+                    $set: {
+                        'NV_MatKhau': bcrypt.hashSync(req.body.NV_MatKhau, 8),
+                    }
+                }, {
+                    new: true,
+                    projection: "-ownerId",
+                })
+            );
+            if (errors) {
+                return res.send("Lỗi trong quá trình đổi mật khẩu")
+            }
+            console.log(documents);
+            return res.send("Đổi mật khẩu thành công")
+        }
+    }
+    else {
+        console.log("2")
+        if (req.body.NV_MatKhau == "") {
+            const [error, document] = await handle(
+                NhanVien.findOneAndUpdate(condition, {
+                    $set: {
+                        'NV_Ten': req.body.NV_Ten,
+                        'NV_Ho': req.body.NV_Ho,
+                        'NV_CCCD': req.body.NV_CCCD,
+                        'NV_NgaySinh': req.body.NV_NgaySinh,
+                        'NV_SDT': req.body.NV_SDT,
+                        'NV_Email': req.body.NV_Email,
+                        'NV_DiaChi': req.body.NV_DiaChi,
+                        'NV_LoaiNV': req.body.NV_LoaiNV,
+                    }
+                },
+                    {
+                        new: true,
+                        projection: "-ownerId",
+                    })
+            );
+            if(error){
+                return res.send("Lỗi trong quá tình cập nhật")
+            }
+            return res.send("Cập nhật thông tin nhân viên thành công")
+        }
+        else{
+            console.log("3")
+            const [error, document] = await handle(
+                NhanVien.findOneAndUpdate(condition, {
+                    $set: {
+                        'NV_Ten': req.body.NV_Ten,
+                        'NV_Ho': req.body.NV_Ho,
+                        'NV_CCCD': req.body.NV_CCCD,
+                        'NV_NgaySinh': req.body.NV_NgaySinh,
+                        'NV_SDT': req.body.NV_SDT,
+                        'NV_Email': req.body.NV_Email,
+                        'NV_DiaChi': req.body.NV_DiaChi,
+                        'NV_LoaiNV': req.body.NV_LoaiNV,
+                        'NV_MatKhau': bcrypt.hashSync(req.body.NV_MatKhau, 8),
+                    }
+                },
+                    {
+                        new: true,
+                        projection: "-ownerId",
+                    })
+            );
+            if(error){
+                return res.send("Lỗi trong quá tình cập nhật")
+            }
+            return res.send("Cập nhật thông tin nhân viên thành công")
+        }
     }
 
-    if (!document) {
-        return next(new BadRequestError(404, "Không tìm thấy nhân viên!"));
-    }
-
-    return res.send({ message: "Cập nhật thông tin nhân viên thành công." });
 };
 
 //Delete a employee with the specified id in the request
@@ -175,28 +228,22 @@ exports.delete = async (req, res) => {
 };
 
 exports.signin = async (req, res, next) => {
-    const [error, nhanvien] = await handle(
+    const [errorss, nhanvien] = await handle(
         NhanVien.findOne({
             NV_Ma: req.body.NV_Ma,
         }).exec()
     );
-
-    if (error) {
-        console.log(error);
-        return next(new BadRequestError(500));
-    }
-    if (!nhanvien) {
-        return next(new BadRequestError(401, "Incorrect username" + req.body.NV_Ma));
-    }
-
+    console.log(errorss);
+    console.log(nhanvien.NV_MatKhau + " " + req.body.NV_MatKhau)
     const passwordIsValid = bcrypt.compareSync(
         req.body.NV_MatKhau,
         nhanvien.NV_MatKhau,
     );
-    console.log(passwordIsValid)
+    console.log(passwordIsValid + "cdsfd")
     if (!passwordIsValid) {
-        return next(new BadRequestError(401, " or password"));
+        return res.send("Sai mat khau");
     }
+
 
     const token = jwt.sign({ NV_Ma: nhanvien.NV_Ma }, config.jwt.secret, {
         expiresIn: 86400, // 24 hours

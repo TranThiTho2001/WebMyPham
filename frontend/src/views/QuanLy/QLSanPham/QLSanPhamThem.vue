@@ -8,9 +8,9 @@
             </div>
             <div class="col-md-10">
                     <QLHeader :maNV="localNhanVien.NV_Ma" />
-                <div class="row bottomHeader">
+                <div class="row bottomHeader" style="width:96%; margin-left: 2%;">
                     <div class="col-md-12 font-weight-bold" style="color:#515151; font-size: 25px;">
-                        <p style="font-family:Inter; text-align: center; margin-bottom: 10px;">Danh sách sản phẩm</p>
+                        <p class="lableName">THÊM SẢN PHẨM</p>
                     </div>
                 </div>
                 <div class="row timkiem">
@@ -18,7 +18,7 @@
                         <div class="row" style="margin-left:0.01%">
                             <input type="text" class="form-control col-md-10" placeholder="Tìm theo tên"
                                 v-model="nameToSearch" @keyup.enter="searchName" @click="goToQLSanPham" />
-                            <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button"
+                            <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button" 
                                 @click="searchName" style="border:none">
                                 <span class="fa fa-search" style="font-size:18px"></span>
                             </button>

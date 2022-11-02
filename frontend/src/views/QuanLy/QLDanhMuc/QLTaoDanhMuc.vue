@@ -9,7 +9,7 @@
                 <QLHeader  :maNV="localNhanVien.NV_Ma" />
                 <div class="row bottomHeader">
                     <div class="col-md-12 font-weight-bold" style="color:#515151; font-size: 25px;">
-                        <p>Danh sách danh mục</p>
+                        <p class="lableName">THÊM DANH MỤC SẢN PHẨM</p>
                     </div>
                 </div>
                 <div class="row timkiem" >

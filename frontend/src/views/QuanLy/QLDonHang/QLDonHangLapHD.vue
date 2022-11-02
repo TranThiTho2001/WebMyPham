@@ -2,13 +2,13 @@
     <div class="container-fluid frameLapHoaDon">
         <div class="row list">
             <div class="col-md-2 dschucNang">
-                <DanhSachChucNang :maNV="localNhanVien.NV_Ma"/>
+                <DanhSachChucNang :maNV="localNhanVien.NV_Ma" />
             </div>
             <div class="col-md-10">
-                    <QLHeader :maNV="localNhanVien.NV_Ma" />
-                <div class="row bottomHeader" v-if="!isOpenLapHD">
+                <QLHeader :maNV="localNhanVien.NV_Ma" />
+                <div class="row bottomHeader">
                     <div class="col-md-12">
-                        <p style="font-family:Inter; color:#515151; font-size:30px; font-weight:700">Lập hóa đơn</p>
+                        <p class="lableName">LẬP HÓA ĐƠN</p>
                         <p></p>
                     </div>
                 </div>
@@ -16,22 +16,22 @@
                 <div class="row container-fluid hoadon" v-if="!isOpenLapHD">
                     <div class="col-md-12">
                         <div>
-                        
-                        <h4 style="text-align:center; margin-top: 30px; margin-bottom: 30px;"> HÓA ĐƠN </h4></div>
+                            <h4 style="text-align:center; margin-top: 30px; margin-bottom: 30px;"> HÓA ĐƠN </h4>
+                        </div>
                         <div class="row">
                             <table class="bangTT">
                                 <tr>
                                     <!-- <td>Số HD:  tt</td> -->
-                                    <td>Khách hàng: {{khachhang.KH_Ten}}</td>
-                                    <td>Nhân viên: {{nhanvien.NV_Ho+nhanvien.NV_Ten}} </td>
+                                    <td>Khách hàng: {{ khachhang.KH_Ten }}</td>
+                                    <td>Nhân viên: {{ nhanvien.NV_Ho + nhanvien.NV_Ten }} </td>
                                 </tr>
                                 <tr>
                                     <!-- <td>Ngày lập: </td> -->
-                                    <td>Mã DH: {{MaDH}}</td>
-                                    <td>SDT: {{khachhang.KH_SDT}} </td>
+                                    <td>Mã DH: {{ MaDH }}</td>
+                                    <td>SDT: {{ khachhang.KH_SDT }} </td>
                                 </tr>
                                 <tr>
-                                    <td>Địa chỉ giao hàng: {{donhang.DH_DiaChiGiaoHang}}</td>
+                                    <td>Địa chỉ giao hàng: {{ donhang.DH_DiaChiGiaoHang }}</td>
                                 </tr>
                             </table>
                         </div>
@@ -47,18 +47,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(row,i) in chitietdonhang" :key="i" style="width:100%">
-                                        <td>{{i+1}}</td>
-                                        <td>{{row.SP_Ten}} </td>
-                                        <td>{{row.CTDH_SoLuong}}</td>
-                                        <td>{{row.CTDH_Gia}}</td>
-                                        <td>{{row.CTDH_SoLuong * row.CTDH_Gia}}</td>
+                                    <tr v-for="(row, i) in chitietdonhang" :key="i" style="width:100%">
+                                        <td>{{ i + 1 }}</td>
+                                        <td>{{ row.SP_Ten }} </td>
+                                        <td>{{ row.CTDH_SoLuong }}</td>
+                                        <td>{{ row.CTDH_Gia }}</td>
+                                        <td>{{ row.CTDH_SoLuong * row.CTDH_Gia }}</td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="col-md-12" style="text-align: right; margin-bottom: 15px;">
                                 <h6 style="text-align: right; margin-right: 100px;">Thành tiền:
-                                    {{donhang.DH_TongTien}}
+                                    {{ donhang.DH_TongTien }}
                                 </h6>
                             </div>
                         </div>
@@ -66,32 +66,32 @@
 
                 </div>
                 <HoaDonChiTiet v-if="isOpenLapHD" :khachhang="khachhang" :chitietdonhang="chitietdonhang"
-                    :nhanvien="nhanvien" :hoadon="hoadon" :donhang="donhang" />
-                <div class="row" >
-                    <div class="col-md-10" v-if="!isOpenLapHD">
-                        <button class="btnLapHoaDon" @click="isOpenXacNhan=!isOpenXacNhan">
-                            Lập Hóa Đơn
-                        </button>
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btnTroVe" @click="goToQLDonHang">
-                            Tro ve
-                        </button>
-                    </div>
+                    :nhanvien="nhanvien" :hoadon="hoadon" :donhang="donhang" />  
+                              <div class="row">
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                    <button class="btnTroVe" @click="goToQLDonHang">
+                        Tro ve
+                    </button>
+                    <button class="btnLapHoaDon" @click="isOpenXacNhan = !isOpenXacNhan" v-if="!isOpenLapHD">
+                        Lập Hóa Đơn
+                    </button>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="dialogXacNhan" v-if="isOpenXacNhan">
-        <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 20px;">
+            </div>
+        </div>   
+        
+        <div class="dialogXacNhan" v-if="isOpenXacNhan">
+        <p style="color:#515151; text-align:center; margin: 50px 20px 20px 20px; font-size: 20px;">
             Bạn chắc chắn muốn lập hóa đơn cho đơn hàng
-            #{{donhang.DH_Ma}}
+            #{{ donhang.DH_Ma }}
         </p>
         <button class="btnYes btn btn-sm btn-outline-secondary"
-            @click="findHoaDon(), isOpenXacNhan = !isOpenXacNhan, isOpenLapHD=!isOpenLapHD"
-            style="margin-left:170px">Yes</button>
-        <button class="btnNo btn btn-sm btn-outline-secondary" @click="isOpenXacNhan = !isOpenXacNhan">No</button>
+            @click="findHoaDon(), isOpenXacNhan = !isOpenXacNhan, isOpenLapHD = !isOpenLapHD">Lập hóa đơn</button>
+        <button class="btnNo btn btn-sm btn-outline-secondary" @click="isOpenXacNhan = !isOpenXacNhan">Hủy</button>
     </div>
+    </div>
+
 </template>
 <script>
 import DanhSachChucNang from '../../../components/QuanLy/DanhSachChucNang.vue';
@@ -245,9 +245,9 @@ export default {
             }
         },
 
-        async goToQLDonHang(){
+        async goToQLDonHang() {
             console.log(this.localNhanVien.NV_Ma)
-            this.$router.push({ name: 'QLDonHang', params: {id: this.localNhanVien.NV_Ma}})
+            this.$router.push({ name: 'QLDonHang', params: { id: this.localNhanVien.NV_Ma } })
         }
     },
 
@@ -260,6 +260,7 @@ export default {
 
 <style>
 @import "../../../assets/QLDonHangStyle.css";
+
 .hoadon .bangTT {
     background-color: #FFFFFF;
 }
@@ -268,5 +269,4 @@ export default {
     border-radius: 15px;
     border-bottom: 1px solid #BABABA;
 }
-
 </style>

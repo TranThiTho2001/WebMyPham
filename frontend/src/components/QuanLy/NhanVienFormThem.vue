@@ -2,7 +2,7 @@
      <Form @submit="$emit('themNhanVien-submit', nhanvienMoi)" :validation-schema="schema">
           <div class="functionName">
                <span class="fa fa-plus-circle"> </span>
-               <p style="display:inline">Thêm nhân viên mới </p>
+               <p style="display:inline"> Thêm nhân viên mới </p>
           </div>
           <div class="row container-fluid content">
                <div class="col-md-6">

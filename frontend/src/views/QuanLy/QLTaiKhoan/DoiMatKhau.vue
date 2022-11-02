@@ -8,9 +8,9 @@
                     <img src="../../../images/logoDanhNhap.png" class="img-fluid  mx-auto d-block" width="269px"
                         height="222px" alt="Logo" style="border-radius: 15px;">
                 </div>
-                <div class="row" style="margin-top:45%">
+                <div class="row" style="margin-top:41%">
                     <img src="../../../images/ImageDangNhap.png" class="img-fluid" width="464px" height="466px"
-                        alt="Image" style="border-radius: 15px;">
+                        alt="Image" style="border-radius: 15px; position: relative; bottom: -40px;">
                 </div>
             </div>
 
@@ -19,7 +19,7 @@
                     <h2 style="text-align:center">ĐỔI MẬT KHẨU</h2>
                 </div>
                 <div class="row">
-                    <Form @submit="handleLogin" :validation-schema="schema" v-slot="{ isSubmitting }">
+                    <Form @submit="handleLogin" :validation-schema="schema" v-slot="{ isSubmitting }" style="background-color: none;">
                         <div class="form-group">
                             <label for="username">Tên đăng nhập</label>
                             <Field name="username" type="text" class="form-control" placeholder="{{maNhanVien}}"
@@ -39,22 +39,23 @@
                                     style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
                                     v-model="nhanvien.NV_MatKhau" />
 
-                                <Field v-if="nhanvien.NV_MatKhau=='' & isOpenCurrentPassword" name="password"
+                                <Field v-if="nhanvien.NV_MatKhau == '' & isOpenCurrentPassword" name="password"
                                     type="text" class="form-control" placeholder="Nhập mật khẩu hiện tại"
                                     style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
                                     v-model="nhanvien.NV_MatKhau" />
 
-                                <Field v-if=" nhanvien.NV_MatKhau!='' & isOpenCurrentPassword " name="currentPassword"
+                                <Field v-if="nhanvien.NV_MatKhau != '' & isOpenCurrentPassword" name="currentPassword"
                                     type="text" class="form-control" placeholder="{{nhanvien.NV_MatKhau}}"
                                     style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
                                     v-model="nhanvien.NV_MatKhau" />
 
                                 <span v-if="!isOpenCurrentPassword" class="btn far fa-eye-slash btnHienMatKhau"
-                                    @click="isOpenCurrentPassword=!isOpenCurrentPassword"></span>
+                                    @click="isOpenCurrentPassword = !isOpenCurrentPassword"></span>
                                 <span v-else class="btn  far fa-eye btnAnMatKhau"
-                                    @click="isOpenCurrentPassword=!isOpenCurrentPassword"></span>
+                                    @click="isOpenCurrentPassword = !isOpenCurrentPassword"></span>
                             </div>
-                            <ErrorMessage name="currentPassword" class="error-feedback" style="color:red; font-size: 17px;" />
+                            <ErrorMessage name="currentPassword" class="error-feedback"
+                                style="color:red; font-size: 17px;" />
                         </div>
                         <p v-if="message" style="display: inline; color: red; float:right">
                             {{ message }}
@@ -68,26 +69,27 @@
                                     placeholder="Nhập mật khẩu mới"
                                     style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
                                     v-model="newPassword" />
-                                <Field v-if="newPassword=='' & isOpenNewPassword" name="password" type="text"
+                                <Field v-if="newPassword == '' & isOpenNewPassword" name="password" type="text"
                                     class="form-control" placeholder="Nhập mật khẩu mới"
                                     style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
                                     v-model="newPassword" />
 
-                                <Field v-if="newPassword!='' & isOpenNewPassword" name="newPassword" type="text"
+                                <Field v-if="newPassword != '' & isOpenNewPassword" name="newPassword" type="text"
                                     class="form-control" placeholder="{{newPassword}}"
                                     style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
                                     v-model="newPassword" />
 
                                 <span v-if="!isOpenNewPassword" class="btn far fa-eye-slash btnHienMatKhau"
-                                    @click="isOpenNewPassword=!isOpenNewPassword"></span>
+                                    @click="isOpenNewPassword = !isOpenNewPassword"></span>
                                 <span v-else class="btn  far fa-eye btnAnMatKhau"
-                                    @click="isOpenNewPassword=!isOpenNewPassword"></span>
+                                    @click="isOpenNewPassword = !isOpenNewPassword"></span>
                             </div>
-                            <ErrorMessage name="newPassword" class="error-feedback" style="color:red; font-size: 17px;" />
+                            <ErrorMessage name="newPassword" class="error-feedback"
+                                style="color:red; font-size: 17px;" />
                         </div>
                         <!-- ------------------------------------NHAP XAC THUC MAT KHAU MOI------------------------------------------------ -->
                         <div class="form-group" style="margin-top:5%">
-                            <label for="confirmPassword">Xác thực mật khẩu mới</label>
+                            <label for="confirmPassword">Xác nhận mật khẩu mới</label>
                             <div class="row"
                                 style="background-color: #F5F4F4; border-radius: 15px; margin: 0 0 0 0.1%;">
                                 <Field v-if="!isOpenConfirmPassword" name="confirmPassword" type="password"
@@ -95,22 +97,23 @@
                                     style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
                                     v-model="confirmPassword" />
 
-                                <Field v-if="confirmPassword=='' & isOpenConfirmPassword" name="password" type="text"
+                                <Field v-if="confirmPassword == '' & isOpenConfirmPassword" name="password" type="text"
                                     class="form-control" placeholder="Nhập lại mật khẩu mới"
                                     style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
                                     v-model="confirmPassword" />
 
-                                <Field v-if="confirmPassword!='' & isOpenConfirmPassword" name="confirmPassword"
+                                <Field v-if="confirmPassword != '' & isOpenConfirmPassword" name="confirmPassword"
                                     type="text" class="form-control" placeholder="{{confirmPassword}}"
                                     style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
                                     v-model="confirmPassword" />
 
                                 <span v-if="!isOpenConfirmPassword" class="btn far fa-eye-slash btnHienMatKhau"
-                                    @click="isOpenConfirmPassword=!isOpenConfirmPassword"></span>
+                                    @click="isOpenConfirmPassword = !isOpenConfirmPassword"></span>
                                 <span v-else class="btn far fa-eye btnAnMatKhau"
-                                    @click="isOpenConfirmPassword=!isOpenConfirmPassword"></span>
+                                    @click="isOpenConfirmPassword = !isOpenConfirmPassword"></span>
                             </div>
-                            <ErrorMessage name="confirmPassword" class="error-feedback" style="color:red; font-size: 17px;" />
+                            <ErrorMessage name="confirmPassword" class="error-feedback"
+                                style="color:red; font-size: 17px;" />
                         </div>
                         <p v-if="message2" style="display: inline; color: red; float:right">
                             {{ message2 }}
@@ -123,7 +126,7 @@
                                 <span>Đổi Mật Khẩu</span>
                             </button>
                             <button class="btn btn-sm btn-outline-secondary btn-block btnTroVe" @click="goToQL">
-                                <span  v-show="loading"  class="spinner-border spinner-border-sm" ></span>
+                                <span v-show="loading" class="spinner-border spinner-border-sm"></span>
                                 <span>Trở về</span>
                             </button>
                         </div>
@@ -200,54 +203,56 @@ export default {
             } else {
                 console.log(response.data);
                 this.nhanviencheck = response.data;
+                this.nhanviencheck.NV_MatKhau =  this.newPassword;
                 this.checkAccount();
             }
         },
 
         async checkAccount() {
-            console.log("Mat khau" + this.nhanvien.NV_MatKhau);
-            if (this.nhanvien.NV_MatKhau == this.nhanviencheck.NV_MatKhau) {
-                if (this.newPassword == this.confirmPassword) {
-                    this.nhanviencheck.NV_MatKhau = this.newPassword;
-                    const [error, response] = await this.handle(
-                        NhanVienService.update(this.nhanviencheck.NV_Ma, this.nhanviencheck)
-                    );
-                    if (error) {
-                        console.log(error);
-                        this.message = "Không tìm thấy tài khoản"
-                    } else {
-                        console.log(response.data);
-                        this.nhanviencheck = response.data;
-                        this.message2 = "Mật khẩu mới của bạn đã được đổi thành công!!!"
-                        this.$router.push({ name: 'QLDonHang', params: { id: this.maNhanVien } })
-                    }
-                    this.message = ""
+            console.log(this.nhanviencheck.NV_MatKhau)
+            if (this.newPassword == this.confirmPassword) {
+                this.nhanviencheck.curentPass  = this.nhanvien.NV_MatKhau;
+                console.log(this.nhanviencheck.currentPass)
+                const [error, response] = await this.handle(
+                    NhanVienService.update(this.nhanviencheck.NV_Ma, this.nhanviencheck)
+                );
+                if (response.data == 'Sai mat khau') {
+                    this.message = "Mật khẩu sai";
+                    this.message2 = ""
                 }
-                else {
-                    this.message2 = "Mật khẩu mới và mật khẩu xác thực không trùng  khớp";
-                    this.message = ""
+                else if (error) {
+                    console.log(error);
+                    this.message = "Không tìm thấy tài khoản"
+                } else {
+                    console.log(response.data);
+                    this.nhanviencheck = response.data;
+                    this.message2 = "Mật khẩu mới của bạn đã được đổi thành công!!!"
+                    this.$router.push({ name: 'QLDonHang', params: { id: this.maNhanVien } })
                 }
             }
             else {
-                this.message = "Mật khẩu sai";
-                this.message2 = ""
+
+                this.message2 = "Mật khẩu mới và mật khẩu xác thực không trùng  khớp";
+                this.message = ""
             }
-        },
 
-        async goToQuenMatKhau() {
-            this.$router.push("/QLQuenMatKhau");
-        },
-
-        async goToQL(){
-            this.$router.push({ name: 'QLDonHang', params: { id: this.maNhanVien} });
-        }
+        
     },
-    mounted() {
-        this.nhanvien.NV_MatKhau = "";
+
+    async goToQuenMatKhau() {
+        this.$router.push("/QLQuenMatKhau");
+    },
+
+    async goToQL() {
+        this.$router.push({ name: 'QLDonHang', params: { id: this.maNhanVien } });
     }
+},
+mounted() {
+    this.nhanvien.NV_MatKhau = "";
+}
 }
 </script>
 
 <style>
-@import "../../../assets/QLTaiKhoanStyle.css"
+@import "../../../assets/QLTaiKhoanStyle.css";
 </style>

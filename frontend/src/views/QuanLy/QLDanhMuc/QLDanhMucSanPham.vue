@@ -8,7 +8,7 @@
                 <QLHeader :maNV="localNhanVien.NV_Ma" />
                 <div class="row bottomHeader">
                     <div class="col-md-12" style="color:#515151">
-                        <p style="font-family:Inter; color:#515151; font-size:30px; font-weight:700">Danh sách danh mục</p>
+                        <p class="lableName">DANH SÁCH DANH MỤC</p>
                     </div>
                 </div>
                 <div class="row timkiem" style="margin-left:2%">
@@ -36,7 +36,7 @@
                 <!-- <Danh sach danh muc san pham-->
                 <div class="row dsDanhMuc">
                     <table>
-                        <thead>
+                        <thead style="text-align:center">
                             <tr>
                                 <th>STT</th>
                                 <th :sortKey="DM_Ma" :hideSortIcons="true">Mã danh mục</th>
@@ -67,7 +67,7 @@
 
                 <!-- danh sach so trang hien thi -->
                 <div class="row" style="width: 100%;" v-if="!isOpenChoosePage && danhmuc.length>9">
-                    <div class="btnChoosePage">
+                    <div class="btnChonTrang">
                         <p style="display: inline-block; padding-top: 4px;text-align: right;">Trang &nbsp;</p>
                         <div class="numberPage">
                             <div class="dropup">
@@ -87,12 +87,12 @@
     </div>
     <!-- ------------------------------Bang xac nhan xoa danh muc ----------------------------- -->
     <div class="dialogXacNhan" v-if="isOpenXacNhan">
-        <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 18px;">
-            <span class="fas fa-trash-alt" style="color:red"></span>Bạn chắc chắn muốn xóa?
+        <p style="color: #515151; text-align:center; margin-top: 50px; font-size: 18px;">
+            <span class="fas fa-trash-alt" style="color:red"></span> Bạn chắc chắn muốn xóa?
         </p>
         <button class="btnYes btn btn-sm btn-outline-secondary"
-            @click="deleteDanhMuc(), isOpenXacNhan = !isOpenXacNhan, isOpenThongBao = !isOpenThongBao">Yes</button>
-        <button class="btnNo btn btn-sm btn-outline-secondary" @click="isOpenXacNhan = !isOpenXacNhan">No</button>
+            @click="deleteDanhMuc(), isOpenXacNhan = !isOpenXacNhan, isOpenThongBao = !isOpenThongBao">Xóa</button>
+        <button class="btnNo btn btn-sm btn-outline-secondary" @click="isOpenXacNhan = !isOpenXacNhan">Hủy</button>
     </div>
     <div class="dialogThongBao" v-if="isOpenThongBao">
         <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 18px;">

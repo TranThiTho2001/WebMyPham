@@ -2,10 +2,8 @@
     <div>
         <div class="row container-fluid hoadonchitiet">
             <div class="col-md-12">
-                <div class="row" style="width:60px"> <img src="../../images/Logo.png"
-                        class="rounded float-left img-fluid">
-                </div>
-                <h4 style="text-align:center"> CHI TIẾT HÓA ĐƠN </h4>
+
+                <h4 style="text-align:center; margin: 30px 0px 30px 0px;"> CHI TIẾT HÓA ĐƠN </h4>
                 <div class="row">
                     <table class="bangTT">
                         <tr>
@@ -49,7 +47,7 @@
                         </tbody>
                     </table>
                     <div class="col-md-12" style="text-align: right; margin-bottom: 15px;">
-                        <h6 style="text-align: right; margin-right: 100px;">Thành tiền:
+                        <h6 style="text-align: right; margin-right: 100px; margin-top: 15px;">Thành tiền:
                             {{ hoadon.HD_TongTien }}
                         </h6>
                     </div>

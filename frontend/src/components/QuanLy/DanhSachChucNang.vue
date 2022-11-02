@@ -125,6 +125,7 @@ export default {
     color: #FFFFFF;
     border: none;
     font-family: Inter;
+    padding-left: 15px;
 }
 
 .dsChucNang .btn-outline-secondary:hover,

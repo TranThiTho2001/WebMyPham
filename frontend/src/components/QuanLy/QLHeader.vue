@@ -95,6 +95,7 @@ export default {
 .fa-user-tie {
     font-size: 38px;
     color: black;
+    margin-top: 6px;
 }
 
 .nav-link .dropdown-menu {

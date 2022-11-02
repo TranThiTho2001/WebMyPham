@@ -2,7 +2,7 @@
     <Form @submit="$emit('suaDanhMuc-submit', danhmucLocal)" :validation-schema="schema">
         <div class="functionName">
             <span class="fas fa-edit"> </span>
-            <p style="font-family:Inter; color:#515151; font-size:22px; font-weight:600; display: inline;"> Sửa danh mục </p>
+            <p style="font-family:Inter; color:#515151; font-size:22px; font-weight:600; display: inline;"> Cập nhật danh mục </p>
         </div>
 
         <div class="form-group">
@@ -22,7 +22,7 @@
             <p v-if="message1=='Cập nhật thành công'" class="textMessage2" style="color:#00BA13">{{message1}}</p>
             <p v-else class="textMessage2" >{{message1}}</p><br>
             <p v-if="message1=='Cập nhật không thành công'" class="textMessage1">{{message1}}</p>
-            <button class="btn btn-outline-secondary btnCapNnhat">Cập nhật</button>
+            <button class="btn btn-outline-secondary btnCapNhat">Cập nhật</button>
         </div>
     </form>
 

@@ -123,7 +123,7 @@ export default {
             if (error) {
                 console.log(error);
                 this.loading = false;
-                this.message = "Số điện thoại hoặc mật khẩu đăng nhập sai";
+                this.message = "Tên đăng nhập hoặc mật khẩu đăng nhập sai";
             } else {
                 console.log(data)
                 this.$router.push({ name: 'QLDonHang', params: { id: this.nhanvien.NV_Ma } });
