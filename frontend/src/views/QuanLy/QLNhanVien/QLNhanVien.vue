@@ -12,7 +12,7 @@
                     </div>
                 </div>
 
-                <div class="row timkiem" style="margin-left:2%">
+                <div class="row timkiem">
                     <div class="col-md-7 input-group">
                         <div class="row">
                             <input type="text" class="form-control col-md-10 inputSearch" placeholder="Tìm theo tên" style="border-radius:10px"
@@ -28,7 +28,7 @@
                     <div class="col-md-2">
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-3 ">
                         <button v-if="!isOpenXemChiTiet" class=" btn btn-sm btn-outline-secondary btnTao" @click="gotoThemNhanVien">
                             <span class="fa fa-plus-circle"></span>
                             Thêm Nhân Viên
@@ -49,7 +49,7 @@
                                 <th>Mã nhân viên</th>
                                 <th>Họ và Tên</th>
                                 <th>Chức vụ</th>
-                                <th>SDT</th>
+                                <th>Số điện thoại</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -111,7 +111,7 @@
     </div>
     <div class="dialogThongBao" v-if="isOpenThongBao">
         <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 18px;">
-            <span class="fas fa-check-circle" style="color:#00BA13; text-align: center;"></span>{{message}}
+            <span class="fas fa-check-circle" style="color:#00BA13; text-align: center;"></span> {{message}}
         </p>
         <button class="btnOK btn btn-sm btn-outline-secondary" @click="isOpenThongBao = !isOpenThongBao">OK</button>
     </div>

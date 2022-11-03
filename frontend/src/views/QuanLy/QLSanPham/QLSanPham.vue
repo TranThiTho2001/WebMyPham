@@ -59,7 +59,7 @@
                                         data-toggle="dropdown" style="color:#515151">
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#"><span class="fas fa-edit"></span> Sửa</a>
+                                        <a class="dropdown-item" href="#" @click="goToSuaSanPham"><span class="fas fa-edit" ></span> Sửa</a>
                                         <a class="dropdown-item" href="#" @click="isOpenXacNhan = !isOpenXacNhan"><span
                                                 class="fas fa-trash-alt" style="color:red"></span> Xóa</a>
                                     </div>
@@ -102,7 +102,7 @@
         <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 18px;">
             <span v-if="message == 'Đã xóa danh mục đã chọn'" class="fas fa-check-circle"
                 style="color:#00BA13; text-align: center;"></span>
-            <span v-else class="fas fa-exclamation-circle" style="color:red; text-align: center;"></span>
+            <span v-else class="fas fa-exclamation-circle" style="color:red; text-align: center;"></span> 
             {{ message }}
         </p>
         <button class="btnOK btn btn-sm btn-outline-secondary" @click="isOpenThongBao = !isOpenThongBao">OK</button>
@@ -226,6 +226,10 @@ export default {
 
         async goToThemSanPham() {
             this.$router.push({ name: 'QLSanPhamThem', params: { id: this.localNhanVien.NV_Ma } });
+        },
+
+        async goToSuaSanPham() {
+            this.$router.push({ name: 'QLSanPhamSua', params: { id: this.localNhanVien.NV_Ma, sanpham:this.sanphamActive } });
         },
 
         //Tìm kiếm theo tên

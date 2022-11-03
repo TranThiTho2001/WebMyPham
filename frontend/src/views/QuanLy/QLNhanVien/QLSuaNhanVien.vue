@@ -12,11 +12,11 @@
                         <p class="lableName">CẬP NHẬT THÔNG TIN NHÂN VIÊN</p>
                     </div>
                 </div>
-                <div class="row timkiem" style="margin-left:2%">
+                <div class="row timkiem">
                     <div class="col-md-7 input-group">
                         <div class="row" >
                             <input type="text" class="form-control col-md-10" placeholder="Tìm theo tên"
-                               v-model="nameToSearch" @keyup.enter="searchName" @click="goToQLNhanVien"/>                           
+                               v-model="nameToSearch" @keyup.enter="searchName" @click="goToQLNhanVien" style="border-radius: 10px;"/>                           
                                 <button class="btn btn-sm btn-outline-secondary btnTimKiem" type="button" style="border:none"
                                     @click="searchName">
                                     <span class="fa fa-search" style="font-size:18px"></span>
@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="col-md-2"></div>
-                    <div class="col-md-3 col-sm-11">
+                    <div class="col-md-3 col-sm-11 ">
                         <button class=" btn btn-sm btn-outline-secondary btnXem font-weight-bold" @click="goToQLNhanVien">
                             <span class="fa fa-list-ol" style="font-size:20px"></span>
                             Xem danh sách

@@ -7,12 +7,12 @@
  }
  .frameQLThemNhanVien .dschucNang  .navigationBar  .moreInformation,
  .frameQLSuaNhanVien .dschucNang  .navigationBar  .moreInformation {
-    margin-top: 255px;
+    margin-top: 250px;
 }
 
 .frameQLThemNhanVien .dschucNang  .navigationBar .null,
 .frameQLSuaNhanVien .dschucNang  .navigationBar .null{
-    height: 10%;
+    height: 9%;
 }
   .number:hover,
   .number.active {
@@ -76,6 +76,12 @@
      margin-top: 20px;
  }
 
+ .frameQLSuaNhanVien .timkiem ,
+ .frameQLThemNhanVien .timkiem ,
+ .frameQLNhanVien .timkiem {
+    width: 96%;
+    margin-left: 2%;
+}
  .frameQLSuaNhanVien .timkiem .inputSearch:hover,
  .frameQLThemNhanVien .timkiem .inputSearch:hover,
  .frameQLNhanVien .timkiem .inputSearch:hover{
@@ -89,7 +95,7 @@
         color: #FFFFFF;
         font-size: 17px;
         float: right;
-        margin-left: 27%;
+        margin-left: 37%;
         position: absolute;
  }
 

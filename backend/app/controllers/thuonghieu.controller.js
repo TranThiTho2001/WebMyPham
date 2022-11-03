@@ -73,7 +73,7 @@ exports.findOne = async (req,res) => {
     if(!documents){
         return next(new BadRequestError(404, "Không tìm thấy"));
     }
-    return res.send(document);
+    return res.send(documents);
 };
 
 //*-----Update a brand by the is in the request

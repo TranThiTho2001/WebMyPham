@@ -37,7 +37,12 @@ const routes = [
             import ("../views/QuanLy/QLSanPham/QLSanPhamThem.vue"),
     },
 
-
+    {
+        path: "/admin/SanPhamSua/:id/:sanpham",
+        name: "QLSanPhamSua",
+        component: () =>
+            import ("../views/QuanLy/QLSanPham/QLSanPhamSua.vue"),
+    },
 
      // Quan ly thuong hieu
     {

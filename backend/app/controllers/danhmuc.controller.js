@@ -2,10 +2,8 @@ const { BadRequestError } = require("../helpers/errors");
 const handle = require("../helpers/promise");
 const db = require("../models");
 const DanhMuc = db.DanhMuc;
-//*-------------Create a product 
-// exports.findAllFavorite = async (req, res) => {
-//     res.send( {message: "Hello danh muc"} );
-// }
+
+
 exports.create = async(req,res) => {
 
     //validate request

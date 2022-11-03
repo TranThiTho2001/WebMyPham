@@ -80,13 +80,12 @@
     font-family: Inter;
     width: fit-content;
     padding: 3px 45px;
-    
     font-weight: 600;
 }
 
 .frameDoiMatKhau .formDoiMatKhau .rightForm Form  .form-group .btnDangNhap,
 .frameDoiMatKhau .formDoiMatKhau .rightForm Form  .form-group .btnTroVe{
-    margin-top: 12%;
+    margin-top: 0%;
     width: 40%;
     border-radius: 10px;
     background-color: black;
@@ -95,6 +94,8 @@
     font-size: 20px;
     font-family: Inter;
     display: inline;
+    margin-top: 4%;
+
 }
 .frameDoiMatKhau .formDoiMatKhau .rightForm Form  .form-group .btnTroVe{
 
@@ -136,7 +137,7 @@
     text-align: right;
     color: red;
     float: right;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .btn-login{

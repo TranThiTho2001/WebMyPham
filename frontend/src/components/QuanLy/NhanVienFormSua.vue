@@ -80,10 +80,10 @@
                     style="color:#00BA13; text-align: center; margin-left: 44%;"></span>
                <span v-if="message1 == 'Cập nhật không thành công'" class="fas fa-times-circle"
                     style="color:red; text-align: center;  margin-left: 41%;"></span>
-               <p v-if="message1 == 'Cập nhật thành công'" class="textMessage2" style="color:#00BA13">{{ message1 }}
+               <p v-if="message1 == 'Cập nhật thành công'" class="textMessage2" style="color:#00BA13">&nbsp;{{ message1 }}
                </p>
-               <p v-else class="textMessage2">{{ message1 }}</p><br>
-               <p v-if="message1 == 'Cập nhật không thành công'" class="textMessage1" style="margin-left:4%">{{ message1 }}</p>
+               <p v-else class="textMessage2"> &nbsp;{{ message1 }}</p><br>
+               <p v-if="message1 == 'Cập nhật không thành công'" class="textMessage1" style="margin-left:4%">&nbsp; {{ message1 }}</p>
                <button class="btn btn-outline-secondary btnCapNhat">Cập Nhật</button>
           </div>
 

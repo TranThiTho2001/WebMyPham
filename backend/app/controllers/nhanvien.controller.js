@@ -113,8 +113,6 @@ exports.update = async (req, res) => {
     };
 
     const curentPass = req.body.curentPass;
-    console.log(curentPass)
-    console.log("1")
     if (curentPass != "") {
         const [errorss, nhanvien] = await handle(
             NhanVien.findOne(condition)
@@ -147,7 +145,6 @@ exports.update = async (req, res) => {
         }
     }
     else {
-        console.log("2")
         if (req.body.NV_MatKhau == "") {
             const [error, document] = await handle(
                 NhanVien.findOneAndUpdate(condition, {
@@ -173,7 +170,6 @@ exports.update = async (req, res) => {
             return res.send("Cập nhật thông tin nhân viên thành công")
         }
         else{
-            console.log("3")
             const [error, document] = await handle(
                 NhanVien.findOneAndUpdate(condition, {
                     $set: {

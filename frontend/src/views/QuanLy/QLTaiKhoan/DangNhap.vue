@@ -25,13 +25,13 @@
                             <Field name="username" type="text" class="form-control" placeholder="Nhập tên đăng nhập"
                                 v-model="nhanvien.NV_Ma"
                                 style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA;" />
-                            <ErrorMessage name="username" class="error-feedback" style="color:red; font-size: 17px;" />
+                            <ErrorMessage name="username" class="error-feedback"  />
 
                         </div>
 
                         <div class="form-group" style="margin-top:10%">
                             <label for="password">Mật khẩu</label>
-                            <div class="row" style="background-color: #F5F4F4; border-radius: 15px; margin: 0 0 0 1%;">
+                            <div class="row" style="background-color: #F5F4F4; border-radius: 15px; margin: 0 0 0 0.1%;">
                                 <Field v-if="!isOpenPassword" name="password" type="password" class="form-control"
                                     placeholder="Nhập mật khẩu"
                                     style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
@@ -53,7 +53,7 @@
                                     @click="isOpenPassword=!isOpenPassword"></span>
                             </div>
                             <a href="#" @click="goToQuenMatKhau">Quên mật khẩu?</a>
-                            <ErrorMessage name="password" class="error-feedback" style="color:red; font-size: 13px;" />
+                            <ErrorMessage name="password" class="error-feedback" />
                         </div>
 
                         

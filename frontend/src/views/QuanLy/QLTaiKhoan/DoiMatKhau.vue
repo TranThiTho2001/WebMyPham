@@ -54,8 +54,7 @@
                                 <span v-else class="btn  far fa-eye btnAnMatKhau"
                                     @click="isOpenCurrentPassword = !isOpenCurrentPassword"></span>
                             </div>
-                            <ErrorMessage name="currentPassword" class="error-feedback"
-                                style="color:red; font-size: 17px;" />
+                            <ErrorMessage name="currentPassword" class="error-feedback"/>
                         </div>
                         <p v-if="message" style="display: inline; color: red; float:right">
                             {{ message }}
@@ -84,8 +83,7 @@
                                 <span v-else class="btn  far fa-eye btnAnMatKhau"
                                     @click="isOpenNewPassword = !isOpenNewPassword"></span>
                             </div>
-                            <ErrorMessage name="newPassword" class="error-feedback"
-                                style="color:red; font-size: 17px;" />
+                            <ErrorMessage name="newPassword" class="error-feedback" />
                         </div>
                         <!-- ------------------------------------NHAP XAC THUC MAT KHAU MOI------------------------------------------------ -->
                         <div class="form-group" style="margin-top:5%">
@@ -112,14 +110,13 @@
                                 <span v-else class="btn far fa-eye btnAnMatKhau"
                                     @click="isOpenConfirmPassword = !isOpenConfirmPassword"></span>
                             </div>
-                            <ErrorMessage name="confirmPassword" class="error-feedback"
-                                style="color:red; font-size: 17px;" />
+                            <ErrorMessage name="confirmPassword" class="error-feedback"/>
                         </div>
                         <p v-if="message2" style="display: inline; color: red; float:right">
                             {{ message2 }}
                         </p>
 
-                        <div class="form-group my-3">
+                        <div class="form-group my-3" style="padding-top: 6%;">
                             <button class="btn btn-sm btn-outline-secondary btn-block btnDangNhap"
                                 :disabled="isSubmitting" :class="{ 'submitting': isSubmitting }">
                                 <span v-show="loading" class="spinner-border spinner-border-sm"></span>

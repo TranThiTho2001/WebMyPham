@@ -10,13 +10,13 @@ module.exports = (app) => {
     router.get("/", thuonghieu.findAll);
 
     //Retrieve a single brand with id
-    router.get("/:id", thuonghieu.findOne);
+    router.get("/:TH_Ma", thuonghieu.findOne);
 
     //Update a cbrand with id
-    router.put("/:id", thuonghieu.update);
+    router.put("/:TH_Ma", thuonghieu.update);
 
     //Delete a brand with id
-    router.delete("/:id", thuonghieu.delete);
+    router.delete("/:TH_Ma", thuonghieu.delete);
 
     app.use("/api/thuonghieu", router);
 

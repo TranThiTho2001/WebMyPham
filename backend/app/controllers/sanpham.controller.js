@@ -108,7 +108,7 @@ exports.findOne = async (req,res) => {
 };
 
 //*-----Update a product by the is in the request
-exports.update = async (req, res) =>{
+exports.update = async (req, res, next) =>{
    if(!req.body){
         return next(
             new BadRequestError(400, "Dữ liệu cập nhật sản phẩm không thể trống!")
@@ -116,8 +116,7 @@ exports.update = async (req, res) =>{
    }
 
    const condition = {
-    _id: res.params.id,
-    ownerId: req.userId,
+    SP_Ma: req.params.SP_Ma
    };
 
    const [error, document] = await handle(

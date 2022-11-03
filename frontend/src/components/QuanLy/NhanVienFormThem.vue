@@ -88,7 +88,7 @@
                </p>
                <p v-else class="textMessage2">{{message2}}</p><br>
                <p v-if="message2=='Thêm không thành công'" class="textMessage1" style="margin-left:4%">{{message1}}</p>
-               <button class="btn btn-outline-secondary btnLuu">Lưu</button>
+               <button class="btn btn-outline-secondary btnLuu" >Lưu</button>
           </div>
 
      </form>
@@ -126,14 +126,14 @@ export default {
                     .required("Tên nhân viên phải có giá trị"),
                cccdNV: yup
                     .string()
-                    .required("Số CMND/CCCD phải được nhập"),
+                    .required("Số CMND/CCCD phải có giá trị"),
                ngaysinhNV: yup
                     .date()
                     .required("Ngày sinh phải có giá trị"),
                sdtNV: yup
                     .string()
-                    .required("SDT phải có giá trị")
-                    .matches(/^(0|\+84)(\s|\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\d)(\s|\.)?(\d{3})(\s|\.)?(\d{3})$/,'Số điện thoại không hợp lệ.') ,
+                    .required("Số điện thoại phải có giá trị")
+                    .matches(/^(0|\+84)(\s|\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\d)(\s|\.)?(\d{3})(\s|\.)?(\d{3})$/,'Số điện thoại không hợp lệ') ,
                emailNV: yup
                     .string()
                     .matches(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/,"Email phải đúng định dạng")
