@@ -19,7 +19,7 @@
                     <h2 style="text-align:center">ĐĂNG NHẬP</h2>
                 </div>
                 <div class="row">
-                    <Form @submit="handleLogin" :validation-schema="schema" v-slot="{ isSubmitting }">
+                    <Form @submit="findNhanVien()" :validation-schema="schema" v-slot="{ isSubmitting }">
                         <div class="form-group">
                             <label for="username">Tên đăng nhập</label>
                             <Field name="username" type="text" class="form-control" placeholder="Nhập tên đăng nhập"
@@ -81,6 +81,8 @@ import * as yup from "yup";
 import { Form, Field, ErrorMessage } from "vee-validate";
 // import NhanVienService from "../../../services/nhanvien.service";
 import { mapGetters } from "vuex";
+import nhanvienService from '../../../services/nhanvien.service'
+
 export default {
     name: `QLDangNhap`,
     components: { Form, Field, ErrorMessage },
@@ -98,6 +100,7 @@ export default {
             isOpenPassword: false,
             nhanvien: {},
             nhanviencheck: {},
+            check: false,
         };
     },
 
@@ -125,11 +128,28 @@ export default {
                 this.loading = false;
                 this.message = "Tên đăng nhập hoặc mật khẩu đăng nhập sai";
             } else {
-                console.log(data)
-                this.$router.push({ name: 'QLDonHang', params: { id: this.nhanvien.NV_Ma } });
+                console.log(data);
+                    this.$router.push({ name: 'QLDonHang', params: { id: this.nhanvien.NV_Ma } });
+                
             }
         },
 
+        async findNhanVien(){
+            const [error, response] = await this.handle(
+                nhanvienService.getByID(this.nhanvien.NV_Ma)
+            );
+            console.log(response.data.NV_KhoaTaiKhoan)
+            if (error) {
+                console.log(error)
+            } else {
+                if(response.data.NV_KhoaTaiKhoan==true){
+                    this.message = "Tài khoản đã bị vô hiệu hóa";
+                }
+                else{
+                    this.handleLogin();
+                }
+            }
+        },
 
         async goToQuenMatKhau() {
             this.$router.push("/QLQuenMatKhau");

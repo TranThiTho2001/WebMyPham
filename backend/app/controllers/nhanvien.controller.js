@@ -39,6 +39,12 @@ exports.create = async (req, res) => {
     if (!req.body.NV_LoaiNV) {
         return next(new BadRequestError(400, "Loại nhân viên không được bỏ trống!"));
     }
+    if (!req.body.NV_GioiTinh) {
+        return next(new BadRequestError(400, "Giới tính nhân viên không được bỏ trống!"));
+    }
+    if (!req.body.NV_KhoaTaiKhoan) {
+        return next(new BadRequestError(400, "Giới tính nhân viên không được bỏ trống!"));
+    }
     // Create a employee
     const nhanvien = new NhanVien({
         NV_Ma: req.body.NV_Ma,
@@ -51,6 +57,8 @@ exports.create = async (req, res) => {
         NV_DiaChi: req.body.NV_DiaChi,
         NV_MatKhau: bcrypt.hashSync(req.body.NV_MatKhau, 8),
         NV_LoaiNV: req.body.NV_LoaiNV,
+        NV_GioiTinh: req.body.NV_GioiTinh,
+        NV_KhoaTaiKhoan: req.body.NV_KhoaTaiKhoan,
         ownerId: req.userId,
     });
     // Save employee in the DB
@@ -157,6 +165,8 @@ exports.update = async (req, res) => {
                         'NV_Email': req.body.NV_Email,
                         'NV_DiaChi': req.body.NV_DiaChi,
                         'NV_LoaiNV': req.body.NV_LoaiNV,
+                        'NV_GioiTinh': req.body.NV_GioiTinh,
+                        'NV_KhoaTaiKhoan': req.body.NV_KhoaTaiKhoan,
                     }
                 },
                     {
@@ -181,6 +191,8 @@ exports.update = async (req, res) => {
                         'NV_Email': req.body.NV_Email,
                         'NV_DiaChi': req.body.NV_DiaChi,
                         'NV_LoaiNV': req.body.NV_LoaiNV,
+                        'NV_GioiTinh': req.body.NV_GioiTinh,
+                        'NV_KhoaTaiKhoan': req.body.NV_KhoaTaiKhoan,
                         'NV_MatKhau': bcrypt.hashSync(req.body.NV_MatKhau, 8),
                     }
                 },
@@ -234,7 +246,6 @@ exports.signin = async (req, res, next) => {
         req.body.NV_MatKhau,
         nhanvien.NV_MatKhau,
     );
-    console.log(passwordIsValid + "cdsfd")
     if (!passwordIsValid) {
         return res.send("Sai mat khau");
     }

@@ -39,6 +39,18 @@
                          </Field>
                          <ErrorMessage name="ngaysinhNV" class="error-feedback" />
                     </div>
+                    <div class="form-group">
+                         <label for="gioitinhNV">Giới tính: &nbsp;</label><br>
+                         <Field name="gioitinhNV" class="form-control" placeholder="" v-model="nhanvienMoi.NV_GioiTinh">
+
+                              <input type="radio" id="one" value="true" v-model="nhanvienMoi.NV_GioiTinh" @click="setGioiTinh(true)"/>
+                              <label for="one">Nam &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+
+                              <input type="radio" id="two" value="false" v-model="nhanvienMoi.NV_GioiTinh" @click="setGioiTinh(false)"/>
+                              <label for="two">Nữ</label>
+                         </Field>
+                         <ErrorMessage name="gioitinhNV" class="error-feedback" />
+                    </div>
                </div>
                <div class="col-md-6">
                     <div class="form-group">
@@ -77,18 +89,29 @@
                          </Field>
                          <ErrorMessage name="loaiNV" class="error-feedback" />
                     </div>
+                    <div class="form-group">
+                         <label for="khoaTKNV">Tài khoản: &nbsp; </label><br>
+                         <Field name="khoaTKNV" class="form-control" v-model="nhanvienMoi.NV_KhoaTaiKhoan">
+                              <input type="radio" id="one" value="false" v-model="nhanvienMoi.NV_KhoaTaiKhoan" @click="setKhoaTaiKhoan(false)"/>
+                              <label for="one">Mở khóa  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+
+                              <input type="radio" id="two" value="true" v-model="nhanvienMoi.NV_KhoaTaiKhoan" @click="setKhoaTaiKhoan(true)"/>
+                              <label for="two">Khóa</label>
+                         </Field>
+                         <ErrorMessage name="khoaTKNV" class="error-feedback" />
+                    </div>
                </div>
           </div>
           <div class="form-group">
-               <span v-if="message2=='Thêm thành công'" class="fas fa-check-circle"
+               <span v-if="message2 == 'Thêm thành công'" class="fas fa-check-circle"
                     style="color:#00BA13; text-align: center; margin-left: 44%;"></span>
-               <span v-if="message2=='Thêm không thành công'" class="fas fa-times-circle"
+               <span v-if="message2 == 'Thêm không thành công'" class="fas fa-times-circle"
                     style="color:red; text-align: center;  margin-left:42%;"></span>
-               <p v-if="message2=='Thêm thành công'" class="textMessage2" style="color:#00BA13">{{message2}}
+               <p v-if="message2 == 'Thêm thành công'" class="textMessage2" style="color:#00BA13">{{ message2 }}
                </p>
-               <p v-else class="textMessage2">{{message2}}</p><br>
-               <p v-if="message2=='Thêm không thành công'" class="textMessage1" style="margin-left:4%">{{message1}}</p>
-               <button class="btn btn-outline-secondary btnLuu" >Lưu</button>
+               <p v-else class="textMessage2">{{ message2 }}</p><br>
+               <p v-if="message2 == 'Thêm không thành công'" class="textMessage1" style="margin-left:4%">{{ message1 }}</p>
+               <button class="btn btn-outline-secondary btnLuu">Lưu</button>
           </div>
 
      </form>
@@ -133,20 +156,27 @@ export default {
                sdtNV: yup
                     .string()
                     .required("Số điện thoại phải có giá trị")
-                    .matches(/^(0|\+84)(\s|\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\d)(\s|\.)?(\d{3})(\s|\.)?(\d{3})$/,'Số điện thoại không hợp lệ') ,
+                    .matches(/^(0|\+84)(\s|\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\d)(\s|\.)?(\d{3})(\s|\.)?(\d{3})$/, 'Số điện thoại không hợp lệ'),
                emailNV: yup
                     .string()
-                    .matches(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/,"Email phải đúng định dạng")
+                    .matches(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/, "Email phải đúng định dạng")
                     .required("Email phải có giá trị"),
                diachiNV: yup
                     .string()
                     .required("Địa chỉ phải có giá trị"),
                matkhauNV: yup
                     .string()
-                    .required("Mật khẩu tài khoản phải có giá trị"),
+                    .required("Mật khẩu tài khoản phải có giá trị")
+                    .min(8, "Mật khẩu có ít nhất 8 ký tự"),
                loaiNV: yup
                     .string()
                     .required("Loại nhân viên phải được chọn"),
+               gioitinhNV: yup
+                    .boolean()
+                    .required("Giới tính nhân viên được yêu cầu"),
+               khoaTKNV: yup
+                    .boolean()
+                    .required("Trạng thái tài khoản nhân viên được yêu cầu"),
           });
           return {
                nhanvienMoi: this.newnhanvien,
@@ -154,6 +184,18 @@ export default {
 
           };
      },
+
+     methods: {
+          async setGioiTinh(data) {
+               this.nhanvienMoi.NV_GioiTinh = data;
+               console.log(this.nhanvienMoi.NV_GioiTinh);
+          },
+
+          async setKhoaTaiKhoan(data) {
+               this.nhanvienMoi.NV_KhoaTaiKhoan = data;
+               console.log(this.nhanvienMoi.NV_KhoaTaiKhoan);
+          },
+     }
 };
 </script>
  

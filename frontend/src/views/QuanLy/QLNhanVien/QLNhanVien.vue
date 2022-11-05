@@ -28,8 +28,8 @@
                     <div class="col-md-2">
                     </div>
 
-                    <div class="col-md-3 ">
-                        <button v-if="!isOpenXemChiTiet" class=" btn btn-sm btn-outline-secondary btnTao" @click="gotoThemNhanVien">
+                    <div class="col-md-3">
+                        <button v-if="!isOpenXemChiTiet" class=" btn btn-sm btn-outline-secondary btnTao" @click="gotoThemNhanVien" >
                             <span class="fa fa-plus-circle"></span>
                             Thêm Nhân Viên
                         </button>
@@ -106,7 +106,7 @@
             <span class="fas fa-trash-alt" style="color:red"></span> Bạn chắc chắn muốn xóa?
         </p>
         <button class="btnYes btn btn-sm btn-outline-secondary"
-            @click="deleteNhanVien(), isOpenXacNhan = !isOpenXacNhan, isOpenThongBao = !isOpenThongBao">Xóa</button>
+            @click="findNVDonHang(), isOpenXacNhan = !isOpenXacNhan, isOpenThongBao = !isOpenThongBao ">Xóa</button>
         <button class="btnNo btn btn-sm btn-outline-secondary" @click="isOpenXacNhan = !isOpenXacNhan">Hủy</button>
     </div>
     <div class="dialogThongBao" v-if="isOpenThongBao">
@@ -121,10 +121,11 @@ import DanhSachChucNang from '../../../components/QuanLy/DanhSachChucNang.vue';
 import QLHeader from '../../../components/QuanLy/QLHeader.vue';
 import NhanVienService from '../../../services/nhanvien.service';
 import NhanVienFormChiTiet from '@/components/QuanLy/NhanVienFormChiTiet.vue';
-// import ThemDanhMucForm from '../../components/QuanLy/ThemDanhMucForm.vue'
+import DonHangService from '../../../services/donhang.service';
+
+
 export default {
     name: `QLHomePage`,
-    // props: ["nhanvien"],
     components: { DanhSachChucNang, QLHeader, NhanVienFormChiTiet },
     data() {
         return {
@@ -185,6 +186,30 @@ export default {
             this.nhanvienActive = nhanvienActive;
         },
 
+        //Tim nhan vien theo don hang
+
+        async findNVDonHang(){
+            
+            const [error, response] = await this.handle(
+                DonHangService.getAll()
+            );
+            if (error) {
+                console.log(error);
+            } else {
+               const donhang = response.data;
+               let check = 0;
+               donhang.forEach(element => {
+                    if(element.NV_Ma==this.nhanvienActive.NV_Ma){
+                        this.message = "Không thể xóa nhân viên!"
+                        check = 1;
+                    }
+               });
+               if(check==0){
+                this.deleteNhanVien();
+               }
+                
+            }
+        },
         //Xoa danh muc duoc chon
         async deleteNhanVien() {
             const [error, response] = await this.handle(

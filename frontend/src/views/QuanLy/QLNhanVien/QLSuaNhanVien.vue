@@ -23,8 +23,8 @@
                                </button>                           
                         </div>
                     </div>
-                    <div class="col-md-2"></div>
-                    <div class="col-md-3 col-sm-11 ">
+                    <div class="col-md-2" ></div>
+                    <div class="col-md-3 col-sm-11">
                         <button class=" btn btn-sm btn-outline-secondary btnXem font-weight-bold" @click="goToQLNhanVien">
                             <span class="fa fa-list-ol" style="font-size:20px"></span>
                             Xem danh sách
@@ -118,6 +118,8 @@ export default {
                 this.newnhanvien.NV_DiaChi = response.data.NV_DiaChi;
                 this.newnhanvien.NV_LoaiNV = response.data.NV_LoaiNV ;
                 this.newnhanvien.NV_MatKhau = response.data.NV_MatKhau;
+                this.newnhanvien.NV_GioiTinh = response.data.NV_GioiTinh;
+                this.newnhanvien.NV_KhoaTaiKhoan = response.data.NV_KhoaTaiKhoan;
                 console.log(this.newnhanvien)
             }
         },

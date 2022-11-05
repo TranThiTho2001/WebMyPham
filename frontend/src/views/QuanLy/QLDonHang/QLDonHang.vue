@@ -131,7 +131,7 @@
                                         <a v-if="dalapHD" class="dropdown-item" href="#"
                                             @click="isOpenHoaDon = !isOpenHoaDon, isOpenList = !isOpenList, isOpenChoosePage = !isOpenChoosePage">
                                             <span class="fas fa-file-invoice" style="font-size:18px; margin-left: 2px;">
-                                            </span> Xem hoa don
+                                            </span> Xem hóa đơn
                                         </a>
                                         <a v-else class="dropdown-item" href="#" @click="gotoLapHD">
                                             <span class="fas fa-file-invoice" style="font-size:18px; margin-left: 2px;">

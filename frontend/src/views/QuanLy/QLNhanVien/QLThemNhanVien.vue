@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-lg-2 "></div>
                     <div class="col-lg-3 ">
-                         <button class=" btn btn-sm btn-outline-secondary btnXem font-weight-bold" @click="goToQLNhanVien" >
+                         <button class=" btn btn-sm btn-outline-secondary btnXem font-weight-bold" @click="goToQLNhanVien">
                              <span class="fa fa-list-ol" style="font-size:20px; "></span>
                              Xem danh sách
                          </button>
