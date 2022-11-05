@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="col-md-2" ></div>
-                    <div class="col-md-3 col-sm-11">
+                    <div class="col-md-3 col-sm-11 ">
                         <button class=" btn btn-sm btn-outline-secondary btnXem font-weight-bold" @click="goToQLNhanVien">
                             <span class="fa fa-list-ol" style="font-size:20px"></span>
                             Xem danh sách

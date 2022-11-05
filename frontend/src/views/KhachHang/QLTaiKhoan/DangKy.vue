@@ -91,7 +91,7 @@
                             </div>
                             <ErrorMessage name="confirmPassword" class="error-feedback" />
                         </div>
-                        <p style="text-align:center">{{message}}</p>
+                        <p style="text-align:center; color:red">{{message}}</p>
                         <div class="form-group my-3 btn-login" style="margin-bottom:0%">
                             <button class="btn btn-sm btn-outline-secondary btn-block btnDangKy"
                                 :disabled="isSubmitting" :class="{ 'submitting': isSubmitting }">
@@ -170,7 +170,7 @@ export default {
                 this.loading = true;
 
                 const [error, data] = await this.handle(
-                    this.$store.dispatch("registerCustomer", khachhang)
+                    this.$store.dispatch("register", khachhang)
                 );
                 if (error) {
                     this.message = error.response.data.message;

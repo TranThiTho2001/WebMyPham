@@ -87,7 +87,7 @@ export default {
     data() {
 
         const schema = yup.object().shape({
-            KH_SDT: yup.string().required("Tên đăng nhập phải có giá trị"),
+            KH_SDT: yup.string().required("Số điện thoại phải có giá trị"),
             KH_MatKhau: yup.string().required("Mật khẩu phải có giá trị"),
         });
 

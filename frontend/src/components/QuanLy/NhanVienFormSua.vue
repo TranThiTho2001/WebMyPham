@@ -95,15 +95,15 @@
                     <div class="form-group">
                          <label for="khoaTKNV">Tài khoản: &nbsp; </label><br>
                          <Field name="khoaTKNV" class="form-control" v-model="nhanvienMoi.NV_KhoaTaiKhoan">
-                              <input v-if="!nhanvienMoi.NV_KhoaTaiKhoan" type="radio" id="one" value="false" v-model="nhanvienMoi.NV_KhoaTaiKhoan"
+                              <input v-if="!nhanvienMoi.NV_KhoaTaiKhoan" type="radio" id="one" value="false" name="khoaTKNV" v-model="nhanvienMoi.NV_KhoaTaiKhoan"
                                    @click="setKhoaTaiKhoan(false)" checked="true"/>
-                              <input  v-if="nhanvienMoi.NV_KhoaTaiKhoan" type="radio" id="one" value="false" v-model="nhanvienMoi.NV_KhoaTaiKhoan"
+                              <input  v-if="nhanvienMoi.NV_KhoaTaiKhoan" type="radio" id="one" value="false" name="khoaTKNV" v-model="nhanvienMoi.NV_KhoaTaiKhoan"
                                    @click="setKhoaTaiKhoan(false)" />
                               <label for="one">Mở khóa &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 
-                              <input v-if="nhanvienMoi.NV_KhoaTaiKhoan" type="radio" id="two" value="true" v-model="nhanvienMoi.NV_KhoaTaiKhoan"
+                              <input v-if="nhanvienMoi.NV_KhoaTaiKhoan" type="radio" id="two" value="true" name="khoaTKNV" v-model="nhanvienMoi.NV_KhoaTaiKhoan"
                                    @click="setKhoaTaiKhoan(true)" checked="true"/>
-                              <input v-if="!nhanvienMoi.NV_KhoaTaiKhoan" type="radio" id="two" value="true" v-model="nhanvienMoi.NV_KhoaTaiKhoan"
+                              <input v-if="!nhanvienMoi.NV_KhoaTaiKhoan" type="radio" id="two" value="true" name="khoaTKNV"  v-model="nhanvienMoi.NV_KhoaTaiKhoan"
                                    @click="setKhoaTaiKhoan(true)" />
                               <label for="two">Khóa</label>
                          </Field>
