@@ -189,8 +189,8 @@
             </p>
             <button class="btnYes btn btn-sm btn-outline-secondary"
                 @click="updateDonHang(), isOpenXacNhan = !isOpenXacNhan"
-                style="margin-left:10px">Yes</button>
-            <button class="btnNo btn btn-sm btn-outline-secondary" @click="isOpenXacNhan = !isOpenXacNhan">No</button>
+                style="margin-left:10px">Cập nhật</button>
+            <button class="btnNo btn btn-sm btn-outline-secondary" @click="isOpenXacNhan = !isOpenXacNhan">Hủy</button>
         </div>
     </div>
 
