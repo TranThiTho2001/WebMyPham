@@ -101,8 +101,7 @@ exports.update = async (req, res) => {
     const condition = {
         DH_Ma: req.params.DH_Ma,
     };
-console.log("Body"+req.body.DH_Ma);
-console.log("Body"+req.params.DH_Ma);
+    
     const [error, document] = await handle(
         DonHang.findOneAndUpdate(condition, req.body, {
             new: true,

@@ -44,10 +44,10 @@
                         </thead>
                         <tbody>
                             <tr v-for="(row, i ) in get_rows()" :key="i">
-                                <td v-if="currentPage > 1">{{ i + ((currentPage - 1) * 9) }}</td>
+                                <td v-if="currentPage > 1">{{ i + ((currentPage - 1) * 8) }}</td>
                                 <td v-else>{{ i }}</td>
                                 <td>{{ row.SP_Ma }}</td>
-                                <td>{{ row.SP_TenSanPham }}</td>
+                                <td style="width:50%">{{ row.SP_TenSanPham }}</td>
                                 <td>{{ row.DMSP_Ten }}</td>
                                 <td>{{ row.SP_GiaBanRa }}</td>
                                 <td>{{ row.SP_SoLuong }}</td>
@@ -129,7 +129,7 @@ export default {
             isOpenXacNhan: false,
             isOpenThongBao: false,
             currentPage: 1,
-            elementsPerPage: 9,
+            elementsPerPage: 8,
             ascending: false,
             isOpenChoosePage:false,
         }

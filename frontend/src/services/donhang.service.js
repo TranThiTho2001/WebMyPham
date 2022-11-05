@@ -4,7 +4,7 @@ class DonHangService {
     getAll() { return http.get("/donhang"); }
     getByID(DH_Ma) { return http.get(`/donhang/${DH_Ma}`); }
     create(data) { return http.post("/donhang", data); }
-    update(id, data) { return http.put(`donhang/${id}`, data); }
+    update(DH_Ma, data) { return http.put(`donhang/${DH_Ma}`, data); }
     delete(DH_Ma) { return http.delete(`/donhang/${DH_Ma}`); }
     findByStatus(DH_TrangThai) { return http.get(`/donhang?name=${DH_TrangThai}`); }
 }

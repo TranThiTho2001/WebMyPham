@@ -218,13 +218,11 @@
     border-width: 1px;
 }
 
-
-
-.frameLapHoaDon .dialogTrangThai,
- .dialogXacNhan {
+.frameQLDonHang .dialogXacNhan, 
+.frameLapHoaDon .dialogXacNhan{
     position: absolute;
-    top: calc(45%);
-    left: 31.9%;
+    top: calc(43%);
+    left: 20%;
     transform: translateX(50%);
     border: solid 0.5px #929292;
     background-color: #EAEAEA;
@@ -235,24 +233,61 @@
     text-align: center;
 }
 
-.frameLapHoaDon .dialogXacNhan .btnYes {
+.frameQLDonHang .dialogTrangThai
+ {
+    position: absolute;
+    top: calc(43%);
+    left: 31.9%;
+    transform: translateX(50%);
+    border: solid 0.5px #929292;
+    background-color: #EAEAEA;
+    border-radius: 16px;
+    display: block;
+    width: max-content;
+    border-radius: 15px;
+    text-align: center;
+}
+.frameQLDonHang .dialogTrangThai .trangthai {
+    font-family: Inter;
+    text-align: left;
+    margin-left: 35%;
+}
+.frameLapHoaDon .dialogXacNhan .btnYes,
+.frameQLDonHang .dialogXacNhan .btnYes {
     border-radius: 10px;
     background-color: red;
-    width: 70px;
-    height: 30px;
+    width: 100px;
     color: #FFFFFF;
     margin: 20px 0px 20px 10px;
 }
 
 
-.frameLapHoaDon .dialogXacNhan .btnNo{
+.frameQLDonHang .dialogTrangThai .btnCapNhat{
+    border-radius: 10px;
+    background-color: red;
+    width: 100px;
+    color: #FFFFFF;
+    margin: 20px 0px 20px 0px;
+}
+.frameQLDonHang .dialogTrangThai .btnHuy{
     border-radius: 10px;
     background-color: #929292;
-    width: 70px;
-    height: 30px;
+    width: 100px;
+    color: #FFFFFF;
+    margin: 20px 0px 20px 0px;
+}
+
+
+.frameLapHoaDon .dialogXacNhan .btnNo,
+.frameQLDonHang .dialogXacNhan .btnNo{
+    border-radius: 10px;
+    background-color: #929292;
+    width: 100px;
     color: #FFFFFF;
     margin: 20px 0px 20px 20px;
 }
+
+
 .dialogThongBao .btnOK {
      margin-left: 22px;
      background-color: #929292;
@@ -272,7 +307,6 @@
 .number.active {
     background: #717699;
 }
-
 
 .frameLapHoaDon .hoadon {
     background-color: #FFFFFF;
