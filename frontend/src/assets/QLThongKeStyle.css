@@ -1,0 +1,145 @@
+.frameQLThongKe .dschucNang .navigationBar .dsChucNang .btnThongKe
+{
+     background-color: #FFFFFF;
+     color: #515151;
+ }
+
+.frameQLThongKe .dschucNang {
+     background-color: #515151;
+     border-bottom-right-radius: 20px;
+     border-top-right-radius: 20px;
+}
+
+ .frameQLThongKe .bottomHeader {
+    margin-bottom: 2px;
+    text-align: center;
+    font-size: 20px;
+    width: 96%;
+    margin-left: 2%;
+ }
+ .frameQLThongKe{
+    background-color: #EAEAEA;
+    height: 100%;
+    font-family: Inter;
+    width: 100%;
+    margin-right: 0px;
+ }
+ 
+ .lableName{
+     font-family:Inter; 
+     color: #515151; 
+     font-size: 30px; 
+     font-weight: 600;
+}
+
+.frameQLThongKe .content{
+     margin-top: 2%;
+}
+.frameQLThongKe .number{
+     font-family: Inter;
+     font-size: 34px;
+     width: 100%;
+     margin-bottom: 1px;
+     color: #515151;
+}
+
+.frameQLThongKe .name{
+     font-family: Inter;
+     font-size: 20px;
+     display: inline;
+     font-weight: 500;
+    margin-left: 5px;
+    color: #515151;
+}
+
+.frameQLThongKe .icon{
+  display: inline-flex;
+  
+}
+
+.frameQLThongKe .icon .fa-receipt,
+.frameQLThongKe .icon .fa-dollar-sign{
+     display: flex;
+     justify-content: center;
+     align-items:center;
+     font-size: 70px;
+     color: #7E7E7E;
+} 
+
+.frameQLThongKe .icon .fa-user-check{
+     display: flex;
+     justify-content: center;
+     align-items:center;
+     font-size: 50px;
+     color: #7E7E7E;
+}
+.frameQLThongKe .name:hover,
+.frameQLThongKe .number:hover,
+.frameQLThongKe .icon .fa-receipt:hover,
+.frameQLThongKe .icon .fa-dollar-sign:hover,
+.frameQLThongKe .icon .fa-user-check:hover{
+     color:#3b3a3a;
+}
+
+.frameQLThongKe .content{
+     width: 96%;
+     margin-left: 2%;
+}
+
+.frameQLThongKe .rowContent{
+     margin-bottom: 3%;
+}
+.frameQLThongKe .rowContent .donhang,
+.frameQLThongKe .rowContent .doanhthu,
+.frameQLThongKe .rowContent .khachhang{
+     border-radius: 10px;
+     background-color:rgb(227, 227, 227);
+     border: 0.1px solid #807f7f;
+     height: max-content;
+}
+
+.frameQLThongKe .rowContent .donhang:hover,
+.frameQLThongKe .rowContent .doanhthu:hover,
+.frameQLThongKe .rowContent .khachhang:hover{
+    border: 3px solid #858282;
+    border-radius: 10px;
+}
+
+.frameQLThongKe .tong{
+     font-family: Inter;
+     font-size: 35px;
+     text-align: center;
+     margin-top: 40%;
+}
+.frameQLThongKe .themmoi{
+     display: inline-flex;
+     border-bottom-left-radius: 5px;
+}
+
+.frameQLThongKe .themmoi .labelSoLuongMoi{
+     font-family: Inter;
+     font-size: 18px;
+     display:flex;
+     align-items:flex-end;
+     justify-content: flex-end;
+}
+
+
+.frameQLThongKe .borderstyle{
+     border: 0.1px solid #7E7E7E;
+     border-bottom-left-radius: 8px;
+     border-bottom-right-radius: 8px;
+     border-top-left-radius: 2px;
+     border-top-right-radius: 8px;
+     background-color: #7E7E7E;
+     color:#FFFFFF;
+}
+.frameQLThongKe .tongso, .frameQLThongKe .chitiet{
+     margin-bottom: 3%;
+}
+
+.frameQLThongKe .trangthai{
+     font-family: Inter;
+     font-size: 18px;
+     margin-left: 5%;
+}

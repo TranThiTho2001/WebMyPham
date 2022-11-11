@@ -43,10 +43,10 @@
                          <label for="gioitinhNV">Giới tính: &nbsp;</label><br>
                          <Field name="gioitinhNV" class="form-control" placeholder="" v-model="nhanvienMoi.NV_GioiTinh">
 
-                              <input type="radio" id="one" value="true" v-model="nhanvienMoi.NV_GioiTinh" @click="setGioiTinh(true)"/>
+                              <input type="radio" id="nam" value="true" v-model="nhanvienMoi.NV_GioiTinh" @click="setGioiTinh(true)"/>
                               <label for="one">Nam &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 
-                              <input type="radio" id="two" value="false" v-model="nhanvienMoi.NV_GioiTinh" @click="setGioiTinh(false)"/>
+                              <input type="radio" id="nu" value="false" v-model="nhanvienMoi.NV_GioiTinh" @click="setGioiTinh(false)"/>
                               <label for="two">Nữ</label>
                          </Field>
                          <ErrorMessage name="gioitinhNV" class="error-feedback" />
@@ -92,10 +92,10 @@
                     <div class="form-group">
                          <label for="khoaTKNV">Tài khoản: &nbsp; </label><br>
                          <Field name="khoaTKNV" class="form-control" v-model="nhanvienMoi.NV_KhoaTaiKhoan">
-                              <input type="radio" id="one" value="false" v-model="nhanvienMoi.NV_KhoaTaiKhoan" @click="setKhoaTaiKhoan(false)"/>
+                              <input type="radio" id="mokhoa" value="false" v-model="nhanvienMoi.NV_KhoaTaiKhoan" @click="setKhoaTaiKhoan(false)"/>
                               <label for="one">Mở khóa  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 
-                              <input type="radio" id="two" value="true" v-model="nhanvienMoi.NV_KhoaTaiKhoan" @click="setKhoaTaiKhoan(true)"/>
+                              <input type="radio" id="khoa" value="true" v-model="nhanvienMoi.NV_KhoaTaiKhoan" @click="setKhoaTaiKhoan(true)"/>
                               <label for="two">Khóa</label>
                          </Field>
                          <ErrorMessage name="khoaTKNV" class="error-feedback" />
@@ -149,7 +149,8 @@ export default {
                     .required("Tên nhân viên phải có giá trị"),
                cccdNV: yup
                     .string()
-                    .required("Số CMND/CCCD phải có giá trị"),
+                    .required("Số CMND/CCCD phải có giá trị")
+                    .max(12,"Số CMND/CCCD có nhiều nhất 12 ký tự"),
                ngaysinhNV: yup
                     .date()
                     .required("Ngày sinh phải có giá trị"),

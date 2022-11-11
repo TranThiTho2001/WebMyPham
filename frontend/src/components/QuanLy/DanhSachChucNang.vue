@@ -5,7 +5,7 @@
             <img src="../../images/LogoQL.png" class="img-fluid">
         </div>
         <div class="dsChucNang">
-            <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnThongKe" @click="goToQLThongKe" :disabled=true><span
+            <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnThongKe" @click="goToQLThongKe"><span
                     class="fa fa-line-chart " aria-hidden="true"> &nbsp;</span> Thống Kê</button>
             <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary btnDonHang" @click="goToQLDonHang"><span
                     class="fa fa-receipt" aria-hidden="true"> &nbsp;&nbsp;</span> Đơn Hàng</button>
@@ -53,7 +53,7 @@ export default {
             this.$router.push({name: 'QLsanpham', params: { id: this.maNhanVien }});
         },
         goToQLThongKe() {
-            this.$router.push({name: 'QLDonHang', params: { id: this.maNhanVien }});
+            this.$router.push({name: 'ThongKe', params: { id: this.maNhanVien }});
         },
         goToQLDonHang() {
             this.$router.push({name: 'QLDonHang', params: { id: this.maNhanVien }});

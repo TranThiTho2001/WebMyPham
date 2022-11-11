@@ -8,7 +8,7 @@
                     <table class="bangTT">
                         <tr>
                             <td>Số HD: {{ hoadon.id }}</td>
-                            <td>Ngày lập: {{ hoadon.HD_ThoiGianLap + " " + hoadon.HD_NgayLap }}</td>
+                            <td>Ngày lập: {{ ngaylap + "   " +  hoadon.HD_ThoiGianLap}}</td>
                         </tr>
                         <tr>
                             <td>Khách hàng: {{ khachhang.KH_Ten }}</td>
@@ -59,6 +59,7 @@
 
 <script>
 import SanPhamService from '../../services/sanpham.service';
+import moment from 'moment';
 
 export default {
     name: `HoaDonChiTiet`,
@@ -66,6 +67,7 @@ export default {
     data() {
         return {
             tenSP:[],
+            ngaylap: ""
         }
     },
 
@@ -75,7 +77,7 @@ export default {
             this.findSanPham(element.SP_Ma, i);
             i++;
         });
-        console.log(this.tenSP)
+        this.formatDate();
     },
 
     methods: {
@@ -88,6 +90,10 @@ export default {
             } else {
                 this.tenSP[index] = response.data.SP_TenSanPham;
             }
+        },
+
+        async formatDate(){
+            this.ngaylap = moment(String(this.hoadon.HD_NgayLap)).format("MM / DD / YYYY");
         }
     }
 

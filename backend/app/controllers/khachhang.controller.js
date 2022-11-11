@@ -49,7 +49,7 @@ exports.findAll = async (req, res) => {
     }
 
     const [error, documents] = await handle(
-        KhachHang.findOne(condition, '-ownerId')
+        KhachHang.find(condition, '-ownerId')
     );
 
     if (error) {

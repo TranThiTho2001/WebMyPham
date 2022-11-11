@@ -111,6 +111,13 @@ const routes = [
             import ("../views/QuanLy/QLNhanVien/QLSuaNhanVien.vue"),
     },  
 
+    //Thong ke
+    {
+        path: '/admin/thongke/:id',
+        name: 'ThongKe',        
+        component: () =>
+            import ("../views/QuanLy/QLThongKe/ThongKe.vue"),
+    }, 
 //-------------------------------------------------KHACHHANG-----------------------------------
     {
         path: '/DangNhap',

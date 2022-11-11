@@ -5,14 +5,14 @@
             <div class="rightHeader nav-item dropdown">
                 <a class="nav-link " href="#" id="navbardrop">
                     <div class="row">
-                        <div class=" col-md-2"> <span class="fa fa-user-tie"></span></div>
+                        <div class=" col-md-2"> <span class="fa fa-user-tie userIcon"></span></div>
                         <div class="col-md-7">
-                            <span style="color:black; font-size: 18px; margin-left: 5%;">{{
+                            <span style="color:black; font-size: 18px; margin-left: 5%;" class="tenNV">{{
                                     localNhanVien.NV_Ten
                             }}</span><br>
-                            <span style="color:#7E7E7E; margin-left: 3px">{{ vaiTro }}</span>
+                            <span style="color:#7E7E7E; margin-left: 3px" class="vaitro">{{ vaiTro }}</span>
                         </div>
-                        <div class="col-md-2 fas fa-caret-down" style="margin-top:5%; font-size:30px; color:#515151">
+                        <div class="col-md-2 fas fa-caret-down iconQLTK" style="margin-top:5%; font-size:30px; color:#515151">
                         </div>
                         <div class="dropdown-menu right col-md-1">
                             <a class="dropdown-item" href="#" @click="goToQLDangNhap">Đăng xuất</a>

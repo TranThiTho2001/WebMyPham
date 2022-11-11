@@ -5,18 +5,18 @@
         <div class="row formDangNhap">
             <div class="col-md-4 leftForm">
                 <div class="row">
-                    <img src="../../../images/logoDanhNhap.png" class="img-fluid  mx-auto d-block" width="269px"
+                    <img src="../../../images/logoDanhNhap.png" class="img-fluid imgHinh mx-auto d-block" width="269px"
                         height="222px" alt="Logo" style="border-radius: 15px;">
                 </div>
                 <div class="row" style="margin-top:20%">
-                    <img src="../../../images/ImageDangNhap.png" class="img-fluid" width="464px" height="466px"
+                    <img src="../../../images/ImageDangNhap.png" class="img-fluid imgLogo" width="464px" height="466px"
                         alt="Image" style="border-radius: 15px; position: relative; bottom: -40px;">
                 </div>
             </div>
 
             <div class="col-md-8 rightForm">
                 <div style="margin-top: 10%">
-                    <h2 style="text-align:center">ĐĂNG NHẬP</h2>
+                    <h2 style="text-align:center" class="labelDangNhap">ĐĂNG NHẬP</h2>
                 </div>
                 <div class="row">
                     <Form @submit="findNhanVien()" :validation-schema="schema" v-slot="{ isSubmitting }">
@@ -47,12 +47,12 @@
                                     style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
                                     v-model="nhanvien.NV_MatKhau" />
 
-                                <span v-if="!isOpenPassword" class="btn far fa-eye-slash btnHienMatKhau"
+                                <span v-if="!isOpenPassword" class="btn far fa-eye btnHienMatKhau"
                                     @click="isOpenPassword=!isOpenPassword"></span>
-                                <span v-if="isOpenPassword" class="btn far fa-eye btnAnMatKhau"
+                                <span v-if="isOpenPassword" class="btn far fa-eye-slash btnAnMatKhau"
                                     @click="isOpenPassword=!isOpenPassword"></span>
                             </div>
-                            <a href="#" @click="goToQuenMatKhau">Quên mật khẩu?</a>
+                            <a href="#" @click="goToQuenMatKhau" class="quenMatKhau">Quên mật khẩu?</a>
                             <ErrorMessage name="password" class="error-feedback" />
                         </div>
 

@@ -5,18 +5,18 @@
         <div class="row formDangky">
             <div class="col-md-4 leftForm" style="height:100%">
                 <div class="row">
-                    <img src="../../../images/logoDanhNhap.png" class="img-fluid  mx-auto d-block" width="269px"
+                    <img src="../../../images/logoDanhNhap.png" class="img-fluid mx-auto d-block imgLogo" width="269px"
                         height="222px" alt="Logo" style="border-radius: 15px;">
                 </div>
                 <div class="row" style="margin-top:44.1%">
-                    <img src="../../../images/ImageDangNhap.png" class="img-fluid" width="464px" height="466px"
+                    <img src="../../../images/ImageDangNhap.png" class="img-fluid imgHinh" width="464px" height="466px"
                         alt="Image" style="border-radius: 15px; position: relative; bottom: -34px;">
                 </div>
             </div>
 
             <div class="col-md-8 rightForm" style="height:98%;">
                 <div style="margin-top: 10%">
-                    <h2 style="text-align:center">ĐĂNG KÝ TÀI KHOẢN</h2>
+                    <h2 style="text-align:center" class="labelDangKy">ĐĂNG KÝ TÀI KHOẢN</h2>
                 </div>
                 <div class="row">
                     <Form @submit="handleRegister" :validation-schema="schema" v-slot="{ isSubmitting }">
@@ -57,39 +57,39 @@
                                     style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
                                     v-model="khachhang.KH_MatKhau" />
 
-                                <span v-if="!isOpenPassword" class="btn far fa-eye-slash btnHienMatKhau"
+                                <span v-if="!isOpenPassword" class="btn far fa-eye btnHienMatKhau"
                                     @click="isOpenPassword=!isOpenPassword"></span>
-                                <span v-else class="btn  far fa-eye btnAnMatKhau"
+                                <span v-else class="btn far fa-eye-slash btnAnMatKhau"
                                     @click="isOpenPassword=!isOpenPassword"></span>
                             </div>
                             <ErrorMessage name="KH_MatKhau" class="error-feedback" />
                         </div>
 
                         <div class="form-group">
-                            <label for="confirmPassword">Nhập lại mật khẩu</label>
+                            <label for="xacNhanMatKhau">Nhập lại mật khẩu</label>
                             <div class="row" style="background-color: #F5F4F4; border-radius: 15px; margin: 0 0 0 0;">
 
-                                <Field v-if="!isOpenconfirmPassword" name="confirmPassword" type="password"
+                                <Field v-if="!isOpenconfirmPassword" name="xacNhanMatKhau" type="password"
                                     class="form-control" placeholder="Nhập lại mật khẩu"
                                     style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
                                     v-model="confirmPassword" />
 
-                                <Field v-if="confirmPassword=='' && isOpenconfirmPassword" name="confirmPassword"
+                                <Field v-if="confirmPassword=='' && isOpenconfirmPassword" name="xacNhanMatKhau"
                                     type="text" class="form-control" placeholder="Nhập lại mật khẩu"
                                     style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
                                     v-model="confirmPassword" />
 
-                                <Field v-if="confirmPassword!='' && isOpenconfirmPassword" name="confirmPassword"
+                                <Field v-if="confirmPassword!='' && isOpenconfirmPassword" name="xacNhanMatKhau"
                                     type="text" class="form-control" placeholder="{{confirmPassword}}"
                                     style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
                                     v-model="confirmPassword" />
 
-                                <span v-if="!isOpenconfirmPassword" class="btn far fa-eye-slash btnHienMatKhau"
+                                <span v-if="!isOpenconfirmPassword" class="btn far far fa-eye btnHienMatKhau"
                                     @click="isOpenconfirmPassword=!isOpenconfirmPassword"></span>
-                                <span v-else class="btn  far fa-eye btnAnMatKhau"
+                                <span v-else class="btn fa-eye-slash btnAnMatKhau"
                                     @click="isOpenconfirmPassword=!isOpenconfirmPassword"></span>
                             </div>
-                            <ErrorMessage name="confirmPassword" class="error-feedback" />
+                            <ErrorMessage name="xacNhanMatKhau" class="error-feedback" />
                         </div>
                         <p style="text-align:center; color:red">{{message}}</p>
                         <div class="form-group my-3 btn-login" style="margin-bottom:0%">
@@ -100,7 +100,7 @@
                             </button>
                         </div>
                         <div class="textDangNhap" >
-                            <p>Bạn đã có tài khoản?<button @click="goToDangNhap" href="" class="btnGoToDangNhap"> Đăng Nhập</button></p>
+                            <p class="labelCoTaiKhoan">Bạn đã có tài khoản?<button @click="goToDangNhap" href="" class="btnDangNhap"> Đăng Nhập</button></p>
                         </div>
                     </Form>
 
@@ -134,7 +134,7 @@ export default {
                 .required("Mật khẩu phải có giá trị")
                 .min(8, "Mật khẩu tối thiểu 8 ký tự")
                 .max(30, "Mật khẩu tối đa 30 ký tự"),
-            confirmPassword: yup
+            xacNhanMatKhau: yup
                 .string()
                 .required("Nhập lại mật khẩu phải có giá trị")
         });
@@ -206,7 +206,7 @@ export default {
     color: #515151;
 }
 
-.btnGoToDangNhap{
+.btnDangNhap{
     border: none;
     font-size: 20px;
     font-weight: 600;
@@ -214,7 +214,7 @@ export default {
     background-color:unset;
 }
 
-.btnGoToDangNhap:hover{
+.btnDangNhap:hover{
     border: none;
     color: black;
     background-color:unset;

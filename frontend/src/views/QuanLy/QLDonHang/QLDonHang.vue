@@ -89,7 +89,7 @@
                                 <td v-if="currentPage > 1">{{ i + ((currentPage - 1) * 11) }}</td>
                                 <td v-else>{{ i }}</td>
                                 <td>{{ row.DH_Ma }}</td>
-                                <td>{{ row.DH_NgayDat }}</td>
+                                <td>{{ row.DH_Ngay }}</td>
                                 <td>{{ row.KH_Ma }}</td>
                                 <td>{{ row.DH_TongTien }}</td>
                                 <td>
@@ -206,7 +206,7 @@ import QLDonHangCTDH from '../../../components/QuanLy/QLDonHangCTDH.vue';
 import NhanVienService from '../../../services/nhanvien.service';
 import HoaDonService from '../../../services/hoadon.service';
 import HoaDonChiTiet from '../../../components/QuanLy/HoaDonChiTiet.vue'
-
+import moment from'moment';
 
 export default {
     name: `QLDonHang`,
@@ -279,6 +279,9 @@ export default {
             } else {
                 this.donhang = response.data;
                 console.log(response.data);
+                this.donhang.forEach(element => {
+                    element.DH_Ngay = moment(String(element.DH_NgayDat)).format("MM / DD / YYYY hh: mm");
+                });
             }
         },
 

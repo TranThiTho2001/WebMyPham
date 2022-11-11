@@ -42,7 +42,7 @@
 
                 <!-- <Danh sach danh muc san pham-->
                 <div class="row dsNhanVien" v-if="!isOpenXemChiTiet">
-                    <table>
+                    <table class="bangTTNV">
                         <thead>
                             <tr>
                                 <th>STT</th>
@@ -66,10 +66,10 @@
                                         data-toggle="dropdown" style="color:#515151">
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#" @click="isOpenXemChiTiet=!isOpenXemChiTiet, isOpenChoosePage=!isOpenChoosePage"><span class="fas fa-eye"
+                                        <a class="dropdown-item xemNV"  href="#" @click="isOpenXemChiTiet=!isOpenXemChiTiet, isOpenChoosePage=!isOpenChoosePage"><span class="fas fa-eye"
                                                 style="font-size:19px"></span> Xem</a>
-                                        <a class="dropdown-item" href="#" @click="goToSuaNhanVien"><span class="fas fa-edit"></span> Sửa</a>
-                                        <a class="dropdown-item" href="#" @click="isOpenXacNhan = !isOpenXacNhan"><span
+                                        <a class="dropdown-item suaNV" href="#" @click="goToSuaNhanVien"><span class="fas fa-edit"></span> Sửa</a>
+                                        <a class="dropdown-item xoaNV" href="#" @click="isOpenXacNhan = !isOpenXacNhan"><span
                                                 class="fas fa-trash-alt" style="color:red"></span> Xóa</a>
                                     </div>
                                 </td>
@@ -80,7 +80,7 @@
                 <!-- danh sach so trang hien thi -->
                 <div class="row" style="width: 100%;" v-if="!isOpenChoosePage && nhanvien.length>9">
                     <div class="btnChonTrang">
-                        <p style="display: inline-block; padding-top: 4px;text-align: right;">Trang &nbsp;</p>
+                        <p style="display: inline-block; padding-top: 4px;text-align: right;" class="soTrang">Trang &nbsp;</p>
                         <div class="numberPage">
                             <div class="dropup">
                                 <button class="dropbtn">{{ currentPage }}
@@ -102,7 +102,7 @@
     </div>
     <!-- ------------------------------Bang xac nhan xoa nhan vien ----------------------------- -->
     <div class="dialogXacNhan" v-if="isOpenXacNhan">
-        <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 18px;">
+        <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 18px;" class="labelXacNhan">
             <span class="fas fa-trash-alt" style="color:red"></span> Bạn chắc chắn muốn xóa?
         </p>
         <button class="btnYes btn btn-sm btn-outline-secondary"
@@ -110,7 +110,7 @@
         <button class="btnNo btn btn-sm btn-outline-secondary" @click="isOpenXacNhan = !isOpenXacNhan">Hủy</button>
     </div>
     <div class="dialogThongBao" v-if="isOpenThongBao">
-        <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 18px;">
+        <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 18px;" class="labelThongBao">
             <span class="fas fa-check-circle" style="color:#00BA13; text-align: center;"></span> {{message}}
         </p>
         <button class="btnOK btn btn-sm btn-outline-secondary" @click="isOpenThongBao = !isOpenThongBao">OK</button>

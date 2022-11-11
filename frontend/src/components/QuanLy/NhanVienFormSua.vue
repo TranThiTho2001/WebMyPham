@@ -76,7 +76,6 @@
                          <div style="border: solid 0.1px #cecaca; border-radius: 5px;">
                               <Field name="matkhauNV" class="form-control" v-model="nhanvienMoi.password"
                                    type="password" style="width:95%; display: inline; border: none;" />
-                              <span class="far fa-eye-slash" style="dislay:inline"> </span>
                          </div>
                          <ErrorMessage name="matkhauNV" class="error-feedback" />
                     </div>

@@ -163,7 +163,6 @@ export default {
                     this.findDanhMuc(element);
                 });
             }
-
         },
 
         async retrieveImage() {

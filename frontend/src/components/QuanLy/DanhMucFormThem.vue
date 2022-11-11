@@ -6,7 +6,7 @@
         </div>
 
         <div class="form-group">
-            <label for="name">Mã danh mục</label>
+            <label for="ma">Mã danh mục</label>
             <Field name="ma" type="name" class="form-control" v-model="danhmucLocal.DM_Ma" placeholder="Nhập mã danh mục" />
             <ErrorMessage name="ma" class="error-feedback" />
         </div>
