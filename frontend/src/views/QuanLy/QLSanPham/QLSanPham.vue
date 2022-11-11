@@ -1,4 +1,5 @@
 <template>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <div class="container-fluid frameQLSanPham">
         <div class="row list">
             <div class="col-md-2 dschucNang">
@@ -38,17 +39,19 @@
                                 <th>Mã</th>
                                 <th>Tên</th>
                                 <th>Danh Mục</th>
+                                <th>Thương hiệu</th>
                                 <th>Giá bán</th>
                                 <th>Số lượng còn</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(row, i ) in get_rows()" :key="i">
-                                <td v-if="currentPage > 1">{{ i + ((currentPage - 1) * 8) }}</td>
+                                <td v-if="currentPage > 1">{{ i + ((currentPage - 1) * 9) }}</td>
                                 <td v-else>{{ i }}</td>
                                 <td>{{ row.SP_Ma }}</td>
-                                <td style="width:50%">{{ row.SP_TenSanPham }}</td>
+                                <td style="width: 400px;  position: relative;"><p class="tenSP">{{ row.SP_TenSanPham }}</p></td>
                                 <td>{{ row.DMSP_Ten }}</td>
+                                <td>{{row.TH_Ten}}</td>
                                 <td>{{ row.SP_GiaBanRa }}</td>
                                 <td>{{ row.SP_SoLuong }}</td>
                                 <!-- <td>
@@ -114,7 +117,9 @@ import QLHeader from '../../../components/QuanLy/QLHeader.vue';
 import SanPhamService from '../../../services/sanpham.service';
 import ImageService from '../../../services/image';
 import DanhMucService from '../../../services/danhmuc.service';
-import ChiTietDonHangService from '../../../services/chitietdonhang.service'
+import ChiTietDonHangService from '../../../services/chitietdonhang.service';
+import ThuongHieuService from '../../../services/thuonghieu.service';
+
 export default {
     name: `QLHomePage`,
     components: { DanhSachChucNang, QLHeader },
@@ -129,9 +134,10 @@ export default {
             isOpenXacNhan: false,
             isOpenThongBao: false,
             currentPage: 1,
-            elementsPerPage: 8,
+            elementsPerPage: 9,
             ascending: false,
             isOpenChoosePage:false,
+            thuonghieu:[],
         }
 
     },
@@ -161,7 +167,25 @@ export default {
                 this.sanpham = response.data;
                 this.sanpham.forEach(element => {
                     this.findDanhMuc(element);
+                    this.thuonghieu.forEach(th => {
+                        if(element.TH_Ma == th.TH_Ma){
+                            element.TH_Ten = th.TH_Ten;
+                        }
+                    });
                 });
+            }
+        },
+
+        async findThuongHieu() {
+           
+            const [error, response] = await this.handle(
+                ThuongHieuService.getAll()
+            );
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(response.data)
+                this.thuonghieu = response.data;
             }
         },
 
@@ -266,6 +290,7 @@ export default {
     },
 
     mounted() {
+        this.findThuongHieu();
         this.retrieveSanPham();
         this.retrieveImage();
     }

@@ -1,4 +1,5 @@
 <template>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
      <div class="container-fluid frameQLThongKe">
           <div class="row list">
                <div class="col-md-2 dschucNang">
@@ -30,7 +31,7 @@
                                    </div>
                                    <div class="col-md-1"></div>
                                    <!-- Thong ke doanh thu -->
-                                   <div class="col-md-3 doanhthu">
+                                   <div class="col-md-4 doanhthu">
                                         <div class="row">
                                              <div class="col-md-3 icon">
                                                   <span class="fa fa-dollar-sign"></span>
@@ -53,26 +54,52 @@
                                              <div class="col-md-9 tongso">
                                                   <p class="number">{{ khachhang.length }}</p>
                                                   <p class="name">Tài Khoản</p>
-
                                              </div>
                                         </div>
                                    </div>
                               </div>
-                              <!-- <div class="row rowContent">
-                                   <Bar :chart-options="chartOptions" :chart-data="chartData" :chart-id="chartId"
-                                        :dataset-id-key="datasetIdKey" :plugins="plugins" :css-classes="cssClasses"
-                                        :styles="styles" :width="500" :height="500" />
-                              </div> -->
                               <div class="row rowContent">
-                                   <Line :chart-options="chartOptions" :chart-data="chartData" :chart-id="chartId"
-                                        :dataset-id-key="datasetIdKey" :plugins="plugins" :css-classes="cssClasses"
-                                        :styles="styles" :width="500" :height="500" />
+                                   <div class="col-md-6 bieuDoDoanhThu">
+                                        <Line :chart-options="chartOptions" :chart-data="chartData" :chart-id="chartId"
+                                             :dataset-id-key="datasetIdKey" :plugins="plugins" :css-classes="cssClasses"
+                                             :styles="styles" :width="500" :height="500" />
+                                   </div>
+                                   <div class="col-md-1"></div>
+                                   <div class="col-md-5 sanPhamBanChay" @scroll="handleScroll">
+                                        <div class="row">
+                                             <p class="lableSPBanChay col-md-12">Sản Phẩm Bán Chạy</p>
+                                        </div>
+                                        <table class="row" >
+                                             <tbody clas="col-md-12">
+                                                  <tr v-for="(sanpham, i) in sanphambanchay" :key="i"
+                                                       class="row sanpham" @click="goToCTSP(sanpham)">
+                                                       <td class="col-md-4 khungAnhSanPham" >
+                                                            <img :src="require(`@/images/${sanpham.SP_HinhAnh}`)"
+                                                                 class="img-fluid">
+                                                       </td>
+                                                       <td class="col-md-8 thongTinSP">
+                                                            <div class="row">
+                                                                 <p class="col-md-6 tenTH">{{ sanpham.TH_Ten}}</p>
+                                                                 <p class="col-md-6 giaban">{{formatMoney(sanpham.SP_GiaBanRa)}}đ</p>
+                                                            </div>
+                                                            <div class="row ">
+                                                                 <p class=" col-md-12 tenSP">{{sanpham.SP_TenSanPham}}</p>
+                                                            </div>
+                                                            <div class="row">
+                                                                 <div class="col-md-12">
+                                                                      <span class="fas fa-star danhgia" v-for="(sao, i) in sanpham.SP_DanhGia" :key="i"></span>
+                                                                 </div>
+                                                            </div>
+                                                       </td>
+                                                  </tr>
+                                             </tbody>
+                                        </table>
+                                   </div>
+
                               </div>
+
                          </div>
-
                     </div>
-
-
                </div>
           </div>
      </div>
@@ -84,12 +111,12 @@ import DanhSachChucNang from '../../../components/QuanLy/DanhSachChucNang.vue';
 import QLHeader from '../../../components/QuanLy/QLHeader.vue';
 import DonHangService from '../../../services/donhang.service';
 import KhachHangService from '../../../services/khachhang.service';
-// import { Bar } from 'vue-chartjs';
-// import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
-
-// ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
+import SanPhamService from '../../../services/sanpham.service';
+import CTDHService from '../../../services/chitietdonhang.service';
+import ThuongHieuService from '../../../services/thuonghieu.service';
 import { Line } from "vue-chartjs"
 import { Chart, registerables } from "chart.js";
+
 Chart.register(...registerables)
 
 export default {
@@ -127,6 +154,10 @@ export default {
                khachhang: [],
                tongdoanhthu: 0,
                doanhthu: "",
+               sanpham: [],
+               sanphambanchay: [],
+               chitietdonhang: [],
+               thuonghieu: [],
                trangthaidonhang: {
                     "moi": {
                          name: "Mới",
@@ -218,11 +249,12 @@ export default {
                chartData: {
                     labels: [],
                     datasets: [{
-                         label:"Doanh Thu",
+                         label: "Doanh Thu",
                          data: [],
-                         backgroundColor: "transparent",
-                         borderColor: "rgba(1, 116, 188, 0.50)",
-                         pointBackgroundColor: "rgba(171, 71, 188, 1)",
+                         backgroundColor: "rgb(227, 227, 227)",
+                         borderColor: "#858282",
+                         pointBackgroundColor: "#515151",
+                         color: "Chart.defaults.color"
                     }]
                },
                chartOptions: {
@@ -279,26 +311,21 @@ export default {
                     if (element.DH_TrangThai == this.trangthaidonhang.nhanhang.name) {
                          this.tongdoanhthu = this.tongdoanhthu + element.DH_TongTien;
                          if (element.DH_NgayDat) {
-                              console.log(element.DH_NgayDat)
                               element.DH_Thang = moment(String(element.DH_NgayDat)).format("MM / DD / YYYY hh: mm").substring(0, 2);
                               this.thang.forEach(t => {
                                    if (t.name == element.DH_Thang) {
                                         t.doanhthu = t.doanhthu + element.DH_TongTien;
                                    }
-                                   console.log(t + " " + t.doanhthu)
                               });
                          }
                     }
                });
                let i = 0;
                this.thang.forEach(element => {
-
                     this.chartData.labels[i] = element.name;
                     this.chartData.datasets[0].data[i] = element.doanhthu;
                     i++;
                });
-               console.log(this.formatMoney(this.tongdoanhthu) + "vdwsag")
-
           },
           formatMoney(data) {
                let val = (data / 1).toFixed(0).replace(".", ",");
@@ -314,17 +341,79 @@ export default {
                } else {
 
                     this.khachhang = response.data;
-                    console.log(response.data);
                }
           },
 
+          async retrieveThuongHieu() {
+               const [error, response] = await this.handle(
+                    ThuongHieuService.getAll()
+               );
+               if (error) {
+                    console.log(error);
+               } else {
+                    this.thuonghieu = response.data;
+                    this.retrieveSanPham();
+               }
+          },
 
+          async retrieveSanPham() {
+               const [error, response] = await this.handle(
+                    SanPhamService.getAll()
+               );
+               if (error) {
+                    console.log(error);
+               } else {
+                    this.sanpham = response.data;
+                    this.sanPhamBanChay();
+               }
+          },
 
+          async retrieveCTDH() {
+               const [error, response] = await this.handle(
+                    CTDHService.getAll()
+               );
+               if (error) {
+                    console.log(error);
+               } else {
+                    this.chitietdonhang = response.data;
+               }
+          },
 
+          async sanPhamBanChay() {
+               console.log("fcsa");
+               this.sanpham.forEach(sp => {
+                    sp.SP_SoLuongBan = 0;
+                    console.log("vrfegr")
+                    this.chitietdonhang.forEach(ctdh => {
+                         if (sp.SP_Ma == ctdh.SP_Ma) {
+                              sp.SP_SoLuongBan += ctdh.CTDH_SoLuong;
+                         }
+                    });
+               });
+               this.sanpham.sort((x, y) => (x["SP_SoLuongBan"] > y["SP_SoLuongBan"] ? -1 : 1)); console.log(this.sanpham);
+               let i = 0;
+               for (i; i < 5; i++) {
+                    this.sanphambanchay[i] = this.sanpham[i];
+                    this.thuonghieu.forEach(element => {
+                         console.log(element)
+                         if (this.sanphambanchay[i].TH_Ma == element.TH_Ma) {
+                              this.sanphambanchay[i].TH_Ten = element.TH_Ten;
+                         }
+                    });
+                    this.sanphambanchay[i].SP_DanhGia = 5;
+               }
+               this.sanphambanchay[2].SP_DanhGia = 4;
+          },
+
+          async goToCTSP(data){
+               this.$router.push({ name: 'QLDonHang', params: { id: this.nhanviencheck.NV_Ma, sp:data.SP_Ma } });
+          }
      },
      mounted() {
           this.getDonHang();
           this.retrieveKhachHang();
+          this.retrieveCTDH();
+          this.retrieveThuongHieu();
      }
 }
 </script>

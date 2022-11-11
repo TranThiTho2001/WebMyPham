@@ -3,6 +3,8 @@
          <div class="functionName">
              <span class="fa fa-plus-circle"> </span>
              <p style="display:inline"> Thêm sản phẩm mới </p>
+             
+             <!-- <p>{{sanphamLocal.SP_HinhAnh}}</p> -->
          </div>
          <div class="row container-fluid">
              <div class="col-md-6">
@@ -43,8 +45,10 @@
                  </div>
                  <div class="form-group">
                      <label for="image">Hình ảnh</label><br>
-                     <input v-if="chonHinhAnh" type="file" ref="file" name="image" @change="selectFile" accept="image/*" >
-                    <Field v-if="!chonHinhAnh" name="image" class="form-control" v-model="sanphamLocal.SP_HinhAnh" @click="chonHinhAnh=true"/>
+                     
+                    <div class="row" style="margin-left:0.5%"><Field name="image" class="form-control " v-model="sanphamLocal.SP_HinhAnh" @click="chonHinhAnh=true">
+                     <input  type="file" ref="file" name="image" @change="selectFile" accept="image/*"  class="" v-bind:aria-disabled="true">
+                    </Field></div> 
                  </div>
              </div>
              <div class="col-md-6">
@@ -97,10 +101,10 @@
  export default {
      name: "SanPhamFormSua",
      components: {
-         Form,
-         Field,
-         ErrorMessage,
-     },
+    Form,
+    Field,
+    ErrorMessage,
+},
      emits: ["suaSanPham-submit", "author-delete"],
      props: ["sanpham", "message1", "message2", "danhmuc", "thuonghieu"],
      data() {
@@ -145,6 +149,7 @@
              chonDanhMuc: false,
              chonThuongHieu: false,
              chonHinhAnh: false,
+             nameImge: this.sanpham.SP_HinhAnh,
          };
      },
      methods: {

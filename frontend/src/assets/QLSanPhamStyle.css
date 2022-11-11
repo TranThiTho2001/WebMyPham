@@ -27,7 +27,7 @@
      border-top-right-radius: 20px;
 }
 
-.frameQLSanPham .timkiem .btnThem{
+.frameQLSanPham .timkiem .btnThem {
      background-color: #515151;
      border-radius: 10px;
      color: #FFFFFF;
@@ -46,10 +46,13 @@
      margin-left: 36%;
      position: absolute;
 }
- .timkiem .inputSearch:hover{
+
+.timkiem .inputSearch:hover {
      background-color: #D9D9D9;
- }
-.frameQLSanPham .bottomHeader, .frameQLThemSanPham .bottomHeader {
+}
+
+.frameQLSanPham .bottomHeader,
+.frameQLThemSanPham .bottomHeader {
      margin-bottom: 2px;
      text-align: center;
      font-size: 20px;
@@ -61,11 +64,12 @@
      width: 100%;
 }
 
-.frameQLSanPham .timkiem, .frameQLThemSanPham .timkiem{
+.frameQLSanPham .timkiem,
+.frameQLThemSanPham .timkiem {
      width: 98%;
      margin-left: 10px;
      margin-bottom: 10px;
- }
+}
 
 .btnChonTrang {
      margin-left: 88.4%;
@@ -179,8 +183,13 @@
      margin-top: 3px;
      font-size: 15px;
      border-bottom: solid 0.01px #e9e7e7;
+    
 }
-
+.frameQLSanPham table tbody tr:hover {
+     background: #ecebeb;
+     border-bottom: solid 0.01px #b4b3b3;
+     color: #515151;
+}
 
 .frameQLSanPham .timkiem .btnXem {
      background-color: #515151;
@@ -233,7 +242,8 @@
      border-right: 10px;
 }
 
-.frameQLSanPham .timkiem .btnTimKiem:hover, .frameQLThemSanPham .timkiem .btnTimKiem:hover{
+.frameQLSanPham .timkiem .btnTimKiem:hover,
+.frameQLThemSanPham .timkiem .btnTimKiem:hover {
      background-color: #515151;
 }
 
@@ -320,10 +330,19 @@ form .form-control {
      color: #515151;
 }
 
-.lableName{
-     font-family:Inter; 
-     color: #515151; 
-     font-size: 30px; 
+.lableName {
+     font-family: Inter;
+     color: #515151;
+     font-size: 30px;
      font-weight: 600;
 }
 
+.frameQLSanPham .dsSanPham table .tenSP {
+     position: absolute;
+     left: 0;
+     right: 8%;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     top: 25%;
+}

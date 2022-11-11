@@ -27,6 +27,7 @@
     "vue-media-upload": "^1.1.4",
     "vue-money-format": "^1.2.4",
     "vue-router": "^4.0.13",
+    "vue-scrolling-table": "^2.0.0",
     "vue3-easy-data-table": "^1.5.0",
     "vue3-simple-file-input": "^1.0.3",
     "vuex": "^4.0.2",

@@ -325,6 +325,13 @@
     font-size: 15px;
     border-bottom: solid 0.01px #e9e7e7;
 }
+
+.frameQLNhanVien table tbody tr:hover {
+    background: #ecebeb;
+    border-bottom: solid 0.01px #b4b3b3;
+    color: #515151;
+}
+
 .lableName{
     font-family:Inter; 
     color: #515151; 
