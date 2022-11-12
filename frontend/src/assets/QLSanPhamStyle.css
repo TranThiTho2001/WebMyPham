@@ -1,16 +1,16 @@
 .frameQLSanPham .dschucNang .navigationBar .dsChucNang .btnSanPham,
-.frameQLThemSanPham .dschucNang .navigationBar .dsChucNang .btnSanPham {
+.frameQLThemSanPham .dschucNang .navigationBar .dsChucNang .btnSanPham,
+.frameQLSuaSanPham  .dschucNang .navigationBar .dsChucNang .btnSanPham{
      background-color: #FFFFFF;
      color: #515151;
 }
 
-
-
-.frameQLThemSanPham .dschucNang .navigationBar .moreInformation {
+.frameQLThemSanPham .dschucNang .navigationBar .moreInformation,
+.frameQLSuaSanPham .dschucNang .navigationBar .moreInformation{
      margin-top: 80px;
 }
 
-
+.frameQLSuaSanPham,
 .frameQLSanPham,
 .frameQLThemSanPham {
      background-color: #EAEAEA;
@@ -21,7 +21,8 @@
 }
 
 .frameQLSanPham .dschucNang,
-.frameQLThemSanPham .dschucNang {
+.frameQLThemSanPham .dschucNang,
+.frameQLSuaSanPham .dschucNang {
      background-color: #515151;
      border-bottom-right-radius: 20px;
      border-top-right-radius: 20px;
@@ -37,7 +38,8 @@
      position: absolute;
 }
 
-.frameQLThemSanPham .timkiem .btnXem {
+.frameQLSuaSanPham .timkiem .btnXem,
+.frameQLThemSanPham .timkiem .btnXem{
      background-color: #515151;
      border-radius: 10px;
      color: #FFFFFF;
@@ -50,7 +52,7 @@
 .timkiem .inputSearch:hover {
      background-color: #D9D9D9;
 }
-
+.frameQLSuaSanPham .bottomHeader,
 .frameQLSanPham .bottomHeader,
 .frameQLThemSanPham .bottomHeader {
      margin-bottom: 2px;
@@ -63,7 +65,7 @@
 .dsSanPham {
      width: 100%;
 }
-
+.frameQLSuaSanPham .timkiem,
 .frameQLSanPham .timkiem,
 .frameQLThemSanPham .timkiem {
      width: 98%;
@@ -235,6 +237,7 @@
      margin-top: 20px;
 }
 
+.frameQLSuaSanPham .form-control,
 .frameQLSanPham .form-control,
 .frameQLThemSanPham .form-control {
      border-radius: 10px;
@@ -242,15 +245,12 @@
      border-right: 10px;
 }
 
+.frameQLSuaSanPham .timkiem .btnTimKiem:hover,
 .frameQLSanPham .timkiem .btnTimKiem:hover,
 .frameQLThemSanPham .timkiem .btnTimKiem:hover {
      background-color: #515151;
 }
 
-.frameQLSanPham .frameThem {
-     background-color: #D9D9D9;
-     border-radius: 10px;
-}
 
 form {
      width: 96.2%;
@@ -296,6 +296,7 @@ form .textMessage1 {
      text-align: center;
 }
 
+.frameQLSuaSanPham .frameSua form .btnLuu,
 .frameQLThemSanPham .frameThem form .btnLuu {
      text-align: center;
      transform: translateY(0px);

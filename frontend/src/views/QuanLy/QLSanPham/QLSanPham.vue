@@ -62,8 +62,9 @@
                                         data-toggle="dropdown" style="color:#515151">
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#" @click="goToSuaSanPham"><span class="fas fa-edit" ></span> Sửa</a>
-                                        <a class="dropdown-item" href="#" @click="isOpenXacNhan = !isOpenXacNhan"><span
+                                        <a class="dropdown-item icon" href="#" @click="goToSuaSanPham"><span class="fas fa-eye" ></span> Xem</a>
+                                        <a class="dropdown-item icon" href="#" @click="goToSuaSanPham"><span class="fas fa-edit"></span> Sửa</a>
+                                        <a class="dropdown-item icon" href="#" @click="isOpenXacNhan = !isOpenXacNhan"><span
                                                 class="fas fa-trash-alt" style="color:red"></span> Xóa</a>
                                     </div>
                                 </td>
@@ -300,6 +301,9 @@ export default {
 <style>
 @import '../../../assets/QLSanPhamStyle.css';
 
+.frameQLSanPham .icon{
+    font-size: 18px;
+}
 .dschucNang .navigationBar .moreInformation {
     margin-top: 40px;
 }

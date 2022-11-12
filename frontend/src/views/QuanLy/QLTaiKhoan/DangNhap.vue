@@ -113,7 +113,7 @@ export default {
     created() {
         if (!this.nhanvienLoggedIn) {
             console.log(this.nhanvienLoggedIn)
-            this.$router.push({ name: 'QLDonHang', params: { id: this.nhanviencheck.NV_Ma } });
+            this.$router.push({ name: 'QLThongKe', params: { id: this.nhanviencheck.NV_Ma } });
         }
     },
 
@@ -129,7 +129,7 @@ export default {
                 this.message = "Tên đăng nhập hoặc mật khẩu đăng nhập sai";
             } else {
                 console.log(data);
-                    this.$router.push({ name: 'QLDonHang', params: { id: this.nhanvien.NV_Ma } });
+                    this.$router.push({ name: 'QLThongKe', params: { id: this.nhanvien.NV_Ma } });
                 
             }
         },

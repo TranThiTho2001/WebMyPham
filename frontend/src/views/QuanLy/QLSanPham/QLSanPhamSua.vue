@@ -10,7 +10,7 @@
                 <QLHeader :maNV="localNhanVien.NV_Ma" />
                 <div class="row bottomHeader" style="width:96%; margin-left: 2%;">
                     <div class="col-md-12 font-weight-bold" style="color:#515151; font-size: 25px;">
-                        <p class="lableName">THÊM SẢN PHẨM</p>
+                        <p class="lableName">CẬP NHẬT THÔNG TIN SẢN PHẨM</p>
                     </div>
                 </div>
                 <div class="row timkiem">
@@ -72,7 +72,7 @@ export default {
             danhmuc: [],
             thuonghieu: [],
             fileName: "",
-
+            oldImage: "",
         }
 
     },
@@ -99,7 +99,9 @@ export default {
                 this.sanpham.SP_GiaMuaVao = response.data.SP_GiaMuaVao;
                 this.sanpham.SP_GiaBanRa = response.data.SP_GiaBanRa;
                 this.sanpham.SP_ThongTin = response.data.SP_ThongTin;
-                this.sanpham.SP_HinhAnh = response.data.SP_HinhAnh;
+                console.log(response.data.SP_HinhAnh);
+                this.sanpham.SP_HinhAnh = require('@/images/' + response.data.SP_HinhAnh);
+                this.oldImage = response.data.SP_HinhAnh;
                 this.sanpham.Image = "";
                 this.findTenDanhMuc(this.sanpham.DMSP_Ma);
                 this.findTenThuongHieu(this.sanpham.TH_Ma);
@@ -108,10 +110,28 @@ export default {
         },
 
         async updateSanPham(data) {
-            console.log(data.SP_HinhAnh+"fcdsgv")
-            if (data.SP_HinhAnh != this.sanpham.SP_HinhAnh) {
-                this.saveImge(data.Image);
+            console.log(data.SP_HinhAnh + " " + this.sanpham.SP_HinhAnh + " " + this.oldImage)
+            if (data.SP_HinhAnh != this.oldImage) {
+                //Luu hinh anh
+                const formData = new FormData();
+                formData.append("image", data.Image);
+                const responses = await ImageService.create(formData);
+                this.fileName = responses.data.filename;
                 data.SP_HinhAnh = this.fileName;
+                
+                //Cap nhat san pham
+                const [error, response] = await this.handle(
+                    SanPhamService.update(data.SP_Ma, data)
+                );
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log(response.data);
+                    this.message2 = "Thêm thành công";
+                    console.log(response.data)
+                }
+            }
+            else {
                 console.log(this.fileName + "aljfdkew b");
                 const [error, response] = await this.handle(
                     SanPhamService.update(data.SP_Ma, data)
@@ -189,13 +209,6 @@ export default {
                 this.sanpham.DM_Ten = response.data.DM_Ten;
                 console.log(response.data);
             }
-        },
-
-        async saveImge(data) {
-            const formData = new FormData();
-            formData.append("image", data);
-            const response = await ImageService.create(formData);
-            this.fileName = response.data.filename;
         },
 
         async goToQLSanPham() {

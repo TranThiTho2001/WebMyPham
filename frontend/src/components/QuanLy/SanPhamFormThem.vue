@@ -39,9 +39,10 @@
                     <ErrorMessage name="name" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="image">Hình ảnh</label><br>
-                    <input type="file" ref="file" name="image" @change="selectFile" accept="image/*">
-
+                    <label for="information">Thông tin</label>
+                    <Field name="information" class="form-control" v-model="sanphamLocal.SP_ThongTin"
+                        placeholder="Thông tin sản phẩm" as="textarea" style="height: 100px;"/>
+                    <ErrorMessage name="information" class="error-feedback" />
                 </div>
             </div>
             <div class="col-md-6">
@@ -64,10 +65,19 @@
                     <ErrorMessage name="saleprice" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="information">Thông tin</label>
-                    <Field name="information" class="form-control" v-model="sanphamLocal.SP_ThongTin"
-                        placeholder="Thông tin sản phẩm" as="textarea"/>
-                    <ErrorMessage name="information" class="error-feedback" />
+                    <label for="image">Hình ảnh &nbsp; &nbsp;</label>
+                    <Field name="image" class="form-control " v-model="sanphamLocal.SP_HinhAnh"
+                                @click="chonHinhAnh = true" >
+                                <input type="file" ref="file" name="image" @change="selectFile" accept="image/*"
+                                    class="" v-bind:aria-disabled="true">
+                            </Field>
+                    <div class="row" >
+                        <div class="col-md-5">
+                            <img v-if="url!=''" :src="url" class="img-fluid">
+                        </div>
+                        <div class="col-md-7">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -139,6 +149,7 @@ export default {
             danhmucActive: "",
             thuonghieuActive: "",
             fileImage: {},
+            url:""
         };
     },
     methods: {
@@ -152,6 +163,7 @@ export default {
             this.sanphamLocal.SP_HinhAnh = "image_" + this.fileImage.name;
             console.log(this.fileImage.name);
             this.sanphamLocal.Image = this.fileImage;
+            this.url = URL.createObjectURL(this.fileImage);
         },
 
         async setMaDanhMuc() {

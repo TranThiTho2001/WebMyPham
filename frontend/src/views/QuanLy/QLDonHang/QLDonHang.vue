@@ -124,16 +124,16 @@
                                         @click="setActiveDonHang(row)">
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#"
+                                        <a class="dropdown-item icon" href="#"
                                             @click="isOpenCTDH = !isOpenCTDH, isOpenList = !isOpenList, isOpenChoosePage = !isOpenChoosePage">
                                             <span class="fas fa-eye"></span> Xem chi tiết
                                         </a>
-                                        <a v-if="dalapHD" class="dropdown-item" href="#"
+                                        <a v-if="dalapHD" class="dropdown-item icon" href="#"
                                             @click="isOpenHoaDon = !isOpenHoaDon, isOpenList = !isOpenList, isOpenChoosePage = !isOpenChoosePage">
                                             <span class="fas fa-file-invoice" style="font-size:18px; margin-left: 2px;">
                                             </span> Xem hóa đơn
                                         </a>
-                                        <a v-else class="dropdown-item" href="#" @click="gotoLapHD">
+                                        <a v-else class="dropdown-item icon" href="#" @click="gotoLapHD">
                                             <span class="fas fa-file-invoice" style="font-size:18px; margin-left: 2px;">
                                             </span> Lập hóa đơn
                                         </a>
@@ -456,5 +456,7 @@ export default {
 
 <style>
 @import "../../../assets/QLDonHangStyle.css";
-
+.frameQLDonHang .icon{
+    font-size: 18px;
+}
 </style>

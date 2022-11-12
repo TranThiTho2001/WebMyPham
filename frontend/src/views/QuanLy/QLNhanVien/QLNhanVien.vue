@@ -66,10 +66,10 @@
                                         data-toggle="dropdown" style="color:#515151">
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item xemNV"  href="#" @click="isOpenXemChiTiet=!isOpenXemChiTiet, isOpenChoosePage=!isOpenChoosePage"><span class="fas fa-eye"
+                                        <a class="dropdown-item xemNV icon"  href="#" @click="goToSuaNhanVien"><span class="fas fa-eye"
                                                 style="font-size:19px"></span> Xem</a>
-                                        <a class="dropdown-item suaNV" href="#" @click="goToSuaNhanVien"><span class="fas fa-edit"></span> Sửa</a>
-                                        <a class="dropdown-item xoaNV" href="#" @click="isOpenXacNhan = !isOpenXacNhan"><span
+                                        <a class="dropdown-item suaNV icon" href="#" @click="goToSuaNhanVien"><span class="fas fa-edit"></span> Sửa</a>
+                                        <a class="dropdown-item xoaNV icon" href="#" @click="isOpenXacNhan = !isOpenXacNhan"><span
                                                 class="fas fa-trash-alt" style="color:red"></span> Xóa</a>
                                     </div>
                                 </td>
@@ -94,9 +94,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" v-if="isOpenXemChiTiet">
-                    <NhanVienFormChiTiet  :nhanvienActive="nhanvienActive"></NhanVienFormChiTiet>
-                </div>
             </div>
         </div>
     </div>
@@ -120,13 +117,12 @@
 import DanhSachChucNang from '../../../components/QuanLy/DanhSachChucNang.vue';
 import QLHeader from '../../../components/QuanLy/QLHeader.vue';
 import NhanVienService from '../../../services/nhanvien.service';
-import NhanVienFormChiTiet from '@/components/QuanLy/NhanVienFormChiTiet.vue';
 import DonHangService from '../../../services/donhang.service';
 
 
 export default {
     name: `QLHomePage`,
-    components: { DanhSachChucNang, QLHeader, NhanVienFormChiTiet },
+    components: { DanhSachChucNang, QLHeader },
     data() {
         return {
             nhanvien: [],
@@ -274,5 +270,9 @@ export default {
 }
 .dschucNang  .navigationBar  .moreInformation{
     margin-top: 20px;
+}
+
+.frameQLNhanVien .icon{
+    font-size: 18px;
 }
 </style>

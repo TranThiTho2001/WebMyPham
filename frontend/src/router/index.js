@@ -114,7 +114,7 @@ const routes = [
     //Thong ke
     {
         path: '/admin/thongke/:id',
-        name: 'ThongKe',        
+        name: 'QLThongKe',        
         component: () =>
             import ("../views/QuanLy/QLThongKe/ThongKe.vue"),
     }, 

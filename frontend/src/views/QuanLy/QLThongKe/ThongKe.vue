@@ -23,7 +23,7 @@
                                              </div>
                                              <div class="col-md-3 themmoi">
                                                   <p class="labelSoLuongMoi">
-                                                       <span class="borderstyle">+2{{ trangthaidonhang.moi.soluong }}
+                                                       <span class="borderstyle">+{{ trangthaidonhang.moi.soluong }}
                                                        </span>
                                                   </p>
                                              </div>

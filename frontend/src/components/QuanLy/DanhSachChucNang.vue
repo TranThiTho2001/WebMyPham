@@ -53,7 +53,7 @@ export default {
             this.$router.push({name: 'QLsanpham', params: { id: this.maNhanVien }});
         },
         goToQLThongKe() {
-            this.$router.push({name: 'ThongKe', params: { id: this.maNhanVien }});
+            this.$router.push({name: 'QLThongKe', params: { id: this.maNhanVien }});
         },
         goToQLDonHang() {
             this.$router.push({name: 'QLDonHang', params: { id: this.maNhanVien }});
