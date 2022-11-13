@@ -23,16 +23,14 @@
                         <div class="form-group">
                             <label for="KH_Ten">Tên tài khoản</label>
                             <Field name="KH_Ten" type="text" class="form-control" placeholder="Nhập tên tài khoản"
-                                v-model="khachhang.KH_Ten"
-                                style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA;" />
+                                v-model="khachhang.KH_Ten" />
                             <ErrorMessage name="KH_Ten" class="error-feedback" />
 
                         </div>
                         <div class="form-group">
                             <label for="KH_SDT">Số điện thoại</label>
                             <Field name="KH_SDT" type="text" class="form-control" placeholder="Nhập số điện thoại "
-                                v-model="khachhang.KH_SDT"
-                                style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA;" />
+                                v-model="khachhang.KH_SDT"/>
                             <ErrorMessage name="KH_SDT" class="error-feedback" />
 
                         </div>
@@ -42,24 +40,18 @@
                             <label for="KH_MatKhau">Mật khẩu</label>
                             <div class="row" style="background-color: #F5F4F4; border-radius: 15px; margin: 0 0 0 0%;">
 
-                                <Field v-if="!isOpenPassword" name="KH_MatKhau" type="password" class="form-control"
-                                    placeholder="Nhập mật khẩu"
-                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="khachhang.KH_MatKhau" />
+                                <Field v-if="!isOpenPassword" name="KH_MatKhau" type="password" class="form-control col-md-10"
+                                    placeholder="Nhập mật khẩu" v-model="khachhang.KH_MatKhau" />
 
                                 <Field v-if="khachhang.KH_MatKhau=='' && isOpenPassword" name="KH_MatKhau" type="text"
-                                    class="form-control" placeholder="Nhập mật khẩu"
-                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="khachhang.KH_MatKhau" />
+                                    class="form-control col-md-10" placeholder="Nhập mật khẩu" v-model="khachhang.KH_MatKhau" />
 
                                 <Field v-if="khachhang.KH_MatKhau!='' && isOpenPassword" name="KH_MatKhau" type="text"
-                                    class="form-control" placeholder="{{KH_MatKhau}}"
-                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="khachhang.KH_MatKhau" />
+                                    class="form-control col-md-10" placeholder="{{KH_MatKhau}}" v-model="khachhang.KH_MatKhau" />
 
-                                <span v-if="!isOpenPassword" class="btn far fa-eye btnHienMatKhau"
+                                <span v-if="!isOpenPassword" class="btn far fa-eye btnHienMatKhau col-md-2"
                                     @click="isOpenPassword=!isOpenPassword"></span>
-                                <span v-else class="btn far fa-eye-slash btnAnMatKhau"
+                                <span v-else class="btn far fa-eye-slash btnAnMatKhau col-md-2"
                                     @click="isOpenPassword=!isOpenPassword"></span>
                             </div>
                             <ErrorMessage name="KH_MatKhau" class="error-feedback" />
@@ -70,23 +62,17 @@
                             <div class="row" style="background-color: #F5F4F4; border-radius: 15px; margin: 0 0 0 0;">
 
                                 <Field v-if="!isOpenconfirmPassword" name="xacNhanMatKhau" type="password"
-                                    class="form-control" placeholder="Nhập lại mật khẩu"
-                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="confirmPassword" />
+                                    class="form-control col-md-10" placeholder="Nhập lại mật khẩu" v-model="confirmPassword" />
 
                                 <Field v-if="confirmPassword=='' && isOpenconfirmPassword" name="xacNhanMatKhau"
-                                    type="text" class="form-control" placeholder="Nhập lại mật khẩu"
-                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="confirmPassword" />
+                                    type="text" class="form-control col-md-10" placeholder="Nhập lại mật khẩu" v-model="confirmPassword" />
 
                                 <Field v-if="confirmPassword!='' && isOpenconfirmPassword" name="xacNhanMatKhau"
-                                    type="text" class="form-control" placeholder="{{confirmPassword}}"
-                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="confirmPassword" />
+                                    type="text" class="form-control col-md-10" placeholder="{{confirmPassword}}" v-model="confirmPassword" />
 
-                                <span v-if="!isOpenconfirmPassword" class="btn far far fa-eye btnHienMatKhau"
+                                <span v-if="!isOpenconfirmPassword" class="btn far fa-eye btnHienMatKhau col-md-2"
                                     @click="isOpenconfirmPassword=!isOpenconfirmPassword"></span>
-                                <span v-else class="btn fa-eye-slash btnAnMatKhau"
+                                <span v-else class="btn far fa-eye-slash btnAnMatKhau col-md-2"
                                     @click="isOpenconfirmPassword=!isOpenconfirmPassword"></span>
                             </div>
                             <ErrorMessage name="xacNhanMatKhau" class="error-feedback" />

@@ -50,21 +50,21 @@
     border-radius: 0px 12px 12px 0px;
 }
 
-.frameDangky .formDangky .rightForm Form{
+.frameDangky .formDangky  .rightForm Form{
     width: 70%;
     margin: 0% 0% 0% 15%;
-    background-color: none;
+    background-color: unset;
 }
 .frameDangNhap .formDangNhap .rightForm Form
 {
     width: 70%;
     margin: 10% 10% 0% 15%;
-    background-color: none;
+    background-color: unset;
 }
 .frameDoiMatKhau .formDoiMatKhau .rightForm Form {
     width: 70%;
     margin: 5% 0% 0% 15%;
-    background-color: none;
+    background-color: unset;
 }
 .frameDangky .formDangky .rightForm Form .form-group{
     margin-top: 4.5%;
@@ -103,11 +103,19 @@
     color: black;
 }
 .frameDangNhap .formDangNhap .rightForm Form .form-group .btnHienMatKhau,
-.frameDoiMatKhau .formDoiMatKhau .rightForm Form  .form-group .btnHienMatKhau{
-    border-radius: 15px;
+.frameDoiMatKhau .formDoiMatKhau .rightForm Form  .form-group .btnHienMatKhau,
+.frameDangky .formDangky .rightForm Form  .form-group .btnHienMatKhau{
+    border: none;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
     background-color: #F5F4F4;
     float: right;
     padding-left: 2%;
+}
+
+.frameDangNhap .formDangNhap .rightForm Form  .form-group:visited .btnHienMatKhau,
+.frameDangNhap .formDangNhap .rightForm Form  .form-group:visited .btnAnMatKhau{
+    background-color: #FFFFFF;
 }
 
 .frameDangky .formDangky .rightForm a,
@@ -147,4 +155,21 @@
 }
 .botton-register p{
     font-size: 14px;
+}
+
+.frameDangky .form-control,
+.frameDangNhap .form-control,
+.frameDoiMatKhau .form-control{
+    border-radius: 15px; 
+    background-color: #F5F4F4; 
+    color: #BABABA; 
+    border: none;
+    font-family: Inter;
+    font-size: 16px
+}
+
+.frameDangky .form-control:focus-visible ,
+.frameDangNhap .form-control:focus-visible,
+.frameDoiMatKhau .form-control:focus-visible{
+    background-color: #F5F4F4; 
 }

@@ -8,7 +8,7 @@
                <div class="col-md-10">
                     <QLHeader :maNV="localNhanVien.NV_Ma" />
                     <div class="row content">
-                         <div class="col-md-12 ">
+                         <div class="col-md-12">
                               <!-- Hang dau -->
                               <div class="row rowContent">
                                    <!-- Thong ke don hang -->
@@ -30,6 +30,19 @@
                                         </div>
                                    </div>
                                    <div class="col-md-1"></div>
+                                   <!-- Thong ke tai khoan khach hang -->
+                                   <div class="col-md-3 khachhang">
+                                        <div class="row">
+                                             <div class="col-md-3 icon">
+                                                  <span class="fas fa-user-check"></span>
+                                             </div>
+                                             <div class="col-md-9 tongso">
+                                                  <p class="number">{{ khachhang.length }}</p>
+                                                  <p class="name">Tài Khoản</p>
+                                             </div>
+                                        </div>
+                                   </div>
+                                   <div class="col-md-1"></div>
                                    <!-- Thong ke doanh thu -->
                                    <div class="col-md-4 doanhthu">
                                         <div class="row">
@@ -44,30 +57,18 @@
                                              </div>
                                         </div>
                                    </div>
-                                   <div class="col-md-1"></div>
-                                   <!-- Thong ke tai khoan khach hang -->
-                                   <div class="col-md-3 khachhang">
-                                        <div class="row">
-                                             <div class="col-md-3 icon">
-                                                  <span class="fas fa-user-check"></span>
-                                             </div>
-                                             <div class="col-md-9 tongso">
-                                                  <p class="number">{{ khachhang.length }}</p>
-                                                  <p class="name">Tài Khoản</p>
-                                             </div>
-                                        </div>
-                                   </div>
                               </div>
-                              <div class="row rowContent">
-                                   <div class="col-md-6 bieuDoDoanhThu">
+
+                              <div class="row rowContent"  style=" margin-bottom: 2px;">
+                                   <div class="col-md-7 bieuDoDoanhThu">
                                         <Line :chart-options="chartOptions" :chart-data="chartData" :chart-id="chartId"
                                              :dataset-id-key="datasetIdKey" :plugins="plugins" :css-classes="cssClasses"
                                              :styles="styles" :width="500" :height="500" />
                                    </div>
                                    <div class="col-md-1"></div>
-                                   <div class="col-md-5 sanPhamBanChay" @scroll="handleScroll">
+                                   <div class="col-md-4 sanPhamBanChay" @scroll="handleScroll">
                                         <div class="row">
-                                             <p class="lableSPBanChay col-md-12">Sản Phẩm Bán Chạy</p>
+                                             <p class="labelSPBanChay col-md-12">Sản Phẩm Bán Chạy</p>
                                         </div>
                                         <table class="row" >
                                              <tbody clas="col-md-12">
@@ -82,7 +83,7 @@
                                                                  <p class="col-md-6 tenTH">{{ sanpham.TH_Ten}}</p>
                                                                  <p class="col-md-6 giaban">{{formatMoney(sanpham.SP_GiaBanRa)}}đ</p>
                                                             </div>
-                                                            <div class="row ">
+                                                            <div class="row">
                                                                  <p class=" col-md-12 tenSP">{{sanpham.SP_TenSanPham}}</p>
                                                             </div>
                                                             <div class="row">
@@ -95,9 +96,7 @@
                                              </tbody>
                                         </table>
                                    </div>
-
                               </div>
-
                          </div>
                     </div>
                </div>

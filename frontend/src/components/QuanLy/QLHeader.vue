@@ -7,12 +7,12 @@
                     <div class="row">
                         <div class=" col-md-2"> <span class="fa fa-user-tie userIcon"></span></div>
                         <div class="col-md-7">
-                            <span style="color:black; font-size: 18px; margin-left: 5%;" class="tenNV">{{
+                            <span  class="tenNV">{{
                                     localNhanVien.NV_Ten
                             }}</span><br>
-                            <span style="color:#7E7E7E; margin-left: 3px" class="vaitro">{{ vaiTro }}</span>
+                            <span class="vaitro">{{ vaiTro }}</span>
                         </div>
-                        <div class="col-md-2 fas fa-caret-down iconQLTK" style="margin-top:5%; font-size:30px; color:#515151">
+                        <div class="col-md-2 fas fa-caret-down iconQLTK">
                         </div>
                         <div class="dropdown-menu right col-md-1">
                             <a class="dropdown-item" href="#" @click="goToQLDangNhap">Đăng xuất</a>
@@ -92,6 +92,31 @@ export default {
     margin-left: 12%;
 }
 
+.rightHeader:hover {
+    background-color: #D9D9D9;
+    border: 0.1px solid #FFFFFF;
+} 
+.tenNV {
+    color:black; 
+    font-size: 18px; 
+    margin-left: 5%;
+    font-family: Inter;
+}
+.rightHeader:hover .tenNV{
+    color: black;
+    font-weight: 500;
+} 
+.Header .iconQLTK{
+    margin-top:5%; 
+    font-size:30px; 
+    color:#515151
+}
+
+.Header .vaitro{
+    color:#7E7E7E; 
+    margin-left: 3px;
+    font-family: Inter;
+}
 .fa-user-tie {
     font-size: 38px;
     color: black;

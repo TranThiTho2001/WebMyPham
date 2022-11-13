@@ -23,8 +23,7 @@
                         <div class="form-group">
                             <label for="username">Tên đăng nhập</label>
                             <Field name="username" type="text" class="form-control" placeholder="Nhập tên đăng nhập"
-                                v-model="nhanvien.NV_Ma"
-                                style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA;" />
+                                v-model="nhanvien.NV_Ma"/>
                             <ErrorMessage name="username" class="error-feedback"  />
 
                         </div>
@@ -32,24 +31,18 @@
                         <div class="form-group" style="margin-top:10%">
                             <label for="password">Mật khẩu</label>
                             <div class="row" style="background-color: #F5F4F4; border-radius: 15px; margin: 0 0 0 0.1%;">
-                                <Field v-if="!isOpenPassword" name="password" type="password" class="form-control"
-                                    placeholder="Nhập mật khẩu"
-                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="nhanvien.NV_MatKhau" />
+                                <Field v-if="!isOpenPassword" name="password" type="password" class="form-control col-md-10"
+                                    placeholder="Nhập mật khẩu" v-model="nhanvien.NV_MatKhau" />
 
                                 <Field v-if="nhanvien.NV_MatKhau=='' & isOpenPassword" name="password" type="text"
-                                    class="form-control" placeholder="Nhập mật khẩu"
-                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="nhanvien.NV_MatKhau" />
+                                    class="form-control col-md-10" placeholder="Nhập mật khẩu" v-model="nhanvien.NV_MatKhau" />
 
                                 <Field v-if="nhanvien.NV_MatKhau!='' & isOpenPassword" name="password" type="text"
-                                    class="form-control" placeholder="{{nhanvien.NV_MatKhau}}"
-                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="nhanvien.NV_MatKhau" />
+                                    class="form-control col-md-10" placeholder="{{nhanvien.NV_MatKhau}}" v-model="nhanvien.NV_MatKhau" />
 
-                                <span v-if="!isOpenPassword" class="btn far fa-eye btnHienMatKhau"
+                                <span v-if="!isOpenPassword" class="btn far fa-eye btnHienMatKhau col-md-2 btnMK"
                                     @click="isOpenPassword=!isOpenPassword"></span>
-                                <span v-if="isOpenPassword" class="btn far fa-eye-slash btnAnMatKhau"
+                                <span v-if="isOpenPassword" class="btn far fa-eye-slash btnAnMatKhau col-md-2 btnMK"
                                     @click="isOpenPassword=!isOpenPassword"></span>
                             </div>
                             <a href="#" @click="goToQuenMatKhau" class="quenMatKhau">Quên mật khẩu?</a>

@@ -1,4 +1,3 @@
-
 <template>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <div class="container frameDoiMatKhau">
@@ -19,13 +18,11 @@
                     <h2 style="text-align:center">ĐỔI MẬT KHẨU</h2>
                 </div>
                 <div class="row">
-                    <Form @submit="handleLogin" :validation-schema="schema" v-slot="{ isSubmitting }" style="background-color: none;">
+                    <Form @submit="handleLogin" :validation-schema="schema" v-slot="{ isSubmitting }" >
                         <div class="form-group">
                             <label for="username">Tên đăng nhập</label>
                             <Field name="username" type="text" class="form-control" placeholder="{{maNhanVien}}"
-                                v-model="maNhanVien"
-                                style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA;"
-                                :disabled="true" />
+                                v-model="maNhanVien" :disabled="true" />
                             <ErrorMessage name="username" class="error-feedback" style="color:red; font-size: 17px;" />
 
                         </div>
@@ -35,23 +32,17 @@
                             <div class="row"
                                 style="background-color: #F5F4F4; border-radius: 15px; margin: 0 0 0 0.1%;">
                                 <Field v-if="!isOpenCurrentPassword" name="currentPassword" type="password"
-                                    class="form-control" placeholder="Nhập mật khẩu hiện tại"
-                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="nhanvien.NV_MatKhau" />
+                                    class="form-control col-md-10" placeholder="Nhập mật khẩu hiện tại" v-model="nhanvien.NV_MatKhau" />
 
                                 <Field v-if="nhanvien.NV_MatKhau == '' & isOpenCurrentPassword" name="password"
-                                    type="text" class="form-control" placeholder="Nhập mật khẩu hiện tại"
-                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="nhanvien.NV_MatKhau" />
+                                    type="text" class="form-control col-md-10" placeholder="Nhập mật khẩu hiện tại" v-model="nhanvien.NV_MatKhau" />
 
                                 <Field v-if="nhanvien.NV_MatKhau != '' & isOpenCurrentPassword" name="currentPassword"
-                                    type="text" class="form-control" placeholder="{{nhanvien.NV_MatKhau}}"
-                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="nhanvien.NV_MatKhau" />
+                                    type="text" class="form-control col-md-10" placeholder="{{nhanvien.NV_MatKhau}}" v-model="nhanvien.NV_MatKhau" />
 
-                                <span v-if="!isOpenCurrentPassword" class="btn far fa-eye-slash btnHienMatKhau"
+                                <span v-if="!isOpenCurrentPassword" class="btn far fa-eye btnHienMatKhau col-md-2"
                                     @click="isOpenCurrentPassword = !isOpenCurrentPassword"></span>
-                                <span v-else class="btn  far fa-eye btnAnMatKhau"
+                                <span v-else class="btn far fa-eye-slash  btnAnMatKhau col-md-2"
                                     @click="isOpenCurrentPassword = !isOpenCurrentPassword"></span>
                             </div>
                             <ErrorMessage name="currentPassword" class="error-feedback"/>
@@ -64,23 +55,17 @@
                             <label for="newPassword">Mật khẩu mới</label>
                             <div class="row"
                                 style="background-color: #F5F4F4; border-radius: 15px; margin: 0 0 0 0.1%;">
-                                <Field v-if="!isOpenNewPassword" name="newPassword" type="password" class="form-control"
-                                    placeholder="Nhập mật khẩu mới"
-                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="newPassword" />
+                                <Field v-if="!isOpenNewPassword" name="newPassword" type="password" class="form-control col-md-10"
+                                    placeholder="Nhập mật khẩu mới" v-model="newPassword" />
                                 <Field v-if="newPassword == '' & isOpenNewPassword" name="password" type="text"
-                                    class="form-control" placeholder="Nhập mật khẩu mới"
-                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="newPassword" />
+                                    class="form-control col-md-10" placeholder="Nhập mật khẩu mới" v-model="newPassword" />
 
                                 <Field v-if="newPassword != '' & isOpenNewPassword" name="newPassword" type="text"
-                                    class="form-control" placeholder="{{newPassword}}"
-                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="newPassword" />
+                                    class="form-control col-md-10" placeholder="{{newPassword}}" v-model="newPassword" />
 
-                                <span v-if="!isOpenNewPassword" class="btn far fa-eye-slash btnHienMatKhau"
+                                <span v-if="!isOpenNewPassword" class="btn far fa-eye btnHienMatKhau col-md-2"
                                     @click="isOpenNewPassword = !isOpenNewPassword"></span>
-                                <span v-else class="btn  far fa-eye btnAnMatKhau"
+                                <span v-else class="btn  far fa-eye-slash btnAnMatKhau col-md-2"
                                     @click="isOpenNewPassword = !isOpenNewPassword"></span>
                             </div>
                             <ErrorMessage name="newPassword" class="error-feedback" />
@@ -91,23 +76,17 @@
                             <div class="row"
                                 style="background-color: #F5F4F4; border-radius: 15px; margin: 0 0 0 0.1%;">
                                 <Field v-if="!isOpenConfirmPassword" name="confirmPassword" type="password"
-                                    class="form-control" placeholder="Nhập lại mật khẩu mới"
-                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="confirmPassword" />
+                                    class="form-control col-md-10" placeholder="Nhập lại mật khẩu mới" v-model="confirmPassword" />
 
                                 <Field v-if="confirmPassword == '' & isOpenConfirmPassword" name="password" type="text"
-                                    class="form-control" placeholder="Nhập lại mật khẩu mới"
-                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="confirmPassword" />
+                                    class="form-control col-md-10" placeholder="Nhập lại mật khẩu mới" v-model="confirmPassword" />
 
                                 <Field v-if="confirmPassword != '' & isOpenConfirmPassword" name="confirmPassword"
-                                    type="text" class="form-control" placeholder="{{confirmPassword}}"
-                                    style="border-radius: 15px; background-color: #F5F4F4; color: #BABABA; width:85%; border: none"
-                                    v-model="confirmPassword" />
+                                    type="text" class="form-control col-md-10" placeholder="{{confirmPassword}}" v-model="confirmPassword" />
 
-                                <span v-if="!isOpenConfirmPassword" class="btn far fa-eye-slash btnHienMatKhau"
+                                <span v-if="!isOpenConfirmPassword" class="btn far fa-eye btnHienMatKhau col-md-2"
                                     @click="isOpenConfirmPassword = !isOpenConfirmPassword"></span>
-                                <span v-else class="btn far fa-eye btnAnMatKhau"
+                                <span v-else class="btn far fa-eye-slash btnAnMatKhau col-md-2"
                                     @click="isOpenConfirmPassword = !isOpenConfirmPassword"></span>
                             </div>
                             <ErrorMessage name="confirmPassword" class="error-feedback"/>
@@ -241,7 +220,7 @@ export default {
     },
 
     async goToQL() {
-        this.$router.push({ name: 'QLDonHang', params: { id: this.maNhanVien } });
+        this.$router.push({ name: 'QLThongKe', params: { id: this.maNhanVien } });
     }
 },
 mounted() {
@@ -252,4 +231,9 @@ mounted() {
 
 <style>
 @import "../../../assets/QLTaiKhoanStyle.css";
+.frameDoiMatKhau .formDoiMatKhau .rightForm Form {
+    width: 70%;
+    margin: 5% 0% 0% 15%;
+    background-color: none;
+}
 </style>

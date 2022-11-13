@@ -82,9 +82,9 @@
 .frameQLThongKe .icon .fa-receipt:hover,
 .frameQLThongKe .icon .fa-dollar-sign:hover,
 .frameQLThongKe .icon .fa-user-check:hover {
-     color: #3b3a3a;
+     color: #ebebeb;
      font-weight: 600;
-     background-color:#cdcaca;
+     background-color:#7E7E7E;;
 }
 
 .frameQLThongKe .content {
@@ -93,7 +93,7 @@
 }
 
 .frameQLThongKe .rowContent {
-     margin-bottom: 3%;
+     margin-bottom: 2%;
 }
 
 .frameQLThongKe .rowContent .donhang,
@@ -105,12 +105,30 @@
      height: max-content;
 }
 
+.frameQLThongKe .rowContent .donhang:hover .name,
+.frameQLThongKe .rowContent .donhang:hover .number,
+.frameQLThongKe .rowContent .donhang:hover .fa-receipt,
+.frameQLThongKe .rowContent .khachhang:hover .name,
+.frameQLThongKe .rowContent .khachhang:hover .number,
+.frameQLThongKe .rowContent .khachhang:hover .fa-user-check,
+.frameQLThongKe .rowContent .doanhthu:hover .name,
+.frameQLThongKe .rowContent .doanhthu:hover .number,
+.frameQLThongKe .rowContent .doanhthu:hover .fa-dollar-sign{
+     color: #FFFFFF;
+     font-weight: 600;
+     background-color:#7E7E7E;
+}
+
+.frameQLThongKe .rowContent .donhang:hover .borderstyle{
+     background-color: #FFFFFF;
+     color: #7E7E7E;
+}
 .frameQLThongKe .rowContent .donhang:hover,
 .frameQLThongKe .rowContent .doanhthu:hover,
 .frameQLThongKe .rowContent .khachhang:hover {
-     border: 3px solid #858282;
+     border: 3px solid #FFFFFF;
      border-radius: 10px;
-     background-color: #cdcaca;
+     background-color: #7E7E7E;
      color: black;
 }
 
@@ -182,10 +200,19 @@
      margin-right: 2px;
 }
 
-.frameQLThongKe .sanPhamBanChay .sanpham:hover {
-     border: 0.1px solid #757373;
+.frameQLThongKe .sanPhamBanChay .sanpham:hover{
+     border: 0.1px solid white;
 }
 
+.frameQLThongKe .sanPhamBanChay .sanpham:hover .thongTinSP,
+.frameQLThongKe .sanPhamBanChay .sanpham:hover .thongTinSP .tenSP,
+.frameQLThongKe .sanPhamBanChay .sanpham:hover .thongTinSP .tenTH,
+.frameQLThongKe .sanPhamBanChay .sanpham:hover .thongTinSP .giaban{
+     background-color: #515151;
+     border: 0.2px solid #515151;
+     color:#FFFFFF;
+     border-radius: 10px;
+}
 .frameQLThongKe .sanPhamBanChay .thongTinSP {
      background-color: #E9E8E8;
      border: 0.1px solid #f2eeee;
@@ -193,10 +220,6 @@
      font-family: Inter;
 }
 
-.frameQLThongKe .sanPhamBanChay .thongTinSP:hover {
-     background-color: #cac9c9;
-     border: 0.1px solid #f2eeee;
-}
 
 .frameQLThongKe .sanPhamBanChay .thongTinSP .tenSP,
 .frameQLThongKe .sanPhamBanChay .thongTinSP .tenTH {
@@ -250,12 +273,12 @@
      float: right;
 }
 
-.frameQLThongKe .sanPhamBanChay .lableSPBanChay{
+.frameQLThongKe .sanPhamBanChay .labelSPBanChay{
      font-family: Inter;
      font-size: 20px;
      color: #515151;
      text-align: center;
-     font-weight: 500;
+     font-weight: 700;
 }
 
 .frameQLThongKe .sanPhamBanChay .thongTinSP .rowThongTin{
