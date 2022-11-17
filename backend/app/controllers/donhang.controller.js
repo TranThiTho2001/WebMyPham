@@ -78,9 +78,9 @@ exports.findAll = async (req, res) => {
 //*-------Find a single order with an id
 exports.findOne = async (req, res) => {
     const condition = {
-        DH_Ma: req.params.DH_Ma
+        _id: req.params.DH_Ma,
+        ownerId: req.userId,
     };
-
     const [error, documents] = await handle(
         DonHang.findOne(condition, '-ownerId')
     );
@@ -99,7 +99,8 @@ exports.findOne = async (req, res) => {
 //*-----Update a order by the is in the request
 exports.update = async (req, res) => {
     const condition = {
-        DH_Ma: req.params.DH_Ma,
+       _id: req.params.DH_Ma,
+       ownerId: req.userId,
     };
     
     const [error, document] = await handle(

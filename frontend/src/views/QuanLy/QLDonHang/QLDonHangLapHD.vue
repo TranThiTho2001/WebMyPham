@@ -40,25 +40,25 @@
                                 <thead>
                                     <tr style="width:100%">
                                         <th>STT</th>
-                                        <th>Tên sản phẩm</th>
-                                        <th>Số lượng</th>
+                                        <th style="text-align:left">Tên sản phẩm</th>
                                         <th>Giá</th>
+                                        <th>Số lượng</th>
                                         <th>Thành tiền</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr v-for="(row, i) in chitietdonhang" :key="i" style="width:100%">
                                         <td>{{ i + 1 }}</td>
-                                        <td>{{ row.SP_Ten }} </td>
+                                        <td style="text-align:left">{{ row.SP_Ten }} </td>
+                                        <td>{{ formatMoney(row.CTDH_Gia) }}</td>  
                                         <td>{{ row.CTDH_SoLuong }}</td>
-                                        <td>{{ row.CTDH_Gia }}</td>
-                                        <td>{{ row.CTDH_SoLuong * row.CTDH_Gia }}</td>
+                                        <td>{{ formatMoney(row.CTDH_SoLuong * row.CTDH_Gia) }}</td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="col-md-12" style="text-align: right; margin-bottom: 15px;">
-                                <h6 style="text-align: right; margin-right: 100px;">Thành tiền:
-                                    {{ donhang.DH_TongTien }}
+                                <h6 class="thanhtien">Thành tiền:
+                                    {{ formatMoney(donhang.DH_TongTien) }}
                                 </h6>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                 <div class="col-md-8"></div>
                 <div class="col-md-4">
                     <button class="btnTroVe" @click="goToQLDonHang">
-                        Tro ve
+                        Trở về
                     </button>
                     <button class="btnLapHoaDon" @click="isOpenXacNhan = !isOpenXacNhan" v-if="!isOpenLapHD">
                         Lập Hóa Đơn
@@ -84,7 +84,7 @@
         <div class="dialogXacNhan" v-if="isOpenXacNhan">
         <p style="color:#515151; text-align:center; margin: 50px 20px 20px 20px; font-size: 20px;">
             Bạn chắc chắn muốn lập hóa đơn cho đơn hàng
-            #{{ donhang.DH_Ma }}
+            #{{ donhang.id }}
         </p>
         <button class="btnYes btn btn-sm btn-outline-secondary"
             @click="findHoaDon(), isOpenXacNhan = !isOpenXacNhan, isOpenLapHD = !isOpenLapHD">Lập hóa đơn</button>
@@ -229,7 +229,7 @@ export default {
 
         //Lap hoa don
         async createHoaDon() {
-            this.hoadon.DH_Ma = this.donhang.DH_Ma;
+            this.hoadon.DH_Ma = this.donhang.id;
             this.hoadon.HD_NgayLap = new Date().toLocaleDateString();
             this.hoadon.HD_ThoiGianLap = new Date().toLocaleTimeString();
             this.hoadon.HD_TongTien = this.donhang.DH_TongTien;
@@ -245,6 +245,10 @@ export default {
             }
         },
 
+        formatMoney(data) {
+               let val = (data / 1).toFixed(0).replace(".", ",");
+               return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+          },
         async goToQLDonHang() {
             console.log(this.localNhanVien.NV_Ma)
             this.$router.push({ name: 'QLDonHang', params: { id: this.localNhanVien.NV_Ma } })
@@ -268,5 +272,23 @@ export default {
 .hoadon .bangCTHD {
     border-radius: 15px;
     border-bottom: 1px solid #BABABA;
+}
+
+.hoadon .thanhtien{
+    font-size: 18px;
+    font-family: Inter;
+    margin-top: 10px;
+    color: black;
+}
+
+.hoadon .bangCTDH td,
+.hoadon .bangCTDH th{
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+}
+.frameLapHoaDon .hoadon{
+    border-radius: 15px;
+    border: 0.1px solid #515151;
 }
 </style>

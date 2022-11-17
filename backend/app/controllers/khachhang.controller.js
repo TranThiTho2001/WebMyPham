@@ -63,7 +63,9 @@ exports.findAll = async (req, res) => {
 //*-------Find a single customer with an id
 exports.findOneByID = async (req, res) => {
     const condition = {
-        KH_Ma: req.params.KH
+        _id: req.params.KH,
+        ownerId: req.userId,
+
     };
     const [error, documents] = await handle(
         KhachHang.findOne(condition)
@@ -80,26 +82,7 @@ exports.findOneByID = async (req, res) => {
     return res.send(documents);
 };
 
-//*-------Find a single customer with an id
-exports.findOneByPhone = async (req, res) => {
-    const condition = {
-        KH_SDT: req.params.KH_SDT
-    };
 
-    const [error, documents] = await handle(
-        KhachHang.findOne(condition, '-ownerId')
-    );
-
-    if (error) {
-        return next(
-            new BadRequestError(500, "Lỗi trong quá trình truy xuất khách hàng!")
-        );
-    }
-    if (!documents) {
-        return res.send("Không tìm thấy");
-    }
-    return res.send(documents);
-};
 //*-----Update a customer by the is in the request
 exports.update = async (req, res) => {
     if (!req.body) {

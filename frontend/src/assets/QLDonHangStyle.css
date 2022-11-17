@@ -6,6 +6,7 @@
     background-color: #EAEAEA;
     height: calc(100vh);
     font-family: Inter;
+    font-size: 17px;
     width: 100%;
     margin-right: 0px;
 }
@@ -37,6 +38,8 @@
 .frameQLDonHang .btnTrangThai{
     margin-left: 6%;
     position: absolute;
+    width: max-content;
+    margin-right: 1px;
 }
 .frameQLDonHang .form-control {
     border-radius: 10px;
@@ -87,7 +90,7 @@
 .btnTrangThaiDH {
     border-radius: 7px;
     border: none;
-    width: 120px;
+    width: 130px;
 }
 
 
@@ -96,7 +99,7 @@
     color: #000000;
     padding: 8px;
     min-width: 30px;
-    font-size: 16px;
+    font-size: 17px;
 }
 
 .frameQLDonHang  table td, .frameLapHoaDon table td{
@@ -162,9 +165,10 @@
     text-align: left;
     top: calc(95%);
 }
-.btnChoosePage{
+
+.btnChonTrang {
     margin-left: 88.4%;
-    margin-top: 1%;
+    margin-top: 2%;
 }
 
 /* Dropup Button */
@@ -213,7 +217,7 @@
   /* Show the dropup menu on hover */
   .dropup:hover .dropup-content {
     display: block;
-    bottom: 105%;
+    bottom: 104%;
     right:  1%;
   }
   
@@ -235,7 +239,7 @@
 .frameLapHoaDon .dialogXacNhan{
     position: absolute;
     top: calc(43%);
-    left: 20%;
+    left: 8%;
     transform: translateX(50%);
     border: solid 0.5px #929292;
     background-color: #EAEAEA;
@@ -249,8 +253,8 @@
 .frameQLDonHang .dialogTrangThai
  {
     position: absolute;
-    top: calc(43%);
-    left: 31.9%;
+    top: calc(36%);
+    left: 30%;
     transform: translateX(50%);
     border: solid 0.5px #929292;
     background-color: #EAEAEA;

@@ -130,7 +130,7 @@
 /* Show the dropup menu on hover */
 .dropup:hover .dropup-content {
      display: block;
-     bottom: 105%;
+     bottom: 104%;
      right: 1%;
 }
 

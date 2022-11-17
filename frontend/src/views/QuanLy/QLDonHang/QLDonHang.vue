@@ -88,11 +88,11 @@
                             <tr v-for="(row, i ) in get_rows()" :key="i" @click="setActiveDonHang(row)">
                                 <td v-if="currentPage > 1">{{ i + ((currentPage - 1) * 11) }}</td>
                                 <td v-else>{{ i }}</td>
-                                <td>{{ row.DH_Ma }}</td>
+                                <td>{{ row.id }}</td>
                                 <td>{{ row.DH_Ngay }}</td>
                                 <td>{{ row.KH_Ma }}</td>
-                                <td>{{ row.DH_TongTien }}</td>
-                                <td>
+                                <td> {{formatMoney( row.DH_TongTien) }}</td>
+                                <td >
                                     <button v-if="row.DH_TrangThai === `Mới`"
                                         @click="isOpenTrangThai = !isOpenTrangThai" class="btnTrangThaiDH"
                                         style="background-color:#00FFFF">{{ row.DH_TrangThai }}
@@ -119,7 +119,7 @@
                                     </button>
 
                                 </td>
-                                <td class="tdChucNang nav-item dropdown">
+                                <td class="tdChucNang nav-item dropdown" style="width:min-content;">
                                     <a class="nav-link  fas fa-ellipsis-v" data-toggle="dropdown" style="color:#515151"
                                         @click="setActiveDonHang(row)">
                                     </a>
@@ -185,7 +185,7 @@
         <div class="dialogXacNhan" v-if="isOpenXacNhan">
             <p style="color:#515151; text-align:center; margin-top: 50px; font-size: 20px;">
                 Bạn chắc chắn muốn cập nhật trạng thái đơn hàng
-                #{{ activeDonHang.DH_Ma }}
+                #{{ activeDonHang.id }}
             </p>
             <button class="btnYes btn btn-sm btn-outline-secondary"
                 @click="updateDonHang(), isOpenXacNhan = !isOpenXacNhan"
@@ -280,7 +280,7 @@ export default {
                 this.donhang = response.data;
                 console.log(response.data);
                 this.donhang.forEach(element => {
-                    element.DH_Ngay = moment(String(element.DH_NgayDat)).format("MM / DD / YYYY hh: mm");
+                    element.DH_Ngay = moment(String(element.DH_NgayDat)).format("MM/DD/YYYY hh: mm");
                 });
             }
         },
@@ -320,7 +320,7 @@ export default {
         async setActiveDonHang(DHActive) {
             this.activeDonHang = DHActive;
             this.findKH(this.activeDonHang.KH_Ma);
-            this.retrieveChiTietDonHang(this.activeDonHang.DH_Ma);
+            this.retrieveChiTietDonHang(this.activeDonHang.id);
             this.findNVByMaNV(this.activeDonHang.NV_Ma);
             this.findHoaDon();
         },
@@ -328,7 +328,7 @@ export default {
         // Lay danh sach chi tiet don hang của don hang
         async retrieveChiTietDonHang() {
             const [error, response] = await this.handle(
-                CTDHService.findByMaDH(this.activeDonHang.DH_Ma)
+                CTDHService.findByMaDH(this.activeDonHang.id)
             );
             if (error) {
                 console.log(error);
@@ -353,7 +353,7 @@ export default {
             console.log(this.activeDonHang.DH_Ma)
             this.activeDonHang.DH_TrangThai = this.newTrangThai;
             const [error, response] = await this.handle(
-                DonHangService.update(this.activeDonHang.DH_Ma, this.activeDonHang)
+                DonHangService.update(this.activeDonHang.id, this.activeDonHang)
             );
             if (error) {
                 console.log(error);
@@ -376,6 +376,9 @@ export default {
                     console.log(error);
                 } else {
                     this.donhang = response.data;
+                    this.donhang.forEach(element => {
+                    element.DH_Ngay = moment(String(element.DH_NgayDat)).format("MM / DD / YYYY hh: mm");
+                });
                 }
             }
 
@@ -419,7 +422,7 @@ export default {
         async findHoaDon() {
             console.log(this.activeDonHang.DH_Ma + " finddonhang")
             const [error, response] = await this.handle(
-                HoaDonService.getByIDMaDH(this.activeDonHang.DH_Ma)
+                HoaDonService.getByIDMaDH(this.activeDonHang.id)
             );
             if (error) {
                 console.log(error);
@@ -437,9 +440,14 @@ export default {
             }
         },
 
+        formatMoney(data) {
+               let val = (data / 1).toFixed(0).replace(".", ",");
+               return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+          },
+
         // Di chuyen den trang lap hoa don
         async gotoLapHD() {
-            this.$router.push({ name: 'QLDonHangLapHD', params: { id: this.activeDonHang.DH_Ma, user: this.localNhanVien.NV_Ma } });
+            this.$router.push({ name: 'QLDonHangLapHD', params: { id: this.activeDonHang.id, user: this.localNhanVien.NV_Ma } });
         },
 
         async goToQLDonHang() {
@@ -458,5 +466,9 @@ export default {
 @import "../../../assets/QLDonHangStyle.css";
 .frameQLDonHang .icon{
     font-size: 18px;
+}
+
+.frameQLDonHang .dialogXacNhan{
+    left: 8%;
 }
 </style>

@@ -30,25 +30,25 @@
                         <thead>
                             <tr style="width:100%">
                                 <th>STT</th>
-                                <th>Tên sản phẩm</th>
-                                <th>Số lượng</th>
+                                <th style="text-align:left">Tên sản phẩm</th>
                                 <th>Giá</th>
+                                <th>Số lượng</th>
                                 <th>Thành tiền</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(row, i) in chitietdonhang" :key="i" style="width:100%">
                                 <td>{{ i + 1 }}</td>
-                                <td>{{ tenSP[i] }} </td>
-                                <td>{{ row.CTDH_SoLuong }}</td>
-                                <td>{{ row.CTDH_Gia }}</td>
-                                <td>{{ row.CTDH_SoLuong * row.CTDH_Gia }}</td>
+                                <td style="text-align:left">{{ tenSP[i] }} </td>                             
+                                <td>{{ formatMoney(row.CTDH_Gia)}}</td> 
+                                 <td>{{ row.CTDH_SoLuong }}</td>
+                                <td>{{ formatMoney(row.CTDH_SoLuong * row.CTDH_Gia) }}</td>
                             </tr>
                         </tbody>
                     </table>
                     <div class="col-md-12" style="text-align: right; margin-bottom: 15px;">
-                        <h6 style="text-align: right; margin-right: 100px; margin-top: 15px;">Thành tiền:
-                            {{ hoadon.HD_TongTien }}
+                        <h6 class="thanhtien">Thành tiền:
+                            {{ formatMoney(hoadon.HD_TongTien) }}
                         </h6>
                     </div>
                 </div>
@@ -93,8 +93,13 @@ export default {
         },
 
         async formatDate(){
-            this.ngaylap = moment(String(this.hoadon.HD_NgayLap)).format("MM / DD / YYYY");
-        }
+            this.ngaylap = moment(String(this.hoadon.HD_NgayLap)).format("MM/DD/YYYY");
+        },
+
+        formatMoney(data) {
+               let val = (data / 1).toFixed(0).replace(".", ",");
+               return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        },
     }
 
 }
@@ -112,5 +117,20 @@ export default {
 .hoadonchitiet .bangCTHD {
     border-radius: 15px;
     border-bottom: 1px solid #BABABA;
+    border-top: none;
+}
+
+.hoadonchitiet .bangCTHD th,
+.hoadonchitiet .bangCTHD td{
+    text-align: center;
+}
+
+.hoadonchitiet .thanhtien{
+    font-size: 18px;
+    font-family: Inter;
+    margin-top: 10px;
+    text-align: right;
+    margin-bottom: 10px;
+    color: black;
 }
 </style>

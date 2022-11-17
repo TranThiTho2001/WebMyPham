@@ -52,7 +52,7 @@
                                 <td style="width: 400px;  position: relative;"><p class="tenSP">{{ row.SP_TenSanPham }}</p></td>
                                 <td>{{ row.DMSP_Ten }}</td>
                                 <td>{{row.TH_Ten}}</td>
-                                <td>{{ row.SP_GiaBanRa }}</td>
+                                <td>{{ formatMoney(row.SP_GiaBanRa) }}</td>
                                 <td>{{ row.SP_SoLuong }}</td>
                                 <!-- <td>
                                     <img :src="require(`@/images/${row.SP_HinhAnh}`)" >
@@ -287,6 +287,11 @@ export default {
 
         async change_page(page) {
             this.currentPage = page;
+        },
+
+        formatMoney(data) {
+               let val = (data / 1).toFixed(0).replace(".", ",");
+               return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         },
     },
 
