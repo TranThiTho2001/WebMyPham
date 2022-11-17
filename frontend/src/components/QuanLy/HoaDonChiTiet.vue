@@ -12,7 +12,7 @@
                         </tr>
                         <tr>
                             <td>Khách hàng: {{ khachhang.KH_Ten }}</td>
-                            <td>Mã DH: {{ hoadon.DH_Ma }}</td>
+                            <td>Mã DH: {{ hoadon.id }}</td>
 
                         </tr>
                         <tr>

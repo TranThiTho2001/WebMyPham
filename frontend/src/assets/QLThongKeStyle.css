@@ -284,3 +284,45 @@
 .frameQLThongKe .sanPhamBanChay .thongTinSP .rowThongTin{
      margin-bottom: 2px;
 }
+
+.bieuDoDoanhThu .dropdown a {
+     color: #515151;
+     font-size: 17px;
+ }
+
+ .bieuDoDoanhThu .dropdown .dropdown-item.active {
+     color: #515151;
+     font-size: 17px;
+     background-color:#BABABA;
+ }
+
+ .bieuDoDoanhThu .dropdown a:hover{
+     color: #161515;
+     font-size: 17px;
+ }
+ .bieuDoDoanhThu .dropdown {
+     display: inline-block;
+     margin-top: 2px;
+     border-radius: 7px;
+     border-style: solid;
+     border-color: #515151;
+     border-width: 1px;
+     background-color: #F1B5B5;
+ }
+ .bieuDoDoanhThu .dropdown .nav-link .dropdown-menu {
+     background-color: #FFFFFF;
+     width: 180px;
+     display: none;
+     text-align: left;
+     font-family: Inter;
+     font-size: 17px;
+ }
+ .bieuDoDoanhThu .dropdown .nav-link:hover .dropdown-menu {
+     position: absolute;
+     background-color: #FFFFFF;
+     width: 180px;
+     border-radius: 10px 10px 10px 10px;
+     display: block;
+     text-align: left;
+     top: calc(95%);
+ }

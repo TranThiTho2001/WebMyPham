@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="row dsDonHang">
-                    <table id="secondTable" v-if="!isOpenList">
+                    <table id="bangTTCTDH" v-if="!isOpenList">
                         <thead>
                             <tr style="width:100%">
                                 <th>STT</th>
@@ -377,7 +377,7 @@ export default {
                 } else {
                     this.donhang = response.data;
                     this.donhang.forEach(element => {
-                    element.DH_Ngay = moment(String(element.DH_NgayDat)).format("MM / DD / YYYY hh: mm");
+                    element.DH_Ngay = moment(String(element.DH_NgayDat)).format("MM/DD/YYYY hh: mm");
                 });
                 }
             }
@@ -413,6 +413,9 @@ export default {
                 this.donhang[0] = response.data;
 
                 this.setActiveDonHang = "";
+                this.donhang.forEach(element => {
+                    element.DH_Ngay = moment(String(element.DH_NgayDat)).format("MM/DD/YYYY hh: mm");
+                });
                 console.log(response.data);
             }
         },

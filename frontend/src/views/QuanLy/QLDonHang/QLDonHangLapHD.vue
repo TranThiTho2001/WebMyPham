@@ -241,7 +241,18 @@ export default {
                 console.log(error);
             } else {
                 this.hoadon = response.data;
+                this.donhang.HD_SoHD = this.hoadon.id;
                 console.log(response.data);
+                const [errors, responses] = await this.handle(
+                 DonHangService.update(this.donhang.id, this.donhang)
+                );
+                if(errors){
+                    console.log(errors)
+                }
+                else{
+                    console.log(responses)
+                }
+               
             }
         },
 

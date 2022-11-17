@@ -59,36 +59,63 @@
                                    </div>
                               </div>
 
-                              <div class="row rowContent"  style=" margin-bottom: 2px;">
+                              <div class="row rowContent" style=" margin-bottom: 2px;">
                                    <div class="col-md-7 bieuDoDoanhThu">
-                                        <Line :chart-options="chartOptions" :chart-data="chartData" :chart-id="chartId"
-                                             :dataset-id-key="datasetIdKey" :plugins="plugins" :css-classes="cssClasses"
-                                             :styles="styles" :width="500" :height="500" />
+                                        <!-- <div class="row">
+                                             <td class="tdChucNang nav-item dropdown">
+                                                  <a class="nav-link " href="#" id="navbardrop" data-toggle="dropdown"
+                                                       style="color:#515151">
+                                                       {{ year }}
+                                                       <span class="fas fa-angle-down"></span>
+                                                       <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item icon" href="#"
+                                                                 @click="setYear('2022')">
+                                                                 2022</a>
+                                                            <a class="dropdown-item icon" href="#"
+                                                                 @click="setYear('2023')">
+                                                                 2023</a>
+                                                            <a class="dropdown-item icon" href="#"
+                                                                 @click="setYear('2024')">
+                                                                 2024</a>
+                                                       </div>
+                                                  </a>
+                                             </td> 
+                                        </div> -->
+                                        <!-- <div class="row" style="width:100%;"> -->
+                                             <Line :chart-options="chartOptions" :chart-data="chartData"
+                                                  :chart-id="chartId" :dataset-id-key="datasetIdKey" :plugins="plugins"
+                                                  :css-classes="cssClasses" :styles="styles" :width="690"
+                                                  :height="500" ref="line" id="linechart"/>
+                                        <!-- </div> -->
                                    </div>
                                    <div class="col-md-1"></div>
                                    <div class="col-md-4 sanPhamBanChay" @scroll="handleScroll">
                                         <div class="row">
                                              <p class="labelSPBanChay col-md-12">Sản Phẩm Bán Chạy</p>
                                         </div>
-                                        <table class="row" >
+                                        <table class="row">
                                              <tbody clas="col-md-12">
                                                   <tr v-for="(sanpham, i) in sanphambanchay" :key="i"
                                                        class="row sanpham" @click="goToCTSP(sanpham)">
-                                                       <td class="col-md-4 khungAnhSanPham" >
+                                                       <td class="col-md-4 khungAnhSanPham">
                                                             <img :src="require(`@/images/${sanpham.SP_HinhAnh}`)"
                                                                  class="img-fluid">
                                                        </td>
                                                        <td class="col-md-8 thongTinSP">
                                                             <div class="row">
-                                                                 <p class="col-md-6 tenTH">{{ sanpham.TH_Ten}}</p>
-                                                                 <p class="col-md-6 giaban">{{formatMoney(sanpham.SP_GiaBanRa)}}đ</p>
+                                                                 <p class="col-md-6 tenTH">{{ sanpham.TH_Ten }}</p>
+                                                                 <p class="col-md-6 giaban">
+                                                                      {{ formatMoney(sanpham.SP_GiaBanRa) }}đ</p>
                                                             </div>
                                                             <div class="row">
-                                                                 <p class=" col-md-12 tenSP">{{sanpham.SP_TenSanPham}}</p>
+                                                                 <p class=" col-md-12 tenSP">{{ sanpham.SP_TenSanPham }}
+                                                                 </p>
                                                             </div>
                                                             <div class="row">
                                                                  <div class="col-md-12">
-                                                                      <span class="fas fa-star danhgia" v-for="(sao, i) in sanpham.SP_DanhGia" :key="i"></span>
+                                                                      <span class="fas fa-star danhgia"
+                                                                           v-for="(sao, i) in sanpham.SP_DanhGia"
+                                                                           :key="i"></span>
                                                                  </div>
                                                             </div>
                                                        </td>
@@ -104,7 +131,7 @@
      </div>
 </template>
 
-<script>
+<script >
 import moment from 'moment';
 import DanhSachChucNang from '../../../components/QuanLy/DanhSachChucNang.vue';
 import QLHeader from '../../../components/QuanLy/QLHeader.vue';
@@ -119,9 +146,11 @@ import { Chart, registerables } from "chart.js";
 Chart.register(...registerables)
 
 export default {
+     
      name: `ThongKe`,
      components: { DanhSachChucNang, QLHeader, Line },
      // extends: Bar,
+     
      props: {
           chartId: {
                type: String,
@@ -148,6 +177,7 @@ export default {
      data() {
 
           return {
+               year: "2022",
                localNhanVien: {},
                donhang: [],
                khachhang: [],
@@ -263,8 +293,7 @@ export default {
                          display: true,
                          text: "Doanh Thu"
                     }
-               }
-
+               },
           }
 
      },
@@ -304,6 +333,17 @@ export default {
                }
           },
 
+          // async setYear(year) {
+          //      this.year = year;
+               
+          //      this.tongdoanhthu = 0;
+          //      this.doanhthutheothang.forEach(element => {
+          //           element.doanhthu = 0;
+          //      });
+          //      this.chartData.update();
+          //      this.doanhthutheothang();
+          //      this.$refs.line.updateChart()
+          // },
 
           async doanhthutheothang() {
                this.donhang.forEach(element => {
@@ -311,20 +351,27 @@ export default {
                          this.tongdoanhthu = this.tongdoanhthu + element.DH_TongTien;
                          if (element.DH_NgayDat) {
                               element.DH_Thang = moment(String(element.DH_NgayDat)).format("MM / DD / YYYY hh: mm").substring(0, 2);
-                              this.thang.forEach(t => {
-                                   if (t.name == element.DH_Thang) {
-                                        t.doanhthu = t.doanhthu + element.DH_TongTien;
-                                   }
-                              });
+                              // element.DH_Nam = moment(String(element.DH_NgayDat)).format("MM / DD / YYYY hh: mm").substring(10, 14);
+                              // if (element.DH_Nam == this.year) {
+                                   this.thang.forEach(t => {
+                                        if (t.name == element.DH_Thang) {
+                                             t.doanhthu = t.doanhthu + element.DH_TongTien;
+                                        }
+                                   });
+                              // }
                          }
                     }
+
                });
                let i = 0;
+               
                this.thang.forEach(element => {
                     this.chartData.labels[i] = element.name;
+                    // this.chartData.datasets[0].data[i] = 0;
                     this.chartData.datasets[0].data[i] = element.doanhthu;
                     i++;
                });
+
           },
           formatMoney(data) {
                let val = (data / 1).toFixed(0).replace(".", ",");
@@ -404,8 +451,8 @@ export default {
                this.sanphambanchay[2].SP_DanhGia = 4;
           },
 
-          async goToCTSP(data){
-               this.$router.push({ name: 'QLDonHang', params: { id: this.nhanviencheck.NV_Ma, sp:data.SP_Ma } });
+          async goToCTSP(data) {
+               this.$router.push({ name: 'QLDonHang', params: { id: this.nhanviencheck.NV_Ma, sp: data.SP_Ma } });
           }
      },
      mounted() {
@@ -413,7 +460,9 @@ export default {
           this.retrieveKhachHang();
           this.retrieveCTDH();
           this.retrieveThuongHieu();
-     }
+          // const chartInstance = this.$refs.line.chart;
+     },
+
 }
 </script>
 
