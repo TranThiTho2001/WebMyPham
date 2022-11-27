@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <label for="KH_SDT">Số điện thoại</label>
                             <Field name="KH_SDT" type="text" class="form-control" placeholder="Nhập số điện thoại "
-                                v-model="khachhang.KH_SDT"/>
+                                v-model="khachhang.KH_SDT" />
                             <ErrorMessage name="KH_SDT" class="error-feedback" />
 
                         </div>
@@ -100,6 +100,8 @@
 <script>
 import * as yup from "yup";
 import { Form, Field, ErrorMessage } from "vee-validate";
+import GioHangService from '../../../services/giohang.service';
+import KhachHangService from '../../../services/khachhang.service'
 import { mapGetters } from "vuex";
 export default {
     name: `QLDangNhap`,
@@ -134,6 +136,8 @@ export default {
             khachhang: {},
             khachhangcheck: {},
             confirmPassword: "",
+            giohang: {},
+            maKH: "",
         };
     },
     computed: {
@@ -167,12 +171,50 @@ export default {
                     this.message = data.message;
                     this.successful = true;
                     this.loading = false;
+                    this.TaoGioHang();
                 }
             }
             else {
                 this.message = "Mật khẩu và mật khẩu nhập lại không trùng khớp"
             }
 
+        },
+
+        async TaoGioHang(){
+            console.log(this.khachhang.KH_SDT);
+            const [error, response] = await this.handle(
+                    KhachHangService.findByName(this.khachhang.KH_SDT)
+                );
+            if(error){
+                console.log("Khong tim thay");
+            }
+            else{
+                console.log(response.data[0].id)
+                this.giohang.KH_Ma = response.data[0].id;
+                
+                this.giohang.GH_TongSoLuong = "0";console.log(this.giohang);
+                const [errors, responses] = await this.handle(
+                    GioHangService.create(this.giohang)
+                );
+                if (errors) {
+                    console.log("Khong the tao gio hang")
+                }
+                else {
+                    console.log(responses.data);
+                    this.khachhang.GH_Ma = responses.data.id;
+                    const [errorss, responsess] = await this.handle(
+                        KhachHangService.update(this.giohang.KH_Ma,this.khachhang)
+                );
+                if(errorss){
+                    console.log("Loi roi");
+                }
+                else{
+                    console.log(responsess.data);
+                }
+                }
+            }
+
+            
         },
 
         async goToDangNhap() {

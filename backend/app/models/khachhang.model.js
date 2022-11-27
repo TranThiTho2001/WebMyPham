@@ -32,6 +32,10 @@ module.exports = mongoose => {
                 type: String,
                 required: [true, "Mat khau tai khoan duoc yeu cau"],
             },
+            GH_Ma: {
+                type: String,
+            },
+
             ownerId: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "khachhang"
@@ -41,7 +45,7 @@ module.exports = mongoose => {
         // Replace _id with id and remove __V
         schema.method("toJSON", function() {
             const { __v, _id, ...object } = this.toObject();
-            object.KH_Ma = _id;
+            object.id = _id;
             return object;
         });
 

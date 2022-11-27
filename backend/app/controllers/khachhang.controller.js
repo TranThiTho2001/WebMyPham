@@ -44,19 +44,19 @@ exports.create = async (req, res) => {
 exports.findAll = async (req, res) => {
     const condition = { ownerId: req.userId };
     const KH_SDT = req.query.name;
-    if (KH_SDT) {
-        condition.KH_SDT = { $regex: new RegExp(KH_SDT), $options: "i" };
+    console.log(req.query.KH_name);
+    if(KH_SDT) {
+        condition.KH_SDT = { $regex: new RegExp(KH_SDT), $options: "i"};
     }
-
     const [error, documents] = await handle(
         KhachHang.find(condition, '-ownerId')
     );
-
     if (error) {
         return next(
             new BadRequestError(500, `Lỗi trong quá trình truy xuất khách hàng với SDT ${req.params.KH_SDT}`)
         );
     }
+    console.log(documents)
     return res.send(documents);
 };
 
@@ -96,7 +96,12 @@ exports.update = async (req, res) => {
     };
 
     const [error, document] = await handle(
-        KhachHang.findOneAndUpdate(condition, req.body, {
+        KhachHang.findOneAndUpdate(condition, {
+            $set: {
+                'GH_Ma': req.body.GH_Ma,
+                // 'KH_MatKhau': bcrypt.hashSync(req.body.KH_MatKhau, 8)
+            }
+        }, {
             new: true,
             projection: "-ownerId",
         })

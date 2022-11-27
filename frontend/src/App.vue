@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <head>
+        <link rel='shortcut icon' href='../../../images/LogoQL.png' />
+    </head>
     <!-- <div class="container-fluid">
       <header class="align-items-center">
         <div class="row  justify-content-between align-items-center">

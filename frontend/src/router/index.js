@@ -3,8 +3,9 @@ const routes = [
     {
         path: "/",
         alias: "/homepage",
-        name: "HomePage",
+        name: "HomePage",meta: { title: 'Skills - MyApp' },
         component: () => import("../views/HomePage.vue"),
+        
     },
     // Quan ly tai khoan
     {
@@ -131,6 +132,14 @@ const routes = [
         name: 'KHDangKy',        
         component: () =>
             import ("../views/KhachHang/QLTaiKhoan/DangKy.vue"),
+    },
+
+    
+    {
+        path: '/GioHang',
+        name: 'GioHang',        
+        component: () =>
+            import ("../views/KhachHang/QLGioHang/GioHang.vue"),
     },
 ];
 
