@@ -91,7 +91,7 @@ exports.update = async (req, res) =>{
     _id: req.params.GH_Ma,
     ownerId: req.userId,
    };
-
+console.log(req.params.GH_Ma+" "+req.body.GH_TongSoLuong);
    const [error, document] = await handle(
         GioHang.findOneAndUpdate(condition, req.body, {
             new: true,

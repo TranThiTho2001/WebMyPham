@@ -373,6 +373,7 @@ export default {
                });
 
           },
+          
           formatMoney(data) {
                let val = (data / 1).toFixed(0).replace(".", ",");
                return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");

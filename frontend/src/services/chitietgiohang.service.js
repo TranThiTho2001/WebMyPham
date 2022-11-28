@@ -8,7 +8,7 @@ class ChiTietGioHangService {
     // tim kiem cac chi tiet gio hang theo ma
     findByMaGH(GH_Ma) { return http.get(`/chitietgiohang?name=${GH_Ma}`); }
 
-    update(id, data) { return http.put(`chitietgiohang/${id}`, data); }
+    update(GH_Ma, data) { return http.put(`chitietgiohang/${GH_Ma}`, data); }
     delete(SP_Ma) { return http.delete(`/chitietgiohang/${SP_Ma}`); }
     //deleteAll() { return http.delete("/sanpham"); }  
     get(SP_Ma) { return http.get(`/chitietgiohang/${SP_Ma}`); }

@@ -11,7 +11,9 @@ module.exports = (app) => {
 
     router.get("/:SP_Ma", chitietgiohang.findOne);
     
-    router.get("/:GH_Ma", chitietgiohang.update);
-    app.use("/api/chitietdonhang", router);
+    router.put("/:GH_Ma", chitietgiohang.update);
+
+    router.delete("/:SP_Ma", chitietgiohang.delete);
+    app.use("/api/chitietgiohang", router);
 
 };

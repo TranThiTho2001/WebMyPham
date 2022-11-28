@@ -1,11 +1,10 @@
 <template>
-    <div class="container">
+    <div class="container-fuild">
         
         <!-- <Carousel :khuyenmai="khuyenmai" /> -->
         <!-- <Carousel /> -->
         <!-- <Navbar :thuonghieu="thuonghieu" :danhmuc="danhmuc" /><br> -->
-        <GioHang :currentUser = currentUser />
-        <div>{{currentUser.GH_Ma}}</div>
+        <GioHang :currentUser = currentUser :giohang = giohang :chitietgiohang = chitietgiohang />
         <!-- -->
         <!-- <div class="contanier"><SanPhamDS />  </div> -->
         <!-- <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary" @click="logout">
@@ -23,6 +22,8 @@
 import DanhMucService from "../services/danhmuc.service";
 import ThuongHieuService from "../services/thuonghieu.service";
 import SanPhamService from "../services/sanpham.service";
+import GioHangService from "../services/giohang.service";
+import CTGHService from '../services/chitietgiohang.service';
 //import KhuyenMaiService from "../services/khuyenmai.service";
 import { mapGetters, mapMutations } from "vuex";
 // import Carousel from "../components/HomePageComponents/Carousel.vue";
@@ -34,13 +35,15 @@ export default {
      //   SanPham,
         // SanPhamDS,
         GioHang,
+        
     },
     data() {
         return {
             danhmuc: [],
             thuonghieu: [],
-            // khuyenmai: [], 
             sanpham: [],
+            giohang:{},
+            chitietgiohang: [],
         }
     },
     computed: {
@@ -54,6 +57,8 @@ export default {
         this.retrieveDanhMuc();
         this.retrieveThuongHieu();
         this.retrieveSanPham();
+        this.retrieveGioHang();
+        this.retrieveCTGH();
     },
     methods: {
         ...mapMutations([
@@ -64,8 +69,7 @@ export default {
             this.$store.commit("logout");
             this.$router.push("/DangNhap");
         },
-        async retrieveDanhMuc() {
-           
+        async retrieveDanhMuc() {          
             const [error, response] = await this.handle(
                 DanhMucService.getAll()
             );
@@ -100,7 +104,44 @@ export default {
                 console.log(response.data);
             }
         },
+        async retrieveCTGH() {
+               console.log("sq")
+               const [error, response] = await this.handle(
+                    CTGHService.findByMaGH(this.currentUser.GH_Ma)
+               );
+               if (error) {
+                    console.log(error);
+               } else {
+                    this.chitietgiohang = response.data;
+                    this.chitietgiohang.forEach(element => {
+                         this.findSanPham(element);
+                    });
+               }
+          },
 
+          async findSanPham(ctgh){
+               const [error, response] = await this.handle(
+                    SanPhamService.getByID(ctgh.SP_Ma)
+               );
+               if (error) {
+                    console.log(error);
+               } else {
+                    ctgh.SP_TenSanPham = response.data.SP_TenSanPham;
+                    ctgh.SP_GiaBanRa = response.data.SP_GiaBanRa;
+                    ctgh.SP_HinhAnh = require(`@/images/`+response.data.SP_HinhAnh);
+               }
+          },
+        async retrieveGioHang() {
+            const [error, response] = await this.handle(
+               GioHangService.getByID(this.currentUser.GH_Ma)
+            );
+            if (error) {
+                console.log(error);
+            } else {
+                this.giohang = response.data;
+                console.log(response.data);
+            }
+        },
         goToQL() {
             this.$router.push("/dangnhap");
         },

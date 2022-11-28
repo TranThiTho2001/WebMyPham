@@ -80,15 +80,15 @@ exports.findOne= async (req,res) => {
 
 // *-----Update a category by the is in the request
 exports.update = async (req, res) =>{
+    console.log("hklwhd")
    if(!req.body){
         return next(
             new BadRequestError(400, "Dữ liệu cập nhật giỏ hàng không thể trống!")
         );
    }
-
    const condition = {
-    GH_Ma: req.body.GH_Ma,
-    SP_Ma:req.body.SP_Ma,
+    GH_Ma: req.params.GH_Ma,
+    SP_Ma: req.body.SP_Ma,
     ownerId: req.userId,
    };
 
@@ -103,8 +103,15 @@ exports.update = async (req, res) =>{
         new BadRequestError(500,`Lỗi trong quá trình cập nhật danh muc có mã id=${req.params.id}`
         )
     );
+   }
+   if (!document) {
+        return next(new BadRequestError(404, "Không tìm thấy danh mục!"));
+    }
+    
+    return res.send({ message: "Cập nhật thông tin danh mục thành công." });
+
 }
-}
+
 
 // if (!document) {
 //     return next(new BadRequestError(404, "Không tìm thấy danh mục!"));
@@ -113,28 +120,28 @@ exports.update = async (req, res) =>{
 // return res.send({ message: "Cập nhật thông tin danh mục thành công." });
 // };
 
-// //Delete a category with the specified id in the request
-// exports.delete = async (req,res) => {    
-//         const condition = {
-//             DM_Ma: req.params.DM_Ma
-//         };
+//Delete a category with the specified id in the request
+exports.delete = async (req,res) => {    
+        const condition = {
+            SP_Ma: req.params.SP_Ma
+        };
     
-//         const [error, document] = await handle(
-//             DanhMuc.findOneAndDelete(condition
-//             )
-//         );
+        const [error, document] = await handle(
+            ChiTietGioHang.findOneAndDelete(condition
+            )
+        );
     
-//         if (error) {
-//             return next(
-//                 new BadRequestError(500,`Không xóa được danh mục có mã ${req.params.DM_Ma}`)
-//             );
-//         }
+        if (error) {
+            return next(
+                new BadRequestError(500,`Không xóa được danh mục có mã ${req.params.DM_Ma}`)
+            );
+        }
     
-//         if (!document) {
-//             return res.send("Khong tim thay danh muc");
-//         }
+        if (!document) {
+            return res.send("Khong tim thay danh muc");
+        }
     
-//         return res.send({ message: "Xóa danh mục thành công" });
+        return res.send({ message: "Xóa danh mục thành công" });
     
-// };
+};
 
