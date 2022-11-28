@@ -101,7 +101,8 @@ export default {
                 this.sanpham.SP_ThongTin = response.data.SP_ThongTin;
                 console.log(response.data.SP_HinhAnh);
                 this.sanpham.SP_HinhAnh = require('@/images/' + response.data.SP_HinhAnh);
-                this.oldImage = response.data.SP_HinhAnh;
+                this.oldImage =require('@/images/' + response.data.SP_HinhAnh);
+                this.sanpham.HinhAnhCu = response.data.SP_HinhAnh;
                 this.sanpham.Image = "";
                 this.findTenDanhMuc(this.sanpham.DMSP_Ma);
                 this.findTenThuongHieu(this.sanpham.TH_Ma);
@@ -110,7 +111,7 @@ export default {
         },
 
         async updateSanPham(data) {
-            console.log(data.SP_HinhAnh + " " + this.sanpham.SP_HinhAnh + " " + this.oldImage)
+            console.log(data.SP_HinhAnh + " vfd" + this.sanpham.SP_HinhAnh + " " + this.oldImage)
             if (data.SP_HinhAnh != this.oldImage) {
                 //Luu hinh anh
                 const formData = new FormData();
@@ -127,12 +128,12 @@ export default {
                     console.log(error);
                 } else {
                     console.log(response.data);
-                    this.message2 = "Thêm thành công";
-                    console.log(response.data)
+                    this.message2 = "Cập nhật thành công";
+                    this.retrieveSanPham();
                 }
             }
             else {
-                console.log(this.fileName + "aljfdkew b");
+                data.SP_HinhAnh = this.sanpham.HinhAnhCu;
                 const [error, response] = await this.handle(
                     SanPhamService.update(data.SP_Ma, data)
                 );
@@ -140,8 +141,9 @@ export default {
                     console.log(error);
                 } else {
                     console.log(response.data);
-                    this.message2 = "Thêm thành công";
+                    this.message2 = "Cập nhật thành công";
                     console.log(response.data)
+                    this.retrieveSanPham();
                 }
             }
 
@@ -168,26 +170,6 @@ export default {
             }
         },
 
-        async findSanPham(data) {
-            this.message1 = "";
-            this.message2 = "";
-            console.log(data);
-            const [error, response] = await this.handle(
-                SanPhamService.getByID(data.SP_Ma)
-            );
-            if (error) {
-                console.log(error);
-            } else {
-                if (response.data == "Khong tim thay") {
-                    this.saveImge(data.Image);
-                    this.createSanPham(data);
-                }
-                else {
-                    this.message1 = "Mã đã tồn tại";
-                    this.message2 = "Thêm không thành công"
-                }
-            }
-        },
         async retrieveDanhMuc() {
             const [error, response] = await this.handle(
                 DanhMucService.getAll()

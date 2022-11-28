@@ -2,7 +2,7 @@
     <Form @submit="$emit('suaSanPham-submit', sanphamLocal)" :validation-schema="schema" enctype="multipart/form-data">
         <div class="functionName">
             <span class="fa fa-plus-circle"> </span>
-            <p style="display:inline"> Thêm sản phẩm mới </p>
+            <p style="display:inline"> Cập nhật thông tin sản phẩm </p>
         </div>
         <div class="row container-fluid">
             <div class="col-md-6">
@@ -92,13 +92,13 @@
         </div>
 
         <div class="form-group">
-            <span v-if="message2 == 'Thêm thành công'" class="fas fa-check-circle"
+            <span v-if="message2 == 'Cập nhật thành công'" class="fas fa-check-circle"
                 style="color:#00BA13; text-align: center; margin-left: 44%;"></span>
-            <span v-if="message2 == 'Thêm không thành công'" class="fas fa-times-circle"
+            <span v-if="message2 == 'Cập nhật không thành công'" class="fas fa-times-circle"
                 style="color:red; text-align: center;  margin-left: 42%;"></span>
-            <p v-if="message2 == 'Thêm thành công'" class="textMessage2" style="color:#00BA13">{{ message2 }}</p>
+            <p v-if="message2 == 'Cập nhật thành công'" class="textMessage2" style="color:#00BA13">{{ message2 }}</p>
             <p v-else class="textMessage2">{{ message2 }}</p><br>
-            <p v-if="message2 == 'Thêm không thành công'" class="textMessage1" style="margin-left: 4%;">{{ message1 }}
+            <p v-if="message2 == 'Cập nhật không thành công'" class="textMessage1" style="margin-left: 4%;">{{ message1 }}
             </p>
             <button class="btn btn-outline-secondary btnLuu">Lưu</button>
         </div>

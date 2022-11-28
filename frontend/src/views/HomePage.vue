@@ -4,8 +4,10 @@
         <!-- <Carousel :khuyenmai="khuyenmai" /> -->
         <!-- <Carousel /> -->
         <!-- <Navbar :thuonghieu="thuonghieu" :danhmuc="danhmuc" /><br> -->
-        <GioHang :currentUser = currentUser :giohang = giohang :chitietgiohang = chitietgiohang />
-        <!-- -->
+        <!-- <GioHang :currentUser = currentUser :giohang = giohang :chitietgiohang = chitietgiohang /> -->
+        <router-link :to="{name:'GioHang', params: {user: this.currentUser._id}}" class="btn btn-sm btn-outline-secondary mx-1"> 
+                           GioHang
+                        </router-link>
         <!-- <div class="contanier"><SanPhamDS />  </div> -->
         <!-- <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary" @click="logout">
             thanh
@@ -18,7 +20,7 @@
 // import Navbar from "../components/HomePageComponents/Navbar.vue";
 //import SanPham from "../components/HomePageComponents/Sanpham/SanPham.vue";
 // import SanPhamDS from "../components/HomePageComponents/SanPhamDS.vue";
- import GioHang from "../components/HomePageComponents/GioHang.vue";
+//  import GioHang from "../components/HomePageComponents/GioHang.vue";
 import DanhMucService from "../services/danhmuc.service";
 import ThuongHieuService from "../services/thuonghieu.service";
 import SanPhamService from "../services/sanpham.service";
@@ -34,7 +36,7 @@ export default {
         // Carousel,
      //   SanPham,
         // SanPhamDS,
-        GioHang,
+        // GioHang,
         
     },
     data() {

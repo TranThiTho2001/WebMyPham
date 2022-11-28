@@ -1,18 +1,17 @@
 .giohang {
-     margin-left: 5%;
-     margin-right: 5%;
+     margin-left: 8%;
+     margin-right: 8%;
      font-family: Inter;
      font-size: 16px;
 }
 
 .giohang .titleRow {
-
      margin-bottom: 3%;
 }
 
 .giohang .title {
      font-family: Inter;
-     font-size: 17px;
+     font-size: 18px;
      font-weight: 500;
 }
 
@@ -24,9 +23,13 @@
 .giohang .thongtinSP {
      width: 100%;
      margin-bottom: 1%;
-     background-color: #EAEAEA;
+     background-color: #f0f0f0;
      border-radius: 10px;
      border: 0.1px solid #EAEAEA;
+}
+.giohang .thongtinSP:hover {
+     margin-bottom: 1%;
+     background-color: #EAEAEA;
 }
 
 .giohang .sanpham .hinhanh {
@@ -74,6 +77,10 @@
      left: 30%;
      transform: translate(-45%, -50%);
      border: 0.1px solid #a9a7a7;
+}
+.giohang .btngiam:hover,
+.giohang .btntang:hover{
+     background-color: #dddddd;
 }
 
 .giohang .soluong {
