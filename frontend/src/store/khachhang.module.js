@@ -6,7 +6,8 @@ const state = {
         KH_Ma: String,
         KH_Ten: String,
         KH_SDT: String,
-        KH_MatKhau: String
+        KH_MatKhau: String,
+        GH_Ma: String,
     },
     status: {
         loggedIn: Boolean

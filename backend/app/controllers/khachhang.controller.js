@@ -202,6 +202,7 @@ console.log(passwordIsValid)
         KH_Ma: khachhang._id,
         KH_Ten: khachhang.KH_Ten,
         KH_SDT: khachhang.KH_SDT,
+        GH_Ma: khachhang.GH_Ma,
         accessToken: token,
     });
 };

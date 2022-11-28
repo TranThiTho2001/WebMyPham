@@ -4,7 +4,8 @@
         <!-- <Carousel :khuyenmai="khuyenmai" /> -->
         <!-- <Carousel /> -->
         <!-- <Navbar :thuonghieu="thuonghieu" :danhmuc="danhmuc" /><br> -->
-        <GioHang />
+        <GioHang :currentUser = currentUser />
+        <div>{{currentUser.GH_Ma}}</div>
         <!-- -->
         <!-- <div class="contanier"><SanPhamDS />  </div> -->
         <!-- <button class="mt-3 ml-2 btn btn-sm btn-outline-secondary" @click="logout">
@@ -39,7 +40,7 @@ export default {
             danhmuc: [],
             thuonghieu: [],
             // khuyenmai: [], 
-            sanpham: [],   
+            sanpham: [],
         }
     },
     computed: {
@@ -64,7 +65,7 @@ export default {
             this.$router.push("/DangNhap");
         },
         async retrieveDanhMuc() {
-
+           
             const [error, response] = await this.handle(
                 DanhMucService.getAll()
             );
