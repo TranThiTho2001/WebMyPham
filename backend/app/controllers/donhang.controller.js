@@ -6,17 +6,8 @@ const DonHang = db.DonHang;
 exports.create = async (req, res) => {
 
     //validate request
-    if (!req.body.DH_Ma) {
-        return res.send(new BadRequestError(400, "Mã đơn hàng không được bỏ trống!"));
-    }
-    if (!req.body.NV_Ma) {
-        return next(new BadRequestError(400, "Mã nhân viên không được bỏ trống!"));
-    }
     if (!req.body.KH_Ma) {
         return next(new BadRequestError(400, "Mã khách hàng không được bỏ trống!"));
-    }
-    if (!req.body.HD_SoHD) {
-        return next(new BadRequestError(400, "Số hóa đơn không được bỏ trống!"));
     }
     if (!req.body.DH_NgayDat) {
         return next(new BadRequestError(400, "Ngày đặt hàng không được bỏ trống!"));
@@ -33,13 +24,11 @@ exports.create = async (req, res) => {
 
     // Create a order
     const donhang = new DonHang({
-        DH_Ma: req.body.DH_Ma,
-        NV_Ma: req.body.NV_Ma,
         KH_Ma: req.body.KH_Ma,
-        HD_SoHD: req.body.HD_SoHD,
         DH_NgayDat: req.body.DH_NgayDat,
         DH_TongSoLuong: req.body.DH_TongSoLuong,
         DH_TongTien: req.body.DH_TongTien,
+        DH_DiaChiGiaoHang: req.body.DH_DiaChiGiaoHang,
         DH_GhiChu: req.body.DH_GhiChu,   
         DH_TrangThai: req.body.DH_TrangThai,
         ownerId: req.userId,

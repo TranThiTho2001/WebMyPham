@@ -133,15 +133,15 @@ exports.delete = async (req,res) => {
     
         if (error) {
             return next(
-                new BadRequestError(500,`Không xóa được danh mục có mã ${req.params.DM_Ma}`)
+                new BadRequestError(500,`Không xóa được chi tiết giỏ hàng có mã ${req.params.DM_Ma}`)
             );
         }
     
         if (!document) {
-            return res.send("Khong tim thay danh muc");
+            return res.send("Khong tim thay chi tiết giỏ hàng");
         }
     
-        return res.send({ message: "Xóa danh mục thành công" });
+        return res.send({ message: "Xóa chi tiết giỏ hàng thành công thành công" });
     
 };
 

@@ -1,13 +1,9 @@
 module.exports = mongoose => {
     const schema = mongoose.Schema(
         {
-            DH_Ma: {
-                type: String,
-                required: [true, "Ma don hang duoc yeu cau"],
-            },
             NV_Ma: {
                 type: String,
-                required: [true, "Ma nhan vien duoc yeu cau"],
+                required: [false, "Ma nhan vien duoc yeu cau"],
             },
 
             KH_Ma: {
@@ -17,7 +13,7 @@ module.exports = mongoose => {
 
             HD_SoHD: {
                 type: String,
-                required: [true, "So hoa don duoc yeu cau"],
+                required: [false, "So hoa don duoc yeu cau"],
             },
 
             DH_NgayDat: {
