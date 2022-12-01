@@ -1,0 +1,57 @@
+.dondathang .title{
+     width: 100%;
+}
+
+.dondathang .title h4{
+     text-align: center;
+     background-color: aquamarine;
+}
+
+.dondathang .dsDonDatHang{
+     width: 100%;
+}
+
+.dondathang .thongtinDonHang{
+     width: 100%;
+     margin-top: 1%;
+     margin-bottom: 1%;
+}
+
+.dondathang .thongtinDonHang:hover{
+     background-color: #EAEAEA;
+}
+.dondathang .thongtinDonHang:hover .text{
+     background-color: #EAEAEA;
+     font-family: Inter;
+     font-size: 18px;
+}
+.dondathang .title {
+     font-family: Inter;
+     font-size: 18px;
+     font-weight: 500;
+     text-align: center;
+}
+
+.dondathang .column {
+     position: relative;
+}
+
+.dondathang .text{
+     word-wrap: break-word;
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-45%, -50%);
+     font-family: Inter;
+     font-size: 17px;
+}
+
+.dondathang .btnTrangThai{
+     word-wrap: break-word;
+     font-family: Inter;
+     font-size: 17px;
+     border-radius: 5px;
+     width: 150px;
+     background-color: aqua;
+}
+

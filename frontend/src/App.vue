@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <head>
+    <!-- <head>
         <link rel='shortcut icon' href='../../../images/LogoQL.png' />
     </head>
-    <!-- <div class="container-fluid">
+    <div class="container-fluid">
       <header class="align-items-center">
         <div class="row  justify-content-between align-items-center">
           <div class="col-sm-1 logo-image pl-0 pr-0">
@@ -54,27 +54,27 @@
             </div>
           </div>
         </div>
-      </header>
-    </div> -->
+      </header> -->
+    <!-- </div>  -->
     <router-view />
   </div>
 </template>
 
 <script>
 
-// export default {
-//   name: 'App',
-//   data() {
-//     return {
-//       currentUser: null
-//     };
-//   },
-//   methods: {
-//     logout() {
-//       console.log("logout");
-//     },
-//   }
-// }
+export default {
+  name: 'App',
+  data() {
+    return {
+      currentUser: null
+    };
+  },
+  methods: {
+    logout() {
+      console.log("logout");
+    },
+  }
+}
 </script> 
 
 
@@ -129,9 +129,6 @@
 }
 #app .nav-item{
   color: #515151;
-  font-size: 20px;
-} */
-/* #app {
+  font-size: 20px; */
 
-} */
 </style>   

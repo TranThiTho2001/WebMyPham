@@ -29,7 +29,7 @@
 
       </ul>
     </nav> -->
-  <nav class="navbar navbar-expand-md navbar-light bg-white">
+  <nav class="navbar navbar-expand-md navbar-light bg-white navbarrow">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-expanded="false">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -70,13 +70,13 @@ export default {
 </script>
      
 <style>
-.navbar .navbar-toggler{
+.navbarrow .navbar-toggler{
   background-color: #FFFFFF;
   color: black;
   /* border: 1px #515151; */
 }
 
-.navbar {
+.navbarrow {
   align-items: left;
   text-align: left;
   justify-content: center;
@@ -85,7 +85,7 @@ export default {
   margin-top: 0px;
 }
 
-.navbar-collapse .nav-item a {
+.navbarrow .navbar-collapse .nav-item a {
   color: #515151;
   position: relative;
   text-align: center;
@@ -94,9 +94,11 @@ export default {
   font-size: 18px;
   padding-top: 0px;
   padding-bottom: 0px;
+  font-family: Inter;
+  font-size: 18px;
 }
 
-.navbar-collapse .nav-item {
+.navbarrow .navbar-collapse .nav-item {
   color: #515151;
   margin-left: 35px;
   position: relative;
@@ -105,21 +107,23 @@ export default {
   transition: 0.4s;
   border-radius: 5px;
   font-size: 18px;
+  font-family: Inter;
+  font-weight: 600;
 }
 
 
-.navbar-collapse .nav-item.active,
-.navbar-collapse .nav-item:hover {
+.navbarrow .navbar-collapse .nav-item.active,
+.navbarrow .navbar-collapse .nav-item:hover {
   background-color: #E9E8E8;
   border-bottom-color: #515151;
 }
 
-.navbar-collapse .menu-item a {
+.navbarrow .navbar-collapse .menu-item a {
   color: inherit;
   text-decoration: none;
 }
 
-.navbar-collapse .dropdown .dropdown-menu {
+.navbarrow .navbar-collapse .dropdown .dropdown-menu {
   background-color: #FFFFFF;
   top: calc(100%);
   left: 50%;
@@ -128,7 +132,7 @@ export default {
   display: none;
 }
 
-.navbar-collapse .dropdown:hover .dropdown-menu {
+ .navbarrow .navbar-collapse .dropdown:hover .dropdown-menu {
   position: absolute;
   background-color: #FFFFFF;
   top: calc(100%);
@@ -140,7 +144,7 @@ export default {
   text-align: left;
 }
 
-.navbar-collapse .dropdown .dropdown-menu .dropdown-item {
+.navbarrow .navbar-collapse .dropdown .dropdown-menu .dropdown-item {
   display: block;
   text-align: left;
   margin-top: 10px;

@@ -141,6 +141,20 @@ const routes = [
         component: () =>
             import ("../views/KhachHang/QLGioHang/GioHang.vue"),
     },
+
+    {
+        path: '/DonHang',
+        name: 'DonHang',        
+        component: () =>
+            import ("../views/KhachHang/QLGioHang/DonHang.vue"),
+    },
+
+    {
+        path: '/CTSP/:id',
+        name: 'CTSP',        
+        component: () =>
+            import ("../views/KhachHang/QLGioHang/ChiTietSanPham.vue"),
+    },
 ];
 
 const router = createRouter({

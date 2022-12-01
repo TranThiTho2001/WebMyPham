@@ -29,7 +29,7 @@ exports.create = async (req, res) => {
         DH_TongSoLuong: req.body.DH_TongSoLuong,
         DH_TongTien: req.body.DH_TongTien,
         DH_DiaChiGiaoHang: req.body.DH_DiaChiGiaoHang,
-        DH_GhiChu: req.body.DH_GhiChu,   
+        DH_GhiChu: req.body.DH_GhiChu,
         DH_TrangThai: req.body.DH_TrangThai,
         ownerId: req.userId,
     });
@@ -47,9 +47,10 @@ exports.create = async (req, res) => {
 //*--------Retrive all orders of store from the database
 exports.findAll = async (req, res) => {
     const condition = { ownerId: req.userId };
-    const DH_TrangThai= req.query.name;
-    if(DH_TrangThai) {
-        condition.DH_TrangThai = { $regex: new RegExp(DH_TrangThai), $options: "i"};
+    const DH_TrangThai = req.query.name;
+    console.log("Khytgj"+DH_TrangThai)
+    if (DH_TrangThai) {
+        condition.DH_TrangThai = { $regex: new RegExp(DH_TrangThai), $options: "i" };
     }
 
     const [error, documents] = await handle(
@@ -61,7 +62,28 @@ exports.findAll = async (req, res) => {
             new BadRequestError(500, `Lỗi trong quá trình truy xuất đơn hàng với mã ${req.params.DH_Ma}`)
         );
     }
-    return res.send(documents);
+    console.log(documents)
+    if (documents[0]==null) {
+        const conditions = { ownerId: req.userId };
+        const KH_Ma = req.query.name;
+        console.log("Kh"+KH_Ma)
+        if (KH_Ma) {
+            conditions.KH_Ma = { $regex: new RegExp(KH_Ma), $options: "i" };
+        }
+        const [errors, documentss] = await handle(
+            DonHang.find(conditions, '-ownerId')
+        );
+        if (errors) {
+            return next(
+                new BadRequestError(500, `Lỗi trong quá trình truy xuất đơn hàng với mã ${req.params.DH_Ma}`)
+            );
+        }
+        console.log("alo")
+        console.log(documentss)
+        return res.send(documentss);
+    
+    }
+return res.send(documents);
 };
 
 //*-------Find a single order with an id
@@ -88,10 +110,10 @@ exports.findOne = async (req, res) => {
 //*-----Update a order by the is in the request
 exports.update = async (req, res) => {
     const condition = {
-       _id: req.params.DH_Ma,
-       ownerId: req.userId,
+        _id: req.params.DH_Ma,
+        ownerId: req.userId,
     };
-    
+
     const [error, document] = await handle(
         DonHang.findOneAndUpdate(condition, req.body, {
             new: true,
