@@ -30,6 +30,8 @@ exports.create = async (req, res) => {
         DH_TongTien: req.body.DH_TongTien,
         DH_DiaChiGiaoHang: req.body.DH_DiaChiGiaoHang,
         DH_GhiChu: req.body.DH_GhiChu,
+        NV_Ma: " ",
+        HD_SoHD:" ",
         DH_TrangThai: req.body.DH_TrangThai,
         ownerId: req.userId,
     });

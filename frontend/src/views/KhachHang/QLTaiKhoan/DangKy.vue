@@ -147,7 +147,7 @@ export default {
     },
     mounted() {
         this.khachhang.KH_MatKhau = "";
-        if (!this.khachhangLoggedIn) {
+        if (this.khachhangLoggedIn) {
             this.$router.push("/");
         }
     },

@@ -59,7 +59,7 @@ export default {
     margin-left: 1%;
     margin-right: 1%;
     margin-top: 1.5%;
-    margin-bottom: 3%;
+    margin-bottom: 1%;
 }
 
 .carouseComponent .row1 {

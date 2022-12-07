@@ -1,86 +1,101 @@
 <template>
      <div class="container-fuild tranggiohang">
-         <!------------------------------------------- Header --------------------------------->
-         <div class="container-fuild header">
-            <header class="align-items-center">
-                <div class="row  justify-content-between align-items-center">
-                    <div class="col-md-1 logo-image pl-0 pr-0" @click="gotoHomePage()">
-                        <img class="img-fluid" src="../../../images/Logo.png">
-                    </div>
-                    <div class="col-sm-11">
-                        <div class="row search">
-                            <div class="col-sm-10 pt-2 pb-1 pl-1">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Tìm kiếm"
-                                        v-model="nameToSearch" style="font-size: 18px;" @click="gotoHomePage()"/>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button" @click="searchName, gotoHomePage()"
-                                            style="border: none; font-size: 18px;">
-                                            <span class="fa fa-search" aria-hidden="true"></span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-2 align-items-center pt-0 pl-0 pr-0">
-                                <div v-if="currentUser" class="justify-content-end align-items-center headerKhachHang">
-                                    <router-link to="/profile" class="nav-link"
-                                        style="color: #756262; display: inline;text-align: right;">
-                                        {{ currentUser.KH_Ten }}
-                                    </router-link>
-                                    <div class="nav-item dropdown justify-content-center" style="display:inline; ">
-                                        <button class="btn btnTaiKhoan btn-default"><span
-                                                class="fas fa-user-circle iconTaiKhoan"></span>
-                                            <a class="nav-link " href="#" id="navbardrop">
-                                                <div class="dropdown-menu right">
-                                                    <a class="dropdown-item" href="#" @click="goToQLDangNhap">Đăng
-                                                        xuất</a>
-                                                    <a class="dropdown-item" href="#" @click="goToDoiMatKHau">Đổi mật
-                                                        khẩu</a>
-                                                </div>
-                                            </a>
-                                        </button>
-                                    </div>
-                                    <router-link :to="{ name: 'GioHang' }" class="btn btnGioHang">
-                                        <span class="fas fa-shopping-cart iconGioHang">
-                                        </span>
-                                        <button class="soluongsanpham">{{ giohang.GH_TongSoLuong }}</button>
-                                    </router-link>
-                                </div>
-                                <div v-if="!currentUser" class="align-items-center headerKhachHang">
-                                    <router-link to="./DangKy">
-                                        <button class="btn btn-secondary pl-1 pr-1 btnDangKy">Đăng ký</button>
-                                    </router-link>
-                                    <div class="nav-item dropdown justify-content-center" style="display:inline; ">
-                                        <button class="btn btnTaiKhoan btn-default"><span
-                                                class="fas fa-user-circle iconTaiKhoan"></span>
-                                            <a class="nav-link " href="#" id="navbardrop">
-                                                <div class="dropdown-menu right">
-                                                    <a class="dropdown-item" href="#" @click="goToQLDangNhap">Đăng
-                                                        xuất</a>
-                                                    <a class="dropdown-item" href="#" @click="goToDoiMatKHau">Đổi mật
-                                                        khẩu</a>
-                                                </div>
-                                            </a>
-                                        </button>
-                                    </div>
+          <!------------------------------------------- Header --------------------------------->
+          <div class="header-outside">
+               <div class="container-fuild header">
+               <header class="align-items-center">
+                    <div class="row  justify-content-between align-items-center" style="background-color: white;">
+                         <div class="col-md-1 logo-image pl-0 pr-0" @click="gotoHomePage()">
+                              <img class="img-fluid" src="../../../images/Logo.png">
+                         </div>
+                         <div class="col-sm-11">
+                              <div class="row search">
+                                   <div class="col-sm-9 pt-2 pb-1 pl-1">
+                                        <div class="input-group">
+                                             <input type="text" class="form-control" placeholder="Tìm kiếm"
+                                                  v-model="nameToSearch" style="font-size: 18px;"
+                                                  @click="gotoHomePage()" />
+                                             <div class="input-group-append">
+                                                  <button class="btn btn-outline-secondary" type="button"
+                                                       @click="searchName, gotoHomePage()"
+                                                       style="border: none; font-size: 18px;">
+                                                       <span class="fa fa-search" aria-hidden="true"></span>
+                                                  </button>
+                                             </div>
+                                        </div>
+                                   </div>
+                                   <div class="col-sm-3 align-items-center pt-0 pl-0 pr-0">
+                                        <div v-if="currentUser"
+                                             class="justify-content-end align-items-center headerKhachHang">
+                                             <p class="tenTaiKhoan">
+                                                  {{ currentUser.KH_Ten }}
+                                             </p>
+                                             <div class="nav-item dropdown justify-content-center"
+                                                  style="display:inline; ">
+                                                  <button class="btn btnTaiKhoan btn-default"><span
+                                                            class="fas fa-user-circle iconTaiKhoan"></span>
+                                                       <a class="nav-link " href="#" id="navbardrop">
+                                                            <div class="dropdown-menu right">
+                                                                 <a class="dropdown-item" href="#"
+                                                                      @click="logout()">Đăng
+                                                                      xuất</a>
+                                                                 <a class="dropdown-item" href="#">Đổi mật khẩu</a>
+                                                            </div>
+                                                       </a>
+                                                  </button>
+                                             </div>
+                                             <router-link :to="{ name: 'GioHang' }" class="btn btnGioHang">
+                                                  <span class="fas fa-shopping-cart iconGioHang">
+                                                  </span>
+                                                  <button class="soluongsanpham">{{ giohang.GH_TongSoLuong }}</button>
+                                             </router-link>
+                                        </div>
+                                        <div v-if="!currentUser" class="align-items-center headerKhachHang">
+                                             <div style="display:inline; width: 50px; height: 100px; margin-left: 30%;">
+                                                  <button class="btn btn-secondary pl-1 pr-1 btnDangKy"
+                                                       @click="goToDangKy()">Đăng ký</button>
+                                             </div>
+                                             <div class="nav-item dropdown justify-content-center"
+                                                  style="display:inline; margin-top: 1px; ">
+                                                  <button class="btn btnTaiKhoan btn-default"
+                                                       style="display:inline; margin-top: 1px;"><span
+                                                            class="fas fa-user-circle iconTaiKhoan"></span>
+                                                       <a class="nav-link " href="#" id="navbardrop">
+                                                            <div class="dropdown-menu right">
+                                                                 <a class="dropdown-item" href="#"
+                                                                      @click="goToQLDangNhap()">Đăng
+                                                                      nhập</a>
+                                                                 <a class="dropdown-item" href="#"
+                                                                      @click="goToDangKy()">Đăng ký</a>
+                                                            </div>
+                                                       </a>
+                                                  </button>
+                                             </div>
 
-                                    <router-link :to="{ name: 'GioHang' }" class="btn btnGioHang">
-                                        <span class="fas fa-shopping-cart iconGioHang">
-                                        </span>
-                                        <button class="soluongsanpham">{{ giohang.GH_TongSoLuong }}</button>
-                                    </router-link>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row pt-1">
-                            <div class="col-12"><img src="../../../images/Cosmetic.png" class="img-fluid"></div>
-                        </div>
+                                             <router-link :to="{ name: 'KHDangNhap' }" class="btn btnGioHang">
+                                                  <span class="fas fa-shopping-cart iconGioHang">
+                                                  </span>
+                                             </router-link>
+                                        </div>
+                                   </div>
+                              </div>
+                              <div class="row pt-1">
+                                   <div class="col-12"><img src="../../../images/Cosmetic.png" class="img-fluid"></div>
+                              </div>
+                         </div>
                     </div>
-                </div>
-
-            </header>
-        </div>
-         <!------------------------------------------- Header --------------------------------->
+               </header>
+          </div>
+          </div>
+          
+          <!------------------------------------------- Header --------------------------------->
+          <div class="row" >
+               <div class="col-md-12" style="margin-top: 150px; overflow: hidden;">
+                    <button class="btnDonHang" @click="goToDonHang()">
+                         Đơn Hàng
+                    </button>
+               </div>
+          </div>
           <div class="giohangtrong row" v-if="SLSPTrongGioHang">
                <div class="col-md-5"></div>
                <div class="col-md-2 text-center">
@@ -93,12 +108,14 @@
                <div class="col-md-5"></div>
           </div>
           <div class="giohang row pt-5p" v-if="(!isOpenDatHang && !SLSPTrongGioHang)">
-              <div class="col-md-12"> <h3 style="text-align:center; margin-top: 3%; margin-bottom: 1%;">THÔNG TIN GIỎ HÀNG</h3></div>
+               <div class="col-md-12">
+                    <h3 style="text-align:center; margin-top: 3%; margin-bottom: 1%;">THÔNG TIN GIỎ HÀNG</h3>
+               </div>
                <div class="row titleRow" style="width:100%">
                     <div class="col-md-5 title" style="text-align:center">Sản phẩm</div>
                     <div class="col-md-2 title" style="text-align:center">Đơn giá</div>
                     <div class="col-md-2 title" style="text-align:center">Số lượng</div>
-                    <div class="col-md-2 title" style="text-align:center">Số tiền</div>
+                    <div class="col-md-2 title" style="text-align:center">Thành tiền</div>
                     <div class="col-md-1 title">Thao tác</div>
                </div>
                <div v-for="(ctgh, i) in chitietgiohang" :key="i" class="row thongtinSP">
@@ -123,8 +140,7 @@
                     <div class="col-md-2 column">
                          <button v-if="ctgh.CTGH_SoLuong > 1" class="btn btngiam" @click="giamSL(ctgh)"><span
                                    class="fas fa-minus"></span></button>
-                         <button v-if="ctgh.CTGH_SoLuong == 1" class="btn btngiam"><span
-                                   class="fas fa-minus"></span></button>
+                         <button v-else class="btn btngiam"><span class="fas fa-minus"></span></button>
                          <p class="text soluong">{{ ctgh.CTGH_SoLuong }}</p>
                          <button class="btn btntang" @click="tangSL(ctgh)"><span class="fas fa-plus"></span></button>
 
@@ -165,12 +181,12 @@
                     </div>
                     <div class="row" style="width:100%">
                          <div class="col-md-6">
-                              <label class="textTT">Địa chỉ giao hàng:</label><br>
+                              <label class="textTTNhap">Địa chỉ giao hàng:</label>
                               <input type="text" name="diachi" id="diachi" class="diachi" required
                                    v-model="dondathang.DH_DiaChiGiaoHang" placeholder="Nhập địa chỉ giao hàng....">
                          </div>
                          <div class="col-md-6">
-                              <label class="textTT">Ghi chú:</label><br>
+                              <label class="textTTNhap">Ghi chú:</label>
                               <input type="text" name="ghichu" id="ghichu" class="ghichu" v-model="dondathang.DH_GhiChu"
                                    placeholder="Nhập ghi chú...">
                          </div>
@@ -182,10 +198,10 @@
                          </div>
                          <div class="col-md-12 ">
                               <div class="row titleRowCTDH" style="width:100%">
-                                   <div class="col-md-6 title">Sản phẩm</div>
+                                   <div class="col-md-6 title" style="text-align:center">Sản phẩm</div>
                                    <div class="col-md-2 title" style="text-align:center">Đơn giá</div>
                                    <div class="col-md-2 title" style="text-align:center">Số lượng</div>
-                                   <div class="col-md-2 title" style="text-align:center">Số tiền</div>
+                                   <div class="col-md-2 title" style="text-align:center">Thành tiền</div>
                               </div>
                               <div v-for="(ctgh, i) in sanphamChon" :key="i" class="row thongtinSPDatHang">
                                    <div class="khungsanpham col-md-6 column">
@@ -235,15 +251,17 @@
                          Đặt đơn hàng thành công
                     </p>
                     <button class="btnOK btn btn-sm btn-outline-secondary"
-                         @click="(isOpenThongBao = !isOpenThongBao, isOpenDatHang=!isOpenDatHang)">OK</button>
+                         @click="(isOpenThongBao = !isOpenThongBao, isOpenDatHang = !isOpenDatHang)">OK</button>
                </div>
           </div>
           <!-- ----------------------------------------ds mot so san pham -->
           <div class="listSP container-fuild border-top border-bottom">
-               <div><h5>CÓ THỂ BẠN SẼ THÍCH</h5></div>
+               <div>
+                    <h5>CÓ THỂ BẠN SẼ THÍCH</h5>
+               </div>
                <div class="row sanpham-khung bg-light">
                     <div v-for="(sanpham, i) in sanphams" :key="i" class="col-md-2">
-                         <SanPham :sanpham="sanpham" />
+                         <SanPhamGioHang :sanpham="sanpham" />
                     </div>
                </div>
           </div>
@@ -254,7 +272,7 @@
 </template>
      
 <script type=”text/javascript”>
-import SanPham from "../../../components/HomePageComponents/SanPham.vue";
+import SanPhamGioHang from "../../../components/HomePageComponents/SanPhamGioHang.vue";
 import SanPhamService from "../../../services/sanpham.service";
 import CTGHService from "../../../services/chitietgiohang.service";
 import GioHangService from "../../../services/giohang.service";
@@ -268,7 +286,7 @@ import Footer from '../../../components/HomePageComponents/Footer.vue'
 
 export default {
      name: `GioHang`,
-     components: { SanPham,  Footer },
+     components: { SanPhamGioHang, Footer },
      data() {
           return {
                sanpham: {},
@@ -286,6 +304,9 @@ export default {
                sanphams: [],
                tongsoluongSP: 0,
                giohang: {},
+               nameToSearch: "",
+               soluongxoa: 0,
+               sothanhcong: false,
           }
      },
      computed: {
@@ -298,6 +319,23 @@ export default {
           ...mapMutations([
                "initCustomerState"
           ]),
+
+          async logout() {
+               this.$store.commit("logout");
+               this.$router.push("/");
+          },
+
+          async goToDangKy() {
+               this.$router.push("/DangKy");
+          },
+
+          async goToQLDangNhap() {
+               this.$router.push("/DangNhap");
+          },
+
+          async goToDonHang() {
+               this.$router.push("/DonHang");
+          },
 
           //    Dinh dang hien thi tien 
           formatMoney(data) {
@@ -324,13 +362,15 @@ export default {
                if (error) {
                     console.log(error);
                } else {
+                    let tong = 0;
                     this.chitietgiohang = response.data;
                     this.chitietgiohang.forEach(element => {
+                         tong += element.CTGH_SoLuong;
                          this.findSanPham(element);
                     });
+                    this.giohang.GH_TongSoLuong = tong;
                }
                this.checkSLSP();
-               console.log(this.chitietgiohang)
           },
 
           async retrieveSanPham() {
@@ -406,6 +446,7 @@ export default {
                     if (response.data.SP_SoLuong >= 1) {
                          ctgh.CTGH_SoLuong += 1;
                          this.sanpham.SP_SoLuong = this.sanpham.SP_SoLuong - 1;
+                         this.giohangActive.GH_TongSoLuong = this.giohangActive.GH_TongSoLuong + 1;
                          this.updateSanPham(ctgh);
                          this.updateCTGH(ctgh);
                          this.updateGioHang();
@@ -427,6 +468,7 @@ export default {
                     this.sanpham = response.data;
                     ctgh.CTGH_SoLuong -= 1;
                     this.sanpham.SP_SoLuong = this.sanpham.SP_SoLuong + 1;
+                    this.giohangActive.GH_TongSoLuong = this.giohangActive.GH_TongSoLuong - 1;
                     this.updateSanPham(ctgh);
                     this.updateCTGH(ctgh)
                     this.updateGioHang();
@@ -435,12 +477,6 @@ export default {
                }
           },
 
-          async tinhSLSPTrongGioHang() {
-               this.tongsoluongSP = 0;
-               this.chitietgiohang.forEach(element => {
-                    this.tongsoluongSP += element.CTGH_SoLuong;
-               });
-          },
           // Cap nhat so luong san pham trong csdl
           async updateSanPham(ctgh) {
                const [error, response] = await this.handle(
@@ -464,11 +500,7 @@ export default {
                     console.log(response.data)
                }
           },
-
-          // Cap nhat tong so luong san pham trong gio hang
           async updateGioHang() {
-               this.tinhSLSPTrongGioHang();
-               this.giohangActive.GH_TongSoLuong = this.tongsoluongSP;
                const [error, response] = await this.handle(
                     GioHangService.update(this.currentUser.GH_Ma, this.giohangActive)
                );
@@ -476,6 +508,20 @@ export default {
                     console.log(error);
                } else {
                     console.log(response.data)
+               }
+          },
+          // Cap nhat tong so luong san pham trong gio hang
+          async updateGioHangKhiXoaSP() {
+               this.findGioHang(this.currentUser.GH_Ma)
+               this.giohangActive.GH_TongSoLuong = this.giohang.GH_TongSoLuong - this.soluongxoa;
+               const [error, response] = await this.handle(
+                    GioHangService.update(this.currentUser.GH_Ma, this.giohangActive)
+               );
+               if (error) {
+                    console.log(error);
+               } else {
+                    console.log(response.data)
+                    this.retrieveGioHang();
                }
           },
 
@@ -490,27 +536,58 @@ export default {
                } else {
                     this.sanpham = response.data;
                     this.sanpham.SP_SoLuong = this.sanpham.SP_SoLuong + ctgh.CTGH_SoLuong;
+                    this.soluongxoa = ctgh.CTGH_SoLuong;
                     this.updateSanPham(ctgh);
-                    this.giohangActive.GH_TongSoLuong -= ctgh.CTGH_SoLuong;
-                    this.updateGioHang();
-                    this.deleteCTGH(this.sanpham.SP_Ma);
-                    this.retrieveGioHang();
+                    this.deleteCTGHTrenGioHang(ctgh.id);
                }
 
           },
-
           // Xoa chi tiet gio hang có ma san pham da chon xoa khoi gio hang
-          async deleteCTGH(maSP) {
+          async deleteCTGHTrenGioHang(id) {
                const [error, response] = await this.handle(
-                    CTGHService.delete(maSP)
+                    CTGHService.delete(id)
                );
                if (error) {
                     console.log(error);
                } else {
                     console.log(response.data);
                     this.retrieveCTGH();
+                    console.log(this.chitietgiohang)
+                    this.updateGioHangKhiXoaSP();
                }
 
+          },
+          // Xoa chi tiet gio hang có ma san pham da chon xoa khoi gio hang
+          async deleteCTGH(id) {
+               const [error, response] = await this.handle(
+                    CTGHService.delete(id)
+               );
+               if (error) {
+                    console.log(error);
+               } else {
+                    console.log(response.data);
+                    this.retrieveCTGH();
+                    console.log(this.chitietgiohang)
+                    this.retrieveGioHang();
+               }
+
+          },
+
+          // Cap nhat tong so luong san pham trong gio hang
+          async updateGioHangXoa() {
+               this.findGioHang(this.currentUser.GH_Ma);
+               console.log(this.giohangActive.GH_TongSoLuong + " " + this.dondathang.DH_TongSoLuong);
+               this.giohangActive.GH_TongSoLuong = this.giohang.GH_TongSoLuong - this.dondathang.DH_TongSoLuong;
+
+               const [error, response] = await this.handle(
+                    GioHangService.update(this.currentUser.GH_Ma, this.giohangActive)
+               );
+               if (error) {
+                    console.log(error);
+               } else {
+                    console.log(response.data)
+                    this.retrieveGioHang()
+               }
           },
 
           //Click chon san pham tren checkbox
@@ -609,6 +686,8 @@ export default {
                     } else {
                          console.log(response.data)
                          this.createCTDH(response.data.id);
+                         this.updateGioHangXoa();
+                         this.thanhTien = 0;
                     }
                }
           },
@@ -623,11 +702,12 @@ export default {
                     temp.SP_Ma = element.SP_Ma;
                     temp.CTDH_Gia = element.SP_GiaBanRa
                     console.log(this.temp);
-                    this.saveCTDH(temp);
+                    this.saveCTDH(temp, element.id);
                })
+
           },
 
-          async saveCTDH(ctdh) {
+          async saveCTDH(ctdh, id) {
                const [error, response] = await this.handle(
                     CTDHService.create(ctdh)
                );
@@ -636,9 +716,8 @@ export default {
                } else {
                     console.log(response.data);
                     this.chonSP(ctdh);
-                    this.deleteCTGH(ctdh.SP_Ma);
+                    this.deleteCTGH(id);
                     this.isOpenThongBao = true;
-                    this.updateGioHang();
                     this.retrieveGioHang();
                }
           },
@@ -652,16 +731,34 @@ export default {
                }
           },
 
-          async gotoHomePage(){
+          async gotoHomePage() {
                this.$router.push({ name: 'HomePage' });
-          }
+          },
+
+          async searchName() {
+               console.log(this.nameToSearch)
+               const [error, response] = await this.handle(
+                    SanPhamService.findByName(this.nameToSearch)
+               );
+               if (error) {
+                    console.log(error);
+               } else {
+                    if (response.data != null) {
+                         this.sanpham = response.data
+                         console.log(this.sanpham)
+                    }
+               }
+          },
      },
 
      mounted() {
           this.initCustomerState();
-          this.retrieveCTGH();
+          if(this.currentUser) {
+               this.retrieveGioHang();
+               this.retrieveCTGH();
+          }
           this.retrieveSanPham();
-          this.retrieveGioHang();
+
      }
 
 }

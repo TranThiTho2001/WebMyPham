@@ -13,7 +13,7 @@ module.exports = (app) => {
     
     router.put("/:GH_Ma", chitietgiohang.update);
 
-    router.delete("/:SP_Ma", chitietgiohang.delete);
+    router.delete("/:id", chitietgiohang.delete);
     app.use("/api/chitietgiohang", router);
 
 };

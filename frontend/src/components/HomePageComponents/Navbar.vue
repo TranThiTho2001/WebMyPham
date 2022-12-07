@@ -2,33 +2,6 @@
 <template>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <!--     
-    <nav class="navbar navbar-expand-sm">
-      <ul class="navbar-nav">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-            THƯƠNG HIỆU
-          </a>
-          <ul>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#" v-for="(item, i) in thuonghieu" :key="i">{{ item.TH_Ten }}</a>
-            </div>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">BÁN CHẠY</a>
-        </li>
-        <ul class="navbar-nav" v-for="(danhmucs, i) in danhmuc" :key="i">
-          <li class="nav-item">
-            <a class="nav-link" href="#">{{ danhmucs.DM_Ten }}</a>
-          </li>
-        </ul>
-        <li class="nav-item">
-          <a class="nav-link" href="#">ƯU ĐÃI</a>
-        </li>
-
-      </ul>
-    </nav> -->
   <nav class="navbar navbar-expand-md navbar-light bg-white navbarrow">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-expanded="false">
       <span class="navbar-toggler-icon"></span>

@@ -281,7 +281,7 @@ export default {
                 this.donhang = response.data;
                 console.log(response.data);
                 this.donhang.forEach(element => {
-                    element.DH_Ngay = moment(String(element.DH_NgayDat)).format("MM/DD/YYYY hh: mm");
+                    element.DH_Ngay = moment(String(element.DH_NgayDat)).format("MM/DD/YYYY");
                 });
             }
         },
@@ -353,6 +353,7 @@ export default {
         async updateDonHang() {
             console.log(this.activeDonHang.DH_Ma)
             this.activeDonHang.DH_TrangThai = this.newTrangThai;
+            this.activeDonHang.NV_Ma = this.localNhanVien.NV_Ma
             const [error, response] = await this.handle(
                 DonHangService.update(this.activeDonHang.id, this.activeDonHang)
             );
@@ -378,7 +379,7 @@ export default {
                 } else {
                     this.donhang = response.data;
                     this.donhang.forEach(element => {
-                    element.DH_Ngay = moment(String(element.DH_NgayDat)).format("MM/DD/YYYY hh: mm");
+                    element.DH_Ngay = moment(String(element.DH_NgayDat)).format("MM/DD/YYYY");
                 });
                 }
             }
@@ -415,7 +416,7 @@ export default {
 
                 this.setActiveDonHang = "";
                 this.donhang.forEach(element => {
-                    element.DH_Ngay = moment(String(element.DH_NgayDat)).format("MM/DD/YYYY hh: mm");
+                    element.DH_Ngay = moment(String(element.DH_NgayDat)).format("MM/DD/YYYY");
                 });
                 console.log(response.data);
             }

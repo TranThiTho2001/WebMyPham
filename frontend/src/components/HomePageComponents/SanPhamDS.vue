@@ -74,7 +74,7 @@ export default {
  
 <style>
 .list {
-    margin-top: 1%;
+    margin-top: 2px;
     margin-left: 1%;
     margin-right: -1%;
 

@@ -16,7 +16,7 @@ exports.create = async(req,res) => {
         return next(new BadRequestError(400, "Số lượng sản phẩm không được bỏ trống!"));
     }
     // Create a order details
-    const chitietgiohang = new ChiTietDonHang({
+    const chitietgiohang = new ChiTietGioHang({
         GH_Ma: req.body.GH_Ma,
         SP_Ma: req.body.SP_Ma,
         CTGH_SoLuong: req.body.CTGH_SoLuong,
@@ -121,9 +121,10 @@ exports.update = async (req, res) =>{
 // };
 
 //Delete a category with the specified id in the request
-exports.delete = async (req,res) => {    
+exports.delete = async (req,res) => {  
         const condition = {
-            SP_Ma: req.params.SP_Ma
+            _id: req.params.id,
+            
         };
     
         const [error, document] = await handle(

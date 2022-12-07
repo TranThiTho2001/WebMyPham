@@ -31,9 +31,9 @@
                                                 class="fas fa-user-circle iconTaiKhoan"></span>
                                             <a class="nav-link " href="#" id="navbardrop">
                                                 <div class="dropdown-menu right">
-                                                    <a class="dropdown-item" href="#" @click="goToQLDangNhap">Đăng
+                                                    <a class="dropdown-item" href="#" @click="logout()">Đăng
                                                         xuất</a>
-                                                    <a class="dropdown-item" href="#" @click="goToDoiMatKHau">Đổi mật
+                                                    <a class="dropdown-item" href="#">Đổi mật
                                                         khẩu</a>
                                                 </div>
                                             </a>
@@ -46,27 +46,29 @@
                                     </router-link>
                                 </div>
                                 <div v-if="!currentUser" class="align-items-center headerKhachHang">
-                                    <router-link to="./DangKy">
-                                        <button class="btn btn-secondary pl-1 pr-1 btnDangKy">Đăng ký</button>
-                                    </router-link>
-                                    <div class="nav-item dropdown justify-content-center" style="display:inline; ">
-                                        <button class="btn btnTaiKhoan btn-default"><span
+                                    <div style="display:inline; width: 50px; height: 100px; margin-left: 30%;">
+                                        <button class="btn btn-secondary pl-1 pr-1 btnDangKy" @click="goToDangKy()">Đăng
+                                            ký</button>
+                                    </div>
+                                    <div class="nav-item dropdown justify-content-center"
+                                        style="display:inline; margin-top: 1px; ">
+                                        <button class="btn btnTaiKhoan btn-default"
+                                            style="display:inline; margin-top: 1px;"><span
                                                 class="fas fa-user-circle iconTaiKhoan"></span>
                                             <a class="nav-link " href="#" id="navbardrop">
                                                 <div class="dropdown-menu right">
-                                                    <a class="dropdown-item" href="#" @click="goToQLDangNhap">Đăng
-                                                        xuất</a>
-                                                    <a class="dropdown-item" href="#" @click="goToDoiMatKHau">Đổi mật
-                                                        khẩu</a>
+                                                    <a class="dropdown-item" href="#" @click="goToQLDangNhap()">Đăng
+                                                        nhập</a>
+                                                    <a class="dropdown-item" href="#" @click="goToDangKy()">Đăng ký</a>
                                                 </div>
                                             </a>
                                         </button>
                                     </div>
 
-                                    <router-link :to="{ name: 'GioHang' }" class="btn btnGioHang">
+                                    <router-link :to="{ name: 'KHDangNhap' }" class="btn btnGioHang"
+                                        style=" margin-top: -5%;">
                                         <span class="fas fa-shopping-cart iconGioHang">
                                         </span>
-                                        <button class="soluongsanpham">{{ giohang.GH_TongSoLuong }}</button>
                                     </router-link>
                                 </div>
                             </div>
@@ -79,7 +81,42 @@
 
             </header>
         </div>
-        <Navbar :thuonghieu="thuonghieu" :danhmuc="danhmuc" />
+        <!-- <Navbar :thuonghieu="thuonghieu" :danhmuc="danhmuc" /> -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <nav class="navbar navbar-expand-md navbar-light bg-white navbarrow">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"
+                aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            THƯƠNG HIỆU
+                        </a>
+                        <ul>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#" v-for="(item, i) in thuonghieu" :key="i" @click="timSPTheoThuongHieu(item)">{{
+                                        item.TH_Ten
+                                }}</a>
+                            </div>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">BÁN CHẠY</a>
+                    </li>
+                    <ul class="navbar-nav" v-for="(danhmucs, i) in danhmuc" :key="i">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" @click="timSPTheoDanhMuc(danhmucs)">{{ danhmucs.DM_Ten }}</a>
+                        </li>
+                    </ul>
+                    <li class="nav-item" style="text-align: right;">
+                        <a class="nav-link" href="#" style="text-align: right;">ƯU ĐÃI</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
         <br>
         <Carousel />
         <!-- <router-link :to="{ name: 'DonHang' }"
@@ -93,10 +130,8 @@
 </template>
 
 <script>
-import Navbar from "../components/HomePageComponents/Navbar.vue";
 import SanPhamDS from "../components/HomePageComponents/SanPhamDS.vue";
 import Footer from "../components/HomePageComponents/Footer.vue";
-//  import Header from "../components/HomePageComponents/Header.vue";
 import DanhMucService from "../services/danhmuc.service";
 import ThuongHieuService from "../services/thuonghieu.service";
 import SanPhamService from "../services/sanpham.service";
@@ -107,7 +142,6 @@ import Carousel from "../components/HomePageComponents/Carousel.vue";
 export default {
     name: `homepage`,
     components: {
-        Navbar,
         Carousel,
         SanPhamDS,
         Footer,
@@ -119,7 +153,8 @@ export default {
             sanpham: [],
             giohang: {},
             chitietgiohang: [],
-            nameToSearch: ""
+            nameToSearch: "",
+            dssanpham:[],
         }
     },
     computed: {
@@ -143,8 +178,17 @@ export default {
 
         logout() {
             this.$store.commit("logout");
+            this.$router.push("/");
+        },
+
+        async goToQLDangNhap() {
             this.$router.push("/DangNhap");
         },
+
+        async goToDangKy() {
+            this.$router.push("/DangKy");
+        },
+
         async retrieveDanhMuc() {
             const [error, response] = await this.handle(
                 DanhMucService.getAll()
@@ -196,19 +240,17 @@ export default {
                     i++;
                 });
                 console.log(this.sanphams)
+                this.dssanpham = this.sanpham.slice();
             }
         },
 
 
         async findThuongHieu(sp, i) {
-            const [error, response] = await this.handle(
-                ThuongHieuService.get(sp.TH_Ma)
-            );
-            if (error) {
-                console.log(error);
-            } else {
-                this.sanpham[i].TH_Ten = response.data.TH_Ten;
-            }
+            this.thuonghieu.forEach(element => {
+                if (element.TH_Ma == sp.TH_Ma) {
+                    this.sanpham[i].TH_Ten = element.TH_Ten;
+                }
+            });
         },
         async retrieveCTGH() {
             console.log("sq")
@@ -249,12 +291,26 @@ export default {
                 console.log(response.data);
             }
         },
-        goToQL() {
-            this.$router.push("/dangnhap");
+
+        async timSPTheoThuongHieu(data){
+            let sanphamcoppy = this.dssanpham;
+            this.sanpham.splice(0,this.sanpham.length);
+            sanphamcoppy.forEach(element => {
+                if(element.TH_Ma == data.TH_Ma){
+                    this.sanpham.push(element);
+                }
+            });
         },
-        dangxuat() {
-            this.$router.push("/");
-        },
+
+        async timSPTheoDanhMuc(data){
+            let sanphamcoppy = this.dssanpham;
+            this.sanpham.splice(0,this.sanpham.length);
+            sanphamcoppy.forEach(element => {
+                if(element.DMSP_Ma == data.DM_Ma){
+                    this.sanpham.push(element);
+                }
+            });            
+        }
     },
 
 
@@ -262,121 +318,5 @@ export default {
 </script>
 
 <style>
-.homepage {
-    margin-left: 5%;
-    margin-right: 5%;
-}
-
-.homepage .header {
-    margin-top: 1%;
-    margin-left: 1%;
-    margin-right: 1%;
-}
-
-.homepage .header .search {
-    text-align: center;
-    background-color: #E9E8E8;
-    font-size: 20px;
-    border-radius: 5px;
-    margin-top: 1%;
-}
-
-.homepage .header .btnDangKy {
-    border: none;
-    color: white;
-    background-color: #929292;
-    border-radius: 5px;
-    font-size: 18px;
-    margin-top: -5%;
-
-}
-
-.homepage .tenTaiKhoan{
-    padding-left: 30%;
-    display: inline;
-}
-.homepage .header .btnGioHang {
-    border: none;
-    background-color: none;
-    color: #929292;
-    margin-top: -2%;
-    /* margin-left: 20%; */
-}
-
-.homepage .header .btnGioHang:hover {
-    border: none;
-    color: #929292;
-}
-
-.homepage .header .iconGioHang {
-    border: none;
-    background-color: none;
-    font-size: 32px;
-    color: #929292;
-}
-
-.homepage .header .iconGioHang:hover {
-    border: none;
-    background-color: none;
-    color: #515151;
-}
-
-.homepage .header .btnTaiKhoan {
-    background-color: #E9E8E8;
-    border: none;
-    margin-top: 3%;
-    /* margin-left: 20%; */
-    color: #929292;
-    /* position: relative;
-  top:-40% */
-}
-
-.homepage .header .iconTaiKhoan {
-    font-size: 38px;
-    color: #929292;
-}
-
-.header .navbar-expand-lg {
-    color: #515151;
-    font-size: 20px;
-
-}
-
-.homepage .headerKhachHang .nav-item {
-    color: #515151;
-    font-size: 20px;
-}
-
-.homepage .headerKhachHang .soluongsanpham {
-    position: absolute;
-    top: 5%;
-    left: 90%;
-    font-size: 17px;
-    border-radius: 50%;
-    border: 0.1px solid #929292;
-    background-color: #929292;
-    height: 30px;
-    width: 30px;
-    color: #FFFFFF;
-}
-
-.homepage .header .nav-link .dropdown-menu {
-    background-color: #FFFFFF;
-    width: max-content;
-    border-radius: 0px 0px 10px 10px;
-    display: none;
-    text-align: left;
-}
-
-.homepage .header .nav-item .nav-link:hover .dropdown-menu {
-    position: absolute;
-    background-color: #FFFFFF;
-    top: calc(97%);
-    transform: translateX(-70%);
-    left: 10%;
-    width: max-content;
-    border-radius: 0px 0px 10px 10px;
-    display: block;
-    text-align: left;
-}
+@import '../assets/homepageStyle.css'
 </style>
